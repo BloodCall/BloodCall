@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Blood Donation App</string>
+    <string name="title_activity_launcher">Launcher_Activity</string>
+
+    <!-- launcher_activity Strings !-->
+    <string name="welcome_header">Welcome!</string>
+    <string name="welcome_subtext">Please log in or sign up to continue</string>
+    <string name="loginbutton">Log In</string>
+    <string name="signupbutton">Sign Up</string>
+
+
+</resources>
