@@ -30,7 +30,7 @@
             android:text="@string/welcome_header"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:textSize="24sp" />
+            android:textSize="34sp" />
 
         <TextView
             android:id="@+id/welcome_subtext"
@@ -45,25 +45,36 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/SignupButton"
+        android:id="@+id/login_button"
         android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
-        android:text="@string/signupbutton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
-    <Button
-        android:id="@+id/LoginButton"
-        android:layout_width="200dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/loginbutton"
+        android:layout_height="48dp"
+        android:layout_marginTop="124dp"
+        android:text="@string/login_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SignupButton" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:id="@+id/signup_subtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signup_subtext"
+        app:layout_constraintBottom_toTopOf="@+id/signup_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button"
+        app:layout_constraintVertical_bias="0.859" />
+
+    <Button
+        android:id="@+id/signup_button"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:text="@string/signup_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

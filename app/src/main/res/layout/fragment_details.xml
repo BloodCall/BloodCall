@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".DetailsFragment">
+
+    <ImageButton
+        android:id="@+id/profile_picture_button"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_button_shape"
+        android:contentDescription="TODO"
+        android:minWidth="32dp"
+        android:minHeight="48dp"
+        android:padding="1dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_baseline_person_24"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/profile_picture_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="170dp"
+        android:text="@string/click_to_add_a_profile_picture" />
+
+    <EditText
+        android:id="@+id/first_name_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="@string/first_name"
+        android:minHeight="48dp"
+        />
+
+    <EditText
+        android:id="@+id/last_name_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:hint="@string/last_name_hint"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/email_signup_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="200dp"
+        android:ems="10"
+        android:hint="@string/e_mail_hint"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/password_signup_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="250dp"
+        android:ems="10"
+        android:hint="@string/password_box_hint"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Spinner
+        android:id="@+id/bloodtype_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="355dp"
+        android:entries="@array/blood_types"
+        android:minHeight="48dp" />
+
+    <Spinner
+        android:id="@+id/bloodtype_spinner_pos_neg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="250dp"
+        android:layout_marginTop="355dp"
+        android:entries="@array/pos_neg"
+        android:minHeight="48dp" />
+
+    <TextView
+        android:id="@+id/blood_type_descriptor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="330dp"
+        android:text="@string/blood_type_description" />
+
+    <Button
+        android:id="@+id/back_button_details"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="609dp"
+        android:layout_marginBottom="72dp"
+        android:background="@color/red_700"
+        android:text="Back"
+        android:textColor="#FFF3E0" />
+
+    <Button
+        android:id="@+id/next_button_details"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="609dp"
+        android:layout_marginBottom="72dp"
+        android:background="@color/red_700"
+        android:text="Next"
+        android:textColor="#FFF3E0" />
+
+
+</FrameLayout>
+

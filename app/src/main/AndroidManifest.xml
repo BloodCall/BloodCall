@@ -11,11 +11,13 @@
         <activity
             android:name=".signup_activity"
             android:theme="@style/Theme.BloodDonationApp"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/signup_button"/>
         <activity
             android:name=".login_activity"
             android:theme="@style/Theme.BloodDonationApp"
-            android:exported="false" />
+            android:exported="false"
+            android:label="@string/login_button"/>
         <activity
             android:name=".launcher_activity"
             android:theme="@style/Theme.BloodDonationApp.NoActionBar"

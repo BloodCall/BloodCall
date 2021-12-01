@@ -15,7 +15,7 @@ public class launcher_activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
 
-        findViewById(R.id.LoginButton).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(launcher_activity.this, login_activity.class);
@@ -23,7 +23,7 @@ public class launcher_activity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.SignupButton).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.signup_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(launcher_activity.this,signup_activity.class);
