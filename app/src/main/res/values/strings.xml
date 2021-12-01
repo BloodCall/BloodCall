@@ -24,6 +24,11 @@
     <string name="last_name_hint">Last Name</string>
 
     <string name="blood_type_description">Please enter your blood type:</string>
+    <string name="radio_btn_subtext">I am registering as a:</string>
+    <string name="individual_radio">Individual</string>
+    <string name="healthcare_provider_radio">Healthcare Provider</string>
+    <string name="next_btn">Next</string>
+    <string name="back_btn">Back</string>
 
     <string-array name="blood_types">
         <item>A</item>
@@ -36,6 +41,7 @@
         <item>+</item>
         <item>-</item>
     </string-array>
+
 
 
 </resources>

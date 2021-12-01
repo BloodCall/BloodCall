@@ -24,7 +24,6 @@ import android.widget.Toast;
 public class DetailsFragment extends Fragment {
 
 
-    public static final int PICK_IMAGE = 1;
 
     Spinner bloodTypeSpinner;
     Spinner posNegSpinner;
@@ -85,6 +84,7 @@ public class DetailsFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //run code to save information to database
                 Toast.makeText(getActivity(),"Not Implemented", Toast.LENGTH_SHORT).show();
             }
         });
@@ -98,7 +98,7 @@ public class DetailsFragment extends Fragment {
 
                     i.putExtra("return-data", true);
                     startActivityForResult(
-                            Intent.createChooser(i, "Select Picture"), 0);
+                            Intent.createChooser(i, "Select a profile picture"), 0);
                 }catch (ActivityNotFoundException ex){
                     ex.printStackTrace();
                 }

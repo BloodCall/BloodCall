@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingBottom="50dp">
 
     <ScrollView
         android:id="@+id/SCROLLER_ID"
         android:layout_width="match_parent"
-        android:layout_height="589dp"
+        android:layout_height="531dp"
+        android:layout_above="@+id/back_button_terms"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="14dp"
         android:fillViewport="true"
         android:scrollbars="vertical">
 
@@ -20,31 +25,27 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/back_button_terms"
+        android:id="@+id/next_button_terms"
         android:layout_width="wrap_content"
-        android:layout_height="10dp"
-        android:layout_below="@+id/SCROLLER_ID"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="85dp"
         android:background="@color/red_700"
-        android:text="Back"
+        android:text="@string/next_btn"
         android:textColor="#FFF3E0" />
 
     <Button
-        android:id="@+id/next_button_terms"
+        android:id="@+id/back_button_terms"
         android:layout_width="wrap_content"
-        android:layout_height="10dp"
-        android:layout_below="@+id/SCROLLER_ID"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="270dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginStart="51dp"
+        android:layout_marginBottom="86dp"
         android:background="@color/red_700"
-        android:text="Next"
+        android:text="@string/back_btn"
         android:textColor="#FFF3E0" />
-
-
 </RelativeLayout>
 
