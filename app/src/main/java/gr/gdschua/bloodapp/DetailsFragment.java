@@ -1,15 +1,20 @@
 package gr.gdschua.bloodapp;
 
-import android.media.Image;
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -18,9 +23,12 @@ import android.widget.Toast;
 
 public class DetailsFragment extends Fragment {
 
+
+    public static final int PICK_IMAGE = 1;
+
     Spinner bloodTypeSpinner;
     Spinner posNegSpinner;
-    ImageButton profilePicButton;
+    de.hdodenhof.circleimageview.CircleImageView profilePicButton;
     Button nextButton;
     Button backButton;
 
@@ -39,6 +47,23 @@ public class DetailsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         getActivity().setTitle("Your Details");
     }
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0 && resultCode == Activity.RESULT_OK){
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                profilePicButton.setImageBitmap(bitmap);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,10 +89,19 @@ public class DetailsFragment extends Fragment {
             }
         });
 
+
         profilePicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"Not Implemented",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                try {
+
+                    i.putExtra("return-data", true);
+                    startActivityForResult(
+                            Intent.createChooser(i, "Select Picture"), 0);
+                }catch (ActivityNotFoundException ex){
+                    ex.printStackTrace();
+                }
             }
         });
 
