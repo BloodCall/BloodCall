@@ -6,12 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+
 public class LauncherActivity extends AppCompatActivity {
 
     /*This activity should not be displayed if user is logged in!*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
 
