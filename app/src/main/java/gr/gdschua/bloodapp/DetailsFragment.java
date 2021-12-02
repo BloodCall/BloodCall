@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 
 
 public class DetailsFragment extends Fragment {
@@ -139,24 +140,23 @@ public class DetailsFragment extends Fragment {
                     userPasswordET.requestFocus();
                     return;
                 }
-                mAuth.createUserWithEmailAndPassword(userEmail,userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        mAuth.createUserWithEmailAndPassword(userEmail, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
-                        //HERE NEED TO MANAGED EXCEPTIONS LIKE IF THE USER ALREADY EXISTS!!!
-                        Log.i("Result:",task.getResult().toString());
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if(task.isSuccessful())
-                        {
-                            Toast.makeText(getActivity(),"You are successfully Registered", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            Toast.makeText(getActivity(),"You are not Registered! Try again",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getActivity(), "You are successfully Registered", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    //At some point add functionality that if the email is already in use show different message
+                                    Log.w("TAG", "createUserWithEmail:failure", task.getException());
+
+                                    Toast.makeText(getActivity(), "You are not Registered! Try again", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
 
             }
         });
