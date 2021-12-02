@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:textAlignment="center"
-    tools:context=".LauncherActivity">
+    tools:context="Activities.LauncherActivity">
 
 
     <LinearLayout
