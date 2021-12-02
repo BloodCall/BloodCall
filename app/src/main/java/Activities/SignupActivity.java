@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -162,7 +163,8 @@ public class SignupActivity extends AppCompatActivity {
                                 Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
                                 startActivity(goToLogin);
                         }else{
-                            Toast.makeText(SignupActivity.this,"Failed to register",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignupActivity.this,"Failed COCK to register",Toast.LENGTH_LONG).show();
+                            Log.w("error", "signInWithCustomToken:failure", task.getException());
                         }
                     }
                 });

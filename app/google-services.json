@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "42601498197",
-    "project_id": "blood-call",
-    "storage_bucket": "blood-call.appspot.com"
+    "project_number": "488565204469",
+    "project_id": "bloodcall-951a8-default-rtdb",
+    "storage_bucket": "bloodcall-951a8-default-rtdb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:42601498197:android:5971fb8aac2ca163bd36dc",
+        "mobilesdk_app_id": "1:488565204469:android:b662e1465180e5d917ecbc",
         "android_client_info": {
           "package_name": "gr.gdschua.bloodapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "42601498197-1oupj1mibbukhb6qq50oh47ds7rdnkct.apps.googleusercontent.com",
+          "client_id": "488565204469-9l42fvb5qf2e44lihdunhr0gi6blun9i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAeBT4uuUN8lHbg9s7hO_7C09W1m6_WQwM"
+          "current_key": "AIzaSyBQyzPVb0IgEc2E2W4DUb0qjmCtZZs_rR0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "42601498197-1oupj1mibbukhb6qq50oh47ds7rdnkct.apps.googleusercontent.com",
+              "client_id": "488565204469-9l42fvb5qf2e44lihdunhr0gi6blun9i.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
