@@ -1,12 +1,20 @@
-package gr.gdschua.bloodapp;
+package Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import gr.gdschua.bloodapp.R;
+
 public class LauncherActivity extends AppCompatActivity {
+
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     /*This activity should not be displayed if user is logged in!*/
 
@@ -31,4 +39,15 @@ public class LauncherActivity extends AppCompatActivity {
             }
         });
     }
+
+    //TO-BE-IMPLEMENTED
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            //Intent intent = new Intent(LauncherActivity.this, MAIN PAGE );
+        }
+    }
+
 }

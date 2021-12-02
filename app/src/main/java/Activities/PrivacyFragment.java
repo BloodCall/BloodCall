@@ -1,4 +1,4 @@
-package gr.gdschua.bloodapp;
+package Activities;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import gr.gdschua.bloodapp.R;
 
 
 public class PrivacyFragment extends Fragment implements View.OnClickListener {

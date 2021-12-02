@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/privacyFragment"
-        android:name="gr.gdschua.bloodapp.PrivacyFragment"
+        android:name="Activities.PrivacyFragment"
         android:label="PrivacyFragment" >
         <action
             android:id="@+id/action_privacyFragment_to_termsFragment"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/termsFragment"
-        android:name="gr.gdschua.bloodapp.TermsFragment"
+        android:name="Activities.TermsFragment"
         android:label="fragment_terms"
         tools:layout="@layout/fragment_terms" >
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="gr.gdschua.bloodapp.DetailsFragment"
+        android:name="Activities.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" />
 </navigation>
