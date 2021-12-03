@@ -38,6 +38,7 @@ public class SignupActivity extends AppCompatActivity {
     Spinner posNegSpinner;
     de.hdodenhof.circleimageview.CircleImageView profilePicButton;
     Button registerButton;
+    Button backButton;
     EditText fName;
     EditText lName;
     EditText email;
@@ -56,12 +57,22 @@ public class SignupActivity extends AppCompatActivity {
         posNegSpinner=findViewById(R.id.bloodtype_spinner_pos_neg);
         profilePicButton=findViewById(R.id.profile_picture_button);
         registerButton=findViewById(R.id.register_button_details);
+        backButton = findViewById(R.id.back_button_details);
         fName=findViewById(R.id.first_name_box);
         lName=findViewById(R.id.last_name_box);
         email=findViewById(R.id.email_signup_box);
         password=findViewById(R.id.password_signup_box);
         progressBar=findViewById(R.id.progressBar);
 
+
+        backButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(SignupActivity.this,LauncherActivity.class );
+                startActivity(intent);
+                finish();
+            }
+        });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
