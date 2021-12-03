@@ -1,4 +1,4 @@
-package Activities;
+package gr.gdschua.bloodapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

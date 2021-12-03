@@ -1,4 +1,4 @@
-package Entities;
+package gr.gdschua.bloodapp.Entities;
 
 public class User {
     private String fullName,email,bloodType,uId;

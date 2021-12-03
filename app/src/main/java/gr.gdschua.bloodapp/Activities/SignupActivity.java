@@ -1,4 +1,4 @@
-package Activities;
+package gr.gdschua.bloodapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -23,11 +24,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import DatabaseAcess.DAOUsers;
-import Entities.User;
+
+import gr.gdschua.bloodapp.DatabaseAcess.DAOUsers;
+import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 
 public class SignupActivity extends AppCompatActivity {
@@ -162,7 +162,8 @@ public class SignupActivity extends AppCompatActivity {
                                 Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
                                 startActivity(goToLogin);
                         }else{
-                            Toast.makeText(SignupActivity.this,"Failed to register",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignupActivity.this,"Failed COCK to register",Toast.LENGTH_LONG).show();
+                            Log.w("error", "signInWithCustomToken:failure", task.getException());
                         }
                     }
                 });
