@@ -1,10 +1,9 @@
-package Activities;
+package gr.gdschua.bloodapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.telecom.Call;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
