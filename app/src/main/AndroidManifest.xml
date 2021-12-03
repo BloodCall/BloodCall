@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
-            android:name="Activities.SignupActivity"
+            android:name="gr.gdschua.bloodapp.Activities.SignupActivity"
             android:theme="@style/Theme.BloodDonationApp"
             android:exported="false"
             android:label="@string/signup_button"/>
         <activity
-            android:name="Activities.LoginActivity"
+            android:name="gr.gdschua.bloodapp.Activities.LoginActivity"
             android:theme="@style/Theme.BloodDonationApp"
             android:exported="false"
             android:label="@string/login_button"/>
         <activity
-            android:name="Activities.LauncherActivity"
+            android:name="gr.gdschua.bloodapp.Activities.LauncherActivity"
             android:theme="@style/Theme.BloodDonationApp.NoActionBar"
             android:exported="true">
             <intent-filter>
@@ -32,6 +32,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        android:fullBackupContent=
     </application>
 
 </manifest>
