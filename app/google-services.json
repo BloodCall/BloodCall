@@ -1,13 +1,14 @@
 {
   "project_info": {
     "project_number": "488565204469",
+    "firebase_url": "https://bloodcall-951a8-default-rtdb-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "bloodcall-951a8-default-rtdb",
     "storage_bucket": "bloodcall-951a8-default-rtdb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:488565204469:android:b662e1465180e5d917ecbc",
+        "mobilesdk_app_id": "1:488565204469:android:7219de342ab6ae4f17ecbc",
         "android_client_info": {
           "package_name": "gr.gdschua.bloodapp"
         }
