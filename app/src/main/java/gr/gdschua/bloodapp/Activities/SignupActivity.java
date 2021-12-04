@@ -39,7 +39,7 @@ public class SignupActivity extends AppCompatActivity {
     Button backButton;
     EditText fName;
     EditText lName;
-    private final int PICK_IMAGE_REQUEST = 22;
+    private final int PICK_IMAGE_REQUEST = 0;
     Uri profilePicture;
     EditText email;
     ProgressBar progressBar;
@@ -55,7 +55,7 @@ public class SignupActivity extends AppCompatActivity {
 
         bloodTypeSpinner=findViewById(R.id.bloodtype_spinner);
         posNegSpinner=findViewById(R.id.bloodtype_spinner_pos_neg);
-        profilePicButton=findViewById(R.id.profilePicButton);
+        profilePicButton=findViewById(R.id.profilePic);
         registerButton=findViewById(R.id.register_button_details);
         backButton = findViewById(R.id.back_button_details);
         fName=findViewById(R.id.first_name_box);

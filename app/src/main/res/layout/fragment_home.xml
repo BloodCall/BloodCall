@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profilePicButton"
+            android:id="@+id/profilePic"
             android:layout_width="148dp"
             android:layout_height="144dp"
             android:background="@drawable/round_button_shape"
@@ -42,10 +42,10 @@
             android:gravity="clip_horizontal|clip_vertical"
             android:text="YourName"
             android:textColor="#3E2723"
-            app:layout_constraintBottom_toBottomOf="@+id/profilePicButton"
-            app:layout_constraintEnd_toEndOf="@+id/profilePicButton"
-            app:layout_constraintStart_toStartOf="@+id/profilePicButton"
-            app:layout_constraintTop_toTopOf="@+id/profilePicButton"
+            app:layout_constraintBottom_toBottomOf="@+id/profilePic"
+            app:layout_constraintEnd_toEndOf="@+id/profilePic"
+            app:layout_constraintStart_toStartOf="@+id/profilePic"
+            app:layout_constraintTop_toTopOf="@+id/profilePic"
             app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
