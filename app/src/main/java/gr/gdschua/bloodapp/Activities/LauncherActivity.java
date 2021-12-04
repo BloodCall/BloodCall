@@ -40,14 +40,12 @@ public class LauncherActivity extends AppCompatActivity {
         });
     }
 
-    //TO-BE-IMPLEMENTED
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-
-            //Intent intent = new Intent(LauncherActivity.this, MAIN PAGE );
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            Intent intent = new Intent(LauncherActivity.this, MainActivity.class);
+            startActivity(intent);
         }
     }
 

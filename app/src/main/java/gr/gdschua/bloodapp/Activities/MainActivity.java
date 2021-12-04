@@ -33,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    public void onBackPressed() {
+        return;
+    }
+
     // override the onOptionsItemSelected()
     // function to implement
     // the item click listener callback

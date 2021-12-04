@@ -9,7 +9,7 @@
 
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profile_picture_button"
+        android:id="@+id/profilePicButton"
         android:layout_width="130dp"
         android:layout_height="132dp"
         android:layout_marginStart="16dp"
@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_picture_button"
+        app:layout_constraintTop_toBottomOf="@+id/profilePicButton"
         app:layout_constraintVertical_bias="0.03" />
 
     <EditText
@@ -41,7 +41,7 @@
         android:hint="@string/first_name"
         app:layout_constraintBottom_toTopOf="@+id/last_name_box"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profile_picture_button"
+        app:layout_constraintStart_toEndOf="@+id/profilePicButton"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.555" />
 
@@ -54,7 +54,7 @@
         android:ems="10"
         android:hint="@string/last_name_hint"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profile_picture_button"
+        app:layout_constraintStart_toEndOf="@+id/profilePicButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText

@@ -5,9 +5,11 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.HomeFragment" >
+    android:foregroundTint="#CA0606"
+    tools:context=".Activities.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="413dp"
         android:layout_height="185dp"
         android:background="@drawable/profile_shape"
@@ -20,7 +22,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_picture_button"
+            android:id="@+id/profilePicButton"
             android:layout_width="148dp"
             android:layout_height="144dp"
             android:background="@drawable/round_button_shape"
@@ -33,18 +35,66 @@
             app:layout_constraintVertical_bias="0.487" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/fullNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/nametag_oval"
             android:gravity="clip_horizontal|clip_vertical"
             android:text="YourName"
             android:textColor="#3E2723"
-            app:layout_constraintBottom_toBottomOf="@+id/profile_picture_button"
-            app:layout_constraintEnd_toEndOf="@+id/profile_picture_button"
-            app:layout_constraintStart_toStartOf="@+id/profile_picture_button"
-            app:layout_constraintTop_toTopOf="@+id/profile_picture_button"
+            app:layout_constraintBottom_toBottomOf="@+id/profilePicButton"
+            app:layout_constraintEnd_toEndOf="@+id/profilePicButton"
+            app:layout_constraintStart_toStartOf="@+id/profilePicButton"
+            app:layout_constraintTop_toTopOf="@+id/profilePicButton"
             app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/emailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/lato_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="312dp"
+        android:fontFamily="@font/lato_bold"
+        android:text="BADGES"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/red_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="4dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="#871515"
+        android:foreground="@drawable/welcome_rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/bloodTypeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:fontFamily="@font/lato_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailTextView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

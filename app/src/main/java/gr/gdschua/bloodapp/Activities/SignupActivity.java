@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -56,7 +55,7 @@ public class SignupActivity extends AppCompatActivity {
 
         bloodTypeSpinner=findViewById(R.id.bloodtype_spinner);
         posNegSpinner=findViewById(R.id.bloodtype_spinner_pos_neg);
-        profilePicButton=findViewById(R.id.profile_picture_button);
+        profilePicButton=findViewById(R.id.profilePicButton);
         registerButton=findViewById(R.id.register_button_details);
         backButton = findViewById(R.id.back_button_details);
         fName=findViewById(R.id.first_name_box);
@@ -156,8 +155,6 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         progressBar.setVisibility(View.VISIBLE);
-        //user creation works
-        //real time database does not work
         mAuth.createUserWithEmailAndPassword(userEmail,userPassword)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
