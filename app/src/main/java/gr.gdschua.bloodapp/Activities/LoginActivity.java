@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(LoginActivity.this, "GOOD" + FirebaseAuth.getInstance().getCurrentUser(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "GOOD" + mAuth.getCurrentUser(), Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(LoginActivity.this,"BAD",Toast.LENGTH_SHORT).show();
                 }
