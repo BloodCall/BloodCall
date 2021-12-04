@@ -156,13 +156,13 @@ public class SignupActivity extends AppCompatActivity {
                                 daoUser.insertUser(newUser).addOnSuccessListener(suc->{
                                     Toast.makeText(SignupActivity.this,"Succesfully registered",Toast.LENGTH_LONG).show();
                                 }).addOnFailureListener(fail->{
-                                    Toast.makeText(SignupActivity.this,"Failed to register"+fail.getMessage(),Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SignupActivity.this,"Failed to register "+fail.getMessage(),Toast.LENGTH_LONG).show();
                                 });
 
                                 Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
                                 startActivity(goToLogin);
                         }else{
-                            Toast.makeText(SignupActivity.this,"Failed COCK to register",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignupActivity.this,"Failed to register",Toast.LENGTH_LONG).show();
                             Log.w("error", "signInWithCustomToken:failure", task.getException());
                         }
                     }
