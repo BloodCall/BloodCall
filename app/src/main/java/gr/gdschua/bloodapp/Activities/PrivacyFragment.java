@@ -38,6 +38,6 @@ public class PrivacyFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        Navigation.findNavController(view).navigate(R.id.action_privacyFragment_to_termsFragment);
+       // Navigation.findNavController(view).navigate(R.id.action_privacyFragment_to_termsFragment);
     }
 }

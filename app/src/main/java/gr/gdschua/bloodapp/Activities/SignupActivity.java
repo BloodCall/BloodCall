@@ -2,13 +2,12 @@ package gr.gdschua.bloodapp.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.Navigation;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -26,13 +25,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
+
 import gr.gdschua.bloodapp.DatabaseAcess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 
 public class SignupActivity extends AppCompatActivity {
 
-    public static final int PICK_IMAGE = 1;
 
     Spinner bloodTypeSpinner;
     Spinner posNegSpinner;
@@ -41,6 +40,8 @@ public class SignupActivity extends AppCompatActivity {
     Button backButton;
     EditText fName;
     EditText lName;
+    private final int PICK_IMAGE_REQUEST = 22;
+    Uri profilePicture;
     EditText email;
     ProgressBar progressBar;
     EditText password;
@@ -85,15 +86,14 @@ public class SignupActivity extends AppCompatActivity {
         profilePicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                try {
-
-                    i.putExtra("return-data", true);
-                    startActivityForResult(
-                            Intent.createChooser(i, "Select Picture"), 0);
-                }catch (ActivityNotFoundException ex){
-                    ex.printStackTrace();
-                }
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(
+                        Intent.createChooser(
+                                intent,
+                                "Select a profile picture..."),
+                        PICK_IMAGE_REQUEST);
             }
         });
     }
@@ -101,8 +101,9 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==0 && resultCode == Activity.RESULT_OK){
+        if(requestCode==PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK){
             try {
+                profilePicture=data.getData();
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
                 profilePicButton.setImageBitmap(bitmap);
 
@@ -164,7 +165,7 @@ public class SignupActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
 
                             User newUser = new User(fullName,userEmail,bloodType);
-                                daoUser.insertUser(newUser).addOnSuccessListener(suc->{
+                                daoUser.insertUser(newUser,profilePicture).addOnSuccessListener(suc->{
                                     Toast.makeText(SignupActivity.this,"Succesfully registered",Toast.LENGTH_LONG).show();
                                 }).addOnFailureListener(fail->{
                                     Toast.makeText(SignupActivity.this,"Failed to register "+fail.getMessage(),Toast.LENGTH_LONG).show();

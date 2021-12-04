@@ -44,7 +44,7 @@ public class TermsFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(rootView).navigate(R.id.action_termsFragment_to_detailsFragment);
+               //Navigation.findNavController(rootView).navigate(R.id.action_termsFragment_to_detailsFragment);
             }
         });
 
