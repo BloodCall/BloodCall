@@ -89,7 +89,7 @@ public class SignupActivity extends AppCompatActivity {
         profilePicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK).setType("image/*");
+                Intent intent = new Intent(Intent.ACTION_PICK).setType("image/*").putExtra("outputX", 240).putExtra("outputY", 240).putExtra("aspectX", 1).putExtra("aspectY",1).putExtra("scale",true);
                 launchGalleryActivity.launch(intent);
             }
         });
@@ -106,9 +106,9 @@ public class SignupActivity extends AppCompatActivity {
                     }
                     Intent data = result.getData();
                     try {
-                        profilePicture=data.getData();
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(SignupActivity.this.getContentResolver(), data.getData());
-                        profilePicButton.setImageBitmap(bitmap);
+                        profilePicture=BitmapResizer.processBitmap(data.getData(),400,SignupActivity.this);
+                        profilePicButton.setImageBitmap(Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(SignupActivity.this.getContentResolver(), profilePicture)));
 
                     } catch (Exception e) {
                         e.printStackTrace();
