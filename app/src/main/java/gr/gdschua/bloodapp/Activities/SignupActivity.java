@@ -1,5 +1,9 @@
 package gr.gdschua.bloodapp.Activities;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -85,32 +89,33 @@ public class SignupActivity extends AppCompatActivity {
         profilePicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(
-                        Intent.createChooser(
-                                intent,
-                                "Select a profile picture..."),
-                        PICK_IMAGE_REQUEST);
+                Intent intent = new Intent(Intent.ACTION_PICK).setType("image/*");
+                launchGalleryActivity.launch(intent);
             }
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK){
-            try {
-                profilePicture=data.getData();
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
-                profilePicButton.setImageBitmap(bitmap);
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+    ActivityResultLauncher<Intent> launchGalleryActivity = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() != Activity.RESULT_OK) {
+                        return;
+                    }
+                    Intent data = result.getData();
+                    try {
+                        profilePicture=data.getData();
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(SignupActivity.this.getContentResolver(), data.getData());
+                        profilePicButton.setImageBitmap(bitmap);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
 
     private void registerUser(){
         String fullName = fName.getText().toString().trim() + " " + lName.getText().toString().trim();
