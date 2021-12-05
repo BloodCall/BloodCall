@@ -9,19 +9,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
-            android:name=".SignupActivity"
-            android:theme="@style/Theme.BloodDonationApp"
-            android:exported="false"
-            android:label="@string/signup_button"/>
+            android:name=".Activities.MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.BloodDonationApp"/>
         <activity
-            android:name=".LoginActivity"
-            android:theme="@style/Theme.BloodDonationApp"
+            android:name=".Activities.SignupActivity"
             android:exported="false"
-            android:label="@string/login_button"/>
+            android:label="@string/signup_button"
+            android:theme="@style/Theme.BloodDonationApp" />
         <activity
-            android:name=".LauncherActivity"
-            android:theme="@style/Theme.BloodDonationApp.NoActionBar"
-            android:exported="true">
+            android:name=".Activities.LoginActivity"
+            android:exported="false"
+            android:label="@string/login_button"
+            android:theme="@style/Theme.BloodDonationApp" />
+        <activity
+            android:name=".Activities.LauncherActivity"
+            android:exported="true"
+            android:theme="@style/Theme.BloodDonationApp.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

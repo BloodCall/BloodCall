@@ -1,4 +1,4 @@
-package gr.gdschua.bloodapp;
+package gr.gdschua.bloodapp.Activities;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import gr.gdschua.bloodapp.R;
 
 
 public class TermsFragment extends Fragment {
@@ -42,7 +44,7 @@ public class TermsFragment extends Fragment {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(rootView).navigate(R.id.action_termsFragment_to_detailsFragment);
+               //Navigation.findNavController(rootView).navigate(R.id.action_termsFragment_to_detailsFragment);
             }
         });
 
