@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,13 +40,12 @@ public class LauncherActivity extends AppCompatActivity {
         });
     }
 
-    //TO-BE-IMPLEMENTED
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            //Intent intent = new Intent(LauncherActivity.this, MAIN PAGE );
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            Intent intent = new Intent(LauncherActivity.this, MainActivity.class);
+            startActivity(intent);
         }
     }
 

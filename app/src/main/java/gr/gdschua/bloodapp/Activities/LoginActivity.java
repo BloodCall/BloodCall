@@ -3,6 +3,7 @@ package gr.gdschua.bloodapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -38,15 +39,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
     private void signIn(String email,String password){
         mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(LoginActivity.this, "GOOD" + FirebaseAuth.getInstance().getCurrentUser(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class );
+                    startActivity(intent);
                 }else{
-                    Toast.makeText(LoginActivity.this,task.getException().toString(),Toast.LENGTH_SHORT).show();
+                    emailET.setError("Invalid email or password , try again or sign up");
                 }
             }
         });
