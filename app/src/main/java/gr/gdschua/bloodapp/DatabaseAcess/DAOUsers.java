@@ -20,12 +20,17 @@ public class DAOUsers {
     }
 
     public Task<Void> insertUser(User newUser, Uri userImage){
+        if (userImage != null){
+            FirebaseStorage.getInstance().getReference("UserImages").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).putFile(userImage);
+        }
 
-       FirebaseStorage.getInstance().getReference("UserImages").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).putFile(userImage);
+
        return FirebaseDatabase.getInstance().getReference("Users")
                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                .setValue(newUser);
     }
+
+
 
     public Task<DataSnapshot> getUser(){
 
