@@ -22,7 +22,7 @@
             android:name=".Activities.LoginActivity"
             android:exported="false"
             android:label="@string/login_button"
-            android:theme="@style/Theme.BloodDonationApp" />
+            android:theme="@style/Theme.BloodDonationApp.NoActionBar" />
         <activity
             android:name=".Activities.LauncherActivity"
             android:exported="true"
