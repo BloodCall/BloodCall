@@ -3,13 +3,15 @@
     <string name="title_activity_launcher">Launcher_Activity</string>
 
     <!-- LauncherActivity Strings !-->
-    <string name="welcome_header">Welcome!</string>
-    <string name="welcome_subtext">Please log in or sign up to continue</string>
+    <string name="FirstTextViewLaunch">GROW \nYOUR BUSINESS</string>
+    <string name="SecondTextViewLaunch">Please log in or sign up to continue</string>
+    <string name="ThirdTextViewLaunch">HOW WE WORK?</string>
     <string name="login_button">Log In</string>
     <string name="signup_button">Sign Up</string>
     <string name="signup_subtext">Don\'t have an account?</string>
     <string name="password_box_hint">Password</string>
     <string name="e_mail_hint">E-Mail</string>
+    <string name="login_activity_textViewFirst">LOGIN</string>
 
     <!-- Sign Up Fragment texts,may be changed to obtain resources from online?!-->
     <!-- TODO: Remove or change this placeholder text -->
