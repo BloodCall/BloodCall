@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment {
                     bloodTypeTV.setText(currUser.getBloodType());
                     fullNameTextView.setText(currUser.getFullName());
                 }else {
-                    Toast.makeText(view.getContext(), "FAILED DOG", Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(), "Failed to retrieve user info.", Toast.LENGTH_LONG).show();
                     Log.e("ERROR", "COULD NOT RETRIEVE USER INFO!");
                 }
             }

@@ -1,4 +1,4 @@
-package gr.gdschua.bloodapp.Activities;
+package gr.gdschua.bloodapp.Utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

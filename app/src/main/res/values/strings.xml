@@ -3,7 +3,7 @@
     <string name="title_activity_launcher">Launcher_Activity</string>
 
     <!-- LauncherActivity Strings !-->
-    <string name="FirstTextViewLaunch">DONATE BLOOD\nSAVE A LIFE</string>
+    <string name="FirstTextViewLaunch">DONATE BLOOD,\nSAVE A LIFE</string>
     <string name="SecondTextViewLaunch">Please log in or sign up to continue</string>
     <string name="ThirdTextViewLaunch">Are you a hospital?</string>
     <string name="login_button">Log In</string>
