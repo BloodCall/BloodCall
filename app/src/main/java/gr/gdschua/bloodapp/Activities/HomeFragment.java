@@ -57,7 +57,6 @@ public class HomeFragment extends Fragment {
         bloodTypeTV = view.findViewById(R.id.bloodTypeTextView);
         fullNameTextView = view.findViewById(R.id.fullNameTextView);
         profilePicture = view.findViewById(R.id.profilePic);
-        //this is how you retrieve data yo
 
         dao.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -86,11 +85,9 @@ public class HomeFragment extends Fragment {
                         if (task.isSuccessful()){
                             Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                             profilePicture.setImageBitmap(bitmap);
+                            localFile.delete();
                         }else{
-                            //need a way to load the default picture here
-
                             Log.e("ERROR","IMAGE NOT FOUND!");
-                            //Toast.makeText(view.getContext(), "HERE NEED TO LOAD DEFAULT PIC?", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
