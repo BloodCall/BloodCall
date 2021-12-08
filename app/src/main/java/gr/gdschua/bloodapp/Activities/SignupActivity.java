@@ -153,7 +153,7 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(userEmail,userPassword)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -176,6 +176,6 @@ public class SignupActivity extends AppCompatActivity {
                         }
                     }
                 });
-        progressBar.setVisibility(View.GONE);
+        //progressBar.setVisibility(View.GONE);
     }
 }
