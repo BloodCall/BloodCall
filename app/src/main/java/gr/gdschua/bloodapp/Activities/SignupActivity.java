@@ -28,10 +28,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
+import java.io.File;
 
 import gr.gdschua.bloodapp.DatabaseAcess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
+import gr.gdschua.bloodapp.Utils.BitmapResizer;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -107,8 +109,8 @@ public class SignupActivity extends AppCompatActivity {
                     Intent data = result.getData();
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(SignupActivity.this.getContentResolver(), data.getData());
-                        profilePicture=BitmapResizer.processBitmap(data.getData(),400,SignupActivity.this);
-                        profilePicButton.setImageBitmap(Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(SignupActivity.this.getContentResolver(), profilePicture)));
+                        BitmapResizer.processBitmap(data.getData(),400,SignupActivity.this,profilePicButton);
+
 
                     } catch (Exception e) {
                         e.printStackTrace();

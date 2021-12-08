@@ -74,8 +74,8 @@
 
     <TextView
         android:id="@+id/ThirdTextViewLaunch"
-        android:layout_width="109dp"
-        android:layout_height="29dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/ThirdTextViewLaunch"
         android:textAlignment="center"
         android:textColor="@color/black"

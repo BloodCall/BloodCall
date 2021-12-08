@@ -1,10 +1,11 @@
-package gr.gdschua.bloodapp.Activities;
+package gr.gdschua.bloodapp.Utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.widget.ImageView;
 
 import androidx.exifinterface.media.ExifInterface;
 
@@ -12,6 +13,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+import gr.gdschua.bloodapp.Activities.SignupActivity;
 
 public class BitmapResizer {
 
@@ -60,7 +63,7 @@ public class BitmapResizer {
         }
     }
 
-    public static Uri processBitmap(Uri imageUri, int maxSize, Context context) {
+    public static void processBitmap(Uri imageUri, int maxSize, Context context,ImageView profilePicButton) {
         int orientation = 0;
         Bitmap image = null;
         try (InputStream inputStream = context.getContentResolver().openInputStream(imageUri)) {
@@ -92,10 +95,12 @@ public class BitmapResizer {
 
         try (FileOutputStream out = new FileOutputStream(localFile)) {
             tmp.compress(Bitmap.CompressFormat.PNG, 100, out);
+            profilePicButton.setImageBitmap(Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.fromFile(localFile))));
+            localFile.delete();
         } catch (IOException e) {
             e.printStackTrace();
         };
 
-        return Uri.fromFile(localFile);
+
     }
 }
