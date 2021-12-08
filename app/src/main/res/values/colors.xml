@@ -10,4 +10,6 @@
     <color name="red_700">#D32F2F</color>
     <color name="red_900">#B71C1C</color>
     <color name="red_300">#E57373</color>
+    <color name="changed_red">#b82323</color>
+    <color name="ice_white">#EDF4F5</color>
 </resources>
