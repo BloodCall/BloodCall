@@ -42,8 +42,8 @@
 
     <TextView
         android:id="@+id/login_activity_textViewFirst"
-        android:layout_width="91dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/login_activity_textViewFirst"
         android:textColor="@color/black"

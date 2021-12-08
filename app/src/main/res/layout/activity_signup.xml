@@ -200,8 +200,8 @@
 
     <TextView
         android:id="@+id/createAcountTextView"
-        android:layout_width="158dp"
-        android:layout_height="51dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:text="@string/createAccountTextView"
         android:textAlignment="viewStart"

@@ -5,7 +5,7 @@
     <!-- LauncherActivity Strings !-->
     <string name="FirstTextViewLaunch">DONATE BLOOD,\nSAVE A LIFE</string>
     <string name="SecondTextViewLaunch">Please log in or sign up to continue</string>
-    <string name="ThirdTextViewLaunch">Are you representing a hospital?Click here.</string>
+    <string name="ThirdTextViewLaunch">Are you representing a hospital? Click here.</string>
     <string name="login_button">Log In</string>
     <string name="signup_button">Sign Up</string>
     <string name="signup_subtext">Don\'t have an account?</string>
