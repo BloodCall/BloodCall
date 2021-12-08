@@ -15,8 +15,7 @@
         <TextView
             android:id="@+id/TEXT_STATUS_ID"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/privacy_text" />
+            android:layout_height="wrap_content" />
     </ScrollView>
 
     <Button

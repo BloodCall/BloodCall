@@ -16,7 +16,7 @@
             android:id="@+id/TEXT_STATUS_ID"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="@string/terms_text" />
+            android:text="@string/SecondTextViewLaunch" />
     </ScrollView>
 
     <Button

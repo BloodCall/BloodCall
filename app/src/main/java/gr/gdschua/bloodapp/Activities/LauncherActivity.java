@@ -8,7 +8,9 @@ import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+
 import com.google.firebase.auth.FirebaseAuth;
+
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 
@@ -36,6 +38,15 @@ public class LauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(LauncherActivity.this, SignupActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.hospital_text).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LauncherActivity.this, HospitalAuthActivity.class);
                 startActivity(intent);
                 finish();
             }
