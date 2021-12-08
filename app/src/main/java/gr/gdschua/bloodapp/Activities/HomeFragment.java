@@ -2,13 +2,11 @@ package gr.gdschua.bloodapp.Activities;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -27,10 +24,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import gr.gdschua.bloodapp.DatabaseAcess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
@@ -41,7 +34,7 @@ public class HomeFragment extends Fragment {
     DAOUsers dao = new DAOUsers();
     TextView bloodTypeTV;
     TextView fullNameTextView;
-    StorageReference mStroageReference;
+    StorageReference mStorageReference;
     User currUser;
     de.hdodenhof.circleimageview.CircleImageView profilePicture;
     @Override
@@ -61,39 +54,50 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        bloodTypeTV=view.findViewById(R.id.bloodTypeTextView);
-        fullNameTextView=view.findViewById(R.id.fullNameTextView);
-        profilePicture=view.findViewById(R.id.profilePic);
-        //this is how you retrieve data yo
-        dao.getUser().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        bloodTypeTV = view.findViewById(R.id.bloodTypeTextView);
+        fullNameTextView = view.findViewById(R.id.fullNameTextView);
+        profilePicture = view.findViewById(R.id.profilePic);
+
+        dao.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onSuccess(DataSnapshot dataSnapshot) {
-                currUser= dataSnapshot.getValue(User.class);
-                bloodTypeTV.setText(currUser.getBloodType());
-                fullNameTextView.setText(currUser.getFullName());
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(view.getContext(),"FAILED DOG",Toast.LENGTH_LONG).show();
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()){
+                    currUser = task.getResult().getValue(User.class);
+                    bloodTypeTV.setText(currUser.getBloodType());
+                    fullNameTextView.setText(currUser.getFullName());
+                }else {
+                    Toast.makeText(view.getContext(), "Failed to retrieve user info.", Toast.LENGTH_LONG).show();
+                    Log.e("ERROR", "COULD NOT RETRIEVE USER INFO!");
+                }
             }
         });
 
-        mStroageReference=FirebaseStorage.getInstance().getReference().child("UserImages/"+FirebaseAuth.getInstance().getUid());
+        mStorageReference = FirebaseStorage.getInstance().getReference().child("UserImages/" + FirebaseAuth.getInstance().getUid());
+
 
         try {
-            final File localFile=File.createTempFile(FirebaseAuth.getInstance().getUid(),"jpg");
-            mStroageReference.getFile(localFile)
-                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            Bitmap bitmap=BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                final File localFile = File.createTempFile(FirebaseAuth.getInstance().getUid(), "jpg");
+
+
+                mStorageReference.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
+                        if (task.isSuccessful()){
+                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                             profilePicture.setImageBitmap(bitmap);
+                            localFile.delete();
+                        }else{
+                            Log.e("ERROR","IMAGE NOT FOUND!");
                         }
-                    });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+
+            }
+
+
+
         return view;
     }
 

@@ -3,13 +3,20 @@
     <string name="title_activity_launcher">Launcher_Activity</string>
 
     <!-- LauncherActivity Strings !-->
-    <string name="welcome_header">Welcome!</string>
-    <string name="welcome_subtext">Please log in or sign up to continue</string>
+    <string name="FirstTextViewLaunch">DONATE BLOOD,\nSAVE A LIFE</string>
+    <string name="SecondTextViewLaunch">Please log in or sign up to continue</string>
+    <string name="ThirdTextViewLaunch">Are you a hospital?</string>
     <string name="login_button">Log In</string>
     <string name="signup_button">Sign Up</string>
     <string name="signup_subtext">Don\'t have an account?</string>
+
+
+    <!-- LoginActivity String!-->
     <string name="password_box_hint">Password</string>
-    <string name="e_mail_hint">E-Mail</string>
+    <string name="e_mail_hint">E-mail</string>
+    <string name="login_activity_textViewFirst">LOGIN</string>
+    <string name="checkbox">Remember Me</string>
+    <string name="forgetPassword">Forgot Password?</string>
 
     <!-- Sign Up Fragment texts,may be changed to obtain resources from online?!-->
     <!-- TODO: Remove or change this placeholder text -->
@@ -51,4 +58,14 @@
     <string name="nav_close">Close</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
 </resources>
