@@ -118,35 +118,35 @@
         tools:ignore="TextContrastCheck" />
 
 
-        <EditText
-            android:id="@+id/password_signup_box"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="350dp"
-            android:layout_height="46dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:autofillHints="password"
-            android:background="@drawable/borders_making"
-            android:drawableStart="@drawable/custom_lock_icon"
-            android:drawablePadding="8dp"
-            android:ems="10"
-            android:hint="@string/password_signup_box_hint"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:paddingLeft="8dp"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.517"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.627"
-            tools:ignore="TextContrastCheck"/>
+    <EditText
+        android:id="@+id/password_signup_box"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="350dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:autofillHints="password"
+        android:background="@drawable/borders_making"
+        android:drawableStart="@drawable/custom_lock_icon"
+        android:drawablePadding="8dp"
+        android:ems="10"
+        android:hint="@string/password_signup_box_hint"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:paddingLeft="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.627"
+        tools:ignore="TextContrastCheck" />
 
     <Spinner
         android:id="@+id/bloodtype_spinner"
-        android:layout_width="76dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:entries="@array/blood_types"
         android:minHeight="48dp"
 
@@ -159,8 +159,8 @@
 
     <Spinner
         android:id="@+id/bloodtype_spinner_pos_neg"
-        android:layout_width="76dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:entries="@array/pos_neg"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"

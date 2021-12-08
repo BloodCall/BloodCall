@@ -7,38 +7,6 @@
 
     tools:context="Activities.LoginActivity">
 
-<!--    <EditText-->
-<!--        android:id="@+id/email_input"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="68dp"-->
-<!--        android:autofillHints="emailAddress"-->
-<!--        android:ems="10"-->
-<!--        android:hint="@string/e_mail_hint"-->
-<!--        android:inputType="textEmailAddress"-->
-<!--        android:minHeight="48dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.497"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:ignore="TextContrastCheck" />-->
-
-<!--    <EditText-->
-<!--        android:id="@+id/password_input"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="36dp"-->
-<!--        android:autofillHints="password"-->
-<!--        android:ems="10"-->
-<!--        android:hint="@string/password_box_hint"-->
-<!--        android:inputType="textPassword"-->
-<!--        android:minHeight="48dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.497"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/email_input"-->
-<!--        tools:ignore="TextContrastCheck" />-->
-
 
     <TextView
         android:id="@+id/login_activity_textViewFirst"
@@ -81,22 +49,22 @@
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:id="@+id/password_input"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="350dp"
         android:layout_height="46dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:ems="10"
         android:autofillHints="password"
-        android:hint="@string/password_box_hint"
+        android:background="@drawable/borders_making"
         android:drawableStart="@drawable/custom_lock_icon"
         android:drawablePadding="8dp"
-        android:paddingLeft="8dp"
+        android:ems="10"
+        android:hint="@string/password_box_hint"
         android:inputType="textPassword"
-        android:textColor="@color/black"
-        android:background="@drawable/borders_making"
         android:minHeight="48dp"
+        android:paddingLeft="8dp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -140,6 +108,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.617" />
+
+    <ImageView
+        android:id="@+id/showPassword"
+        android:layout_width="33dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:src="@drawable/show_password_image"
+        app:layout_constraintEnd_toEndOf="@+id/password_input"
+        app:layout_constraintTop_toTopOf="@+id/password_input" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
