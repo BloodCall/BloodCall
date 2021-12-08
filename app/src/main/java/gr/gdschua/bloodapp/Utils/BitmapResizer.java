@@ -88,7 +88,7 @@ public class BitmapResizer {
         Bitmap tmp = Bitmap.createScaledBitmap(image, width, height, true);
 
         try {
-            localFile = File.createTempFile("temp", "png");
+            localFile = File.createTempFile("picker","");
         } catch (IOException e) {
             e.printStackTrace();
         }

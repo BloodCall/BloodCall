@@ -77,7 +77,6 @@ public class SignupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(SignupActivity.this,LauncherActivity.class );
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -171,13 +170,13 @@ public class SignupActivity extends AppCompatActivity {
                             User newUser = new User(fullName,userEmail,bloodType);
                             daoUser.insertUser(newUser,profilePicture).addOnSuccessListener(suc->{
                                 Toast.makeText(SignupActivity.this,"Succesfully registered",Toast.LENGTH_LONG).show();
-                                CacheClearer.deleteCache(SignupActivity.this);
                             }).addOnFailureListener(fail->{
                                 Toast.makeText(SignupActivity.this,"Failed to register "+fail.getMessage(),Toast.LENGTH_LONG).show();
                             });
-
+                            CacheClearer.deleteCache(SignupActivity.this);
                             Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
                             startActivity(goToLogin);
+                            finish();
                         }else{
                             Toast.makeText(SignupActivity.this,"Failed to register",Toast.LENGTH_LONG).show();
                             Log.w("error", "signInWithCustomToken:failure", task.getException());

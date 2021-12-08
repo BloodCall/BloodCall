@@ -27,8 +27,8 @@ public class LauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LauncherActivity.this, LoginActivity.class);
-                finish();
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -36,8 +36,8 @@ public class LauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(LauncherActivity.this, SignupActivity.class);
-                finish();
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -50,7 +50,6 @@ public class LauncherActivity extends AppCompatActivity {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             Intent intent = new Intent(LauncherActivity.this, MainActivity.class);
-            finish();
             startActivity(intent);
         }
     }
