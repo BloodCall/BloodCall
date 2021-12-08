@@ -20,15 +20,17 @@
 
     <!-- Sign Up Fragment texts,may be changed to obtain resources from online?!-->
     <string name="click_to_add_a_profile_picture">Click to add a profile picture</string>
-    <string name="first_name">First Name</string>
+    <string name="first_name_hint">First Name</string>
     <string name="last_name_hint">Last Name</string>
-
+    <string name="email_signup_box_hint">Email</string>
+    <string name="password_signup_box_hint">Password</string>
     <string name="blood_type_description">Please enter your blood type:</string>
     <string name="radio_btn_subtext">I am registering as a:</string>
     <string name="individual_radio">Individual</string>
     <string name="healthcare_provider_radio">Healthcare Provider</string>
-    <string name="next_btn">Next</string>
+    <string name="register_button">REGISTER</string>
     <string name="back_btn">Back</string>
+    <string name="createAccountTextView">CREATE \nACCOUNT</string>
 
 
     <string-array name="blood_types">
