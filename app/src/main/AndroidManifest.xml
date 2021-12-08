@@ -12,11 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
-            android:name=".Activities.HospitalSignUpActivity"
+            android:name=".Activities.HospitalActivities.HospitalSignUpActivity"
             android:exported="false"
             android:theme="@style/Theme.BloodDonationApp.NoActionBar"/>
         <activity
-            android:name=".Activities.HospitalAuthActivity"
+            android:name=".Activities.HospitalActivities.HospitalAuthActivity"
             android:exported="false"
             android:theme="@style/Theme.BloodDonationApp.NoActionBar" />
         <activity

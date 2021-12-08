@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import gr.gdschua.bloodapp.Activities.HospitalActivities.HospitalAuthActivity;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 
