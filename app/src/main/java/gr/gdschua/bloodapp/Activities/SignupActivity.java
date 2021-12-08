@@ -34,6 +34,7 @@ import gr.gdschua.bloodapp.DatabaseAcess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.BitmapResizer;
+import gr.gdschua.bloodapp.Utils.CacheClearer;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -108,8 +109,7 @@ public class SignupActivity extends AppCompatActivity {
                     }
                     Intent data = result.getData();
                     try {
-                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(SignupActivity.this.getContentResolver(), data.getData());
-                        BitmapResizer.processBitmap(data.getData(),400,SignupActivity.this,profilePicButton);
+                        profilePicture=BitmapResizer.processBitmap(data.getData(),400,SignupActivity.this,profilePicButton);
 
 
                     } catch (Exception e) {
@@ -169,14 +169,15 @@ public class SignupActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
 
                             User newUser = new User(fullName,userEmail,bloodType);
-                                daoUser.insertUser(newUser,profilePicture).addOnSuccessListener(suc->{
-                                    Toast.makeText(SignupActivity.this,"Succesfully registered",Toast.LENGTH_LONG).show();
-                                }).addOnFailureListener(fail->{
-                                    Toast.makeText(SignupActivity.this,"Failed to register "+fail.getMessage(),Toast.LENGTH_LONG).show();
-                                });
+                            daoUser.insertUser(newUser,profilePicture).addOnSuccessListener(suc->{
+                                Toast.makeText(SignupActivity.this,"Succesfully registered",Toast.LENGTH_LONG).show();
+                                CacheClearer.deleteCache(SignupActivity.this);
+                            }).addOnFailureListener(fail->{
+                                Toast.makeText(SignupActivity.this,"Failed to register "+fail.getMessage(),Toast.LENGTH_LONG).show();
+                            });
 
-                                Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
-                                startActivity(goToLogin);
+                            Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
+                            startActivity(goToLogin);
                         }else{
                             Toast.makeText(SignupActivity.this,"Failed to register",Toast.LENGTH_LONG).show();
                             Log.w("error", "signInWithCustomToken:failure", task.getException());

@@ -63,7 +63,7 @@ public class BitmapResizer {
         }
     }
 
-    public static void processBitmap(Uri imageUri, int maxSize, Context context,ImageView profilePicButton) {
+     public static Uri processBitmap(Uri imageUri, int maxSize, Context context,ImageView profilePicButton) {
         int orientation = 0;
         Bitmap image = null;
         try (InputStream inputStream = context.getContentResolver().openInputStream(imageUri)) {
@@ -96,11 +96,9 @@ public class BitmapResizer {
         try (FileOutputStream out = new FileOutputStream(localFile)) {
             tmp.compress(Bitmap.CompressFormat.PNG, 100, out);
             profilePicButton.setImageBitmap(Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.fromFile(localFile))));
-            localFile.delete();
         } catch (IOException e) {
             e.printStackTrace();
         };
-
-
+        return Uri.fromFile(localFile);
     }
 }
