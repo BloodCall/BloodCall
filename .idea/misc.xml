@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projects/Android Studio/BloodCall/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.20185185185185187" />
+        <entry key="..\:/Projects/Android Studio/BloodCall/app/src/main/res/layout/activity_forgot_password.xml" value="0.23324275362318841" />
+        <entry key="..\:/Projects/Android Studio/BloodCall/app/src/main/res/layout/activity_hospital_auth.xml" value="0.23324275362318841" />
+        <entry key="..\:/Projects/Android Studio/BloodCall/app/src/main/res/layout/activity_hospital_sign_up.xml" value="0.23324275362318841" />
         <entry key="..\:/Projects/Android Studio/BloodCall/app/src/main/res/layout/activity_launcher.xml" value="0.33" />
         <entry key="..\:/Projects/Android Studio/BloodCall/app/src/main/res/layout/activity_login.xml" value="0.2957427536231884" />
         <entry key="..\:/Projects/Android Studio/BloodCall/app/src/main/res/layout/activity_main.xml" value="0.20729166666666668" />

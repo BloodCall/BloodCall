@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -67,7 +66,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String password = passET.getText().toString().trim();
                 String email = emailET.getText().toString().trim();
-                signIn(email,password);
+                signIn(email, password);
+            }
+        });
+
+        findViewById(R.id.forgetPasswordText).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ForgotPassword.class);
+                startActivity(intent);
             }
         });
     }
@@ -87,4 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 }
