@@ -5,7 +5,7 @@
     <!-- LauncherActivity Strings !-->
     <string name="FirstTextViewLaunch">DONATE BLOOD,\nSAVE A LIFE</string>
     <string name="SecondTextViewLaunch">Please log in or sign up to continue</string>
-    <string name="ThirdTextViewLaunch">Are you a hospital?</string>
+    <string name="ThirdTextViewLaunch">Are you representing a hospital? Click here.</string>
     <string name="login_button">Log In</string>
     <string name="signup_button">Sign Up</string>
     <string name="signup_subtext">Don\'t have an account?</string>
@@ -19,23 +19,18 @@
     <string name="forgetPassword">Forgot Password?</string>
 
     <!-- Sign Up Fragment texts,may be changed to obtain resources from online?!-->
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="privacy_text">PRIVACY POLICY TEXT\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse sed ligula fermentum sem dictum rutrum ac quis sapien. Sed lacinia eleifend placerat. Phasellus nec vestibulum purus, at finibus nibh. Mauris bibendum augue a lectus euismod tempor. Curabitur pretium, nulla eu aliquam convallis, odio eros consectetur felis, hendrerit condimentum justo mi sit amet arcu. Fusce pellentesque iaculis sem, id feugiat risus rhoncus sit amet. Phasellus tristique semper dolor, sit amet mollis magna malesuada at. Nulla facilisi. Etiam et ultrices lectus. Integer eget sapien et nunc finibus pretium quis nec metus.
-    Ut eget molestie dolor. Ut quis euismod ligula. Curabitur posuere massa nisi, at volutpat quam vulputate at. Pellentesque nisl massa, congue eu felis at, elementum rutrum justo. Cras aliquam interdum rhoncus. Maecenas pharetra blandit pulvinar. Suspendisse fringilla consequat ultrices. Nam egestas arcu quis velit lacinia, sed ornare dolor maximus. Donec a felis mi. Aenean vulputate dictum neque id tincidunt. Etiam elementum augue nisi, non semper enim faucibus vitae. Nunc quis purus arcu. Mauris viverra mi a elementum elementum. Praesent nisi diam, ultrices id velit non, sodales dignissim nisl.
-    Sed placerat suscipit ligula vitae eleifend. Mauris blandit nisi sed arcu lacinia gravida. Proin scelerisque placerat sapien, nec ultricies risus. Praesent tempor massa vel eleifend sollicitudin. Ut gravida massa eget dapibus scelerisque. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Cras viverra eget velit vitae sagittis. Nam suscipit tempor quam, non dignissim neque. Phasellus pellentesque efficitur dignissim. Integer mauris massa, rhoncus a diam eget, interdum sodales libero. Ut ut condimentum diam.
-    Morbi purus nibh, tincidunt eget odio at, posuere lacinia mauris. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Donec in ultrices risus. Nulla interdum, metus non pretium tristique, mi ipsum tempor elit, vel venenatis ligula nibh vitae dui. Praesent vel fermentum nisl. Fusce quis ligula commodo, tristique erat ut, hendrerit nibh. Ut ante orci, auctor eu interdum non, porta a mi. Phasellus venenatis porta est at pulvinar. Vestibulum quis odio felis. Nullam sit amet placerat neque. Nulla mattis scelerisque sem quis convallis. Nullam eget fringilla est. Duis vel fringilla mi, sed ullamcorper metus. Nullam tincidunt ex non odio facilisis, pretium convallis diam imperdiet. Vivamus tincidunt et lectus sed euismod. Sed consectetur viverra sollicitudin. Vestibulum vitae ex vitae diam venenatis tempus. Ut risus justo, dignissim sed justo et, efficitur faucibus leo. Mauris eget magna vel augue aliquet dictum vitae vel nisl.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="terms_text">TERMS TEXT\nLi Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu sommun paroles. Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va esser plu simplic e regulari quam li existent Europan lingues. It va esser tam simplic quam Occidental in fact, it va esser Occidental. A un Angleso it va semblar un simplificat Angles, quam un skeptic Cambridge amico dit me que Occidental es.Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu sommun paroles.</string>
     <string name="click_to_add_a_profile_picture">Click to add a profile picture</string>
-    <string name="first_name">First Name</string>
+    <string name="first_name_hint">First Name</string>
     <string name="last_name_hint">Last Name</string>
-
+    <string name="email_signup_box_hint">Email</string>
+    <string name="password_signup_box_hint">Password</string>
     <string name="blood_type_description">Please enter your blood type:</string>
     <string name="radio_btn_subtext">I am registering as a:</string>
     <string name="individual_radio">Individual</string>
     <string name="healthcare_provider_radio">Healthcare Provider</string>
-    <string name="next_btn">Next</string>
+    <string name="register_button">REGISTER</string>
     <string name="back_btn">Back</string>
+    <string name="createAccountTextView">CREATE \nACCOUNT</string>
 
 
     <string-array name="blood_types">
@@ -57,7 +52,6 @@
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>

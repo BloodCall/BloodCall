@@ -76,7 +76,7 @@ public class HomeFragment extends Fragment {
 
 
         try {
-                final File localFile = File.createTempFile(FirebaseAuth.getInstance().getUid(), "jpg");
+               final File localFile = File.createTempFile(FirebaseAuth.getInstance().getUid(), "jpg");
 
 
                 mStorageReference.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {

@@ -64,22 +64,14 @@ public class SignupActivity extends AppCompatActivity {
         posNegSpinner=findViewById(R.id.bloodtype_spinner_pos_neg);
         profilePicButton=findViewById(R.id.profilePic);
         registerButton=findViewById(R.id.register_button_details);
-        backButton = findViewById(R.id.back_button_details);
+        //backButton = findViewById(R.id.back_button_details);
         fName=findViewById(R.id.first_name_box);
         lName=findViewById(R.id.last_name_box);
         email=findViewById(R.id.email_signup_box);
         password=findViewById(R.id.password_signup_box);
-        progressBar=findViewById(R.id.progressBar);
+        //progressBar=findViewById(R.id.progressBar);
 
 
-        backButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(SignupActivity.this,LauncherActivity.class );
-                startActivity(intent);
-                finish();
-            }
-        });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,7 +153,7 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(userEmail,userPassword)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -171,19 +163,19 @@ public class SignupActivity extends AppCompatActivity {
                             User newUser = new User(fullName,userEmail,bloodType);
                             daoUser.insertUser(newUser,profilePicture).addOnSuccessListener(suc->{
                                 Toast.makeText(SignupActivity.this,"Succesfully registered",Toast.LENGTH_LONG).show();
-                                CacheClearer.deleteCache(SignupActivity.this);
                             }).addOnFailureListener(fail->{
                                 Toast.makeText(SignupActivity.this,"Failed to register "+fail.getMessage(),Toast.LENGTH_LONG).show();
                             });
-
+                            CacheClearer.deleteCache(SignupActivity.this);
                             Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
                             startActivity(goToLogin);
+                            finish();
                         }else{
                             Toast.makeText(SignupActivity.this,"Failed to register",Toast.LENGTH_LONG).show();
                             Log.w("error", "signInWithCustomToken:failure", task.getException());
                         }
                     }
                 });
-        progressBar.setVisibility(View.GONE);
+        //progressBar.setVisibility(View.GONE);
     }
 }

@@ -8,7 +8,10 @@ import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+
 import com.google.firebase.auth.FirebaseAuth;
+
+import gr.gdschua.bloodapp.Activities.HospitalActivities.HospitalAuthActivity;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 
@@ -27,8 +30,8 @@ public class LauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LauncherActivity.this, LoginActivity.class);
-                finish();
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -36,8 +39,17 @@ public class LauncherActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(LauncherActivity.this, SignupActivity.class);
-                finish();
                 startActivity(intent);
+                finish();
+            }
+        });
+
+        findViewById(R.id.hospital_text).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LauncherActivity.this, HospitalAuthActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -50,7 +62,6 @@ public class LauncherActivity extends AppCompatActivity {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             Intent intent = new Intent(LauncherActivity.this, MainActivity.class);
-            finish();
             startActivity(intent);
         }
     }
