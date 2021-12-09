@@ -19,7 +19,8 @@ public class LauncherActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-    BroadcastReceiver broadcastReceiver;
+    BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,6 @@ public class LauncherActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LauncherActivity.this, LoginActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -40,7 +40,6 @@ public class LauncherActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(LauncherActivity.this, SignupActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -49,12 +48,14 @@ public class LauncherActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(LauncherActivity.this, HospitalAuthActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
+        IntentFilter filter=new IntentFilter();
+        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        registerReceiver(broadcastReceiver,filter);
 
-        broadcastReceiver= new NetworkChangeReceiver();
-        registerNetworkBroadcastReceiver();
+
+        
     }
 
     @Override
