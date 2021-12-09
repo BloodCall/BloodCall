@@ -11,6 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
+        <activity android:name=".Activities.NoInternetActivity"
+            android:exported="false"
+            android:theme="@style/Theme.BloodDonationApp.NoActionBar"
+            android:excludeFromRecents="true"
+            android:noHistory="true" />
         <activity
             android:name=".Activities.HospitalActivities.HospitalSignUpActivity"
             android:exported="false"
@@ -45,13 +50,6 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:name=".Utils.NetworkChangeReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
 
         <meta-data
             android:name="preloaded_fonts"

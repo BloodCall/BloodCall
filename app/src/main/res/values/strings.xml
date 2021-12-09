@@ -31,6 +31,8 @@
     <string name="register_button">REGISTER</string>
     <string name="back_btn">Back</string>
     <string name="createAccountTextView">CREATE \nACCOUNT</string>
+    <string name="noInternet">No internet connection!</string>
+    <string name="noInternetSubtext">This app requires an internet connection.\nPlease connect to a network</string>
 
 
     <string-array name="blood_types">

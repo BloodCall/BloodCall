@@ -8,15 +8,22 @@ import android.net.NetworkInfo;
 import android.util.Log;
 import android.widget.Toast;
 
+import gr.gdschua.bloodapp.Activities.LauncherActivity;
+import gr.gdschua.bloodapp.Activities.NoInternetActivity;
+
 public class NetworkChangeReceiver extends BroadcastReceiver {
+
+    Boolean triggered;
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
         try{
-            if(isOnline(context)){
-                Toast.makeText(context,"Online",Toast.LENGTH_LONG).show();
+            if(isOnline(context) && triggered){
+                NoInternetActivity.FinishTask();
             }else{
-                Toast.makeText(context,"Offline",Toast.LENGTH_LONG).show();
+                triggered=true;
+                Intent launchIntent=new Intent(context, NoInternetActivity.class);
+                context.startActivity(launchIntent);
             }
         }catch(NullPointerException e){
             e.printStackTrace();
