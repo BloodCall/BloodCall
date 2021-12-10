@@ -19,6 +19,7 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, final Intent intent) {
         try{
             if(isOnline(context) && triggered){
+                triggered=false;
                 NoInternetActivity.FinishTask();
             }else{
                 triggered=true;
