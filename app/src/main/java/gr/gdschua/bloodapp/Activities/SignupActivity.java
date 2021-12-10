@@ -8,7 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.BitmapResizer;
 import gr.gdschua.bloodapp.Utils.CacheClearer;
+import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -42,6 +45,7 @@ public class SignupActivity extends AppCompatActivity {
     Spinner bloodTypeSpinner;
     Spinner posNegSpinner;
     de.hdodenhof.circleimageview.CircleImageView profilePicButton;
+    BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
     Button registerButton;
     Button backButton;
     EditText fName;
@@ -52,6 +56,12 @@ public class SignupActivity extends AppCompatActivity {
     ProgressBar progressBar;
     EditText password;
     DAOUsers daoUser = new DAOUsers();
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
@@ -81,6 +91,8 @@ public class SignupActivity extends AppCompatActivity {
         });
 
 
+
+
         profilePicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +100,7 @@ public class SignupActivity extends AppCompatActivity {
                 launchGalleryActivity.launch(intent);
             }
         });
+
     }
 
 
@@ -109,6 +122,8 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 }
             });
+
+
 
 
     private void registerUser(){
@@ -169,6 +184,7 @@ public class SignupActivity extends AppCompatActivity {
                             CacheClearer.deleteCache(SignupActivity.this);
                             Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
                             startActivity(goToLogin);
+                            LauncherActivity.actv.finish();
                             finish();
                         }else{
                             Toast.makeText(SignupActivity.this,"Failed to register",Toast.LENGTH_LONG).show();
@@ -178,4 +194,6 @@ public class SignupActivity extends AppCompatActivity {
                 });
         //progressBar.setVisibility(View.GONE);
     }
+
+
 }

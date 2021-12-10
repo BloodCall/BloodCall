@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -17,24 +19,24 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import gr.gdschua.bloodapp.R;
+import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 
 public class LoginActivity extends AppCompatActivity {
     EditText passET;
     EditText emailET;
     ImageView showPasswordIV;
     private FirebaseAuth mAuth;
+    BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        finish();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         emailET= findViewById(R.id.email_input);
         passET = findViewById(R.id.password_input);
         showPasswordIV = findViewById(R.id.showPassword);
@@ -77,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
 
@@ -86,15 +89,16 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class );
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    LauncherActivity.actv.finish();
+                    finish();
                 }else{
                     emailET.setError("Invalid email or password , try again or sign up");
                 }
             }
         });
     }
-
 
 
 }

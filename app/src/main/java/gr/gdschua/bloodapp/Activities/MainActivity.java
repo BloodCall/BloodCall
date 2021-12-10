@@ -1,6 +1,8 @@
 package gr.gdschua.bloodapp.Activities;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,12 +23,21 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import gr.gdschua.bloodapp.R;
+import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 import gr.gdschua.bloodapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity{
 
     private AppBarConfiguration mAppBarConfiguration;
+    BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
     private ActivityMainBinding binding;
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterNetwork();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +75,10 @@ public class MainActivity extends AppCompatActivity{
                 return true;
             }
         });
+
+        IntentFilter filter=new IntentFilter();
+        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        registerReceiver(broadcastReceiver,filter);
     }
 
     @Override
@@ -73,16 +88,21 @@ public class MainActivity extends AppCompatActivity{
         return true;
     }
 
-    @Override
-    public void onBackPressed() {
-        return;
-    }
 
     @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+
+    protected void unregisterNetwork(){
+        try{
+            unregisterReceiver(broadcastReceiver);
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
     }
 
 }
