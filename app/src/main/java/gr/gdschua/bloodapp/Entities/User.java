@@ -1,7 +1,7 @@
 package gr.gdschua.bloodapp.Entities;
 
 public class User {
-    private String fullName,email,bloodType,uId;
+    private String fullName,email,bloodType;
 
     public String getBloodType() {
         return bloodType;

@@ -4,6 +4,9 @@ public class Hospital {
     private String Name,Email;
     private double lat,lon;
 
+    public Hospital(){
+
+    }
     public Hospital(String name, String email, double lat, double lon) {
         Name = name;
         Email = email;
