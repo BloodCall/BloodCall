@@ -28,6 +28,7 @@ public class LauncherActivity extends AppCompatActivity {
     public static Activity actv;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

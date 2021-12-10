@@ -8,7 +8,10 @@
             android:id="@+id/nav_home"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/sign_out"
-            android:title="Sign Out" />
+            android:id="@+id/nav_map"
+            android:title="Map" />
     </group>
+    <item
+        android:id="@+id/sign_out"
+        android:title="Sign Out" />
 </menu>
