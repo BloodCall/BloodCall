@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,6 +33,7 @@ public class LauncherActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LauncherActivity.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -40,6 +42,7 @@ public class LauncherActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(LauncherActivity.this, SignupActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -48,14 +51,13 @@ public class LauncherActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(LauncherActivity.this, HospitalAuthActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         IntentFilter filter=new IntentFilter();
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         registerReceiver(broadcastReceiver,filter);
 
-
-        
     }
 
     @Override
@@ -64,6 +66,7 @@ public class LauncherActivity extends AppCompatActivity {
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
             Intent intent = new Intent(LauncherActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
@@ -71,16 +74,6 @@ public class LauncherActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterNetwork();
-    }
-
-    //make contentprovider to send to other activities
-    public void registerNetworkBroadcastReceiver(){
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
-            registerReceiver(broadcastReceiver,new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-        }
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            registerReceiver(broadcastReceiver,new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-        }
     }
 
     protected void unregisterNetwork(){

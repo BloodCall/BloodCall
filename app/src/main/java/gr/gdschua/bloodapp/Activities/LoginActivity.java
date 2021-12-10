@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -17,24 +19,25 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import gr.gdschua.bloodapp.R;
+import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 
 public class LoginActivity extends AppCompatActivity {
     EditText passET;
     EditText emailET;
     ImageView showPasswordIV;
     private FirebaseAuth mAuth;
+    BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        finish();
+        unregisterNetwork();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         emailET= findViewById(R.id.email_input);
         passET = findViewById(R.id.password_input);
         showPasswordIV = findViewById(R.id.showPassword);
@@ -77,6 +80,10 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        IntentFilter filter=new IntentFilter();
+        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        registerReceiver(broadcastReceiver,filter);
     }
 
 
@@ -96,5 +103,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    protected void unregisterNetwork(){
+        try{
+            unregisterReceiver(broadcastReceiver);
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
+    }
 
 }
