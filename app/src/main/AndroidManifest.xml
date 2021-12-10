@@ -44,7 +44,8 @@
         <activity
             android:name=".Activities.LauncherActivity"
             android:exported="true"
-            android:theme="@style/Theme.BloodDonationApp.NoActionBar">
+            android:theme="@style/Theme.BloodDonationApp.NoActionBar"
+            android:launchMode = "singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

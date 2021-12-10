@@ -1,6 +1,8 @@
 package gr.gdschua.bloodapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -23,17 +25,19 @@ public class LauncherActivity extends AppCompatActivity {
     BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
 
 
+    public static Activity actv;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
-
+        actv = this;
         findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LauncherActivity.this, LoginActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -42,7 +46,6 @@ public class LauncherActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(LauncherActivity.this, SignupActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -51,7 +54,6 @@ public class LauncherActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(LauncherActivity.this, HospitalAuthActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
         IntentFilter filter=new IntentFilter();

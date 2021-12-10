@@ -31,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterNetwork();
     }
 
     @Override
@@ -81,9 +80,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        IntentFilter filter=new IntentFilter();
-        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        registerReceiver(broadcastReceiver,filter);
     }
 
 
@@ -93,8 +89,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class );
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    LauncherActivity.actv.finish();
+                    finish();
                 }else{
                     emailET.setError("Invalid email or password , try again or sign up");
                 }
@@ -102,13 +100,5 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
-    protected void unregisterNetwork(){
-        try{
-            unregisterReceiver(broadcastReceiver);
-        }catch(IllegalArgumentException e){
-            e.printStackTrace();
-        }
-    }
 
 }

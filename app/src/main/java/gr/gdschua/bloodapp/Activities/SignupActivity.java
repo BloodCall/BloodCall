@@ -61,7 +61,6 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterNetwork();
     }
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -102,9 +101,6 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        IntentFilter filter=new IntentFilter();
-        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        registerReceiver(broadcastReceiver,filter);
     }
 
 
@@ -188,6 +184,7 @@ public class SignupActivity extends AppCompatActivity {
                             CacheClearer.deleteCache(SignupActivity.this);
                             Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
                             startActivity(goToLogin);
+                            LauncherActivity.actv.finish();
                             finish();
                         }else{
                             Toast.makeText(SignupActivity.this,"Failed to register",Toast.LENGTH_LONG).show();
@@ -198,12 +195,5 @@ public class SignupActivity extends AppCompatActivity {
         //progressBar.setVisibility(View.GONE);
     }
 
-    protected void unregisterNetwork(){
-        try{
-            unregisterReceiver(broadcastReceiver);
-        }catch(IllegalArgumentException e){
-            e.printStackTrace();
-        }
-    }
 
 }
