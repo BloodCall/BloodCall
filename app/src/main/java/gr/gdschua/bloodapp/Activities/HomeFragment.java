@@ -68,14 +68,6 @@ public class HomeFragment extends Fragment {
                 if (task.isSuccessful()) {
                     currUser = task.getResult().getValue(User.class);
                     if (task.getResult().getValue() == null) {
-                        Hdao.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                Hospital currHosp = task.getResult().getValue(Hospital.class);
-                                bloodTypeTV.setText("HOSPITAL");
-                                fullNameTextView.setText(currHosp.getName());
-                            }
-                        });
                     } else {
                         bloodTypeTV.setText(currUser.getBloodType());
                         fullNameTextView.setText(currUser.getFullName());
