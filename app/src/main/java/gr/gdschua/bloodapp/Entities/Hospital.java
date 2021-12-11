@@ -1,12 +1,17 @@
 package gr.gdschua.bloodapp.Entities;
 
 public class Hospital {
-    private String Name,Address,Email;
+    private String Name,Email;
+    private double lat,lon;
 
-    public Hospital(String name, String address, String email) {
+    public Hospital(){
+
+    }
+    public Hospital(String name, String email, double lat, double lon) {
         Name = name;
-        Address = address;
         Email = email;
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public String getName() {
@@ -17,19 +22,27 @@ public class Hospital {
         Name = name;
     }
 
-    public String getAddress() {
-        return Address;
-    }
-
-    public void setAddress(String address) {
-        Address = address;
-    }
-
     public String getEmail() {
         return Email;
     }
 
     public void setEmail(String email) {
         Email = email;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
     }
 }

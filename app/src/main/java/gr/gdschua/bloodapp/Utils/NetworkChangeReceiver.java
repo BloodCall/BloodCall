@@ -13,15 +13,13 @@ import gr.gdschua.bloodapp.Activities.NoInternetActivity;
 
 public class NetworkChangeReceiver extends BroadcastReceiver {
 
-    Boolean triggered;
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
         try{
-            if(isOnline(context) && triggered){
+            if(isOnline(context)){
                 NoInternetActivity.FinishTask();
             }else{
-                triggered=true;
                 Intent launchIntent=new Intent(context, NoInternetActivity.class);
                 context.startActivity(launchIntent);
             }
