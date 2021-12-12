@@ -6,7 +6,7 @@
     app:startDestination="@id/nav_hospital_home">
     <fragment
         android:id="@+id/nav_hospital_home"
-        android:name="gr.gdschua.bloodapp.Activities.HospitalHomeFragment"
+        android:name="gr.gdschua.bloodapp.Activities.HospitalActivities.HospitalHomeFragment"
         android:label="@string/side_bar_home"
         tools:layout="@layout/fragment_hospital_home" />
     <fragment

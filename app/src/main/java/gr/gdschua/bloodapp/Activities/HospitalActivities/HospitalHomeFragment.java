@@ -1,4 +1,4 @@
-package gr.gdschua.bloodapp.Activities;
+package gr.gdschua.bloodapp.Activities.HospitalActivities;
 
 import android.os.Bundle;
 
