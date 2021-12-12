@@ -28,6 +28,7 @@
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/round_button_shape.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/side_nav_bar.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/welcome_rectangle.xml" value="0.34427083333333336" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_forgot_password.xml" value="0.328125" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_hospital_auth.xml" value="0.490036231884058" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_hospital_sign_up.xml" value="0.490036231884058" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_launcher.xml" value="0.328125" />
@@ -50,6 +51,7 @@
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/nav_header_main.xml" value="0.328125" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/menu/activity_main_drawer.xml" value="0.328125" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/menu/activity_main_drawer_hospital.xml" value="0.328125" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/menu/activity_main_drawer_user.xml" value="0.328125" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/menu/main.xml" value="0.328125" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/menu/navigation_menu.xml" value="0.55" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodDonationApp/app/src/main/res/drawable/welcome_rectangle.xml" value="0.5661458333333333" />

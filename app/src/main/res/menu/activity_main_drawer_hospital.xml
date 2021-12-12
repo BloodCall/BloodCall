@@ -6,12 +6,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_hospital_home"
-            android:title="@string/menu_home" />
+            android:title="@string/side_bar_home" />
         <item
             android:id="@+id/nav_hosp_map"
-            android:title="Map" />
+            android:title="@string/side_bar_map" />
     </group>
     <item
         android:id="@+id/sign_out"
-        android:title="Sign Out" />
+        android:title="@string/side_bar_signout" />
 </menu>

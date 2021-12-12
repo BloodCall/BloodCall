@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity{
                     Intent intent=new Intent(MainActivity.this,LauncherActivity.class);
                     startActivity(intent);
                     finish();
-                    Toast.makeText(getApplicationContext(), "Signed Out", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.signed_out), Toast.LENGTH_SHORT).show();
                 }
                 NavigationUI.onNavDestinationSelected(menuItem,navController);
                 drawer.closeDrawer(GravityCompat.START);
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity{
                     Intent intent=new Intent(MainActivity.this,LauncherActivity.class);
                     startActivity(intent);
                     finish();
-                    Toast.makeText(getApplicationContext(), "Signed Out", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.signed_out), Toast.LENGTH_SHORT).show();
                 }
                 NavigationUI.onNavDestinationSelected(menuItem,navController);
                 drawer.closeDrawer(GravityCompat.START);

@@ -20,7 +20,7 @@ import gr.gdschua.bloodapp.R;
 
 public class MapsFragment extends Fragment {
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             LatLng sydney = new LatLng(37.962001099999995, 23.7010336);

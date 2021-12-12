@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                     LauncherActivity.actv.finish();
                     finish();
                 }else{
-                    emailET.setError("Invalid email or password , try again or sign up");
+                    emailET.setError(getResources().getString(R.string.login_error));
                 }
             }
         });
