@@ -20,6 +20,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_main"
+        app:headerLayout="@layout/nav_header_main_hosp"
         app:menu="@menu/activity_main_drawer_hospital" />
 </androidx.drawerlayout.widget.DrawerLayout>
