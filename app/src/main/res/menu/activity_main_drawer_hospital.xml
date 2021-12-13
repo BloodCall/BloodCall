@@ -8,6 +8,9 @@
             android:id="@+id/nav_hospital_home"
             android:title="@string/side_bar_home" />
         <item
+            android:id="@+id/nav_hosp_addEvent"
+            android:title="@string/side_bar_add_event" />
+        <item
             android:id="@+id/nav_hosp_map"
             android:title="@string/side_bar_map" />
     </group>

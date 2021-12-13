@@ -14,4 +14,9 @@
         android:name="gr.gdschua.bloodapp.Activities.MapsFragment"
         android:label="@string/side_bar_map"
         tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/nav_hosp_addEvent"
+        android:name="gr.gdschua.bloodapp.Activities.HospitalActivities.HospitalAddEventFragment"
+        android:label="@string/side_bar_add_event"
+        tools:layout="@layout/fragment_hospital_add_event" />
 </navigation>
