@@ -13,80 +13,29 @@
         android:id="@+id/profilePic"
         android:layout_width="148dp"
         android:layout_height="144dp"
+        android:layout_marginStart="16dp"
         android:background="@drawable/round_button_shape"
         android:src="@drawable/ic_baseline_person_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.071" />
-
-    <TextView
-        android:id="@+id/fullNameTextView"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
-        android:background="@drawable/nametag_oval"
-        android:gravity="clip_horizontal|clip_vertical"
-        android:text="YourName"
-        android:textColor="@color/changed_red"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.856"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.059" />
-
-    <TextView
-        android:id="@+id/emailTextView"
-        android:layout_width="160dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/nametag_oval"
-        android:text="YourEmail"
-        android:textColor="@color/changed_red"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.856"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.096" />
-
-
-    <TextView
-        android:id="@+id/bloodTypeTextView"
-        android:layout_width="50dp"
-        android:layout_height="30dp"
-        android:background="@drawable/nametag_oval"
-        android:textAlignment="center"
-        android:textColor="@color/changed_red"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.595"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.222" />
+        app:layout_constraintVertical_bias="0.286" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="300dp"
-        android:layout_marginBottom="270dp"
+        android:layout_width="408dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="384dp"
         android:background="@color/changed_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/textViewWithSwitch"
-            android:layout_width="230dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:text="@string/textViewWithSwitch"
@@ -101,11 +50,57 @@
 
         <Switch
             android:id="@+id/switchBtn"
-            android:layout_width="60dp"
-            android:layout_height="15dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginLeft="40dp"
             android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="175dp"
+        android:layout_height="155dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="143dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintStart_toEndOf="@+id/profilePic"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:id="@+id/fullNameTextView"
+            android:layout_width="160dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/nametag_oval"
+            android:gravity="clip_vertical"
+            android:text="YourName"
+            android:textColor="@color/changed_red"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/emailTextView"
+            android:layout_width="160dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/nametag_oval"
+            android:text="YourEmail"
+            android:textColor="@color/changed_red"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/bloodTypeTextView"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/nametag_oval"
+            android:textAlignment="center"
+            android:textColor="@color/changed_red" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
