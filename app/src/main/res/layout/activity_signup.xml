@@ -24,7 +24,7 @@
         android:layout_height="133dp"
         android:layout_marginTop="64dp"
         android:background="@drawable/round_button_shape"
-        android:src="@drawable/ic_baseline_person_24"
+        android:src="@drawable/default_profile"
         app:layout_constraintBottom_toTopOf="@+id/profile_picture_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.82"

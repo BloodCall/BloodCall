@@ -15,7 +15,7 @@
         android:layout_height="144dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/round_button_shape"
-        android:src="@drawable/ic_baseline_person_24"
+        android:src="@drawable/default_profile"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -55,7 +55,8 @@
             android:layout_marginLeft="40dp"
             android:layout_marginTop="15dp"
             android:layout_marginRight="15dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:minHeight="48dp" />
 
     </LinearLayout>
 
