@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText passET;
     EditText emailET;
     ImageView showPasswordIV;
+    boolean loginClicked=false;
     private FirebaseAuth mAuth;
     BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
 
@@ -84,20 +85,23 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void signIn(String email,String password){
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    LauncherActivity.actv.finish();
-                    finish();
-                }else{
-                    emailET.setError("Invalid email or password , try again or sign up");
+        if (!email.isEmpty() && !password.isEmpty() && !loginClicked){
+            loginClicked=true;
+            mAuth = FirebaseAuth.getInstance();
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        LauncherActivity.actv.finish();
+                        finish();
+                    } else {
+                        emailET.setError(getResources().getString(R.string.login_error));
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
 

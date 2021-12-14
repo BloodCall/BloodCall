@@ -98,7 +98,7 @@
         android:layout_marginEnd="16dp"
         android:clickable="true"
         android:ems="10"
-        android:text="@string/forgetPassword"
+        android:text="@string/reset_password"
         android:textAlignment="viewEnd"
         android:textColor="@color/black"
         android:textSize="16sp"
