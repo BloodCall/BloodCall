@@ -33,6 +33,7 @@
     <string name="createAccountTextView">CREATE \nACCOUNT</string>
     <string name="noInternet">No internet connection!</string>
     <string name="noInternetSubtext">This app requires an internet connection.\nPlease connect to a network</string>
+    <string name="textViewWithSwitch">Make my profile public</string>
 
 
     <string-array name="blood_types">

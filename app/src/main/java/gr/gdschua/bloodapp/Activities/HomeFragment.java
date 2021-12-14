@@ -38,6 +38,7 @@ public class HomeFragment extends Fragment {
     DAOHospitals Hdao=new DAOHospitals();
     TextView bloodTypeTV;
     TextView fullNameTextView;
+    TextView emailTextView;
     StorageReference mStorageReference;
     User currUser;
     de.hdodenhof.circleimageview.CircleImageView profilePicture;
@@ -60,6 +61,8 @@ public class HomeFragment extends Fragment {
 
         bloodTypeTV = view.findViewById(R.id.bloodTypeTextView);
         fullNameTextView = view.findViewById(R.id.fullNameTextView);
+        //Kitsaros gia to email.
+        emailTextView = view.findViewById(R.id.emailTextView);
         profilePicture = view.findViewById(R.id.profilePic);
 
         Udao.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -79,6 +82,8 @@ public class HomeFragment extends Fragment {
                     } else {
                         bloodTypeTV.setText(currUser.getBloodType());
                         fullNameTextView.setText(currUser.getFullName());
+                        //kitsaros gia to mail
+                        emailTextView.setText(currUser.getEmail());
                         mStorageReference = FirebaseStorage.getInstance().getReference().child("UserImages/" + FirebaseAuth.getInstance().getUid());
                         try {
                             final File localFile = File.createTempFile(FirebaseAuth.getInstance().getUid(), "jpg");
