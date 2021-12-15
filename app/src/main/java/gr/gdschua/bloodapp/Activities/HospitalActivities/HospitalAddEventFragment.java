@@ -1,5 +1,7 @@
 package gr.gdschua.bloodapp.Activities.HospitalActivities;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,7 +9,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
+import gr.gdschua.bloodapp.DatabaseAcess.DAOEvents;
+import gr.gdschua.bloodapp.Entities.Event;
 import gr.gdschua.bloodapp.R;
 
 /**
@@ -21,6 +33,7 @@ public class HospitalAddEventFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private DAOEvents daoEvents=new DAOEvents();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -61,6 +74,29 @@ public class HospitalAddEventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hospital_add_event, container, false);
+        View view=inflater.inflate(R.layout.fragment_hospital_add_event, container, false);
+
+        view.findViewById(R.id.addEventButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Address> latLonList = null;
+                TextView name=view.findViewById(R.id.eventName);
+                TextView addr=view.findViewById(R.id.eventAddress);
+                TextView date=view.findViewById(R.id.eventDateBox);
+
+                Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+                try {
+                    latLonList = geocoder.getFromLocationName(addr.getText().toString(),1);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                Event event= new Event(name.getText().toString(),date.getText().toString(), FirebaseAuth.getInstance().getUid(),latLonList.get(0).getLatitude(),latLonList.get(0).getLongitude());
+                daoEvents.insertEvent(event);
+            }
+        });
+
+
+        return view;
     }
 }

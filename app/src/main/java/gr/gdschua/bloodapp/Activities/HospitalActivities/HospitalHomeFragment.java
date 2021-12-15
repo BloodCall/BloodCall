@@ -2,12 +2,20 @@ package gr.gdschua.bloodapp.Activities.HospitalActivities;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+
+import gr.gdschua.bloodapp.DatabaseAcess.DAOHospitals;
+import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
 
 /**
@@ -19,6 +27,8 @@ public class HospitalHomeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    DAOHospitals daoHospitals = new DAOHospitals();
+    Hospital currUser;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -61,6 +71,23 @@ public class HospitalHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hospital_home, container, false);
+        View view=inflater.inflate(R.layout.fragment_hospital_home, container, false);
+        TextView email=view.findViewById(R.id.hosp_emailTextView);
+        TextView name=view.findViewById(R.id.hosp_fullNameTextView);
+        TextView address=view.findViewById(R.id.hosp_adrressTextView);
+        daoHospitals.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    currUser = task.getResult().getValue(Hospital.class);
+                    email.setText(currUser.getEmail());
+                    name.setText(currUser.getName());
+                    address.setText(currUser.getAddress(getActivity()));
+                }
+            }
+        });
+
+
+        return view;
     }
 }

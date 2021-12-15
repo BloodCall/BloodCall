@@ -28,7 +28,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
 
 public class MapsFragment extends Fragment {
@@ -36,11 +46,6 @@ public class MapsFragment extends Fragment {
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            LatLng PAPPUS = new LatLng(37.962001099999995, 23.7010336);
-            googleMap.addMarker(new MarkerOptions().position(PAPPUS).title("Marker in PAPPUSPITAL"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(PAPPUS));
-
-
             FusedLocationProviderClient mFusedLocationClient;
 
             //if we have permission else just show the events on the map
@@ -69,6 +74,7 @@ public class MapsFragment extends Fragment {
 
         }
     };
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
@@ -97,7 +103,8 @@ public class MapsFragment extends Fragment {
                                 if (fineLocationGranted != null && fineLocationGranted) {
                                     // Precise location access granted.
                                 } else {
-                                    Toast.makeText(getContext(),"App will not be able to function properly without location permissions!",Toast.LENGTH_SHORT).show();;
+                                    Toast.makeText(getContext(), "App will not be able to function properly without location permissions!", Toast.LENGTH_SHORT).show();
+                                    ;
                                 }
                             }
                     );
@@ -108,7 +115,5 @@ public class MapsFragment extends Fragment {
 
             return;
         }
-
-
     }
 }

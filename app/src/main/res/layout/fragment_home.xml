@@ -50,7 +50,7 @@
         app:layout_constraintVertical_bias="0.137">
 
         <TextView
-            android:id="@+id/fullNameTextView"
+            android:id="@+id/hosp_fullNameTextView"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
@@ -64,7 +64,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/emailTextView"
+            android:id="@+id/hosp_emailTextView"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginBottom="10dp"
