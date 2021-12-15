@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,6 +30,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
+
+import gr.gdschua.bloodapp.DatabaseAcess.DAOHospitals;
+import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
 
 public class MapsFragment extends Fragment {
@@ -39,6 +44,9 @@ public class MapsFragment extends Fragment {
             LatLng PAPPUS = new LatLng(37.962001099999995, 23.7010336);
             googleMap.addMarker(new MarkerOptions().position(PAPPUS).title("Marker in PAPPUSPITAL"));
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(PAPPUS));
+
+            DAOHospitals daoHospitals = new DAOHospitals();
+
 
 
             FusedLocationProviderClient mFusedLocationClient;
@@ -65,7 +73,18 @@ public class MapsFragment extends Fragment {
                         }
                     }
                 });
+
+
+
             }
+            //get all hospitals on an array list
+            ArrayList<Hospital> hospitals = daoHospitals.getAllHospitals();
+            //just place the markers :)
+            for (int i = 0; i <hospitals.size() ; i++ ){
+                LatLng hospitalLatLong = new LatLng(hospitals.get(i).getLat(),hospitals.get(i).getLon());
+                googleMap.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()));
+            }
+
 
         }
     };
