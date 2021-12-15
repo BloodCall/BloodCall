@@ -33,7 +33,7 @@ import gr.gdschua.bloodapp.R;
 
 public class MapsFragment extends Fragment {
 
-    private OnMapReadyCallback callback = new OnMapReadyCallback() {
+    private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
         public void onMapReady(GoogleMap googleMap) {
             LatLng PAPPUS = new LatLng(37.962001099999995, 23.7010336);
@@ -44,7 +44,7 @@ public class MapsFragment extends Fragment {
             FusedLocationProviderClient mFusedLocationClient;
 
             //if we have permission else just show the events on the map
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 googleMap.setMyLocationEnabled(true);
 
                 mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
@@ -69,8 +69,6 @@ public class MapsFragment extends Fragment {
 
         }
     };
-
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,

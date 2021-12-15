@@ -6,21 +6,18 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.ConnectivityManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import gr.gdschua.bloodapp.Activities.HospitalActivities.HospitalAuthActivity;
+import gr.gdschua.bloodapp.Activities.HospitalActivities.HospitalSignUpActivity;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 
 public class LauncherActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
 
@@ -53,7 +50,7 @@ public class LauncherActivity extends AppCompatActivity {
         findViewById(R.id.hospital_text).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(LauncherActivity.this, HospitalAuthActivity.class);
+                Intent intent=new Intent(LauncherActivity.this, HospitalSignUpActivity.class);
                 startActivity(intent);
             }
         });

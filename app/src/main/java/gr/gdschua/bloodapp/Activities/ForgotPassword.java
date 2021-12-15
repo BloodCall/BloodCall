@@ -42,13 +42,13 @@ public class ForgotPassword extends AppCompatActivity {
                 String email = emailET.getText().toString().trim();
 
                 if(email.isEmpty()){
-                    emailET.setError("Email is required");
+                    emailET.setError(getResources().getString(R.string.email_req_error));
                     emailET.requestFocus();
                     return;
                 }
 
                 if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    emailET.setError("Please provide a valid email address");
+                    emailET.setError(getResources().getString(R.string.email_inv_error));
                     emailET.requestFocus();
                     return;
                 }
@@ -57,9 +57,9 @@ public class ForgotPassword extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(),"Reset email sent successfully ",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),getResources().getString(R.string.res_email_succ),Toast.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(getApplicationContext(),"ERROR!!!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(),getResources().getString(R.string.res_email_err),Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

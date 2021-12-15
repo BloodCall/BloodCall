@@ -35,10 +35,6 @@
             android:exported="false"
             android:theme="@style/Theme.BloodDonationApp.NoActionBar" />
         <activity
-            android:name=".Activities.HospitalActivities.HospitalAuthActivity"
-            android:exported="false"
-            android:theme="@style/Theme.BloodDonationApp.NoActionBar" />
-        <activity
             android:name=".Activities.MainActivity"
             android:exported="false"
             android:label="@string/title_activity_main"

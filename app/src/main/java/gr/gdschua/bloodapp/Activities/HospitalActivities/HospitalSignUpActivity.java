@@ -27,8 +27,8 @@ import gr.gdschua.bloodapp.R;
 
     public class HospitalSignUpActivity extends AppCompatActivity {
 
-        private DAOHospitals dao=new DAOHospitals();
-        private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        private final DAOHospitals dao=new DAOHospitals();
+        private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +59,11 @@ import gr.gdschua.bloodapp.R;
                                             Hospital newUser= new Hospital(name.getText().toString(),email.getText().toString(),latLonList.get(0).getLatitude(),latLonList.get(0).getLongitude());
 
                                             dao.insertUser(newUser).addOnSuccessListener(suc->{
-                                                Toast.makeText(HospitalSignUpActivity.this,"Succesfully registered",Toast.LENGTH_LONG).show();
+                                                Toast.makeText(HospitalSignUpActivity.this,getResources().getString(R.string.succ_reg),Toast.LENGTH_LONG).show();
                                             }).addOnFailureListener(fail->{
-                                                Toast.makeText(HospitalSignUpActivity.this,"Failed to register "+fail.getMessage(),Toast.LENGTH_LONG).show();
+                                                Toast.makeText(HospitalSignUpActivity.this,getResources().getString(R.string.fail_reg)+fail.getMessage(),Toast.LENGTH_LONG).show();
                                             });
-                                            Intent goToLogin = new Intent(HospitalSignUpActivity.this, HospitalAuthActivity.class);
+                                            Intent goToLogin = new Intent(HospitalSignUpActivity.this, HospitalSignUpActivity.class);
                                             startActivity(goToLogin);
                                             finish();
 
@@ -72,7 +72,7 @@ import gr.gdschua.bloodapp.R;
                                             e.printStackTrace();
                                         }
                                     }else{
-                                        Toast.makeText(HospitalSignUpActivity.this,"Failed to register",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(HospitalSignUpActivity.this,getResources().getString(R.string.fail_reg),Toast.LENGTH_LONG).show();
                                         Log.w("error", "signInWithCustomToken:failure", task.getException());
                                     }
                                 }

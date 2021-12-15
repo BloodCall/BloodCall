@@ -98,7 +98,7 @@ public class BitmapResizer {
             profilePicButton.setImageBitmap(Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.fromFile(localFile))));
         } catch (IOException e) {
             e.printStackTrace();
-        };
-        return Uri.fromFile(localFile);
+        }
+         return Uri.fromFile(localFile);
     }
 }
