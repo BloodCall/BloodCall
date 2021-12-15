@@ -21,10 +21,24 @@
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/app_bar_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/content_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/borders_home_fragment.xml" value="0.3828125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/borders_making.xml" value="0.3828125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/buttons_curved.xml" value="0.3828125" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/buttons_curved_2.xml" value="0.3828125" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/custom_email_icon.xml" value="0.3828125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_baseline_wifi_off_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_blood_drop.xml" value="0.3828125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_email.xml" value="0.3828125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_email_focused.xml" value="0.3828125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_fullname.xml" value="0.3828125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_fullname_focused.xml" value="0.3828125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_lock_focused.xml" value="0.3828125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_mail_profile.xml" value="0.3828125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_person.xml" value="0.3828125" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/nametag_oval.xml" value="0.3828125" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/profile_shape.xml" value="0.3828125" />
+        <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/round_button_shape.xml" value="0.3828125" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_forgot_password.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_hospital_auth.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/admin/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_hospital_sign_up.xml" value="0.36666666666666664" />
