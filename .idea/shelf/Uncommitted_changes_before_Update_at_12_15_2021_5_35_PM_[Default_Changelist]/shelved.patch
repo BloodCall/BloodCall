@@ -1,0 +1,44 @@
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_8_12_2021_12_35_____Default_Changelist_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_8_12_2021_12_35_____Default_Changelist_.xml b/.idea/shelf/Uncommitted_changes_before_Checkout_at_8_12_2021_12_35_____Default_Changelist_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_8_12_2021_12_35_____Default_Changelist_.xml	(revision 3ac369b0121d5c34b0d8b628e0729a60fde937ca)
++++ /dev/null	(revision 3ac369b0121d5c34b0d8b628e0729a60fde937ca)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Checkout_at_8_12_2021_12_35_μ_μ__[Default_Changelist]" date="1638959732063" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_8_12_2021_12_35_μ_μ__[Default_Changelist]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 8/12/2021 12:35 μ.μ. [Default Changelist]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_8_12_2021_12_35_μ_μ__[Default_Changelist]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Checkout_at_8_12_2021_12_35_μ_μ__[Default_Changelist]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Checkout_at_8_12_2021_12_35_μ_μ__[Default_Changelist]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Checkout_at_8_12_2021_12_35_μ_μ__[Default_Changelist]/shelved.patch	(revision 3ac369b0121d5c34b0d8b628e0729a60fde937ca)
++++ /dev/null	(revision 3ac369b0121d5c34b0d8b628e0729a60fde937ca)
+@@ -1,25 +0,0 @@
+-Index: .idea/deploymentTargetDropDown.xml
+-===================================================================
+-diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+-deleted file mode 100644
+---- a/.idea/deploymentTargetDropDown.xml	(revision b6815302bd7688daba4ce3cd34b4f479016780d3)
+-+++ /dev/null	(revision b6815302bd7688daba4ce3cd34b4f479016780d3)
+-@@ -1,17 +0,0 @@
+--<?xml version="1.0" encoding="UTF-8"?>
+--<project version="4">
+--  <component name="deploymentTargetDropDown">
+--    <runningDeviceTargetSelectedWithDropDown>
+--      <Target>
+--        <type value="RUNNING_DEVICE_TARGET" />
+--        <deviceKey>
+--          <Key>
+--            <type value="SERIAL_NUMBER" />
+--            <value value="192.168.1.9:43945" />
+--          </Key>
+--        </deviceKey>
+--      </Target>
+--    </runningDeviceTargetSelectedWithDropDown>
+--    <timeTargetWasSelectedWithDropDown value="2021-12-04T13:30:14.004817200Z" />
+--  </component>
+--</project>
+-\ No newline at end of file

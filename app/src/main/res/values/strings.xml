@@ -19,7 +19,7 @@
     <string name="email_inv_error">Please provide a valid email address</string>
     <string name="pass_req_error">Password is required</string>
     <string name="pass_inv_error">Password must be at least 6 characters</string>
-    <string name="succ_reg">Succesfully registered!</string>
+    <string name="succ_reg">Successfully registered!</string>
     <string name="fail_reg">Failed to register! </string>
 
     <!-- LoginActivity Strings !-->
@@ -54,7 +54,7 @@
     <string name="side_bar_add_event">Add Event</string>
 
     <!--Forgot Password Strings !-->
-    <string name="res_email_succ">Reset email sent succesfully!</string>
+    <string name="res_email_succ">Reset email sent successfully!</string>
     <string name="res_email_err">Failed to send reset email!</string>
     <string name="back_btn">Back</string>
     <string name="res_btn">Reset</string>
