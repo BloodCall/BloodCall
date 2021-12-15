@@ -10,66 +10,44 @@
     tools:context=".Activities.HomeFragment">
 
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="413dp"
+        android:layout_height="387dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_switch"
+        app:layout_constraintVertical_bias="0.0">
+
+    </LinearLayout>
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilePic"
         android:layout_width="148dp"
         android:layout_height="144dp"
-        android:layout_marginStart="16dp"
         android:background="@drawable/round_button_shape"
         android:src="@drawable/default_profile"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.411" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="411dp"
-        android:layout_height="446dp"
-        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/textViewWithSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:text="@string/textViewWithSwitch"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.60"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.265" />
-
-        <Switch
-            android:id="@+id/switchBtn"
-            android:layout_width="168dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_weight="1" />
-
-    </LinearLayout>
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.136" />
 
     <LinearLayout
-        android:layout_width="175dp"
-        android:layout_height="155dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="208dp"
+        android:layout_height="140dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintHorizontal_bias="0.652"
         app:layout_constraintStart_toEndOf="@+id/profilePic"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.265">
+        app:layout_constraintVertical_bias="0.137">
 
         <TextView
             android:id="@+id/fullNameTextView"
@@ -107,4 +85,36 @@
             android:textColor="@color/white" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_switch"
+        android:layout_width="414dp"
+        android:layout_height="50dp"
+        android:background="@drawable/borders_home_fragment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.433">
+
+        <TextView
+            android:id="@+id/textViewWithSwitch"
+            android:layout_width="186dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="35sp"
+            android:layout_marginTop="10sp"
+            android:text="@string/textViewWithSwitch"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <Switch
+            android:id="@+id/switchBtn"
+            android:layout_width="92dp"
+            android:layout_height="28dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
