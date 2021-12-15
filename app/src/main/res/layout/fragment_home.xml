@@ -73,7 +73,7 @@
 
         <TextView
             android:id="@+id/fullNameTextView"
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
@@ -87,7 +87,7 @@
 
         <TextView
             android:id="@+id/emailTextView"
-            android:layout_width="160dp"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/nametag_oval"
@@ -99,7 +99,7 @@
 
         <TextView
             android:id="@+id/bloodTypeTextView"
-            android:layout_width="49dp"
+            android:layout_width="63dp"
             android:layout_height="wrap_content"
             android:background="@drawable/nametag_oval"
             android:drawableStart="@drawable/ic_blood_drop"
