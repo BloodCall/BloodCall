@@ -25,6 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,22 +33,42 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 
+import gr.gdschua.bloodapp.DatabaseAcess.DAOEvents;
 import gr.gdschua.bloodapp.DatabaseAcess.DAOHospitals;
+import gr.gdschua.bloodapp.Entities.Event;
 import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
 
 public class MapsFragment extends Fragment {
     DAOHospitals daoHospitals = new DAOHospitals();
+    DAOEvents daoEvents=new DAOEvents();
+    ArrayList<Event> events = new ArrayList<>();
+    ArrayList<Hospital> hospitals = new ArrayList<>();
+
+    //get all Events on an array list
+    Thread eventThread=new Thread(new Runnable() {
+        @Override
+        public void run() {
+            events = daoEvents.getAllEvents();
+        }
+    });
+
+    Thread hospThread=new Thread(new Runnable() {
+        @Override
+        public void run() {
+            hospitals = daoHospitals.getAllHospitals();
+        }
+    });
+
+
+
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
+
         @Override
         public void onMapReady(GoogleMap googleMap) {
-
-
-
-
-
-
+            eventThread.start();
+            hospThread.start();
             FusedLocationProviderClient mFusedLocationClient;
 
             //if we have permission else just show the events on the map
@@ -76,14 +97,26 @@ public class MapsFragment extends Fragment {
 
 
             }
-            //get all hospitals on an array list
-            ArrayList<Hospital> hospitals = daoHospitals.getAllHospitals();
+
+
+
             //just place the markers :)
-            for (int i = 0; i <hospitals.size() ; i++ ){
-                LatLng hospitalLatLong = new LatLng(hospitals.get(i).getLat(),hospitals.get(i).getLon());
-                googleMap.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()));
+            if (events.size()>0) {
+                for (int i = 0; i < events.size(); i++) {
+                    LatLng eventLatLong = new LatLng(events.get(i).getLat(), events.get(i).getLon());
+                    googleMap.addMarker(new MarkerOptions().position(eventLatLong).title(events.get(i).getName())).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                }
             }
 
+
+
+            //just place the markers :)
+            if(hospitals.size()>0) {
+                for (int i = 0; i < hospitals.size(); i++) {
+                    LatLng hospitalLatLong = new LatLng(hospitals.get(i).getLat(), hospitals.get(i).getLon());
+                    googleMap.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()));
+                }
+            }
 
         }
     };
