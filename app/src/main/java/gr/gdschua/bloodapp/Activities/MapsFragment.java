@@ -37,15 +37,14 @@ import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
 
 public class MapsFragment extends Fragment {
+    DAOHospitals daoHospitals = new DAOHospitals();
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
         public void onMapReady(GoogleMap googleMap) {
-            LatLng PAPPUS = new LatLng(37.962001099999995, 23.7010336);
-            googleMap.addMarker(new MarkerOptions().position(PAPPUS).title("Marker in PAPPUSPITAL"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(PAPPUS));
 
-            DAOHospitals daoHospitals = new DAOHospitals();
+
+
 
 
 
