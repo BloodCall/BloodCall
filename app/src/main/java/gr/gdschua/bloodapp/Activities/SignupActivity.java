@@ -8,7 +8,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.BitmapResizer;
 import gr.gdschua.bloodapp.Utils.CacheClearer;
+import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -42,6 +45,7 @@ public class SignupActivity extends AppCompatActivity {
     Spinner bloodTypeSpinner;
     Spinner posNegSpinner;
     de.hdodenhof.circleimageview.CircleImageView profilePicButton;
+    BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
     Button registerButton;
     Button backButton;
     EditText fName;
@@ -53,33 +57,30 @@ public class SignupActivity extends AppCompatActivity {
     EditText password;
     DAOUsers daoUser = new DAOUsers();
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        this.setTitle("Your Details");
 
         bloodTypeSpinner=findViewById(R.id.bloodtype_spinner);
         posNegSpinner=findViewById(R.id.bloodtype_spinner_pos_neg);
         profilePicButton=findViewById(R.id.profilePic);
         registerButton=findViewById(R.id.register_button_details);
-        backButton = findViewById(R.id.back_button_details);
+        //backButton = findViewById(R.id.back_button_details);
         fName=findViewById(R.id.first_name_box);
         lName=findViewById(R.id.last_name_box);
         email=findViewById(R.id.email_signup_box);
         password=findViewById(R.id.password_signup_box);
-        progressBar=findViewById(R.id.progressBar);
+        //progressBar=findViewById(R.id.progressBar);
 
 
-        backButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(SignupActivity.this,LauncherActivity.class );
-                startActivity(intent);
-                finish();
-            }
-        });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +90,8 @@ public class SignupActivity extends AppCompatActivity {
         });
 
 
+
+
         profilePicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +99,7 @@ public class SignupActivity extends AppCompatActivity {
                 launchGalleryActivity.launch(intent);
             }
         });
+
     }
 
 
@@ -119,6 +123,8 @@ public class SignupActivity extends AppCompatActivity {
             });
 
 
+
+
     private void registerUser(){
         String fullName = fName.getText().toString().trim() + " " + lName.getText().toString().trim();
         String userEmail = email.getText().toString().trim();
@@ -126,42 +132,42 @@ public class SignupActivity extends AppCompatActivity {
         String bloodType = bloodTypeSpinner.getSelectedItem().toString().trim() + posNegSpinner.getSelectedItem().toString().trim();
 
         if(fName.getText().toString().trim().isEmpty()){
-            fName.setError("Name is required");
+            fName.setError(getResources().getString(R.string.fname_error));
             fName.requestFocus();
             return;
         }
 
         if(lName.getText().toString().trim().isEmpty()){
-            lName.setError("Last name is required");
+            lName.setError(getResources().getString(R.string.lname_error));
             lName.requestFocus();
             return;
         }
 
         if(userEmail.isEmpty()){
-            email.setError("Email is required");
+            email.setError(getResources().getString(R.string.email_req_error));
             email.requestFocus();
             return;
         }
 
         if(!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()){
-            email.setError("Please provide a valid email address");
+            email.setError(getResources().getString(R.string.email_inv_error));
             email.requestFocus();
             return;
         }
 
         if(userPassword.isEmpty()){
-            password.setError("Password is required");
+            password.setError(getResources().getString(R.string.pass_req_error));
             password.requestFocus();
             return;
         }
 
         if (userPassword.length()<6){
-            password.setError("Password must be at least 6 characters");
+            password.setError(getResources().getString(R.string.pass_inv_error));
             password.requestFocus();
             return;
         }
 
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(userEmail,userPassword)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -170,20 +176,23 @@ public class SignupActivity extends AppCompatActivity {
 
                             User newUser = new User(fullName,userEmail,bloodType);
                             daoUser.insertUser(newUser,profilePicture).addOnSuccessListener(suc->{
-                                Toast.makeText(SignupActivity.this,"Succesfully registered",Toast.LENGTH_LONG).show();
-                                CacheClearer.deleteCache(SignupActivity.this);
+                                Toast.makeText(SignupActivity.this,getResources().getString(R.string.succ_reg),Toast.LENGTH_LONG).show();
                             }).addOnFailureListener(fail->{
-                                Toast.makeText(SignupActivity.this,"Failed to register "+fail.getMessage(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(SignupActivity.this,getResources().getString(R.string.fail_reg)+fail.getMessage(),Toast.LENGTH_LONG).show();
                             });
-
+                            CacheClearer.deleteCache(SignupActivity.this);
                             Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
                             startActivity(goToLogin);
+                            LauncherActivity.actv.finish();
+                            finish();
                         }else{
-                            Toast.makeText(SignupActivity.this,"Failed to register",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignupActivity.this,getResources().getString(R.string.fail_reg),Toast.LENGTH_LONG).show();
                             Log.w("error", "signInWithCustomToken:failure", task.getException());
                         }
                     }
                 });
-        progressBar.setVisibility(View.GONE);
+        //progressBar.setVisibility(View.GONE);
     }
+
+
 }

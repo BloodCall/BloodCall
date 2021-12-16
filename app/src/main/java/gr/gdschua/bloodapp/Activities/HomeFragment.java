@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,15 +24,18 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
+import gr.gdschua.bloodapp.DatabaseAcess.DAOHospitals;
 import gr.gdschua.bloodapp.DatabaseAcess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 
 public class HomeFragment extends Fragment {
 
-    DAOUsers dao = new DAOUsers();
+    DAOUsers Udao = new DAOUsers();
+    DAOHospitals Hdao=new DAOHospitals();
     TextView bloodTypeTV;
     TextView fullNameTextView;
+    TextView emailTextView;
     StorageReference mStorageReference;
     User currUser;
     de.hdodenhof.circleimageview.CircleImageView profilePicture;
@@ -55,46 +57,44 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         bloodTypeTV = view.findViewById(R.id.bloodTypeTextView);
-        fullNameTextView = view.findViewById(R.id.fullNameTextView);
+        fullNameTextView = view.findViewById(R.id.hosp_fullNameTextView);
+        //Kitsaros gia to email.
+        emailTextView = view.findViewById(R.id.hosp_emailTextView);
         profilePicture = view.findViewById(R.id.profilePic);
 
-        dao.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        Udao.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     currUser = task.getResult().getValue(User.class);
-                    bloodTypeTV.setText(currUser.getBloodType());
-                    fullNameTextView.setText(currUser.getFullName());
-                }else {
-                    Toast.makeText(view.getContext(), "Failed to retrieve user info.", Toast.LENGTH_LONG).show();
-                    Log.e("ERROR", "COULD NOT RETRIEVE USER INFO!");
-                }
-            }
-        });
-
-        mStorageReference = FirebaseStorage.getInstance().getReference().child("UserImages/" + FirebaseAuth.getInstance().getUid());
+                        bloodTypeTV.setText(currUser.getBloodType());
+                        fullNameTextView.setText(currUser.getFullName());
+                        //kitsaros gia to mail
+                        emailTextView.setText(currUser.getEmail());
+                        mStorageReference = FirebaseStorage.getInstance().getReference().child("UserImages/" + FirebaseAuth.getInstance().getUid());
+                        try {
+                            final File localFile = File.createTempFile(FirebaseAuth.getInstance().getUid(), "jpg");
 
 
-        try {
-                final File localFile = File.createTempFile(FirebaseAuth.getInstance().getUid(), "jpg");
-
-
-                mStorageReference.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
-                        if (task.isSuccessful()){
-                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                            profilePicture.setImageBitmap(bitmap);
-                            localFile.delete();
-                        }else{
-                            Log.e("ERROR","IMAGE NOT FOUND!");
+                            mStorageReference.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                        profilePicture.setImageBitmap(bitmap);
+                                        localFile.delete();
+                                    } else {
+                                        Log.e("ERROR", "IMAGE NOT FOUND!");
+                                    }
+                                }
+                            });
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
-                });
-            } catch (IOException e) {
-                e.printStackTrace();
 
-            }
+                }
+        });
 
 
 

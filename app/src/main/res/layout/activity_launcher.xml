@@ -23,6 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.115" />
 
+
     <Button
         android:id="@+id/login_button"
         android:layout_width="138dp"
@@ -57,7 +58,6 @@
         app:layout_constraintVertical_bias="0.8"
         tools:ignore="TouchTargetSizeCheck" />
 
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="268dp"
@@ -73,7 +73,7 @@
         app:layout_constraintVertical_bias="0.721" />
 
     <TextView
-        android:id="@+id/ThirdTextViewLaunch"
+        android:id="@+id/hospital_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ThirdTextViewLaunch"

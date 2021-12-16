@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_hosp"
+    app:startDestination="@id/nav_hospital_home">
+    <fragment
+        android:id="@+id/nav_hospital_home"
+        android:name="gr.gdschua.bloodapp.Activities.HospitalActivities.HospitalHomeFragment"
+        android:label="@string/side_bar_home"
+        tools:layout="@layout/fragment_hospital_home" />
+    <fragment
+        android:id="@+id/nav_hosp_map"
+        android:name="gr.gdschua.bloodapp.Activities.MapsFragment"
+        android:label="@string/side_bar_map"
+        tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/nav_hosp_addEvent"
+        android:name="gr.gdschua.bloodapp.Activities.HospitalActivities.HospitalAddEventFragment"
+        android:label="@string/side_bar_add_event"
+        tools:layout="@layout/fragment_hospital_add_event" />
+</navigation>

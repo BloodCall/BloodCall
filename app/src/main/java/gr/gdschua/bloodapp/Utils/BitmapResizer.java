@@ -88,7 +88,7 @@ public class BitmapResizer {
         Bitmap tmp = Bitmap.createScaledBitmap(image, width, height, true);
 
         try {
-            localFile = File.createTempFile("temp", "png");
+            localFile = File.createTempFile("picker","");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -98,7 +98,7 @@ public class BitmapResizer {
             profilePicButton.setImageBitmap(Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.fromFile(localFile))));
         } catch (IOException e) {
             e.printStackTrace();
-        };
-        return Uri.fromFile(localFile);
+        }
+         return Uri.fromFile(localFile);
     }
 }
