@@ -41,8 +41,7 @@ public class DAOHospitals {
 
 
 
-    //Maybe make static
-    //Maybe in the future add a parameter to limit how many hospitals it should return or the general location?
+
     private void populateHospitalMap(){
 
 
@@ -69,7 +68,8 @@ public class DAOHospitals {
 
     }
 
-
+    //Maybe make static
+    //Maybe in the future add a parameter to limit how many hospitals it should return or the general location?
     public ArrayList<Hospital> getAllHospitals(){
 
 
