@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,24 +29,25 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
+import gr.gdschua.bloodapp.DatabaseAcess.DAOHospitals;
 import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
 
 public class MapsFragment extends Fragment {
+    DAOHospitals daoHospitals = new DAOHospitals();
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
         @Override
         public void onMapReady(GoogleMap googleMap) {
+
+
+
+
+
+
             FusedLocationProviderClient mFusedLocationClient;
 
             //if we have permission else just show the events on the map
@@ -70,11 +72,21 @@ public class MapsFragment extends Fragment {
                         }
                     }
                 });
+
+
+
             }
+            //get all hospitals on an array list
+            ArrayList<Hospital> hospitals = daoHospitals.getAllHospitals();
+            //just place the markers :)
+            for (int i = 0; i <hospitals.size() ; i++ ){
+                LatLng hospitalLatLong = new LatLng(hospitals.get(i).getLat(),hospitals.get(i).getLon());
+                googleMap.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()));
+            }
+
 
         }
     };
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
@@ -103,8 +115,7 @@ public class MapsFragment extends Fragment {
                                 if (fineLocationGranted != null && fineLocationGranted) {
                                     // Precise location access granted.
                                 } else {
-                                    Toast.makeText(getContext(), "App will not be able to function properly without location permissions!", Toast.LENGTH_SHORT).show();
-                                    ;
+                                    Toast.makeText(getContext(),"App will not be able to function properly without location permissions!",Toast.LENGTH_SHORT).show();;
                                 }
                             }
                     );
@@ -115,5 +126,7 @@ public class MapsFragment extends Fragment {
 
             return;
         }
+
+
     }
 }
