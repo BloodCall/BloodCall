@@ -27,6 +27,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -61,8 +62,6 @@ public class MapsFragment extends Fragment {
     });
 
 
-
-
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         @Override
@@ -93,9 +92,28 @@ public class MapsFragment extends Fragment {
                         }
                     }
                 });
+                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(@NonNull Marker marker) {
+                        MarkerInfoFragment myMarkerInfoFragment = new MarkerInfoFragment();
+                        if(marker.getSnippet().equals("Hospital")){
+                            Hospital hospital = (Hospital) marker.getTag();
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name",hospital.getName());
+                            bundle.putString("email",hospital.getEmail());
+                            myMarkerInfoFragment.setArguments(bundle);
+
+                        }else if(marker.getSnippet().equals("Event")){
+                            Toast.makeText(getContext(),"Event clicked",Toast.LENGTH_LONG);
+                        }
 
 
 
+                        myMarkerInfoFragment.show(getActivity().getSupportFragmentManager(),"My Fragment");
+                        return true;
+                    }
+                });
             }
 
 
@@ -104,7 +122,7 @@ public class MapsFragment extends Fragment {
             if (events.size()>0) {
                 for (int i = 0; i < events.size(); i++) {
                     LatLng eventLatLong = new LatLng(events.get(i).getLat(), events.get(i).getLon());
-                    googleMap.addMarker(new MarkerOptions().position(eventLatLong).title(events.get(i).getName())).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    googleMap.addMarker(new MarkerOptions().position(eventLatLong).title(events.get(i).getName()).snippet("Event")).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                 }
             }
 
@@ -114,12 +132,14 @@ public class MapsFragment extends Fragment {
             if(hospitals.size()>0) {
                 for (int i = 0; i < hospitals.size(); i++) {
                     LatLng hospitalLatLong = new LatLng(hospitals.get(i).getLat(), hospitals.get(i).getLon());
-                    googleMap.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()));
+                    googleMap.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()).snippet("Hospital")).setTag(hospitals.get(i));
                 }
             }
 
         }
     };
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
