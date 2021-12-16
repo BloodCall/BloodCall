@@ -56,7 +56,9 @@ public class DAOHospitals {
 
 
                         //hospitalsMap = (Map<String, Object>) dataSnapshot.getValue();
-                        hospitalsMap.putAll((Map<String, Object>) dataSnapshot.getValue());
+                        if(dataSnapshot.exists()) {
+                            hospitalsMap.putAll((Map<String, Object>) dataSnapshot.getValue());
+                        }
 
                     }
 
