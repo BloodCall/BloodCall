@@ -59,6 +59,11 @@
     <string name="back_btn">Back</string>
     <string name="res_btn">Reset</string>
 
+    <!--Marker Info Fragment Strings !-->
+    <string name="textViewMarkerCenter">You just gain one "Cookhat" for Salad \ncooking. Share you achievement with \nyour friends.</string>
+    <string name="textViewCongratsMessage">Congrats Julia!!!</string>
+    <string name="btnMakerInfo">Share</string>
+    <string name="btnMakerSkip">Skip</string>
 
     <string-array name="blood_types">
         <item>A</item>

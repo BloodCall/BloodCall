@@ -11,9 +11,9 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="413dp"
-        android:layout_height="387dp"
+        android:id="@+id/linearLayoutMarker"
+        android:layout_width="0dp"
+        android:layout_height="388dp"
         android:background="@color/white"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,68 +27,70 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profilePic"
-        android:layout_width="148dp"
-        android:layout_height="144dp"
+        android:layout_width="150dp"
+        android:layout_height="149dp"
         android:background="@drawable/round_button_shape"
         android:src="@drawable/default_profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136" />
+        app:layout_constraintVertical_bias="0.119" />
 
-    <LinearLayout
-        android:layout_width="208dp"
-        android:layout_height="140dp"
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/hosp_fullNameTextView"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:background="@drawable/nametag_oval"
+        android:drawableStart="@drawable/ic_person"
+        android:drawablePadding="2dp"
+        android:gravity="clip_vertical"
+        android:text="YourName"
+        android:textColor="@color/white"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.652"
-        app:layout_constraintStart_toEndOf="@+id/profilePic"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.137">
+        app:layout_constraintVertical_bias="0.128" />
 
-        <TextView
-            android:id="@+id/hosp_fullNameTextView"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/nametag_oval"
-            android:drawableStart="@drawable/ic_person"
-            android:drawablePadding="2dp"
-            android:gravity="clip_vertical"
-            android:text="YourName"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
+    <TextView
+        android:id="@+id/hosp_emailTextView"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:background="@drawable/nametag_oval"
+        android:drawableStart="@drawable/ic_mail_profile"
+        android:drawablePadding="2dp"
+        android:text="YourEmail"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.189" />
 
-        <TextView
-            android:id="@+id/hosp_emailTextView"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/nametag_oval"
-            android:drawableStart="@drawable/ic_mail_profile"
-            android:drawablePadding="2dp"
-            android:text="YourEmail"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/bloodTypeTextView"
-            android:layout_width="63dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/nametag_oval"
-            android:drawableStart="@drawable/ic_blood_drop"
-            android:textAlignment="center"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
+    <TextView
+        android:id="@+id/bloodTypeTextView"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/nametag_oval"
+        android:drawableStart="@drawable/ic_blood_drop"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.601"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.248" />
 
     <LinearLayout
         android:id="@+id/linearLayout_switch"
-        android:layout_width="414dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/borders_home_fragment"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -100,9 +102,9 @@
 
         <TextView
             android:id="@+id/textViewWithSwitch"
-            android:layout_width="186dp"
-            android:layout_height="28dp"
-            android:layout_marginStart="35sp"
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5sp"
             android:layout_marginTop="10sp"
             android:text="@string/textViewWithSwitch"
             android:textColor="@color/white"
@@ -110,8 +112,8 @@
 
         <Switch
             android:id="@+id/switchBtn"
-            android:layout_width="92dp"
-            android:layout_height="28dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginLeft="100dp"
             android:layout_marginTop="10dp" />
 
