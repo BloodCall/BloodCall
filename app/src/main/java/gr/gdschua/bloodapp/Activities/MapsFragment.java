@@ -31,6 +31,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 
@@ -101,17 +102,32 @@ public class MapsFragment extends Fragment {
 
                             Bundle bundle = new Bundle();
                             bundle.putString("name",hospital.getName());
+                            bundle.putString("address",hospital.getAddress(getActivity()));
                             bundle.putString("email",hospital.getEmail());
                             myMarkerInfoFragment.setArguments(bundle);
+                            myMarkerInfoFragment.show(getActivity().getSupportFragmentManager(),"My Fragment");
 
                         }else if(marker.getSnippet().equals("Event")){
-                            Toast.makeText(getContext(),"Event clicked",Toast.LENGTH_LONG).show();
+                            Event event = (Event) marker.getTag();
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name",event.getName());
+                            bundle.putString("address",event.getAddress(getActivity()));
+                           daoHospitals.getUser(event.getOwner()).addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                               @Override
+                               public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                   Hospital ownerHosp=task.getResult().getValue(Hospital.class);
+                                   bundle.putString("email",ownerHosp.getEmail());
+                                   bundle.putString("organizer",ownerHosp.getName());
+                                   myMarkerInfoFragment.setArguments(bundle);
+                                   myMarkerInfoFragment.show(getActivity().getSupportFragmentManager(),"My Fragment");
+                               }
+                           });
                             return true;
                         }
 
 
 
-                        myMarkerInfoFragment.show(getActivity().getSupportFragmentManager(),"My Fragment");
                         return true;
                     }
                 });
@@ -123,7 +139,7 @@ public class MapsFragment extends Fragment {
             if (events.size()>0) {
                 for (int i = 0; i < events.size(); i++) {
                     LatLng eventLatLong = new LatLng(events.get(i).getLat(), events.get(i).getLon());
-                    googleMap.addMarker(new MarkerOptions().position(eventLatLong).title(events.get(i).getName()).snippet("Event")).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                    googleMap.addMarker(new MarkerOptions().position(eventLatLong).title(hospitals.get(i).getName()).snippet("Event").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))).setTag(events.get(i));
                 }
             }
 

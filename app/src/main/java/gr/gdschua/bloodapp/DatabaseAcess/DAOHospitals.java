@@ -20,6 +20,7 @@ import java.util.Map;
 import gr.gdschua.bloodapp.Entities.Hospital;
 
 public class DAOHospitals {
+    Hospital temphosp=null;
     Map<String,Object> hospitalsMap = new HashMap<>();
 
     public DAOHospitals() {
@@ -39,6 +40,9 @@ public class DAOHospitals {
         return FirebaseDatabase.getInstance().getReference().child("Hospitals").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).get();
     }
 
+    public Task<DataSnapshot> getUser(String ID){
+        return FirebaseDatabase.getInstance().getReference().child("Hospitals").child(ID).get();
+    }
 
 
 
