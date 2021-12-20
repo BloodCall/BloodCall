@@ -105,7 +105,8 @@ public class MapsFragment extends Fragment {
                             myMarkerInfoFragment.setArguments(bundle);
 
                         }else if(marker.getSnippet().equals("Event")){
-                            Toast.makeText(getContext(),"Event clicked",Toast.LENGTH_LONG);
+                            Toast.makeText(getContext(),"Event clicked",Toast.LENGTH_LONG).show();
+                            return true;
                         }
 
 

@@ -22,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.583" />
+        app:layout_constraintVertical_bias="0.354" />
 
     <TextView
         android:id="@+id/textViewCongratsMessage"
@@ -40,7 +40,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.469" />
+        app:layout_constraintVertical_bias="0.23" />
 
     <Button
         android:id="@+id/btnMakerInfo"
@@ -71,17 +71,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.853" />
 
-    <LinearLayout
-        android:id="@+id/linearLayoutMarker"
-        android:layout_width="409dp"
-        android:layout_height="289dp"
-        android:orientation="vertical"
-        android:background="@color/changed_red"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
