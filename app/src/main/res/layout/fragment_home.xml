@@ -11,17 +11,17 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayoutMarker"
-        android:layout_width="0dp"
-        android:layout_height="388dp"
+        android:id="@+id/whiteboardLinear"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
         android:background="@color/white"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout_switch"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
     </LinearLayout>
 
@@ -31,13 +31,12 @@
         android:layout_height="149dp"
         android:background="@drawable/round_button_shape"
         android:src="@drawable/default_profile"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout_switch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
+        app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.119" />
-
+        app:layout_constraintVertical_bias="0.451" />
 
     <LinearLayout
         android:layout_width="202dp"
@@ -45,10 +44,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout_switch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.837"
+        app:layout_constraintHorizontal_bias="0.72"
         app:layout_constraintStart_toEndOf="@+id/profilePic"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.493">
+        app:layout_constraintVertical_bias="0.437">
 
         <TextView
             android:id="@+id/hosp_fullNameTextView"
@@ -110,12 +109,12 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/borders_home_fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/whiteboardLinear"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.433">
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:id="@+id/textViewWithSwitch"
