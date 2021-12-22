@@ -38,55 +38,72 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.119" />
 
-    <TextView
-        android:id="@+id/hosp_fullNameTextView"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:background="@drawable/nametag_oval"
-        android:drawableStart="@drawable/ic_person"
-        android:drawablePadding="2dp"
-        android:gravity="clip_vertical"
-        android:text="YourName"
-        android:textColor="@color/white"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.128" />
 
-    <TextView
-        android:id="@+id/hosp_emailTextView"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:background="@drawable/nametag_oval"
-        android:drawableStart="@drawable/ic_mail_profile"
-        android:drawablePadding="2dp"
-        android:text="YourEmail"
-        android:textColor="@color/white"
-        android:textSize="13sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <LinearLayout
+        android:layout_width="202dp"
+        android:layout_height="143dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout_switch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.837"
+        app:layout_constraintStart_toEndOf="@+id/profilePic"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.189" />
+        app:layout_constraintVertical_bias="0.493">
 
-    <TextView
-        android:id="@+id/bloodTypeTextView"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/nametag_oval"
-        android:drawableStart="@drawable/ic_blood_drop"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.601"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.248" />
+        <TextView
+            android:id="@+id/hosp_fullNameTextView"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/nametag_oval"
+            android:drawableStart="@drawable/ic_person"
+            android:drawablePadding="2dp"
+            android:gravity="clip_vertical"
+            android:text="YourName"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.128" />
+
+        <TextView
+            android:id="@+id/hosp_emailTextView"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/nametag_oval"
+            android:drawableStart="@drawable/ic_mail_profile"
+            android:drawablePadding="2dp"
+            android:text="YourEmail"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/hosp_fullNameTextView"
+            app:layout_constraintVertical_bias="0.189" />
+
+        <TextView
+            android:id="@+id/bloodTypeTextView"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/nametag_oval"
+            android:drawableStart="@drawable/ic_blood_drop"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.601"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/hosp_emailTextView"
+            app:layout_constraintVertical_bias="0.248" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout_switch"
