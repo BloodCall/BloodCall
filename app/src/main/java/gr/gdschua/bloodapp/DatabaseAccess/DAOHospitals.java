@@ -1,9 +1,5 @@
-package gr.gdschua.bloodapp.DatabaseAcess;
+package gr.gdschua.bloodapp.DatabaseAccess;
 
-
-import android.util.Log;
-
-import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,7 +16,6 @@ import java.util.Map;
 import gr.gdschua.bloodapp.Entities.Hospital;
 
 public class DAOHospitals {
-    Hospital temphosp=null;
     Map<String,Object> hospitalsMap = new HashMap<>();
 
     public DAOHospitals() {

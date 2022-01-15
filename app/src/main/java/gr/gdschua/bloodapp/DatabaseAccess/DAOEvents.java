@@ -1,7 +1,6 @@
-package gr.gdschua.bloodapp.DatabaseAcess;
+package gr.gdschua.bloodapp.DatabaseAccess;
 
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -12,24 +11,22 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
+import java.util.UUID;
 
 import gr.gdschua.bloodapp.Entities.Event;
 
 public class DAOEvents {
-    Random rand = new Random();
     Map<String,Object> eventMap = new HashMap<>();
 
 
     public DAOEvents(){
-
         populateEventMap();
     }
 
     public Task<Void> insertEvent(Event newEvent){
 
         return FirebaseDatabase.getInstance().getReference("Events")
-                .child(String.valueOf(Math.abs(rand.nextLong())))
+                .child(UUID.randomUUID().toString())
                 .setValue(newEvent);
     }
 

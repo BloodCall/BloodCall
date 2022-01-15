@@ -1,4 +1,4 @@
-package gr.gdschua.bloodapp.DatabaseAcess;
+package gr.gdschua.bloodapp.DatabaseAccess;
 
 import android.net.Uri;
 

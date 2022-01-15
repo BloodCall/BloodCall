@@ -1,5 +1,6 @@
 package gr.gdschua.bloodapp.Activities.HospitalActivities;
 
+import android.app.DatePickerDialog;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -9,16 +10,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
-import gr.gdschua.bloodapp.DatabaseAcess.DAOEvents;
+import gr.gdschua.bloodapp.DatabaseAccess.DAOEvents;
 import gr.gdschua.bloodapp.Entities.Event;
 import gr.gdschua.bloodapp.R;
 
@@ -28,6 +33,8 @@ import gr.gdschua.bloodapp.R;
  * create an instance of this fragment.
  */
 public class HospitalAddEventFragment extends Fragment {
+
+    final Calendar myCalendar= Calendar.getInstance();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,6 +82,7 @@ public class HospitalAddEventFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_hospital_add_event, container, false);
+        EditText editText=view.findViewById(R.id.eventDateBox);
 
         view.findViewById(R.id.addEventButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,12 +99,40 @@ public class HospitalAddEventFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                Event event= new Event(name.getText().toString(),date.getText().toString(), FirebaseAuth.getInstance().getUid(),latLonList.get(0).getLatitude(),latLonList.get(0).getLongitude());
-                daoEvents.insertEvent(event);
+                try {
+                    Event event= new Event(name.getText().toString(),date.getText().toString(), FirebaseAuth.getInstance().getUid(),latLonList.get(0).getLatitude(),latLonList.get(0).getLongitude());
+                    daoEvents.insertEvent(event);
+                }
+                catch (IndexOutOfBoundsException e){
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(),"Address not found!",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+
+        DatePickerDialog.OnDateSetListener date =new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH,month);
+                myCalendar.set(Calendar.DAY_OF_MONTH,day);
+                updateLabel(editText);
+            }
+        };
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(getActivity(),R.style.DatePickerTheme,date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
-
         return view;
+    }
+
+    private void updateLabel(EditText editText){
+        String myFormat="MM/dd/yy";
+        SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);
+        editText.setText(dateFormat.format(myCalendar.getTime()));
     }
 }
