@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,29 +24,50 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 
-import gr.gdschua.bloodapp.DatabaseAcess.DAOHospitals;
+import gr.gdschua.bloodapp.DatabaseAccess.DAOEvents;
+import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
+import gr.gdschua.bloodapp.Entities.Event;
 import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
 
 public class MapsFragment extends Fragment {
     DAOHospitals daoHospitals = new DAOHospitals();
+    DAOEvents daoEvents=new DAOEvents();
+    ArrayList<Event> events = new ArrayList<>();
+    ArrayList<Hospital> hospitals = new ArrayList<>();
+
+    //get all Events on an array list
+    Thread eventThread=new Thread(new Runnable() {
+        @Override
+        public void run() {
+            events = daoEvents.getAllEvents();
+        }
+    });
+
+    Thread hospThread=new Thread(new Runnable() {
+        @Override
+        public void run() {
+            hospitals = daoHospitals.getAllHospitals();
+        }
+    });
+
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
+
         @Override
         public void onMapReady(GoogleMap googleMap) {
-
-
-
-
-
-
+            eventThread.start();
+            hospThread.start();
             FusedLocationProviderClient mFusedLocationClient;
 
             //if we have permission else just show the events on the map
@@ -72,21 +92,70 @@ public class MapsFragment extends Fragment {
                         }
                     }
                 });
+                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(@NonNull Marker marker) {
+                        MarkerInfoFragment myMarkerInfoFragment = new MarkerInfoFragment();
+                        if(marker.getSnippet().equals("Hospital")){
+                            Hospital hospital = (Hospital) marker.getTag();
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name",hospital.getName());
+                            bundle.putString("address",hospital.getAddress(getActivity()));
+                            bundle.putString("email",hospital.getEmail());
+                            myMarkerInfoFragment.setArguments(bundle);
+                            myMarkerInfoFragment.show(getActivity().getSupportFragmentManager(),"My Fragment");
+
+                        }else if(marker.getSnippet().equals("Event")){
+                            Event event = (Event) marker.getTag();
+
+                            Bundle bundle = new Bundle();
+                            bundle.putString("name",event.getName());
+                            bundle.putString("address",event.getAddress(getActivity()));
+                           daoHospitals.getUser(event.getOwner()).addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                               @Override
+                               public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                   Hospital ownerHosp=task.getResult().getValue(Hospital.class);
+                                   bundle.putString("email",ownerHosp.getEmail());
+                                   bundle.putString("organizer",ownerHosp.getName());
+                                   myMarkerInfoFragment.setArguments(bundle);
+                                   myMarkerInfoFragment.show(getActivity().getSupportFragmentManager(),"My Fragment");
+                               }
+                           });
+                            return true;
+                        }
 
 
 
+                        return true;
+                    }
+                });
             }
-            //get all hospitals on an array list
-            ArrayList<Hospital> hospitals = daoHospitals.getAllHospitals();
+
+
+
             //just place the markers :)
-            for (int i = 0; i <hospitals.size() ; i++ ){
-                LatLng hospitalLatLong = new LatLng(hospitals.get(i).getLat(),hospitals.get(i).getLon());
-                googleMap.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()));
+            if (events.size()>0) {
+                for (int i = 0; i < events.size(); i++) {
+                    LatLng eventLatLong = new LatLng(events.get(i).getLat(), events.get(i).getLon());
+                    googleMap.addMarker(new MarkerOptions().position(eventLatLong).title(hospitals.get(i).getName()).snippet("Event").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))).setTag(events.get(i));
+                }
             }
 
+
+
+            //just place the markers :)
+            if(hospitals.size()>0) {
+                for (int i = 0; i < hospitals.size(); i++) {
+                    LatLng hospitalLatLong = new LatLng(hospitals.get(i).getLat(), hospitals.get(i).getLon());
+                    googleMap.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()).snippet("Hospital")).setTag(hospitals.get(i));
+                }
+            }
 
         }
     };
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,

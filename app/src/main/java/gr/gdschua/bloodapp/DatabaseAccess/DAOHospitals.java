@@ -1,9 +1,5 @@
-package gr.gdschua.bloodapp.DatabaseAcess;
+package gr.gdschua.bloodapp.DatabaseAccess;
 
-
-import android.util.Log;
-
-import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,6 +35,9 @@ public class DAOHospitals {
         return FirebaseDatabase.getInstance().getReference().child("Hospitals").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).get();
     }
 
+    public Task<DataSnapshot> getUser(String ID){
+        return FirebaseDatabase.getInstance().getReference().child("Hospitals").child(ID).get();
+    }
 
 
 
@@ -56,7 +55,9 @@ public class DAOHospitals {
 
 
                         //hospitalsMap = (Map<String, Object>) dataSnapshot.getValue();
-                        hospitalsMap.putAll((Map<String, Object>) dataSnapshot.getValue());
+                        if(dataSnapshot.exists()) {
+                            hospitalsMap.putAll((Map<String, Object>) dataSnapshot.getValue());
+                        }
 
                     }
 

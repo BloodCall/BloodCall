@@ -10,11 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -30,9 +27,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-import java.io.File;
-
-import gr.gdschua.bloodapp.DatabaseAcess.DAOUsers;
+import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.BitmapResizer;

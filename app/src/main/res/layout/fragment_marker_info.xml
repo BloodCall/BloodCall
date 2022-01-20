@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounding_borders_markerinfo"
+    tools:context=".Activities.MarkerInfoFragment">
+
+    <TextView
+        android:id="@+id/textViewMarkerCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="35dp"
+        android:text="@string/textViewMarkerCenter"
+        android:textAlignment="center"
+        android:textColor="@color/changed_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMarkerTitle" />
+
+    <Button
+        android:id="@+id/btnMakerInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/buttons_curved"
+        android:text="@string/btnMakerInfo"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMarkerCenter" />
+
+    <Button
+        android:id="@+id/btnMakerSkip"
+        android:layout_width="70dp"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/white"
+        android:stateListAnimator="@null"
+        android:text="@string/btnMakerSkip"
+        android:textColor="@color/changed_red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMakerInfo"
+        app:layout_constraintVertical_bias="0.71000004" />
+
+    <TextView
+        android:id="@+id/textViewMarkerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="216dp"
+        android:layout_marginEnd="35dp"
+        android:text="@string/textViewCongratsMessage"
+        android:textAlignment="center"
+        android:textColor="@color/changed_red"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="392dp"
+        android:layout_height="164dp"
+        android:background="@drawable/welcome_rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

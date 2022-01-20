@@ -24,8 +24,8 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
-import gr.gdschua.bloodapp.DatabaseAcess.DAOHospitals;
-import gr.gdschua.bloodapp.DatabaseAcess.DAOUsers;
+import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
+import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 
