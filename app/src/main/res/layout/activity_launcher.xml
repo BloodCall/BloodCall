@@ -60,8 +60,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="268dp"
-        android:layout_height="27dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/SecondTextViewLaunch"
         android:textAlignment="center"
         android:textSize="14sp"

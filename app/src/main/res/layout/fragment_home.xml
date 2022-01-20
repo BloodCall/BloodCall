@@ -107,7 +107,7 @@
     <LinearLayout
         android:id="@+id/linearLayout_switch"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/borders_home_fragment"
         app:layout_constraintBottom_toTopOf="@id/whiteboardLinear"
         app:layout_constraintEnd_toEndOf="parent"

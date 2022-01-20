@@ -152,7 +152,7 @@
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.665"
+        app:layout_constraintHorizontal_bias="0.706"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.756" />
@@ -165,7 +165,7 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintHorizontal_bias="0.952"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.756" />
@@ -178,9 +178,10 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/register_button_details"
         app:layout_constraintEnd_toStartOf="@+id/bloodtype_spinner"
+        app:layout_constraintHorizontal_bias="0.611"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_signup_box"
-        app:layout_constraintVertical_bias="0.52" />
+        app:layout_constraintVertical_bias="0.545" />
 
     <Button
         android:id="@+id/register_button_details"

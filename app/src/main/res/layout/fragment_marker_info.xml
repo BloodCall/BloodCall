@@ -38,8 +38,8 @@
 
     <Button
         android:id="@+id/btnMakerSkip"
-        android:layout_width="70dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
         android:stateListAnimator="@null"
         android:text="@string/btnMakerSkip"
