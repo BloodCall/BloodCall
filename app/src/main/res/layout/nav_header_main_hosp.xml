@@ -18,5 +18,5 @@
         android:text="@string/hospital_mode"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="48sp" />
+        android:textSize="34sp" />
 </LinearLayout>

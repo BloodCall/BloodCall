@@ -1,8 +1,8 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp();
-exports.checkflag = functions.database.ref("/flagparent")
-    .onUpdate((snapshot, context) => {
+exports.checkflag = functions.database.ref("/alerts")
+    .onCreate((snapshot, context) => {
       const temptoken = "yourapptoken";
       const flag = snapshot.after.val();
       const statusMessage = `Message from the clouds as ${flag}`;

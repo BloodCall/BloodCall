@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Blood Donation App</string>
+    <string name="app_name">Εφαρμογή Αιμοδοσίας</string>
     <string name="FirstTextViewLaunch">ΔΩΣΤΕ ΑΙΜΑ,\nΣΩΣΤΕ ΜΙΑ ΖΩΗ</string>
     <string name="SecondTextViewLaunch">Παρακαλώ κάντε είσοδο ή εγγραφή για να συνεχίσετε.</string>
     <string name="ThirdTextViewLaunch">Εκπροσωπείτε κάποιο νοσοκομείο; Πατήστε εδώ για να εγγραφείτε</string>

@@ -13,9 +13,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="116dp"
-        android:layout_height="136dp"
-        android:src="@drawable/shiba_inu_logo"
+        android:layout_width="331dp"
+        android:layout_height="222dp"
+        android:src="@drawable/ic_logo"
+        android:tint="@color/changed_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
