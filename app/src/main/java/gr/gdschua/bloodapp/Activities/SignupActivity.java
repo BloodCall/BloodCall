@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
@@ -175,6 +176,7 @@ public class SignupActivity extends AppCompatActivity {
                             }).addOnFailureListener(fail->{
                                 Toast.makeText(SignupActivity.this,getResources().getString(R.string.fail_reg)+fail.getMessage(),Toast.LENGTH_LONG).show();
                             });
+                            FirebaseMessaging.getInstance().subscribeToTopic("Alerts");
                             CacheClearer.deleteCache(SignupActivity.this);
                             Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
                             startActivity(goToLogin);
