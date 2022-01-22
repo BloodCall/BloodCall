@@ -62,14 +62,6 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
     }
 
 
-    private RemoteViews getCustomDesign(String title, String message) {
-        RemoteViews remoteViews = new RemoteViews(
-        getApplicationContext().getPackageName(), R.layout.notification);
-        remoteViews.setTextViewText(R.id.title, title);
-        remoteViews.setTextViewText(R.id.message, message);
-        remoteViews.setImageViewResource(R.id.icon, R.drawable.ic_blood_drop);
-        return remoteViews;
-    }
 
     public void showNotification(String title, String message,String bloodTypeNeeded) {
         Intent intent = new Intent(this, MainActivity.class);
@@ -84,18 +76,14 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
                         NotificationCompat.Builder builder = new NotificationCompat
                                 .Builder(getApplicationContext(), channel_id)
                                 .setSmallIcon(R.drawable.ic_blood_drop)
-                                .setAutoCancel(true)
-                                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
-                                .setOnlyAlertOnce(true)
+                                .setContentTitle(title)
+                                .setContentText(message)
                                 .setContentIntent(pendingIntent);
-
-                        builder = builder.setContent(getCustomDesign(title, message));
                         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                             NotificationChannel notificationChannel = new NotificationChannel(channel_id, "bloodcall", NotificationManager.IMPORTANCE_HIGH);
                             notificationManager.createNotificationChannel(notificationChannel);
                         }
-
                         notificationManager.notify(0, builder.build());
                     }
                 }else{
