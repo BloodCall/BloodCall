@@ -32,7 +32,6 @@ public class DAOUsers {
 
 
     public Task<DataSnapshot> getUser(){
-
         return FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).get();
     }
 
