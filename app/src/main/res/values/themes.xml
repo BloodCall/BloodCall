@@ -15,6 +15,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="NoActionBar" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="DatePickerTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
         <item name="colorPrimary">@color/changed_red</item>
         <item name="colorPrimaryDark">@color/red_900</item>

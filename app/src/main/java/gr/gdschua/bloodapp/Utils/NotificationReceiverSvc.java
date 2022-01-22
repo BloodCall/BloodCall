@@ -33,22 +33,8 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
     @Override
     public void
     onMessageReceived(RemoteMessage remoteMessage) {
-        // First case when notifications are received via
-        // data event
-        // Here, 'title' and 'message' are the assumed names
-        // of JSON
-        // attributes. Since here we do not have any data
-        // payload, This section is commented out. It is
-        // here only for reference purposes.
-        /*if(remoteMessage.getData().size()>0){
-            showNotification(remoteMessage.getData().get("title"),
-                          remoteMessage.getData().get("message"));
-        }*/
-
-        // Second case when notification payload is
-        // received.
         if (remoteMessage.getNotification() != null) {
-            showNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
+            showNotification("Urgent Blood Call!", "Your blood is needed right now!");
         }
     }
 
@@ -69,7 +55,7 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Builder builder = new NotificationCompat
                 .Builder(getApplicationContext(), channel_id)
-                .setSmallIcon(R.drawable.ic_person)
+                .setSmallIcon(R.drawable.ic_blood_drop)
                 .setAutoCancel(true)
                 .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                 .setOnlyAlertOnce(true)

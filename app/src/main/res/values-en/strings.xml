@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Blood Donation App</string>
+    <string name="app_name">BloodCall</string>
 
     <!-- LauncherActivity Strings !-->
     <string name="FirstTextViewLaunch">DONATE BLOOD,\nSAVE A LIFE</string>
