@@ -14,8 +14,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import gr.gdschua.bloodapp.Activities.SignupActivity;
-
 public class BitmapResizer {
 
 
