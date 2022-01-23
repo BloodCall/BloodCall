@@ -28,6 +28,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 
+import java.util.ArrayList;
+
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
@@ -75,6 +77,8 @@ public class SignupActivity extends AppCompatActivity {
         email=findViewById(R.id.email_signup_box);
         password=findViewById(R.id.password_signup_box);
         //progressBar=findViewById(R.id.progressBar);
+
+
 
 
 
@@ -176,7 +180,7 @@ public class SignupActivity extends AppCompatActivity {
                             }).addOnFailureListener(fail->{
                                 Toast.makeText(SignupActivity.this,getResources().getString(R.string.fail_reg)+fail.getMessage(),Toast.LENGTH_LONG).show();
                             });
-                            FirebaseMessaging.getInstance().subscribeToTopic("Alerts");
+                            FirebaseMessaging.getInstance().subscribeToTopic(bloodType);
                             CacheClearer.deleteCache(SignupActivity.this);
                             Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
                             startActivity(goToLogin);

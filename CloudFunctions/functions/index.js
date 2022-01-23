@@ -7,7 +7,7 @@ exports.alertAdded = functions.database.ref("/Alerts/{alert_id}")
     .onCreate((snapshot, context) => {
       const alertData = snapshot.val();
       admin.messaging().sendToTopic(
-          "Alerts",
+          alertData.bloodType,
           {
             notification: {
               title: "Urgent Blood Call!",
