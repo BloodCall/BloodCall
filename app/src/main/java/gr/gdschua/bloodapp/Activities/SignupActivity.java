@@ -180,12 +180,16 @@ public class SignupActivity extends AppCompatActivity {
                             }).addOnFailureListener(fail->{
                                 Toast.makeText(SignupActivity.this,getResources().getString(R.string.fail_reg)+fail.getMessage(),Toast.LENGTH_LONG).show();
                             });
-                            FirebaseMessaging.getInstance().subscribeToTopic(bloodType);
                             CacheClearer.deleteCache(SignupActivity.this);
                             Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
-                            startActivity(goToLogin);
-                            LauncherActivity.actv.finish();
-                            finish();
+                            FirebaseMessaging.getInstance().subscribeToTopic(bloodType).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    startActivity(goToLogin);
+                                    LauncherActivity.actv.finish();
+                                    finish();
+                                }
+                            });
                         }else{
                             Toast.makeText(SignupActivity.this,getResources().getString(R.string.fail_reg),Toast.LENGTH_LONG).show();
                             Log.w("error", "signInWithCustomToken:failure", task.getException());
