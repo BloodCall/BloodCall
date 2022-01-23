@@ -24,7 +24,7 @@ public class MarkerInfoFragment extends DialogFragment {
         TextView tv2=view.findViewById(R.id.textViewMarkerCenter);
         tv.setText(getArguments().get("name").toString());
         if(getArguments().get("organizer")!=null) {
-            tv2.setText("Address: "+getArguments().get("address").toString()+"\nOrganized By:"+getArguments().get("organizer").toString()+"\nEmail: "+getArguments().get("email").toString());
+            tv2.setText("Address: "+getArguments().get("address").toString()+"\nOrganized By: "+getArguments().get("organizer").toString()+"\nEmail: "+getArguments().get("email").toString());
         }else {
             tv2.setText("Address: "+getArguments().get("address").toString()+"\nEmail: "+getArguments().get("email").toString());
         }
