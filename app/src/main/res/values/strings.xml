@@ -73,7 +73,7 @@
 
     <string-array name="pos_neg">
         <item>+</item>
-        <item>-</item>
+        <item>_</item>
     </string-array>
     <string name="title_activity_main">MainActivity</string>
 

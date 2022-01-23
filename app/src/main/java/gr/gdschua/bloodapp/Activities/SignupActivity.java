@@ -182,7 +182,8 @@ public class SignupActivity extends AppCompatActivity {
                             });
                             CacheClearer.deleteCache(SignupActivity.this);
                             Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
-                            FirebaseMessaging.getInstance().subscribeToTopic(bloodType).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            String TopicName=bloodType.toString().replace("+","pos").replace("-","neg");
+                            FirebaseMessaging.getInstance().subscribeToTopic(TopicName).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     startActivity(goToLogin);
