@@ -88,4 +88,6 @@
     <string name="new_alert_text">What Kind of Blood Type is required?</string>
     <string name="create_alert_btn">Create Alert</string>
     <string name="hospital_mode">HOSPITAL MODE</string>
+    <string name="marker_type_1">Address: %1$s \n Organized By: %2$s \n Email: %3$s</string>
+    <string name="marker_type_2">Address: %1$s \n Email: %2$s</string>
 </resources>
