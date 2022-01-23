@@ -54,7 +54,6 @@
     <string name="new_alert_text">Τι τύπος αίματος απαιτείτε;</string>
     <string name="create_alert_btn">Δημιουργία Ειδοποίησης</string>
     <string name="hospital_mode">ΛΕΙΤΟΥΡΓΙΑ ΝΟΣΟΚΟΜΕΙΟΥ</string>
-    <string name="marker_address">Διεύθυνση: </string>
-    <string name="marker_org_by">Διοργανωτής: </string>
-    <string name="marker_email">Email: </string>
+    <string name="marker_type_1">Διεύθυνση: %1$s \n Διοργανωτής: %2$s \n Email: %3$s</string>
+    <string name="marker_type_2">Διεύθυνση: %1$s \n Email: %2$s</string>
 </resources>
