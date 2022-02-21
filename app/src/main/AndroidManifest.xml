@@ -16,6 +16,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key"/>
 
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesMenuActivity"
+            android:theme="@style/Theme.BloodDonationApp" />
+        <activity
+            android:name="com.google.android.gms.oss.licenses.OssLicensesActivity"
+            android:theme="@style/Theme.BloodDonationApp" />
+
 
 
         <service android:name="gr.gdschua.bloodapp.Utils.NotificationReceiverSvc"

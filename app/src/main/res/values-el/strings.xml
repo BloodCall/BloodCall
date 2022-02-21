@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Εφαρμογή Αιμοδοσίας</string>
+    <string name="app_name">BloodCall</string>
     <string name="FirstTextViewLaunch">ΔΩΣΤΕ ΑΙΜΑ,\nΣΩΣΤΕ ΜΙΑ ΖΩΗ</string>
     <string name="SecondTextViewLaunch">Παρακαλώ κάντε είσοδο ή εγγραφή για να συνεχίσετε.</string>
     <string name="ThirdTextViewLaunch">Εκπροσωπείτε κάποιο νοσοκομείο; Πατήστε εδώ για να εγγραφείτε</string>
@@ -34,7 +34,7 @@
     <string name="textViewWithSwitch">Κάνε το προφίλ μου δημόσιο</string>
     <string name="side_bar_home">Αρχική</string>
     <string name="side_bar_map">Χάρτης Νοσοκομείων</string>
-    <string name="settings_toolbar">Ρυθμίσεις</string>
+    <string name="settings_toolbar">Άδειες Ανοιχτού Λογισμικού</string>
     <string name="side_bar_signout">Αποσύνδεση</string>
     <string name="signed_out">Έχετε αποσυνδεθεί</string>
     <string name="side_bar_add_event">Προσθήκη γεγονότος</string>

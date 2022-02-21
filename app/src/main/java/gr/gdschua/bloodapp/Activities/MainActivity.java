@@ -3,6 +3,7 @@ package gr.gdschua.bloodapp.Activities;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,6 +72,17 @@ public class MainActivity extends AppCompatActivity{
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        if (item.getItemId() == R.id.action_licences) {
+            startActivity(new Intent(this, OssLicensesMenuActivity.class));
+            OssLicensesMenuActivity.setActivityTitle(getString(R.string.settings_toolbar));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
