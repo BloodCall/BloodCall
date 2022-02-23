@@ -1,12 +1,5 @@
 package gr.gdschua.bloodapp.Activities;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
@@ -21,14 +14,18 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
-
-
-import java.util.ArrayList;
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
@@ -174,21 +171,43 @@ public class SignupActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
 
+                            //if creating authentication user was successful add use details to database
+
                             User newUser = new User(fullName,userEmail,bloodType);
-                            daoUser.insertUser(newUser,profilePicture).addOnSuccessListener(suc->{
-                                Toast.makeText(SignupActivity.this,getResources().getString(R.string.succ_reg),Toast.LENGTH_LONG).show();
-                            }).addOnFailureListener(fail->{
-                                Toast.makeText(SignupActivity.this,getResources().getString(R.string.fail_reg)+fail.getMessage(),Toast.LENGTH_LONG).show();
-                            });
-                            CacheClearer.deleteCache(SignupActivity.this);
-                            Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
-                            String TopicName=bloodType.toString().replace("+","pos").replace("-","neg");
-                            FirebaseMessaging.getInstance().subscribeToTopic(TopicName).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                            daoUser.insertUser(newUser,profilePicture).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    startActivity(goToLogin);
-                                    LauncherActivity.actv.finish();
-                                    finish();
+
+                                    if(task.isSuccessful()){
+
+                                        //if adding user details to database was successful add user to notification topic and then change to activity login
+
+                                        Toast.makeText(SignupActivity.this,getResources().getString(R.string.succ_reg),Toast.LENGTH_LONG).show();
+
+                                        CacheClearer.deleteCache(SignupActivity.this);
+                                        Intent goToLogin = new Intent(SignupActivity.this,LoginActivity.class);
+                                        String TopicName=bloodType.toString().replace("+","pos").replace("-","neg");
+                                        FirebaseMessaging.getInstance().subscribeToTopic(TopicName).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                startActivity(goToLogin);
+                                                LauncherActivity.actv.finish();
+                                                finish();
+                                            }
+                                        });
+                                    }else{
+
+                                        //if adding user details fails delete authentication user
+
+                                        if(mAuth.getCurrentUser() != null){
+                                            mAuth.getCurrentUser().delete();
+                                        }
+
+                                        Log.e("DB_FAIL", task.getException().toString());
+                                        Toast.makeText(SignupActivity.this,getResources().getString(R.string.fail_reg)+task.getException().toString(),Toast.LENGTH_LONG).show();
+
+                                    }
                                 }
                             });
                         }else{

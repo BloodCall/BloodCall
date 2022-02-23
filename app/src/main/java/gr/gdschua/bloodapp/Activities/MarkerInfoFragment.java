@@ -1,16 +1,14 @@
 package gr.gdschua.bloodapp.Activities;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.DialogFragment;
 
 import gr.gdschua.bloodapp.R;
 public class MarkerInfoFragment extends DialogFragment {

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Blood Call</string>
+    <string name="app_name">BloodCall</string>
 
     <!-- LauncherActivity Strings !-->
     <string name="FirstTextViewLaunch">DONATE BLOOD,\nSAVE A LIFE</string>
@@ -47,7 +47,7 @@
     <!-- Main Activity Strings !-->
     <string name="side_bar_home">Home</string>
     <string name="side_bar_map">Hospital Map</string>
-    <string name="settings_toolbar">Settings</string>
+    <string name="settings_toolbar">Open Source Licences</string>
     <string name="side_bar_signout">Sign Out</string>
     <string name="signed_out">Signed Out</string>
     <string name="side_bar_add_event">Add Event</string>

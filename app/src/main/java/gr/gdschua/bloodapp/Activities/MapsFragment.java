@@ -1,17 +1,17 @@
 package gr.gdschua.bloodapp.Activities;
 
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +33,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOEvents;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
@@ -41,121 +42,101 @@ import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
 
 public class MapsFragment extends Fragment {
-    DAOHospitals daoHospitals = new DAOHospitals();
-    DAOEvents daoEvents=new DAOEvents();
-    ArrayList<Event> events = new ArrayList<>();
-    ArrayList<Hospital> hospitals = new ArrayList<>();
 
-    //get all Events on an array list
-    Thread eventThread=new Thread(new Runnable() {
-        @Override
-        public void run() {
-            events = daoEvents.getAllEvents();
+    private GoogleMap map;
+    private final DAOHospitals daoHospitals = new DAOHospitals();
+    private final DAOEvents daoEvents=new DAOEvents();
+
+
+    GoogleMap.OnMarkerClickListener MarkerClickListener= marker -> {
+        MarkerInfoFragment myMarkerInfoFragment = new MarkerInfoFragment();
+        if (Objects.equals(marker.getSnippet(), "Hospital")) {
+            Hospital hospital = (Hospital) marker.getTag();
+
+            Bundle bundle = new Bundle();
+            assert hospital != null;
+            bundle.putString("name", hospital.getName());
+            bundle.putString("address", hospital.getAddress(getActivity()));
+            bundle.putString("email", hospital.getEmail());
+            myMarkerInfoFragment.setArguments(bundle);
+            myMarkerInfoFragment.show(requireActivity().getSupportFragmentManager(), "My Fragment");
+
+        } else if (Objects.equals(marker.getSnippet(), "Event")) {
+            Event event = (Event) marker.getTag();
+
+            Bundle bundle = new Bundle();
+            assert event != null;
+            bundle.putString("name", event.getName());
+            bundle.putString("address", event.getAddress(getActivity()));
+            daoHospitals.getUser(event.getOwner()).addOnCompleteListener(task -> {
+                Hospital ownerHosp = task.getResult().getValue(Hospital.class);
+                assert ownerHosp != null;
+                bundle.putString("email", ownerHosp.getEmail());
+                bundle.putString("organizer", ownerHosp.getName());
+                myMarkerInfoFragment.setArguments(bundle);
+                myMarkerInfoFragment.show(requireActivity().getSupportFragmentManager(), "My Fragment");
+            });
+            return true;
+
         }
-    });
 
-    Thread hospThread=new Thread(new Runnable() {
-        @Override
-        public void run() {
-            hospitals = daoHospitals.getAllHospitals();
+        return true;
+    };
+
+    @SuppressLint("MissingPermission")
+    private void handleLocation(){
+        map.setMyLocationEnabled(true);
+        FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
+        mFusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
+            Location location = task.getResult();
+            LatLng myLoc = new LatLng(location.getLatitude(),location.getLongitude());
+            map.moveCamera(CameraUpdateFactory.newLatLng(myLoc));
+
+            //Move the camera to the user's location and zoom in!
+            map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 12.0f));
+        });
+
+    }
+
+    private void placeMarkers(){
+        ArrayList<Event> events = daoEvents.getAllEvents();
+        ArrayList<Hospital> hospitals = daoHospitals.getAllHospitals();
+
+        if (events.size()>0) {
+            for (int i = 0; i < events.size(); i++) {
+                LatLng eventLatLong = new LatLng(events.get(i).getLat(), events.get(i).getLon());
+                map.addMarker(new MarkerOptions().position(eventLatLong).title(hospitals.get(i).getName()).snippet("Event").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))).setTag(events.get(i));
+            }
         }
-    });
-
+        if(hospitals.size()>0) {
+            for (int i = 0; i < hospitals.size(); i++) {
+                LatLng hospitalLatLong = new LatLng(hospitals.get(i).getLat(), hospitals.get(i).getLon());
+                Objects.requireNonNull(map.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()).snippet("Hospital"))).setTag(hospitals.get(i));
+            }
+        }
+    }
 
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         @Override
-        public void onMapReady(GoogleMap googleMap) {
-            eventThread.start();
-            hospThread.start();
-            FusedLocationProviderClient mFusedLocationClient;
-
-            //if we have permission else just show the events on the map
-            if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                googleMap.setMyLocationEnabled(true);
-
-                mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
-
-
-                mFusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Location> task) {
-                        Location location = task.getResult();
-                        if (location == null) {
-                            Toast.makeText(getContext(),"CANT GET LOCATIONS",Toast.LENGTH_SHORT).show();
-                        } else {
-                            LatLng myLoc = new LatLng(location.getLatitude(),location.getLongitude());
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLng(myLoc));
-
-                            //Move the camera to the user's location and zoom in!
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 12.0f));
-                        }
-                    }
-                });
-                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(@NonNull Marker marker) {
-                        MarkerInfoFragment myMarkerInfoFragment = new MarkerInfoFragment();
-                        if(marker.getSnippet().equals("Hospital")){
-                            Hospital hospital = (Hospital) marker.getTag();
-
-                            Bundle bundle = new Bundle();
-                            bundle.putString("name",hospital.getName());
-                            bundle.putString("address",hospital.getAddress(getActivity()));
-                            bundle.putString("email",hospital.getEmail());
-                            myMarkerInfoFragment.setArguments(bundle);
-                            myMarkerInfoFragment.show(getActivity().getSupportFragmentManager(),"My Fragment");
-
-                        }else if(marker.getSnippet().equals("Event")){
-                            Event event = (Event) marker.getTag();
-
-                            Bundle bundle = new Bundle();
-                            bundle.putString("name",event.getName());
-                            bundle.putString("address",event.getAddress(getActivity()));
-                           daoHospitals.getUser(event.getOwner()).addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                               @Override
-                               public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                   Hospital ownerHosp=task.getResult().getValue(Hospital.class);
-                                   bundle.putString("email",ownerHosp.getEmail());
-                                   bundle.putString("organizer",ownerHosp.getName());
-                                   myMarkerInfoFragment.setArguments(bundle);
-                                   myMarkerInfoFragment.show(getActivity().getSupportFragmentManager(),"My Fragment");
-                               }
-                           });
-                            return true;
-                        }
-
-
-
-                        return true;
-                    }
-                });
+        public void onMapReady(@NonNull GoogleMap googleMap) {
+            map = googleMap;
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                locationRequest.launch(Manifest.permission.ACCESS_FINE_LOCATION);
+            } else {
+                handleLocation();
             }
 
 
-
-            //just place the markers :)
-            if (events.size()>0) {
-                for (int i = 0; i < events.size(); i++) {
-                    LatLng eventLatLong = new LatLng(events.get(i).getLat(), events.get(i).getLon());
-                    googleMap.addMarker(new MarkerOptions().position(eventLatLong).title(hospitals.get(i).getName()).snippet("Event").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))).setTag(events.get(i));
-                }
-            }
-
-
-
-            //just place the markers :)
-            if(hospitals.size()>0) {
-                for (int i = 0; i < hospitals.size(); i++) {
-                    LatLng hospitalLatLong = new LatLng(hospitals.get(i).getLat(), hospitals.get(i).getLon());
-                    googleMap.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()).snippet("Hospital")).setTag(hospitals.get(i));
-                }
-            }
+            googleMap.setOnMarkerClickListener(MarkerClickListener);
+            placeMarkers();
 
         }
     };
 
 
+
+    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
@@ -163,7 +144,16 @@ public class MapsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_maps, container, false);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
+    private final ActivityResultLauncher<String> locationRequest=registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
+        if(result){
+            handleLocation();
+        }
+        else{
+            Toast.makeText(requireContext(),"We were not able to retrieve your location because you denied the permission.", Toast.LENGTH_LONG).show();
+        }
+    });
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -172,30 +162,8 @@ public class MapsFragment extends Fragment {
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }
-
-        //check if we have permission if not ask nicely if the user denies the app will not close (for now)
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityResultLauncher<String[]> locationPermissionRequest =
-                    registerForActivityResult(new ActivityResultContracts
-                                    .RequestMultiplePermissions(), result -> {
-                                Boolean fineLocationGranted = result.getOrDefault(
-                                        Manifest.permission.ACCESS_FINE_LOCATION, false);
-                                if (fineLocationGranted != null && fineLocationGranted) {
-                                    // Precise location access granted.
-                                } else {
-                                    Toast.makeText(getContext(),"App will not be able to function properly without location permissions!",Toast.LENGTH_SHORT).show();;
-                                }
-                            }
-                    );
-
-            locationPermissionRequest.launch(new String[]{
-                    Manifest.permission.ACCESS_FINE_LOCATION
-            });
-
-            return;
-        }
-
-
     }
+
+
+
 }
