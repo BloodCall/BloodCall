@@ -6,10 +6,10 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@color/changed_red"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline21"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,17 +17,60 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:scrollbarAlwaysDrawVerticalTrack="false"
+            app:layout_constraintBottom_toTopOf="@+id/pushNotifSwitch"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilePic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:foregroundGravity="center_vertical|center_horizontal"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:src="@drawable/default_profile"
+                android:translationY="5dp" />
+        </LinearLayout>
+
+        <Switch
+            android:id="@+id/pushNotifSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/borders_home_fragment"
+            android:hapticFeedbackEnabled="true"
+            android:paddingStart="5dp"
+            android:text="@string/textViewWithSwitch"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:gravity="center|start"
             android:orientation="vertical"
             android:paddingStart="10dp"
-            android:paddingTop="45dp"
             android:paddingEnd="10dp"
             app:layout_constraintBottom_toTopOf="@+id/pushNotifSwitch"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.72"
-            app:layout_constraintStart_toEndOf="@+id/frameLayout4"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout2"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -37,6 +80,7 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/nametag_oval"
                 android:drawableStart="@drawable/ic_person"
+                android:elegantTextHeight="false"
                 android:gravity="center|start"
                 android:maxLines="1"
                 android:textColor="@color/white"
@@ -46,10 +90,8 @@
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.128" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/hosp_emailTextView"
@@ -58,6 +100,8 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/nametag_oval"
                 android:drawableStart="@drawable/ic_mail_profile"
+                android:drawablePadding="5dp"
+                android:elegantTextHeight="false"
                 android:gravity="center|start"
                 android:maxWidth="200dp"
                 android:maxLines="1"
@@ -69,68 +113,40 @@
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/hosp_fullNameTextView"
-                app:layout_constraintVertical_bias="0.189" />
+                app:layout_constraintTop_toTopOf="@id/hosp_fullNameTextView" />
 
             <TextView
                 android:id="@+id/bloodTypeTextView"
-                android:layout_width="50dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/nametag_oval"
                 android:drawableStart="@drawable/ic_blood_drop"
+                android:elegantTextHeight="false"
+                android:gravity="center|start"
+                android:maxWidth="200dp"
                 android:maxLines="1"
-                android:textAlignment="viewStart"
+                android:minWidth="150dp"
                 android:textColor="@color/white"
                 android:textSize="12sp"
+                app:autoSizeMinTextSize="5sp"
+                app:autoSizeStepGranularity="3sp"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.601"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/hosp_emailTextView"
-                app:layout_constraintVertical_bias="0.248" />
+                app:layout_constraintTop_toTopOf="@id/hosp_fullNameTextView" />
 
         </LinearLayout>
 
-        <FrameLayout
-            android:id="@+id/frameLayout4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingStart="10dp"
-            android:paddingTop="45dp"
-            android:paddingEnd="10dp"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profilePic"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:background="@drawable/round_button_shape"
-                android:src="@drawable/default_profile"
-                app:layout_constraintStart_toStartOf="parent" />
-        </FrameLayout>
-
-        <Switch
-            android:id="@+id/pushNotifSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="56dp"
-            android:layout_weight="1"
-            android:background="@drawable/borders_home_fragment"
-            android:hapticFeedbackEnabled="true"
-            android:paddingStart="5dp"
-            android:text="@string/textViewWithSwitch"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frameLayout4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.39952996" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
