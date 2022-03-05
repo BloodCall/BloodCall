@@ -10,7 +10,7 @@
     <string name="fname_error">Το όνομα απαιτήται.</string>
     <string name="lname_error">Το επώνυμο απαιτήται.</string>
     <string name="email_req_error">Το email απαιτείται.</string>
-    <string name="email_inv_error">Παρακαλώ εισάγεται μια έκυρη διεύυθηνση email.</string>
+    <string name="email_inv_error">Παρακαλώ εισάγετε μια έκυρη διεύυθηνση email.</string>
     <string name="pass_req_error">Ο κωδικός απαιτείτε.</string>
     <string name="pass_inv_error">Ο κωδικός πρεπει να είναι τουλαχσιτον 6 χαρακτήρες</string>
     <string name="succ_reg">Εγγραφή επιτυχής!</string>
@@ -56,4 +56,5 @@
     <string name="hospital_mode">ΛΕΙΤΟΥΡΓΙΑ ΝΟΣΟΚΟΜΕΙΟΥ</string>
     <string name="marker_type_1">Διεύθυνση: %1$s \n Διοργανωτής: %2$s \n Email: %3$s</string>
     <string name="marker_type_2">Διεύθυνση: %1$s \n Email: %2$s</string>
+    <string name="password_reset">Επαναφορά Κωδικού</string>
 </resources>

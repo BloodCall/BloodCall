@@ -91,4 +91,5 @@
 
     <string name="marker_type_1">Address: %1$s \n Organized By: %2$s \n Email: %3$s</string>
     <string name="marker_type_2">Address: %1$s \n Email: %2$s</string>
+    <string name="password_reset">Password Reset</string>
 </resources>

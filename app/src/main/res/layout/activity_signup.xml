@@ -18,203 +18,216 @@
     <!--        app:layout_constraintStart_toEndOf="@+id/back_button_details"-->
     <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/createAcountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:fontFamily="sans-serif"
+        android:maxLines="2"
+        android:text="@string/createAccountTextView"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:autoSizeMinTextSize="5sp"
+        app:autoSizeStepGranularity="1sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/profile_picture_description"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:weightSum="1"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:elegantTextHeight="false"
+        android:gravity="center_horizontal|center_vertical"
+        android:maxLines="3"
+        android:paddingTop="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/click_to_add_a_profile_picture"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/first_name_box"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/borders_making"
+        android:drawableStart="@drawable/custom_fullname_icon"
+        android:drawablePadding="8dp"
+        android:hint="@string/first_name_hint"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35"
+        tools:ignore="TextContrastCheck" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout5"
+    <EditText
+        android:id="@+id/last_name_box"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/borders_making"
+        android:drawableStart="@drawable/custom_fullname_icon"
+        android:drawablePadding="8dp"
+        android:hint="@string/last_name_hint"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:paddingStart="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/email_signup_box"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/borders_making"
+        android:drawableStart="@drawable/custom_email_icon"
+        android:drawablePadding="8dp"
+        android:hint="@string/email_signup_box_hint"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/password_signup_box"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:autofillHints="password"
+        android:background="@drawable/borders_making"
+        android:drawableStart="@drawable/custom_lock_icon"
+        android:drawablePadding="8dp"
+        android:hint="@string/password_signup_box_hint"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:paddingLeft="8dp"
+        android:paddingEnd="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65"
+        tools:ignore="TextContrastCheck" />
+
+    <Button
+        android:id="@+id/register_button_details"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".0005"
+        android:background="@drawable/buttons_curved_2"
+        android:text="@string/register_button"
+        android:textColor="@color/ice_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintVertical_bias="0.25" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="300dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.81">
+
+        <TextView
+            android:id="@+id/blood_type_descriptor"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight=".25"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
             android:gravity="center"
-            android:orientation="vertical">
+            android:text="@string/blood_type_description"
+            android:textColor="@color/black" />
 
-            <LinearLayout
-                android:id="@+id/linearLayout4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="100"
-                android:orientation="horizontal"
-                android:paddingTop="30dp">
-
-                <TextView
-                    android:id="@+id/createAcountTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif"
-                    android:maxLines="2"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="15dp"
-                    android:text="@string/createAccountTextView"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/black"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    app:autoSizeMinTextSize="5sp"
-                    app:autoSizeStepGranularity="1sp"
-                    app:autoSizeTextType="uniform" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profilePic"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:cropToPadding="false"
-                    android:src="@drawable/default_profile"
-                    android:translationX="30dp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/profile_picture_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.7"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:text="@string/click_to_add_a_profile_picture"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.873"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.3" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout6"
+        <Spinner
+            android:id="@+id/bloodtype_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
 
-            <EditText
-                android:id="@+id/first_name_box"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="350dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/borders_making"
-                android:drawableStart="@drawable/custom_fullname_icon"
-                android:drawablePadding="8dp"
-                android:hint="@string/first_name_hint"
-                android:inputType="textEmailAddress"
-                android:minHeight="48dp"
-                android:paddingLeft="8dp"
-                android:textColor="@color/black"
-                tools:ignore="TextContrastCheck" />
+            android:entries="@array/blood_types"
+            android:minHeight="48dp" />
 
-            <EditText
-                android:id="@+id/email_signup_box"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="350dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/borders_making"
-                android:drawableStart="@drawable/custom_email_icon"
-                android:drawablePadding="8dp"
-                android:hint="@string/email_signup_box_hint"
-                android:inputType="textEmailAddress"
-                android:minHeight="48dp"
-                android:paddingLeft="8dp"
-                android:textColor="@color/black"
-                tools:ignore="TextContrastCheck" />
-
-            <EditText
-                android:id="@+id/password_signup_box"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="350dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:autofillHints="password"
-                android:background="@drawable/borders_making"
-                android:drawableStart="@drawable/custom_lock_icon"
-                android:drawablePadding="8dp"
-                android:hint="@string/password_signup_box_hint"
-                android:inputType="textPassword"
-                android:minHeight="48dp"
-                android:paddingLeft="8dp"
-                android:textColor="@color/black"
-                tools:ignore="TextContrastCheck" />
-
-            <EditText
-                android:id="@+id/last_name_box"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="350dp"
-                android:layout_height="48dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/borders_making"
-                android:drawableStart="@drawable/custom_fullname_icon"
-                android:drawablePadding="8dp"
-                android:hint="@string/last_name_hint"
-                android:inputType="textEmailAddress"
-                android:minHeight="48dp"
-                android:paddingLeft="8dp"
-                android:textColor="@color/black"
-                tools:ignore="TextContrastCheck" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout7"
+        <Spinner
+            android:id="@+id/bloodtype_spinner_pos_neg"
             android:layout_width="match_parent"
-            android:layout_height="76dp"
-            android:orientation="horizontal"
-            android:paddingBottom="15dp">
-
-            <TextView
-                android:id="@+id/blood_type_descriptor"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2"
-                android:gravity="center"
-                android:text="@string/blood_type_description"
-                android:textColor="@color/black" />
-
-            <Spinner
-                android:id="@+id/bloodtype_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3"
-
-                android:entries="@array/blood_types"
-                android:minHeight="48dp" />
-
-            <Spinner
-                android:id="@+id/bloodtype_spinner_pos_neg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:entries="@array/pos_neg"
-                android:minHeight="48dp" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/register_button_details"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight=".0005"
-            android:background="@drawable/buttons_curved_2"
-            android:text="@string/register_button"
-            android:textColor="@color/ice_white" />
-
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:entries="@array/pos_neg"
+            android:minHeight="48dp" />
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profilePic"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:cropToPadding="false"
+        android:scaleX="0.9"
+        android:scaleY="0.9"
+        android:src="@drawable/default_profile"
+        app:layout_constraintBottom_toTopOf="@+id/profile_picture_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
