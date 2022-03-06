@@ -165,6 +165,7 @@
         android:layout_height="55dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:gravity="center_horizontal|center_vertical"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -175,7 +176,7 @@
         <TextView
             android:id="@+id/blood_type_descriptor"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.2"
             android:gravity="center"
             android:text="@string/blood_type_description"
