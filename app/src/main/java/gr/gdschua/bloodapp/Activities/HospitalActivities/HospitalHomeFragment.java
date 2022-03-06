@@ -4,16 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 
+import gr.gdschua.bloodapp.Activities.MainActivity;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
@@ -72,6 +77,7 @@ public class HospitalHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        ((AppCompatActivity)getContext()).getSupportFragmentManager().popBackStack(null,FragmentManager.POP_BACK_STACK_INCLUSIVE);
         View view=inflater.inflate(R.layout.fragment_hospital_home, container, false);
         TextView email=view.findViewById(R.id.hosp_emailTextView);
         TextView name=view.findViewById(R.id.hosp_fullNameTextView);
@@ -88,31 +94,64 @@ public class HospitalHomeFragment extends Fragment {
             }
         });
 
+
+
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        FloatingActionButton fab1 = (FloatingActionButton) view.findViewById(R.id.fab1);
-        FloatingActionButton fab2 = (FloatingActionButton) view.findViewById(R.id.fab2);
+        LinearLayout fabLayout1 = (LinearLayout) view.findViewById(R.id.alertFabLayout);
+        LinearLayout fabLayout2 = (LinearLayout) view.findViewById(R.id.eventFabLayout);
+
+        FloatingActionButton fab1= (FloatingActionButton) view.findViewById(R.id.fab1);
+        FloatingActionButton fab2= (FloatingActionButton) view.findViewById(R.id.fab2);
+
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HospitalAddAlertFragment hospitalAddAlertFragment=HospitalAddAlertFragment.newInstance(null,null);
+                FragmentTransaction ft = ((MainActivity) requireActivity()).getSupportFragmentManager().beginTransaction();
+                ft.setCustomAnimations(R.anim.slide_in_up,0,0, R.anim.slide_out_down);
+                ft.replace(R.id.nav_host_fragment_content_hosp,hospitalAddAlertFragment).addToBackStack(null).commit();
+            }
+        });
+
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HospitalAddEventFragment hospitalAddEventFragment=HospitalAddEventFragment.newInstance(null,null);
+                FragmentTransaction ft = ((MainActivity) requireActivity()).getSupportFragmentManager().beginTransaction();
+                ft.setCustomAnimations(R.anim.slide_in_up,0,0, R.anim.slide_out_down);
+                ft.replace(R.id.nav_host_fragment_content_hosp,hospitalAddEventFragment).addToBackStack(null).commit();
+            }
+        });
+
+
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!isFABOpen){
-                    showFABMenu(fab1,fab2);
+                    showFABMenu(fabLayout1,fabLayout2);
                 }else{
-                    closeFABMenu(fab1,fab2);
+                    closeFABMenu(fabLayout1,fabLayout2);
                 }
             }
         });
         return view;
     }
 
-    private void showFABMenu(FloatingActionButton fab1 , FloatingActionButton fab2){
+    private void showFABMenu(LinearLayout fab1 , LinearLayout fab2){
         isFABOpen=true;
+        fab1.setVisibility(View.VISIBLE);
+        fab2.setVisibility(View.VISIBLE);
         fab1.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
         fab2.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
     }
 
-    private void closeFABMenu(FloatingActionButton fab1 , FloatingActionButton fab2){
+    private void closeFABMenu(LinearLayout fab1 , LinearLayout fab2){
         isFABOpen=false;
         fab1.animate().translationY(0);
         fab2.animate().translationY(0);
+        fab1.setVisibility(View.INVISIBLE);
+        fab2.setVisibility(View.INVISIBLE);
     }
 }

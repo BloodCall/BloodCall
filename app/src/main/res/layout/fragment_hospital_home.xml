@@ -5,6 +5,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     android:foregroundTint="#CA0606"
     tools:context=".Activities.HomeFragment">
 
@@ -12,7 +13,7 @@
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="261dp"
-        android:layout_height="140dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,8 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:gravity="clip_vertical"
             android:background="@drawable/nametag_oval"
+            android:gravity="clip_vertical"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
@@ -74,60 +75,121 @@
         app:layout_constraintGuide_percent="0.25"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:backgroundTint="@color/changed_red"
-        android:clickable="true"
-        android:minHeight="48dp"
-        android:src="@drawable/ic_baseline_calendar_today_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.346"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.957" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:backgroundTint="@color/changed_red"
-        android:clickable="true"
-        android:minHeight="48dp"
-        android:src="@drawable/ic_baseline_notification_important_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.346"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.957" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:backgroundTint="@color/changed_red"
-        android:clickable="true"
-        android:minHeight="48dp"
-        android:src="@drawable/ic_baseline_add_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.346"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.957" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="350dp"
-        app:layout_constraintGuide_percent="0.70" />
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|end"
+        android:backgroundTint="@color/changed_red"
+        android:clickable="true"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_baseline_add_24"
+        android:visibility="visible"
+        app:borderWidth="0dp"
+        app:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.90"
+        tools:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/alertFabLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        android:weightSum="10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.90">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/add_new_alert"
+            android:textAlignment="center" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="bottom|end"
+            android:layout_weight="6"
+            android:backgroundTint="@color/changed_red"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:minHeight="48dp"
+            android:src="@drawable/ic_baseline_notification_important_24"
+            android:tint="@color/white"
+            app:borderWidth="0dp"
+            app:elevation="0dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/eventFabLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        android:weightSum="10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.90">
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="center|center_vertical"
+            android:text="@string/side_bar_add_event" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="bottom|end"
+            android:layout_weight="6"
+            android:backgroundTint="@color/changed_red"
+            android:clickable="true"
+            android:elevation="0dp"
+            android:minHeight="48dp"
+            android:src="@drawable/ic_baseline_calendar_today_24"
+            app:borderWidth="0dp"
+            app:elevation="0dp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,9 +4,9 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/changed_red</item>
         <item name="colorPrimaryVariant">@color/red_900</item>
-        <item name="colorOnPrimary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+        <item name="colorOnSecondary">@color/white</item>
         <!-- Customize your theme here. -->
     </style>
 

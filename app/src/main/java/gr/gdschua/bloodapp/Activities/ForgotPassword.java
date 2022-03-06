@@ -27,6 +27,7 @@ public class ForgotPassword extends AppCompatActivity {
 
 
         emailET = findViewById(R.id.forgotPassEmail);
+
             /*
         findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
             @Override
