@@ -11,79 +11,72 @@
     tools:context="Activities.LauncherActivity">
 
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="331dp"
+        android:layout_height="222dp"
+        android:src="@drawable/ic_logo"
+        android:tint="@color/changed_red"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.115" />
+
+
+    <Button
+        android:id="@+id/login_button"
+        android:layout_width="138dp"
+        android:layout_height="39dp"
+        android:background="@drawable/buttons_curved"
+        android:backgroundTint="@color/changed_red"
+        android:text="@string/login_button"
+        android:textColor="@color/ice_white"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <Button
+        android:id="@+id/signup_button"
+        android:layout_width="138dp"
+        android:layout_height="39dp"
+        android:background="@drawable/buttons_curved"
+        android:backgroundTint="@color/changed_red"
+        android:text="@string/signup_button"
+        android:textColor="@color/ice_white"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.805"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        tools:ignore="TouchTargetSizeCheck" />
+
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:foregroundGravity="center"
-        android:gravity="center"
         android:text="@string/SecondTextViewLaunch"
         android:textAlignment="center"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.623" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:gravity="center"
-        android:maxHeight="14dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.78">
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/signup_button"
-            android:layout_width="138dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/buttons_curved"
-            android:backgroundTint="@color/changed_red"
-            android:text="@string/signup_button"
-            android:textAlignment="center"
-            android:textColor="@color/ice_white"
-            app:backgroundTint="@null" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/login_button"
-            android:layout_width="138dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/buttons_curved"
-            android:backgroundTint="@color/changed_red"
-            android:text="@string/login_button"
-            android:textAlignment="center"
-            android:textColor="@color/ice_white"
-            app:backgroundTint="@null" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-    </LinearLayout>
+        app:layout_constraintVertical_bias="0.721" />
 
     <TextView
         android:id="@+id/hospital_text"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="15dp"
         android:text="@string/ThirdTextViewLaunch"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -91,54 +84,26 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.991" />
+        app:layout_constraintVertical_bias="0.883" />
 
     <TextView
         android:id="@id/FirstTextViewLaunch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="191dp"
+        android:layout_height="63dp"
         android:fontFamily="sans-serif"
-        android:gravity="center"
-        android:text="@string/FirstTextViewLaunch"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.263" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_logo"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:tint="@color/changed_red" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.621"
+        android:text="@string/FirstTextViewLaunch" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import gr.gdschua.bloodapp.Activities.MainActivity;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
@@ -63,7 +64,7 @@ import gr.gdschua.bloodapp.R;
                                             }).addOnFailureListener(fail->{
                                                 Toast.makeText(HospitalSignUpActivity.this,getResources().getString(R.string.fail_reg)+fail.getMessage(),Toast.LENGTH_LONG).show();
                                             });
-                                            Intent goToLogin = new Intent(HospitalSignUpActivity.this, HospitalSignUpActivity.class);
+                                            Intent goToLogin = new Intent(HospitalSignUpActivity.this, MainActivity.class);
                                             startActivity(goToLogin);
                                             finish();
 

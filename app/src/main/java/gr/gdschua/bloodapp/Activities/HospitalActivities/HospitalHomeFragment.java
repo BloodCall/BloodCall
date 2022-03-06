@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
@@ -28,6 +29,7 @@ public class HospitalHomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     DAOHospitals daoHospitals = new DAOHospitals();
     Hospital currUser;
+    private boolean isFABOpen=false;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -86,7 +88,31 @@ public class HospitalHomeFragment extends Fragment {
             }
         });
 
-
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        FloatingActionButton fab1 = (FloatingActionButton) view.findViewById(R.id.fab1);
+        FloatingActionButton fab2 = (FloatingActionButton) view.findViewById(R.id.fab2);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!isFABOpen){
+                    showFABMenu(fab1,fab2);
+                }else{
+                    closeFABMenu(fab1,fab2);
+                }
+            }
+        });
         return view;
+    }
+
+    private void showFABMenu(FloatingActionButton fab1 , FloatingActionButton fab2){
+        isFABOpen=true;
+        fab1.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
+        fab2.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
+    }
+
+    private void closeFABMenu(FloatingActionButton fab1 , FloatingActionButton fab2){
+        isFABOpen=false;
+        fab1.animate().translationY(0);
+        fab2.animate().translationY(0);
     }
 }

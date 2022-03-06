@@ -70,7 +70,7 @@
     <Button
         android:id="@+id/login_auth_button"
         android:layout_width="350dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:background="@drawable/buttons_curved_2"
@@ -89,6 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:minHeight="48dp"
         android:text="@string/reset_password"
         android:textAlignment="viewEnd"
         android:textColor="@color/black"

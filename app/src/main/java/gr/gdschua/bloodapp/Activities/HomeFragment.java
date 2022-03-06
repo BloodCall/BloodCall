@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
                         emailTextView.setText(currUser.getEmail());
                         mStorageReference = FirebaseStorage.getInstance().getReference().child("UserImages/" + FirebaseAuth.getInstance().getUid());
                         try {
-                            final File localFile = File.createTempFile(FirebaseAuth.getInstance().getUid(), "jpg");
+                            File localFile = File.createTempFile(FirebaseAuth.getInstance().getUid(), "jpg");
 
 
                             mStorageReference.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
