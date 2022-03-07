@@ -57,4 +57,5 @@
     <string name="marker_type_1">Διεύθυνση: %1$s \n Διοργανωτής: %2$s \n Email: %3$s</string>
     <string name="marker_type_2">Διεύθυνση: %1$s \n Email: %2$s</string>
     <string name="password_reset">Επαναφορά Κωδικού</string>
+    <string name="add_event_hospital_frag_btn">Προσθήκη Γεγονόντος</string>
 </resources>

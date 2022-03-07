@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">BloodCall</string>
 
     <!-- LauncherActivity Strings !-->
@@ -92,4 +92,8 @@
     <string name="marker_type_1">Address: %1$s \n Organized By: %2$s \n Email: %3$s</string>
     <string name="marker_type_2">Address: %1$s \n Email: %2$s</string>
     <string name="password_reset">Password Reset</string>
+    <string name="add_event_hospital_frag_btn">Add Event</string>
+    <string name="date_hint_hospital" translatable="false" tools:ignore="MissingTranslation">Date</string>
+    <string name="address_hint_hospital" translatable="false">Address</string>
+    <string name="name_hint_hospital" translatable="false" tools:ignore="MissingTranslation">Name</string>
 </resources>
