@@ -10,14 +10,14 @@ exports.alertAdded = functions.database.ref("/Alerts/{alert_id}")
       admin.database().ref("/Hospitals/"+alertData.owner)
           .once("value", (snap) => {
             console.log(snap.val());
-            hospital=snap.val().name;
+            hospital=snap.val();
             topic=alertData.bloodType.replace("+", "pos").replace("-", "neg");
             admin.messaging().sendToTopic(
                 "/topics/"+topic,
                 {
-                  notification: {
-                    title: "Urgent need for "+alertData.bloodType+" blood",
-                    body: "Your blood is needed right now at "+hospital+"!",
+                  data: {
+                    alert: JSON.stringify(alertData),
+                    hospital: JSON.stringify(hospital),
                   },
                 }
             );

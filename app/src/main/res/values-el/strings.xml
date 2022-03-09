@@ -58,4 +58,10 @@
     <string name="marker_type_2">Διεύθυνση: %1$s \n Email: %2$s</string>
     <string name="password_reset">Επαναφορά Κωδικού</string>
     <string name="add_event_hospital_frag_btn">Προσθήκη Γεγονόντος</string>
+    <string name="notif_channel_name">Επείγουσα Ειδοποίηση</string>
+    <string name="notif_title">Το αίμα σας χρειάζεται!</string>
+    <string name="notif_text_template">Στην τοποθεσία: %1$s, πατήστε για περισσότερες πληροφορίες.</string>
+    <string name="date_hint_hospital">Ημερομηνία</string>
+    <string name="address_hint_hospital">Διεύθυνση</string>
+    <string name="name_hint_hospital">Όνομα</string>
 </resources>

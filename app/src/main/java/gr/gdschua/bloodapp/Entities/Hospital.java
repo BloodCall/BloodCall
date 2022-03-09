@@ -8,21 +8,21 @@ import java.util.List;
 import java.util.Locale;
 
 public class Hospital {
-    private String Name,Email;
+    private String name, email;
     private double lat,lon;
 
     public Hospital(){
-
     }
+
     public Hospital(String name, String email, double lat, double lon) {
-        Name = name;
-        Email = email;
+        this.name = name;
+        this.email = email;
         this.lat = lat;
         this.lon = lon;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public String getAddress(Context context){
@@ -47,15 +47,15 @@ public class Hospital {
 
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public double getLat() {

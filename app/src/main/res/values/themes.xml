@@ -30,4 +30,6 @@
     <style name="Theme.BloodDonationApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.BloodDonationApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.BloodCall.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.BloodCall.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

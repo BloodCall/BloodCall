@@ -95,5 +95,11 @@
     <!--kitsaros for the win
      hospital fragment events-->
     <string name="add_event_hospital_frag_btn">Add Event</string>
+    <string name="notif_channel_name">Emergency Notification</string>
+    <string name="notif_title">Your blood is needed!</string>
+    <string name="notif_text_template">At location: %1$s, tap to learn more.</string>
+    <string name="date_hint_hospital">Date</string>
+    <string name="address_hint_hospital">Address</string>
+    <string name="name_hint_hospital">Name</string>
 
 </resources>

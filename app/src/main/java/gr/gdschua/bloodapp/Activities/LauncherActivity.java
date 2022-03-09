@@ -10,6 +10,8 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 import gr.gdschua.bloodapp.Activities.HospitalActivities.HospitalSignUpActivity;
 import gr.gdschua.bloodapp.R;
@@ -17,7 +19,6 @@ import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 
 public class LauncherActivity extends AppCompatActivity {
 
-    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
 
@@ -31,6 +32,8 @@ public class LauncherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
         actv = this;
+
+
         findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
