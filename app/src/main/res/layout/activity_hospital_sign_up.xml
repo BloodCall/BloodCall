@@ -24,7 +24,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
+        app:layout_constraintVertical_bias="0.629" />
 
     <EditText
         android:id="@+id/hospSignupName"
@@ -43,8 +43,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.808" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.759" />
 
     <EditText
         android:id="@+id/HospSignupEmail"
@@ -63,14 +63,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.872" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.848" />
 
     <EditText
         android:id="@+id/HospSignupPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
         android:background="@drawable/borders_making"
         android:drawablePadding="8dp"
         android:ems="10"
@@ -80,10 +79,12 @@
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/HospSignupAddr" />
+        app:layout_constraintTop_toBottomOf="@+id/HospSignupAddr"
+        app:layout_constraintVertical_bias="0.117" />
 
     <Button
         android:id="@+id/HospSignUpBtn2"
@@ -94,8 +95,31 @@
         android:textColor="@color/ice_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/HospSignupPass"
-        app:layout_constraintVertical_bias="0.232" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.903" />
+
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="170dp"
+        android:layout_height="130dp"
+        android:src="@drawable/hospital_ic_menu"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.682" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
