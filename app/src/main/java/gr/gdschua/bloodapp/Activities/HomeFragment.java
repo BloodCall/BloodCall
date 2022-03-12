@@ -101,6 +101,7 @@ public class HomeFragment extends Fragment {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
                     currUser = task.getResult().getValue(User.class);
+                    pushN.setChecked(currUser.getNotificationsB());
                     if (currUser.getNotificationsB()) {
                         if (!reqResult) {
                             handleBgLoc();

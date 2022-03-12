@@ -1,5 +1,7 @@
 package gr.gdschua.bloodapp.Entities;
 
+import com.google.firebase.database.Exclude;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,10 +35,12 @@ public class User {
         this.notifications = notifications;
     }
 
+    @Exclude
     public boolean getNotificationsB() {
         return Boolean.parseBoolean(notifications);
     }
 
+    @Exclude
     public void setNotificationsB(boolean notifications) {
         this.notifications = String.valueOf(notifications);
     }
@@ -61,6 +65,7 @@ public class User {
         return this.bloodType.replace("+", "pos").replace("-", "neg");
     }
 
+    @Exclude
     public Map<String, Object> getAsMap() {
         Map<String, Object> map = new HashMap<>();
         for (Field field : this.getClass().getDeclaredFields()) {
