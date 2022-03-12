@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -100,16 +101,20 @@ public class MapsFragment extends Fragment {
     };
 
     private void handleLocation() {
-        map.setMyLocationEnabled(true);
-        FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
-        mFusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
-            Location location = task.getResult();
-            LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
-            map.moveCamera(CameraUpdateFactory.newLatLng(myLoc));
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            map.setMyLocationEnabled(true);
+            FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
+            mFusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
+                Location location = task.getResult();
+                LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
+                map.moveCamera(CameraUpdateFactory.newLatLng(myLoc));
 
-            //Move the camera to the user's location and zoom in!
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 12.0f));
-        });
+                //Move the camera to the user's location and zoom in!
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 12.0f));
+            });
+            return;
+        }
+
 
     }
 
