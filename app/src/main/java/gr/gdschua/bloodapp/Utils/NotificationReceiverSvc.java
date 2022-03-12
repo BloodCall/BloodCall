@@ -47,6 +47,7 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
         Hospital targetHospital = gson.fromJson(remoteMessage.getData().get("hospital"), Hospital.class);
 
         FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+        //not sure if this if actually works
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             mFusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
                 Location userLocation = task.getResult();
