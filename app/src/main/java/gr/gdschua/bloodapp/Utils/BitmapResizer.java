@@ -54,28 +54,27 @@ public class BitmapResizer {
             Bitmap bmRotated = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
             bitmap.recycle();
             return bmRotated;
-        }
-        catch (OutOfMemoryError e) {
+        } catch (OutOfMemoryError e) {
             e.printStackTrace();
             return null;
         }
     }
 
-     public static Uri processBitmap(Uri imageUri, int maxSize, Context context,ImageView profilePicButton) {
+    public static Uri processBitmap(Uri imageUri, int maxSize, Context context, ImageView profilePicButton) {
         int orientation = 0;
         Bitmap image = null;
         try (InputStream inputStream = context.getContentResolver().openInputStream(imageUri)) {
-            image= Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri));
+            image = Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(context.getContentResolver(), imageUri));
             ExifInterface exif = new ExifInterface(inputStream);
             orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        image=rotateBitmap(image,orientation);
+        image = rotateBitmap(image, orientation);
         int width = image.getWidth();
         File localFile = null;
         int height = image.getHeight();
-        float bitmapRatio = (float)width / (float) height;
+        float bitmapRatio = (float) width / (float) height;
         if (bitmapRatio > 1) {
             width = maxSize;
             height = (int) (width / bitmapRatio);
@@ -86,7 +85,7 @@ public class BitmapResizer {
         Bitmap tmp = Bitmap.createScaledBitmap(image, width, height, true);
 
         try {
-            localFile = File.createTempFile("picker","");
+            localFile = File.createTempFile("picker", "");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,6 +96,6 @@ public class BitmapResizer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-         return Uri.fromFile(localFile);
+        return Uri.fromFile(localFile);
     }
 }

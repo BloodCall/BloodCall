@@ -2,16 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:foregroundTint="#CA0606"
     tools:context=".Activities.HomeFragment">
 
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
         android:layout_width="261dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -28,9 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/nametag_oval"
+            android:background="@drawable/hosp_nametags"
             android:gravity="clip_vertical"
-            android:textColor="@color/white"
             android:textSize="14sp" />
 
         <TextView
@@ -38,9 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/nametag_oval"
+            android:background="@drawable/hosp_nametags"
             android:gravity="clip_vertical"
-            android:textColor="@color/white"
             android:textSize="14sp" />
 
         <TextView
@@ -48,15 +43,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/nametag_oval"
+            android:background="@drawable/hosp_nametags"
             android:gravity="clip_vertical"
-            android:textColor="@color/white"
             android:textSize="14sp" />
 
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView5"
         android:layout_width="127dp"
         android:layout_height="115dp"
         android:src="@drawable/hospital_ic_menu"
@@ -94,11 +87,11 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_gravity="bottom|end"
-        android:backgroundTint="@color/changed_red"
         android:clickable="true"
         android:minHeight="48dp"
         android:src="@drawable/ic_baseline_add_24"
         android:visibility="visible"
+        app:backgroundTint="?android:colorAccent"
         app:borderWidth="0dp"
         app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -107,6 +100,7 @@
         app:layout_constraintStart_toStartOf="@+id/guideline4"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.90"
+        app:tint="@android:color/white"
         tools:visibility="visible" />
 
     <LinearLayout
@@ -127,13 +121,14 @@
         app:layout_constraintVertical_bias="0.90">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/alertFabTxt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="10"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/add_new_alert"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:theme="@style/LauncherTheme" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab1"
@@ -141,14 +136,14 @@
             android:layout_height="56dp"
             android:layout_gravity="bottom|end"
             android:layout_weight="6"
-            android:backgroundTint="@color/changed_red"
             android:clickable="true"
             android:elevation="0dp"
             android:minHeight="48dp"
             android:src="@drawable/ic_baseline_notification_important_24"
-            android:tint="@color/white"
+            app:backgroundTint="?android:colorAccent"
             app:borderWidth="0dp"
-            app:elevation="0dp" />
+            app:elevation="0dp"
+            app:tint="@android:color/white" />
 
     </LinearLayout>
 
@@ -170,12 +165,13 @@
         app:layout_constraintVertical_bias="0.90">
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/eventFabTxt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="10"
             android:gravity="center|center_vertical"
-            android:text="@string/side_bar_add_event" />
+            android:text="@string/side_bar_add_event"
+            android:theme="@style/LauncherTheme" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab2"
@@ -183,13 +179,14 @@
             android:layout_height="56dp"
             android:layout_gravity="bottom|end"
             android:layout_weight="6"
-            android:backgroundTint="@color/changed_red"
             android:clickable="true"
             android:elevation="0dp"
             android:minHeight="48dp"
             android:src="@drawable/ic_baseline_calendar_today_24"
+            app:backgroundTint="?android:colorAccent"
             app:borderWidth="0dp"
-            app:elevation="0dp" />
+            app:elevation="0dp"
+            app:tint="@android:color/white" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Locale;
 
 public class Hospital {
-    private String name, email;
-    private double lat,lon;
+    private String name, email, id;
+    private double lat, lon;
 
-    public Hospital(){
+    public Hospital() {
     }
 
     public Hospital(String name, String email, double lat, double lon) {
@@ -25,14 +25,26 @@ public class Hospital {
         return name;
     }
 
-    public String getAddress(Context context){
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id; //store firebase authentication id into object itself
+    }
+
+    public String getAddress(Context context) {
         String strAdd = "";
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         try {
             List<Address> addresses = geocoder.getFromLocation(this.lat, this.lon, 1);
             if (addresses != null) {
                 Address returnedAddress = addresses.get(0);
-                StringBuilder strReturnedAddress = new StringBuilder("");
+                StringBuilder strReturnedAddress = new StringBuilder();
                 for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
                 }
@@ -43,11 +55,6 @@ public class Hospital {
             e.printStackTrace();
         }
         return strAdd;
-    }
-
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {

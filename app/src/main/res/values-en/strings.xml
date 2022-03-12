@@ -7,7 +7,6 @@
     <string name="ThirdTextViewLaunch">Are you representing a hospital? Click here to sign up.</string>
     <string name="login_button">Log In</string>
     <string name="signup_button">Sign Up</string>
-    <string name="signup_subtext">Don\'t have an account?</string>
 
 
     <!-- RegisterActivity Strings !-->
@@ -25,7 +24,6 @@
     <string name="password_box_hint">Password</string>
     <string name="e_mail_hint">E-mail</string>
     <string name="login_activity_textViewFirst">LOGIN</string>
-    <string name="checkbox">Remember Me</string>
     <string name="reset_password">Forgot your password?</string>
     <string name="login_error">Invalid email or password , try again or sign up</string>
 
@@ -42,7 +40,7 @@
     <!-- No Internet Screen !-->
     <string name="noInternet">No internet connection!</string>
     <string name="noInternetSubtext">This app requires an internet connection.\nPlease connect to a network</string>
-    <string name="textViewWithSwitch">Make my profile public</string>
+    <string name="textViewWithSwitch">Recieve emergency notifications</string>
 
     <!-- Main Activity Strings !-->
     <string name="side_bar_home">Home</string>
@@ -55,7 +53,6 @@
     <!--Forgot Password Strings !-->
     <string name="res_email_succ">Reset email sent successfully!</string>
     <string name="res_email_err">Failed to send reset email!</string>
-    <string name="back_btn">Back</string>
     <string name="res_btn">Reset</string>
 
     <!--Marker Info Fragment Strings !-->
@@ -80,10 +77,7 @@
 
     <!--to toggle the open close button
         of the navigation drawer-->
-    <string name="nav_open">Open</string>
-    <string name="nav_close">Close</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_new_alert">Add New Alert</string>
     <string name="new_alert_text">What Kind of Blood Type is required?</string>
     <string name="create_alert_btn">Create Alert</string>
@@ -101,5 +95,6 @@
     <string name="date_hint_hospital">Date</string>
     <string name="address_hint_hospital">Address</string>
     <string name="name_hint_hospital">Name</string>
+    <string name="create_hospital_account">CREATE HOSPITAL ACCOUNT</string>
 
 </resources>

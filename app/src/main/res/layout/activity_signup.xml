@@ -8,7 +8,6 @@
 
 
     <TextView
-        android:id="@+id/createAccountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
@@ -16,7 +15,7 @@
         android:maxLines="2"
         android:text="@string/createAccountTextView"
         android:textAlignment="viewStart"
-        android:textColor="@color/black"
+
         android:textSize="22sp"
         android:textStyle="bold"
         app:autoSizeMinTextSize="5sp"
@@ -41,7 +40,6 @@
         android:paddingEnd="10dp"
         android:text="@string/click_to_add_a_profile_picture"
         android:textAlignment="center"
-        android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +49,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/first_name_box"
+        android:id="@+id/hospSignupName"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -63,7 +61,6 @@
         android:minHeight="48dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +69,7 @@
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/last_name_box"
+        android:id="@+id/hospSignupAddr"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -83,7 +80,6 @@
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:paddingStart="8dp"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +88,7 @@
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/email_signup_box"
+        android:id="@+id/hospSignupEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -104,7 +100,6 @@
         android:minHeight="48dp"
         android:paddingLeft="8dp"
         android:paddingEnd="8dp"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +108,7 @@
         tools:ignore="TextContrastCheck" />
 
     <EditText
-        android:id="@+id/password_signup_box"
+        android:id="@+id/hospSignupPass"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -126,7 +121,6 @@
         android:minHeight="48dp"
         android:paddingLeft="8dp"
         android:paddingEnd="8dp"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -135,14 +129,12 @@
         tools:ignore="TextContrastCheck" />
 
     <Button
-        android:id="@+id/register_button_details"
+        android:id="@+id/hospSignupBtn"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight=".0005"
-        android:background="@drawable/buttons_curved_2"
         android:text="@string/register_button"
-        android:textColor="@color/ice_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -165,19 +157,17 @@
         app:layout_constraintVertical_bias="0.81">
 
         <TextView
-            android:id="@+id/blood_type_descriptor"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="0.15"
             android:gravity="center"
-            android:text="@string/blood_type_description"
-            android:textColor="@color/black" />
+            android:text="@string/blood_type_description" />
 
         <Spinner
             android:id="@+id/bloodtype_spinner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
+            android:layout_weight="0.2"
 
             android:entries="@array/blood_types"
             android:minHeight="48dp" />
@@ -186,7 +176,7 @@
             android:id="@+id/bloodtype_spinner_pos_neg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.3"
+            android:layout_weight="0.2"
             android:entries="@array/pos_neg"
             android:minHeight="48dp" />
     </LinearLayout>
@@ -196,7 +186,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.3" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -209,7 +199,7 @@
         android:id="@+id/profilePic"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="32dp"
         android:cropToPadding="false"
         android:scaleX="0.9"
         android:scaleY="0.9"

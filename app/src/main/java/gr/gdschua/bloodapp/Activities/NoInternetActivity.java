@@ -15,6 +15,10 @@ import gr.gdschua.bloodapp.R;
 public class NoInternetActivity extends AppCompatActivity {
     public static Activity activity = null;
 
+    public static void FinishTask() {
+        activity.finish();
+    }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -23,16 +27,12 @@ public class NoInternetActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public static void FinishTask(){
-        activity.finish();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this;
         setContentView(R.layout.activity_no_internet);
-        ImageView imageView=findViewById(R.id.noInternetIcon);
+        ImageView imageView = findViewById(R.id.noInternetIcon);
         Animation animation = new AlphaAnimation(1, 0); //to change visibility from visible to invisible
         animation.setDuration(1000); //1 second duration for each animation cycle
         animation.setInterpolator(new LinearInterpolator());

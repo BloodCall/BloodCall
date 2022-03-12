@@ -12,9 +12,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
@@ -34,13 +37,12 @@ import gr.gdschua.bloodapp.R;
  */
 public class HospitalAddEventFragment extends Fragment {
 
-    final Calendar myCalendar= Calendar.getInstance();
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private DAOEvents daoEvents=new DAOEvents();
+    final Calendar myCalendar = Calendar.getInstance();
+    private final DAOEvents daoEvents = new DAOEvents();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -82,58 +84,64 @@ public class HospitalAddEventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_hospital_add_event, container, false);
-        EditText editText=view.findViewById(R.id.eventDateBox);
+        View view = inflater.inflate(R.layout.fragment_hospital_add_event, container, false);
+        EditText editText = view.findViewById(R.id.eventDateBox);
 
         view.findViewById(R.id.addEventButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 List<Address> latLonList = null;
-                TextView name=view.findViewById(R.id.eventName);
-                TextView addr=view.findViewById(R.id.eventAddress);
-                TextView date=view.findViewById(R.id.eventDateBox);
+                TextView name = view.findViewById(R.id.eventName);
+                TextView addr = view.findViewById(R.id.eventAddress);
+                TextView date = view.findViewById(R.id.eventDateBox);
 
                 Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
                 try {
-                    latLonList = geocoder.getFromLocationName(addr.getText().toString(),1);
+                    latLonList = geocoder.getFromLocationName(addr.getText().toString(), 1);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
                 try {
-                    Event event= new Event(name.getText().toString(),date.getText().toString(), FirebaseAuth.getInstance().getUid(),latLonList.get(0).getLatitude(),latLonList.get(0).getLongitude());
-                    daoEvents.insertEvent(event);
-                }
-                catch (IndexOutOfBoundsException e){
+                    Event event = new Event(name.getText().toString(), date.getText().toString(), FirebaseAuth.getInstance().getUid(), latLonList.get(0).getLatitude(), latLonList.get(0).getLongitude());
+                    daoEvents.insertEvent(event).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), "Event Added!", Snackbar.LENGTH_LONG);
+                            requireActivity().onBackPressed();
+                            snackbar.show();
+                        }
+                    });
+                } catch (IndexOutOfBoundsException e) {
                     e.printStackTrace();
-                    Toast.makeText(getActivity(),"Address not found!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Address not found!", Toast.LENGTH_SHORT).show();
                 }
             }
 
         });
 
-        DatePickerDialog.OnDateSetListener date =new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH,month);
-                myCalendar.set(Calendar.DAY_OF_MONTH,day);
+                myCalendar.set(Calendar.MONTH, month);
+                myCalendar.set(Calendar.DAY_OF_MONTH, day);
                 updateLabel(editText);
             }
         };
         editText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(getActivity(),R.style.DatePickerTheme,date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(getActivity(), date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
         return view;
     }
 
-    private void updateLabel(EditText editText){
-        String myFormat="MM/dd/yy";
-        SimpleDateFormat dateFormat=new SimpleDateFormat(myFormat, Locale.US);
+    private void updateLabel(EditText editText) {
+        String myFormat = "MM/dd/yy";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(myFormat, Locale.US);
         editText.setText(dateFormat.format(myCalendar.getTime()));
     }
 }

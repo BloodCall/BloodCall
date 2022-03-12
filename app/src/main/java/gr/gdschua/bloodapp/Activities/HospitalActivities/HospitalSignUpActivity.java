@@ -26,60 +26,59 @@ import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
 
-    public class HospitalSignUpActivity extends AppCompatActivity {
+public class HospitalSignUpActivity extends AppCompatActivity {
 
-        private final DAOHospitals dao=new DAOHospitals();
-        private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private final DAOHospitals dao = new DAOHospitals();
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_hospital_sign_up);
-            double lat,lon;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_hospital_sign_up);
+        double lat, lon;
 
-            findViewById(R.id.HospSignUpBtn2).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    EditText addr=findViewById(R.id.HospSignupAddr);
-                    EditText name=findViewById(R.id.hospSignupName);
-                    EditText email=findViewById(R.id.HospSignupEmail);
-                    EditText password=findViewById(R.id.HospSignupPass);
+        findViewById(R.id.hospSignupBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText addr = findViewById(R.id.hospSignupAddr);
+                EditText name = findViewById(R.id.hospSignupName);
+                EditText email = findViewById(R.id.hospSignupEmail);
+                EditText password = findViewById(R.id.hospSignupPass);
 
 
+                mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
 
-                    mAuth.createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if(task.isSuccessful()){
+                                    Geocoder geocoder = new Geocoder(HospitalSignUpActivity.this, Locale.getDefault());
+                                    try {
 
-                                        Geocoder geocoder = new Geocoder(HospitalSignUpActivity.this, Locale.getDefault());
-                                        try {
+                                        List<Address> latLonList = geocoder.getFromLocationName(addr.getText().toString(), 1);
+                                        Hospital newUser = new Hospital(name.getText().toString(), email.getText().toString(), latLonList.get(0).getLatitude(), latLonList.get(0).getLongitude());
 
-                                            List<Address> latLonList = geocoder.getFromLocationName(addr.getText().toString(),1);
-                                            Hospital newUser= new Hospital(name.getText().toString(),email.getText().toString(),latLonList.get(0).getLatitude(),latLonList.get(0).getLongitude());
+                                        dao.insertUser(newUser).addOnSuccessListener(suc -> {
+                                            Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.succ_reg), Toast.LENGTH_LONG).show();
+                                        }).addOnFailureListener(fail -> {
+                                            Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.fail_reg) + fail.getMessage(), Toast.LENGTH_LONG).show();
+                                        });
+                                        Intent goToLogin = new Intent(HospitalSignUpActivity.this, MainActivity.class);
+                                        startActivity(goToLogin);
+                                        finish();
 
-                                            dao.insertUser(newUser).addOnSuccessListener(suc->{
-                                                Toast.makeText(HospitalSignUpActivity.this,getResources().getString(R.string.succ_reg),Toast.LENGTH_LONG).show();
-                                            }).addOnFailureListener(fail->{
-                                                Toast.makeText(HospitalSignUpActivity.this,getResources().getString(R.string.fail_reg)+fail.getMessage(),Toast.LENGTH_LONG).show();
-                                            });
-                                            Intent goToLogin = new Intent(HospitalSignUpActivity.this, MainActivity.class);
-                                            startActivity(goToLogin);
-                                            finish();
-
-                                        } catch (IOException e) {
-                                            //error handle it here
-                                            e.printStackTrace();
-                                        }
-                                    }else{
-                                        Toast.makeText(HospitalSignUpActivity.this,getResources().getString(R.string.fail_reg),Toast.LENGTH_LONG).show();
-                                        Log.w("error", "signInWithCustomToken:failure", task.getException());
+                                    } catch (IOException e) {
+                                        //error handle it here
+                                        e.printStackTrace();
                                     }
+                                } else {
+                                    Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.fail_reg), Toast.LENGTH_LONG).show();
+                                    Log.w("error", "signInWithCustomToken:failure", task.getException());
                                 }
-                            });
-                }
-            });
-        }
-
+                            }
+                        });
+            }
+        });
     }
+
+}

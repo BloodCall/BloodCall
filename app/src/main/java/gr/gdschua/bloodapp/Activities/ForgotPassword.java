@@ -43,13 +43,13 @@ public class ForgotPassword extends AppCompatActivity {
             public void onClick(View v) {
                 String email = emailET.getText().toString().trim();
 
-                if(email.isEmpty()){
+                if (email.isEmpty()) {
                     emailET.setError(getResources().getString(R.string.email_req_error));
                     emailET.requestFocus();
                     return;
                 }
 
-                if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     emailET.setError(getResources().getString(R.string.email_inv_error));
                     emailET.requestFocus();
                     return;
@@ -58,10 +58,10 @@ public class ForgotPassword extends AppCompatActivity {
                 FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(),getResources().getString(R.string.res_email_succ),Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(getApplicationContext(),getResources().getString(R.string.res_email_err),Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.res_email_succ), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.res_email_err), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -6,10 +6,14 @@ import android.location.Geocoder;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 public class Event {
-    private String Name,Date,Owner;
-    private double lat,lon;
+    private final String id;
+    private String Name;
+    private String Date;
+    private String Owner;
+    private double lat, lon;
 
     public Event(String name, String date, String owner, double lat, double lon) {
         Name = name;
@@ -17,17 +21,22 @@ public class Event {
         Owner = owner;
         this.lat = lat;
         this.lon = lon;
+        id = UUID.randomUUID().toString();
     }
 
 
-    public String getAddress(Context context){
+    public String getId() {
+        return id;
+    }
+
+    public String getAddress(Context context) {
         String strAdd = "";
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
         try {
             List<Address> addresses = geocoder.getFromLocation(this.lat, this.lon, 1);
             if (addresses != null) {
                 Address returnedAddress = addresses.get(0);
-                StringBuilder strReturnedAddress = new StringBuilder("");
+                StringBuilder strReturnedAddress = new StringBuilder();
                 for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
                 }

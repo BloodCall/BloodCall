@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:theme="@style/LauncherTheme"
     tools:context=".Activities.HospitalActivities.HospitalAddEventFragment">
 
     <EditText
@@ -21,7 +21,7 @@
         android:minHeight="48dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:textColor="@color/black"
+
         app:layout_constraintBottom_toTopOf="@+id/eventAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -41,7 +41,7 @@
         android:minHeight="48dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:textColor="@color/black"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,9 +51,7 @@
         android:id="@+id/addEventButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/buttons_curved"
         android:text="@string/add_event_hospital_frag_btn"
-        android:textColor="@color/ice_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,12 +66,14 @@
         android:background="@drawable/borders_making"
         android:drawablePadding="8dp"
         android:ems="10"
+        android:focusable="false"
         android:hint="@string/date_hint_hospital"
-        android:inputType="date"
+        android:inputType="none"
+        android:longClickable="false"
         android:minHeight="48dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:textColor="@color/black"
+
         app:layout_constraintBottom_toTopOf="@+id/eventName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

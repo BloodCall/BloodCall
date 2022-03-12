@@ -11,23 +11,25 @@ import android.widget.TextView;
 import androidx.fragment.app.DialogFragment;
 
 import gr.gdschua.bloodapp.R;
+
 public class MarkerInfoFragment extends DialogFragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        super.onCreateView(inflater,container,savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_marker_info, container, false);
         TextView tv = view.findViewById(R.id.textViewMarkerTitle);
-        TextView tv2=view.findViewById(R.id.textViewMarkerCenter);
+        TextView tv2 = view.findViewById(R.id.textViewMarkerCenter);
         tv.setText(getArguments().get("name").toString());
-        if(getArguments().get("organizer")!=null) {
-            tv2.setText(String.format(getString(R.string.marker_type_1),getArguments().get("address").toString(),getArguments().get("organizer").toString(),getArguments().get("email").toString()));
-        }else {
-            tv2.setText(String.format(getString(R.string.marker_type_2),getArguments().get("address").toString(),getArguments().get("email").toString()));
+        if (getArguments().get("organizer") != null) {
+            tv2.setText(String.format(getString(R.string.marker_type_1), getArguments().get("address").toString(), getArguments().get("organizer").toString(), getArguments().get("email").toString()));
+        } else {
+            tv2.setText(String.format(getString(R.string.marker_type_2), getArguments().get("address").toString(), getArguments().get("email").toString()));
         }
         return view;
     }
+
     @Override
     public void onStart() {
         super.onStart();

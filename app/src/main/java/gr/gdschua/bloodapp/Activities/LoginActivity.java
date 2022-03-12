@@ -25,9 +25,9 @@ public class LoginActivity extends AppCompatActivity {
     EditText passET;
     EditText emailET;
     ImageView showPasswordIV;
-    boolean loginClicked=false;
-    private FirebaseAuth mAuth;
+    boolean loginClicked = false;
     BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onDestroy() {
@@ -38,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        emailET= findViewById(R.id.email_input);
+        emailET = findViewById(R.id.email_input);
         passET = findViewById(R.id.password_input);
         showPasswordIV = findViewById(R.id.showPassword);
         showPasswordIV.setTag(R.drawable.show_password_image);
@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         showPasswordIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if((Integer)showPasswordIV.getTag() == R.drawable.show_password_image ){
+                if ((Integer) showPasswordIV.getTag() == R.drawable.show_password_image) {
 
                     passET.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     passET.setSelection(passET.getText().length());
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                     showPasswordIV.setTag(R.drawable.hide_password_image);
 
 
-                }else if((Integer)showPasswordIV.getTag() == R.drawable.hide_password_image){
+                } else if ((Integer) showPasswordIV.getTag() == R.drawable.hide_password_image) {
 
                     passET.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     passET.setSelection(passET.getText().length());
@@ -84,9 +84,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void signIn(String email,String password){
-        if (!email.isEmpty() && !password.isEmpty() && !loginClicked){
-            loginClicked=true;
+    private void signIn(String email, String password) {
+        if (!email.isEmpty() && !password.isEmpty() && !loginClicked) {
+            loginClicked = true;
             mAuth = FirebaseAuth.getInstance();
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override

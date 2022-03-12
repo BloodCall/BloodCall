@@ -60,6 +60,8 @@
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/borders_home_fragment.xml" value="0.1" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/borders_making.xml" value="0.1" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/buttons_curved.xml" value="0.1" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/floating_icon.xml" value="0.314" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/hosp_nametags.xml" value="0.1625" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_icon_logo.xml" value="0.33697916666666666" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_launcher_background.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_launcher_logo.xml" value="0.5574358974358974" />
@@ -70,17 +72,17 @@
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/side_nav_bar.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/trans_bg_round_corner.xml" value="0.1" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/welcome_rectangle.xml" value="0.34427083333333336" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_forgot_password.xml" value="0.43523550724637683" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_forgot_password.xml" value="0.33" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_hospital_auth.xml" value="0.490036231884058" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_hospital_sign_up.xml" value="0.490036231884058" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_hospital_sign_up.xml" value="0.5" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_launcher.xml" value="0.328125" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_login.xml" value="0.30570652173913043" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_main.xml" value="0.5458333333333333" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_main_hospital.xml" value="0.43523550724637683" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_main_user.xml" value="0.43523550724637683" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_no_internet.xml" value="0.47101449275362317" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_notification_info.xml" value="0.33" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_signup.xml" value="0.328125" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_signup.xml" value="0.25" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/app_bar_main.xml" value="0.328125" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/app_bar_main_hosp.xml" value="0.43523550724637683" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/app_bar_main_user.xml" value="0.43523550724637683" />

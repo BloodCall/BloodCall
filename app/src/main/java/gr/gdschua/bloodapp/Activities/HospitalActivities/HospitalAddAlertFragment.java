@@ -6,8 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.SimpleDateFormat;
@@ -24,13 +28,11 @@ import gr.gdschua.bloodapp.R;
  * create an instance of this fragment.
  */
 public class HospitalAddAlertFragment extends Fragment {
-    DAOAlerts daoAlerts=new DAOAlerts();
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    DAOAlerts daoAlerts = new DAOAlerts();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -69,14 +71,21 @@ public class HospitalAddAlertFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_hospital_add_alert, container, false);
-        Spinner bloodTypeSpn=view.findViewById(R.id.bloodtype_spinner);
-        Spinner posNegSpn=view.findViewById(R.id.bloodtype_spinner_pos_neg);
+        View view = inflater.inflate(R.layout.fragment_hospital_add_alert, container, false);
+        Spinner bloodTypeSpn = view.findViewById(R.id.bloodtype_spinner);
+        Spinner posNegSpn = view.findViewById(R.id.bloodtype_spinner_pos_neg);
         view.findViewById(R.id.createAlertBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Alert alert=new Alert(FirebaseAuth.getInstance().getUid(), bloodTypeSpn.getSelectedItem().toString()+posNegSpn.getSelectedItem().toString(),new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()));
-                daoAlerts.insertAlert(alert);
+                Alert alert = new Alert(FirebaseAuth.getInstance().getUid(), bloodTypeSpn.getSelectedItem().toString() + posNegSpn.getSelectedItem().toString(), new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()));
+                daoAlerts.insertAlert(alert).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), "Alert Added!", Snackbar.LENGTH_LONG);
+                        requireActivity().onBackPressed();
+                        snackbar.show();
+                    }
+                });
             }
         });
         return view;

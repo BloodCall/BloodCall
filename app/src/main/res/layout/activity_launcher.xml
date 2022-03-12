@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/ice_white"
     android:textAlignment="center"
     tools:context="Activities.LauncherActivity">
 
@@ -26,7 +25,6 @@
         app:layout_constraintTop_toBottomOf="@+id/guideline3" />
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
         android:layout_width="411dp"
         android:layout_height="48dp"
         android:gravity="center"
@@ -46,12 +44,8 @@
             android:id="@+id/signup_button"
             android:layout_width="138dp"
             android:layout_height="match_parent"
-            android:background="@drawable/buttons_curved"
-            android:backgroundTint="@color/changed_red"
             android:text="@string/signup_button"
-            android:textAlignment="center"
-            android:textColor="@color/ice_white"
-            app:backgroundTint="@null" />
+            android:textAlignment="center" />
 
         <Space
             android:layout_width="0dp"
@@ -62,12 +56,8 @@
             android:id="@+id/login_button"
             android:layout_width="138dp"
             android:layout_height="match_parent"
-            android:background="@drawable/buttons_curved"
-            android:backgroundTint="@color/changed_red"
             android:text="@string/login_button"
-            android:textAlignment="center"
-            android:textColor="@color/ice_white"
-            app:backgroundTint="@null" />
+            android:textAlignment="center" />
 
         <Space
             android:layout_width="0dp"
@@ -82,7 +72,7 @@
         android:padding="15dp"
         android:text="@string/ThirdTextViewLaunch"
         android:textAlignment="center"
-        android:textColor="@color/black"
+
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -95,13 +85,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_logo"
-        app:tint="@color/changed_red"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        app:tint="?android:colorPrimary" />
 
     <TextView
         android:id="@id/FirstTextViewLaunch"
@@ -111,7 +101,7 @@
         android:gravity="center"
         android:text="@string/FirstTextViewLaunch"
         android:textAlignment="center"
-        android:textColor="@color/black"
+
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"

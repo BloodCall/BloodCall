@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/changed_red"
+    android:background="?android:colorPrimary"
     tools:context=".Activities.NoInternetActivity">
 
     <ImageView
@@ -21,11 +21,12 @@
 
     <TextView
         android:id="@+id/noInternetText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
+        android:gravity="center"
+
         android:text="@string/noInternet"
-        android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -33,8 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/noInternetIcon" />
 
     <TextView
-        android:id="@+id/noInternetSubtext"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
         android:text="@string/noInternetSubtext"
