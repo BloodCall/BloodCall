@@ -43,21 +43,23 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
     @Override
     public void
     onMessageReceived(RemoteMessage remoteMessage) {
+        Log.d("notif", "msg recieved");
         Alert targetAlert = gson.fromJson(remoteMessage.getData().get("alert"), Alert.class);
         Hospital targetHospital = gson.fromJson(remoteMessage.getData().get("hospital"), Hospital.class);
 
         FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
         //not sure if this if actually works
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mFusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
                 Location userLocation = task.getResult();
-                LatLng userLatLng = new LatLng(userLocation.getLatitude(),userLocation.getLongitude());
-                LatLng hospitalLatLng = new LatLng(targetHospital.getLat(),targetHospital.getLon());
-                if(calculateDistance(userLatLng,hospitalLatLng)<=20){
+                LatLng userLatLng = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
+                Log.d("notif", "location available " + userLatLng.latitude + " , " + userLatLng.longitude);
+                LatLng hospitalLatLng = new LatLng(targetHospital.getLat(), targetHospital.getLon());
+                if (calculateDistance(userLatLng, hospitalLatLng) <= 20) {
                     showNotification(targetHospital, targetAlert);
                 }
             });
-            return;
         }
     }
 

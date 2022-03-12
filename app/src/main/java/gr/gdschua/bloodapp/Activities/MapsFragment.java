@@ -1,6 +1,7 @@
 package gr.gdschua.bloodapp.Activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -100,8 +101,8 @@ public class MapsFragment extends Fragment {
         }
     };
 
+    @SuppressLint("MissingPermission")
     private void handleLocation() {
-        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             map.setMyLocationEnabled(true);
             FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
             mFusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
@@ -112,10 +113,6 @@ public class MapsFragment extends Fragment {
                 //Move the camera to the user's location and zoom in!
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 12.0f));
             });
-            return;
-        }
-
-
     }
 
     private void placeMarkers() {

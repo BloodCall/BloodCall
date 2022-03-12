@@ -9,6 +9,12 @@
 
     </style>
 
+    <style name="CustomDialogTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="colorPrimary">@color/changed_red</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
     <style name="LauncherTheme" parent="MainTheme">
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:textColor">@color/black</item>
