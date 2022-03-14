@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import gr.gdschua.bloodapp.Activities.HospitalActivities.HospitalSignUpActivity;
 import gr.gdschua.bloodapp.R;
+import gr.gdschua.bloodapp.Utils.LevelHandler;
 import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 
 public class LauncherActivity extends AppCompatActivity {

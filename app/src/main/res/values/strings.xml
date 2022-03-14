@@ -95,4 +95,6 @@
     <string name="notif_title">Your blood is needed!</string>
     <string name="notif_text_template">At location: %1$s, tap to learn more.</string>
     <string name="create_hospital_account">CREATE HOSPITAL ACCOUNT</string>
+    <string name="curr_lvl_text">My Level: %1$d</string>
+    <string name="new_lvl_xp">%1$d XP remaining for level %2$d</string>
 </resources>

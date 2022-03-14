@@ -2,6 +2,7 @@ package gr.gdschua.bloodapp.Activities;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -36,6 +38,7 @@ import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
+import gr.gdschua.bloodapp.Utils.LevelHandler;
 
 public class HomeFragment extends Fragment {
 
@@ -86,6 +89,9 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         bloodTypeTV = view.findViewById(R.id.bloodTypeTextView);
         fullNameTextView = view.findViewById(R.id.hosp_fullNameTextView);
+        ProgressBar progressBar= view.findViewById(R.id.lvlProgressBar);
+        TextView lvlTV= view.findViewById(R.id.lvlTV);
+        TextView nextLvlTV= view.findViewById(R.id.nextLvlTV);
         pushN = view.findViewById(R.id.pushNotifSwitch);
         //Kitsaros gia to email.
         emailTextView = view.findViewById(R.id.hosp_emailTextView);
@@ -107,6 +113,9 @@ public class HomeFragment extends Fragment {
                     //kitsaros gia to mail
                     emailTextView.setText(currUser.getEmail());
                     mStorageReference = FirebaseStorage.getInstance().getReference().child("UserImages/" + FirebaseAuth.getInstance().getUid());
+                    progressBar.setProgress(currUser.getXp()*100/LevelHandler.getXpForLvl(LevelHandler.getLevel(currUser.getXp())+1));
+                    lvlTV.setText(getResources().getString(R.string.curr_lvl_text,LevelHandler.getLevel(currUser.getXp())));
+                    nextLvlTV.setText(getResources().getString(R.string.new_lvl_xp,(LevelHandler.getXpForLvl(LevelHandler.getLevel(currUser.getXp())+1)-currUser.getXp()),LevelHandler.getLevel(currUser.getXp())+1));
                     try {
                         File localFile = File.createTempFile(FirebaseAuth.getInstance().getUid(), "jpg");
                         mStorageReference.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {

@@ -96,5 +96,7 @@
     <string name="address_hint_hospital">Address</string>
     <string name="name_hint_hospital">Name</string>
     <string name="create_hospital_account">CREATE HOSPITAL ACCOUNT</string>
+    <string name="curr_lvl_text">My Level: %1$d</string>
+    <string name="new_lvl_xp">%1$d XP remaining for level %2$d</string>
 
 </resources>

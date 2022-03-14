@@ -40,19 +40,29 @@
     </style>
 
 
+
+
     <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
         <item name="color">@android:color/white</item>
     </style>
 
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">2dp</item>
+        <item name="android:background">?android:attr/dividerVertical</item>
+    </style>
+
+    <style name="CustomProgressBarTheme">
+        <item name="colorAccent">@color/light_green</item>
+        <item name="android:progressBarStyle">@style/Widget.AppCompat.ProgressBar.Horizontal</item>
+    </style>
+
     <style name="Switch" parent="Theme.AppCompat.Light">
-        <item name="colorControlActivated">#66BB6A</item>
-
-        <item name="trackColorActive">#66BB6A</item>
-
-        <item name="colorSwitchThumbNormal">#f1f1f1</item>
-
-        <item name="android:colorForeground">#f1f1f1</item>
+        <item name="colorControlActivated">@color/light_green</item>
+        <item name="trackColorActive">@color/light_green</item>
+        <item name="colorSwitchThumbNormal">@android:color/white</item>
+        <item name="android:colorForeground">@android:color/white</item>
     </style>
 
 

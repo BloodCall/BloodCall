@@ -8,11 +8,21 @@ import java.util.Map;
 
 public class User {
     private String fullName, email, bloodType, id, notifications;
+    private int xp;
 
     public User(String fullName, String email, String bloodType) {
         this.fullName = fullName;
         this.email = email;
         this.bloodType = bloodType;
+    }
+
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
     }
 
 
