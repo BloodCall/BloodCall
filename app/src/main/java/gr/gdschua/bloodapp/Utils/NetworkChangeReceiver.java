@@ -15,7 +15,10 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
     public void onReceive(final Context context, final Intent intent) {
         try {
             if (isOnline(context)) {
-                NoInternetActivity.FinishTask();
+                Intent local = new Intent();
+                local.setAction("gr.gdschua.bloodapp.online");
+                context.sendBroadcast(local);
+
             } else {
                 Intent launchIntent = new Intent(context, NoInternetActivity.class);
                 context.startActivity(launchIntent);

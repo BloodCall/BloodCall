@@ -1,6 +1,7 @@
 package gr.gdschua.bloodapp.Activities;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
@@ -113,7 +114,8 @@ public class HomeFragment extends Fragment {
                     //kitsaros gia to mail
                     emailTextView.setText(currUser.getEmail());
                     mStorageReference = FirebaseStorage.getInstance().getReference().child("UserImages/" + FirebaseAuth.getInstance().getUid());
-                    progressBar.setProgress(currUser.getXp()*100/LevelHandler.getXpForLvl(LevelHandler.getLevel(currUser.getXp())+1));
+                    progressBar.setProgress(currUser.getXp()*100/LevelHandler.getXpForLvl(LevelHandler.getLevel(currUser.getXp())+1),true);
+                    ObjectAnimator.ofInt(progressBar, "progress", progressBar.getProgress()).setDuration(1000).start();
                     lvlTV.setText(getResources().getString(R.string.curr_lvl_text,LevelHandler.getLevel(currUser.getXp())));
                     nextLvlTV.setText(getResources().getString(R.string.new_lvl_xp,(LevelHandler.getXpForLvl(LevelHandler.getLevel(currUser.getXp())+1)-currUser.getXp()),LevelHandler.getLevel(currUser.getXp())+1));
                     try {

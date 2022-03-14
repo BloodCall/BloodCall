@@ -1,7 +1,10 @@
 package gr.gdschua.bloodapp.Activities;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -13,11 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import gr.gdschua.bloodapp.R;
 
 public class NoInternetActivity extends AppCompatActivity {
-    public static Activity activity = null;
 
-    public static void FinishTask() {
-        activity.finish();
-    }
 
     @Override
     public void onBackPressed() {
@@ -27,10 +26,20 @@ public class NoInternetActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    BroadcastReceiver receiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            finish();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activity = this;
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("gr.gdschua.bloodapp.online");
+        registerReceiver(receiver, filter);
         setContentView(R.layout.activity_no_internet);
         ImageView imageView = findViewById(R.id.noInternetIcon);
         Animation animation = new AlphaAnimation(1, 0); //to change visibility from visible to invisible
