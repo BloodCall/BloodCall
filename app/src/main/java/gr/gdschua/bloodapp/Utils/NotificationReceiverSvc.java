@@ -72,7 +72,7 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
         b.putDouble("lat", hospital.getLat());
         b.putString("timestamp", alert.getDateCreated());
         b.putString("hospname", hospital.getName());
-        b.putString("hospaddr", hospital.getAddress(this));
+        b.putString("hospaddr", hospital.getAddress());
         intent.putExtras(b);
         PendingIntent pendingIntent;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {

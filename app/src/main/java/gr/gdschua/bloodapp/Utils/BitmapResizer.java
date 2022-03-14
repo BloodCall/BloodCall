@@ -2,15 +2,15 @@ package gr.gdschua.bloodapp.Utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.widget.ImageView;
 
 import androidx.exifinterface.media.ExifInterface;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -60,7 +60,7 @@ public class BitmapResizer {
         }
     }
 
-    public static Uri processBitmap(Uri imageUri, int maxSize, Context context, ImageView profilePicButton) {
+    public static Bitmap processBitmap(Uri imageUri, int maxSize, Context context) {
         int orientation = 0;
         Bitmap image = null;
         try (InputStream inputStream = context.getContentResolver().openInputStream(imageUri)) {
@@ -72,7 +72,6 @@ public class BitmapResizer {
         }
         image = rotateBitmap(image, orientation);
         int width = image.getWidth();
-        File localFile = null;
         int height = image.getHeight();
         float bitmapRatio = (float) width / (float) height;
         if (bitmapRatio > 1) {
@@ -82,20 +81,6 @@ public class BitmapResizer {
             height = maxSize;
             width = (int) (height * bitmapRatio);
         }
-        Bitmap tmp = Bitmap.createScaledBitmap(image, width, height, true);
-
-        try {
-            localFile = File.createTempFile("picker", "");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try (FileOutputStream out = new FileOutputStream(localFile)) {
-            tmp.compress(Bitmap.CompressFormat.PNG, 100, out);
-            profilePicButton.setImageBitmap(Bitmap.createBitmap(MediaStore.Images.Media.getBitmap(context.getContentResolver(), Uri.fromFile(localFile))));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return Uri.fromFile(localFile);
+        return Bitmap.createScaledBitmap(image, width, height, true);
     }
 }

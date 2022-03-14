@@ -38,26 +38,6 @@ public class Hospital {
         this.id = id; //store firebase authentication id into object itself
     }
 
-    public String getAddress(Context context) {
-        String strAdd = "";
-        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocation(this.lat, this.lon, 1);
-            if (addresses != null) {
-                Address returnedAddress = addresses.get(0);
-                StringBuilder strReturnedAddress = new StringBuilder();
-                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
-                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
-                }
-                strAdd = strReturnedAddress.toString();
-            } else {
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return strAdd;
-    }
-
     public String getEmail() {
         return email;
     }

@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     ImageView showPasswordIV;
     boolean loginClicked = false;
     BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
-    private FirebaseAuth mAuth;
 
     @Override
     protected void onDestroy() {
@@ -87,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
     private void signIn(String email, String password) {
         if (!email.isEmpty() && !password.isEmpty() && !loginClicked) {
             loginClicked = true;
-            mAuth = FirebaseAuth.getInstance();
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -97,6 +96,8 @@ public class LoginActivity extends AppCompatActivity {
                         LauncherActivity.actv.finish();
                         finish();
                     } else {
+                        emailET.requestFocus();
+                        loginClicked = false;
                         emailET.setError(getResources().getString(R.string.login_error));
                     }
                 }

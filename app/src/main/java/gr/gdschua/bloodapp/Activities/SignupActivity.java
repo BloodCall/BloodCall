@@ -2,7 +2,7 @@ package gr.gdschua.bloodapp.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -26,11 +26,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.io.IOException;
+
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.BitmapResizer;
-import gr.gdschua.bloodapp.Utils.CacheClearer;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -43,7 +44,7 @@ public class SignupActivity extends AppCompatActivity {
     Button registerButton;
     EditText fName;
     EditText lName;
-    Uri profilePicture;
+    Bitmap profilePicture;
     EditText email;
     ProgressBar progressBar;
     EditText password;
@@ -58,9 +59,8 @@ public class SignupActivity extends AppCompatActivity {
                     }
                     Intent data = result.getData();
                     try {
-                        profilePicture = BitmapResizer.processBitmap(data.getData(), 400, SignupActivity.this, profilePicButton);
-
-
+                        profilePicture = BitmapResizer.processBitmap(data.getData(), 400, SignupActivity.this);
+                        profilePicButton.setImageBitmap(profilePicture);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -152,24 +152,26 @@ public class SignupActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-
                             User newUser = new User(fullName, userEmail, bloodType);
                             newUser.setNotificationsB(true);
-                            daoUser.insertUser(newUser, profilePicture).addOnSuccessListener(suc -> {
-                                Toast.makeText(SignupActivity.this, getResources().getString(R.string.succ_reg), Toast.LENGTH_LONG).show();
-                            }).addOnFailureListener(fail -> {
-                                Toast.makeText(SignupActivity.this, getResources().getString(R.string.fail_reg) + fail.getMessage(), Toast.LENGTH_LONG).show();
-                            });
-                            CacheClearer.deleteCache(SignupActivity.this);
-                            Intent goToLogin = new Intent(SignupActivity.this, LoginActivity.class);
-                            FirebaseMessaging.getInstance().subscribeToTopic(newUser.getTopic()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    startActivity(goToLogin);
-                                    LauncherActivity.actv.finish();
-                                    finish();
-                                }
-                            });
+                            try {
+                                daoUser.insertUser(newUser, profilePicture,getApplicationContext()).addOnSuccessListener(suc -> {
+                                    Toast.makeText(SignupActivity.this, getResources().getString(R.string.succ_reg), Toast.LENGTH_LONG).show();
+                                    Intent goToHome = new Intent(SignupActivity.this, MainActivity.class);
+                                    FirebaseMessaging.getInstance().subscribeToTopic(newUser.getTopic()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            startActivity(goToHome);
+                                            LauncherActivity.actv.finish();
+                                            finish();
+                                        }
+                                    });
+                                }).addOnFailureListener(fail -> {
+                                    Toast.makeText(SignupActivity.this, getResources().getString(R.string.fail_reg) + fail.getMessage(), Toast.LENGTH_LONG).show();
+                                });
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
                         } else {
                             Toast.makeText(SignupActivity.this, getResources().getString(R.string.fail_reg), Toast.LENGTH_LONG).show();
                             Log.w("error", "signInWithCustomToken:failure", task.getException());

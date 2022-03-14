@@ -58,7 +58,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
     }
 
     final ActivityResultLauncher<String> bgLocationRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result-> {
@@ -110,8 +109,6 @@ public class HomeFragment extends Fragment {
                     mStorageReference = FirebaseStorage.getInstance().getReference().child("UserImages/" + FirebaseAuth.getInstance().getUid());
                     try {
                         File localFile = File.createTempFile(FirebaseAuth.getInstance().getUid(), "jpg");
-
-
                         mStorageReference.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {

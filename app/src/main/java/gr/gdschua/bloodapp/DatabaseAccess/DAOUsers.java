@@ -1,5 +1,7 @@
 package gr.gdschua.bloodapp.DatabaseAccess;
 
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 
 import com.google.android.gms.tasks.Task;
@@ -7,6 +9,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import gr.gdschua.bloodapp.Entities.User;
 
@@ -17,11 +24,20 @@ public class DAOUsers {
     public DAOUsers() {
     }
 
-    public Task<Void> insertUser(User newUser, Uri userImage) {
+    public Task<Void> insertUser(User newUser, Bitmap userImage, Context context) throws IOException {
 
         newUser.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
         if (userImage != null) {
-            FirebaseStorage.getInstance().getReference("UserImages").child(newUser.getId()).putFile(userImage);
+            File outputFile = File.createTempFile("profPic"+Math.random(), ".png", context.getCacheDir());
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            userImage.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+            byte[] bitmapdata = bos.toByteArray();
+            FileOutputStream fos = new FileOutputStream(outputFile);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+            FirebaseStorage.getInstance().getReference("UserImages").child(newUser.getId()).putFile(Uri.fromFile(outputFile));
+            outputFile.delete();
         }
 
 
