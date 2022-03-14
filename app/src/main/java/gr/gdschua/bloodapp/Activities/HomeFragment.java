@@ -3,7 +3,6 @@ package gr.gdschua.bloodapp.Activities;
 import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -114,10 +113,10 @@ public class HomeFragment extends Fragment {
                     //kitsaros gia to mail
                     emailTextView.setText(currUser.getEmail());
                     mStorageReference = FirebaseStorage.getInstance().getReference().child("UserImages/" + FirebaseAuth.getInstance().getUid());
-                    progressBar.setProgress(currUser.getXp()*100/LevelHandler.getXpForLvl(LevelHandler.getLevel(currUser.getXp())+1),true);
+                    progressBar.setProgress(LevelHandler.getLvlCompletionPercentage(currUser.getXp(),LevelHandler.getLevel(currUser.getXp())),true);
                     ObjectAnimator.ofInt(progressBar, "progress", progressBar.getProgress()).setDuration(1000).start();
                     lvlTV.setText(getResources().getString(R.string.curr_lvl_text,LevelHandler.getLevel(currUser.getXp())));
-                    nextLvlTV.setText(getResources().getString(R.string.new_lvl_xp,(LevelHandler.getXpForLvl(LevelHandler.getLevel(currUser.getXp())+1)-currUser.getXp()),LevelHandler.getLevel(currUser.getXp())+1));
+                    nextLvlTV.setText(getResources().getString(R.string.new_lvl_xp,(LevelHandler.getLvlXpCap(LevelHandler.getLevel(currUser.getXp()))-currUser.getXp()),LevelHandler.getLevel(currUser.getXp())+1));
                     try {
                         File localFile = File.createTempFile(FirebaseAuth.getInstance().getUid(), "jpg");
                         mStorageReference.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
