@@ -8,17 +8,18 @@ import java.util.List;
 import java.util.Locale;
 
 public class Hospital {
-    private String name, email, id;
+    private String name, email, id,address;
     private double lat, lon;
 
     public Hospital() {
     }
 
-    public Hospital(String name, String email, double lat, double lon) {
+    public Hospital(String name, String email, double lat, double lon,String address) {
         this.name = name;
         this.email = email;
         this.lat = lat;
         this.lon = lon;
+        this.address=address;
     }
 
     public String getName() {
@@ -63,6 +64,14 @@ public class Hospital {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public double getLat() {

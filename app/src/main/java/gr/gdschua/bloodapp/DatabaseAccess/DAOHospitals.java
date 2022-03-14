@@ -23,7 +23,7 @@ public class DAOHospitals {
     }
 
     public static Hospital mapToHospital(Map singleHospital) {
-        return new Hospital(singleHospital.get("name").toString(), singleHospital.get("email").toString(), (double) singleHospital.get("lat"), (double) singleHospital.get("lon"));
+        return new Hospital(singleHospital.get("name").toString(), singleHospital.get("email").toString(), (double) singleHospital.get("lat"), (double) singleHospital.get("lon"), singleHospital.get("address").toString());
     }
 
     public Task<Void> insertUser(Hospital newUser) {

@@ -48,7 +48,7 @@ public class MapsFragment extends Fragment {
             Bundle bundle = new Bundle();
             assert hospital != null;
             bundle.putString("name", hospital.getName());
-            bundle.putString("address", hospital.getAddress(getActivity()));
+            bundle.putString("address", hospital.getAddress());
             bundle.putString("email", hospital.getEmail());
             myMarkerInfoFragment.setArguments(bundle);
             myMarkerInfoFragment.show(requireActivity().getSupportFragmentManager(), "My Fragment");

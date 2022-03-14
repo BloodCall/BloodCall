@@ -90,7 +90,7 @@ public class HospitalHomeFragment extends Fragment {
                     currUser = task.getResult().getValue(Hospital.class);
                     email.setText(currUser.getEmail());
                     name.setText(currUser.getName());
-                    address.setText(currUser.getAddress(getActivity()));
+                    address.setText(currUser.getAddress());
                 }
             }
         });
