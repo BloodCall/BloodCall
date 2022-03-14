@@ -40,7 +40,7 @@
     <!-- No Internet Screen !-->
     <string name="noInternet">No internet connection!</string>
     <string name="noInternetSubtext">This app requires an internet connection.\nPlease connect to a network</string>
-    <string name="textViewWithSwitch">Recieve emergency notifications</string>
+    <string name="textViewWithSwitch">Receive emergency notifications</string>
 
     <!-- Main Activity Strings !-->
     <string name="side_bar_home">Home</string>
