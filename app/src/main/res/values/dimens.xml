@@ -5,4 +5,5 @@
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="standard_55">60dp</dimen>
     <dimen name="standard_105">120dp</dimen>
+    <dimen name="content_margin_medium" />
 </resources>

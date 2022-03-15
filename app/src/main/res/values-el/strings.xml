@@ -61,4 +61,8 @@
     <string name="create_hospital_account">ΔΗΜΙΟΥΡΓΙΑ ΛΟΓΑΡΙΑΣΜΟΥ ΝΟΣΟΚΟΜΕΙΟΥ</string>
     <string name="curr_lvl_text">Το επίπεδο μου: %1$d</string>
     <string name="new_lvl_xp">%1$d Πόντοι απομένουν για το επίπεδο %2$d</string>
+    <string name="qrText">Εισάγετε έναν κωδικό QR στο πλαίσιο.</string>
+    <string name="qr_succ">Ο χρήστης έγινε check in με επιτυχία!</string>
+    <string name="qr_fail_1">Άκυρος κωδικός QR!</string>
+    <string name="qr_fail_2">Δεν ήταν δυνατό το check in του χρήστη.</string>
 </resources>

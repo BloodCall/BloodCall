@@ -98,5 +98,9 @@
     <string name="create_hospital_account">CREATE HOSPITAL ACCOUNT</string>
     <string name="curr_lvl_text">My Level: %1$d</string>
     <string name="new_lvl_xp">%1$d XP remaining for level %2$d</string>
+    <string name="qrText">Please insert a QR code into the frame.</string>
+    <string name="qr_succ">User checked in successfully!</string>
+    <string name="qr_fail_1">Invalid QR code!</string>
+    <string name="qr_fail_2">Could not check in user!</string>
 
 </resources>

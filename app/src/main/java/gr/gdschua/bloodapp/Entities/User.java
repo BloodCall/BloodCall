@@ -3,12 +3,14 @@ package gr.gdschua.bloodapp.Entities;
 import com.google.firebase.database.Exclude;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class User {
     private String fullName, email, bloodType, id, notifications;
     private int xp;
+    public ArrayList<CheckIn> checkIns= new ArrayList<>();
 
     public User(String fullName, String email, String bloodType) {
         this.fullName = fullName;

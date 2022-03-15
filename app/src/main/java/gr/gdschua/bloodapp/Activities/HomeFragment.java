@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.zxing.WriterException;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +41,7 @@ import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.LevelHandler;
+import gr.gdschua.bloodapp.Utils.QrEncoder;
 
 public class HomeFragment extends Fragment {
 
@@ -88,10 +91,12 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         bloodTypeTV = view.findViewById(R.id.bloodTypeTextView);
+        QrEncoder qrEncoder= new QrEncoder(requireContext());
         fullNameTextView = view.findViewById(R.id.hosp_fullNameTextView);
         ProgressBar progressBar= view.findViewById(R.id.lvlProgressBar);
         TextView lvlTV= view.findViewById(R.id.lvlTV);
         TextView nextLvlTV= view.findViewById(R.id.nextLvlTV);
+        ImageView qrIV =  view.findViewById(R.id.qrImageView);
         pushN = view.findViewById(R.id.pushNotifSwitch);
         //Kitsaros gia to email.
         emailTextView = view.findViewById(R.id.hosp_emailTextView);
@@ -107,6 +112,11 @@ public class HomeFragment extends Fragment {
                             handleBgLoc();
                         }
                         FirebaseMessaging.getInstance().subscribeToTopic(currUser.getTopic());
+                    }
+                    try {
+                        qrIV.setImageBitmap(qrEncoder.encodeAsBitmap("BLCL:"+currUser.getId()));
+                    } catch (WriterException e) {
+                        e.printStackTrace();
                     }
                     bloodTypeTV.setText(currUser.getBloodType());
                     fullNameTextView.setText(currUser.getFullName());
