@@ -23,7 +23,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewMarkerTitle" />
 
     <Button
-        android:id="@+id/btnMakerInfo"
+        android:id="@+id/shareEventButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -45,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMakerInfo"
+        app:layout_constraintTop_toBottomOf="@+id/shareEventButton"
         app:layout_constraintVertical_bias="0.71000004" />
 
     <TextView

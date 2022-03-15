@@ -13,8 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true">
-
-
         <activity
             android:name=".Activities.NotificationInfoActivity"
             android:exported="false"
@@ -46,8 +44,8 @@
         <activity
             android:name=".Activities.NoInternetActivity"
             android:exported="false"
-            android:theme="@style/MainTheme"
-            android:launchMode="singleInstance" />
+            android:launchMode="singleInstance"
+            android:theme="@style/MainTheme" />
         <activity
             android:name=".Activities.HospitalActivities.HospitalSignUpActivity"
             android:exported="false"
@@ -74,10 +72,10 @@
             android:theme="@style/LauncherTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
