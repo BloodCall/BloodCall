@@ -3,18 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/borders_home_fragment.xml" value="0.314" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/custom_fullname_icon.xml" value="0.314" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/hospital_ic_menu.xml" value="0.314" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/ic_fullname_focused.xml" value="0.314" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/rounded.xml" value="0.314" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_hospital_qr_scanner.xml" value="0.2552372808892689" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_signup.xml" value="0.2604166666666667" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_history.xml" value="0.25181701581872595" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_home.xml" value="0.33" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_hospital_add_alert.xml" value="0.18540344514959203" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_hospital_qr_scan.xml" value="0.2552372808892689" />
-        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_scan_result.xml" value="0.2552372808892689" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_home.xml" value="0.5" />
       </map>
     </option>
   </component>
