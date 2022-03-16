@@ -10,8 +10,6 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 
-import java.util.Objects;
-
 import gr.gdschua.bloodapp.R;
 
 public class QrEncoder {
