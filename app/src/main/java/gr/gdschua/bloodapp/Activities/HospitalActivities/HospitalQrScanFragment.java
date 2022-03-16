@@ -163,6 +163,7 @@ public class HospitalQrScanFragment extends Fragment {
                                             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                                             Date date = new Date();
                                             currUser.checkIns.add(new CheckIn(formatter.format(date),currHospital.getName()));
+                                            currUser.setXp(currUser.getXp()+300);
                                             daoUsers.updateUser(currUser).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {

@@ -68,15 +68,6 @@ public class ScanResultFragment extends Fragment {
             ResultIV.setColorFilter(ContextCompat.getColor(getContext(), R.color.light_green), android.graphics.PorterDuff.Mode.SRC_IN);
             ResultIV.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_check_circle_outline_24, getContext().getTheme()));
             ResultTV.setText(getString(R.string.qr_succ));
-            daoUsers.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if(task.isSuccessful()){
-                        currUser = task.getResult().getValue(User.class);
-                        currUser.setXp(currUser.getXp()+300);
-                    }
-                }
-            });
         }
         else if(mParam1.equals("false1")){
             ResultIV.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_remove_circle_outline_24, getContext().getTheme()));
