@@ -59,6 +59,7 @@ public class MapsFragment extends Fragment {
             Bundle bundle = new Bundle();
             assert event != null;
             bundle.putString("name", event.getName());
+            bundle.putString("date",event.getDate());
             bundle.putString("address", event.getAddress(getActivity()));
             daoHospitals.getUser(event.getOwner()).addOnCompleteListener(task -> {
                 Hospital ownerHosp = task.getResult().getValue(Hospital.class);
