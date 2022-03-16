@@ -42,7 +42,7 @@
     <string name="textViewMarkerCenter">You just gain one Cookhat for Salad  cooking. Share you achievement with  your friends.</string>
     <string name="textViewCongratsMessage">Congrats Julia!!!</string>
     <string name="btnMakerInfo">Διαμοιρασμός</string>
-    <string name="btnMakerSkip">Παράλειψη</string>
+    <string name="btnMakerSkip">Κλείσιμο</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="add_new_alert">Προσθήκη νέας ειδοποίησης</string>
     <string name="new_alert_text">Τι τύπος αίματος απαιτείται;</string>

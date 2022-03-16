@@ -59,7 +59,7 @@
     <string name="textViewMarkerCenter">You just gain one "Cookhat" for Salad \ncooking. Share you achievement with \nyour friends.</string>
     <string name="textViewCongratsMessage">Congrats Julia!!!</string>
     <string name="btnMakerInfo">Share</string>
-    <string name="btnMakerSkip">Skip</string>
+    <string name="btnMakerSkip">Close</string>
 
     <string-array name="blood_types">
         <item>A</item>
