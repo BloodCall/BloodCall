@@ -11,13 +11,23 @@ public class User {
     private String fullName, email, bloodType, id, notifications;
     private int xp;
     public ArrayList<CheckIn> checkIns= new ArrayList<>();
+    public Boolean notifFirstTime;
 
     public User(String fullName, String email, String bloodType) {
         this.fullName = fullName;
         this.email = email;
         this.bloodType = bloodType;
+        notifFirstTime=false;
     }
 
+
+    public Boolean getNotifFirstTime() {
+        return notifFirstTime;
+    }
+
+    public void setNotifFirstTime(Boolean notifFirstTime) {
+        this.notifFirstTime = notifFirstTime;
+    }
 
     public int getXp() {
         return xp;

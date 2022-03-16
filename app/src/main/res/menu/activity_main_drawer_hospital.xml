@@ -14,7 +14,7 @@
 
         <item
             android:id="@+id/nav_hosp_qr_scanner"
-            android:title="Check in" />
+            android:title="@string/check_in" />
 
     </group>
     <item

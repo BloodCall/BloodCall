@@ -102,4 +102,14 @@
     <string name="qr_succ">User checked in successfully!</string>
     <string name="qr_fail_1">Invalid QR code!</string>
     <string name="qr_fail_2">Could not check in user!</string>
+    <string name="check_in">Check in</string>
+    <string name="my_history">Blood Donation History</string>
+    <string name="navigate">Navigate</string>
+    <string name="close">CLOSE</string>
+    <string name="qr_text">This is your QR code. Show this to hospital staff in order to be checked in</string>
+    <string name="bg_loc_title">Background Location Access is needed.</string>
+    <string name="bg_loc_text">In order for the emergency notifications to work, you need to provide background notification permission. Do that now?</string>
+    <string name="notif_first_time">Thank you for turning on push notifications! You have been awarded 10 XP!</string>
+    <string name="event_added">Event Added!</string>
+    <string name="alert_added">Alert Created!</string>
 </resources>

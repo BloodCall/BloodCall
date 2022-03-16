@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -24,6 +25,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -70,6 +72,12 @@ public class HomeFragment extends Fragment {
         reqResult=result;
         pushN.setChecked(reqResult);
         currUser.setNotificationsB(reqResult);
+        if(!currUser.notifFirstTime){
+            currUser.setXp(currUser.getXp()+10);
+            currUser.notifFirstTime=true;
+            Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.notif_first_time, Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
         Udao.updateUser(currUser);
     });
     final ActivityResultLauncher<String> locationRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
@@ -80,6 +88,12 @@ public class HomeFragment extends Fragment {
             reqResult = result;
             pushN.setChecked(reqResult);
             currUser.setNotificationsB(reqResult);
+            if(!currUser.notifFirstTime){
+                currUser.setXp(currUser.getXp()+10);
+                currUser.notifFirstTime=true;
+                Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.notif_first_time, Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
             Udao.updateUser(currUser);
         }
     });
@@ -177,17 +191,17 @@ public class HomeFragment extends Fragment {
     }
 
     private void handleBgLoc(){
-        if(shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION) || shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION)){
+        if(shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION)){
             new AlertDialog.Builder(requireContext(), R.style.CustomDialogTheme)
-                    .setTitle("Background Location Access is needed.")
-                    .setMessage("In order for the emergency notifications to work, you need to provide background notification permission. Do that now?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    .setTitle(R.string.bg_loc_title)
+                    .setMessage(R.string.bg_loc_text)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             locationRequest.launch(Manifest.permission.ACCESS_FINE_LOCATION);
                         }
                     })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             pushN.setChecked(false);

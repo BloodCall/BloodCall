@@ -81,7 +81,7 @@ public class HospitalAddAlertFragment extends Fragment {
                 daoAlerts.insertAlert(alert).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), "Alert Added!", Snackbar.LENGTH_LONG);
+                        Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.alert_added, Snackbar.LENGTH_LONG);
                         requireActivity().onBackPressed();
                         snackbar.show();
                     }

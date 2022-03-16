@@ -65,4 +65,14 @@
     <string name="qr_succ">Ο χρήστης έγινε check in με επιτυχία!</string>
     <string name="qr_fail_1">Άκυρος κωδικός QR!</string>
     <string name="qr_fail_2">Δεν ήταν δυνατό το check in του χρήστη.</string>
+    <string name="check_in">Check in</string>
+    <string name="my_history">Ιστορικό Αιμοδοσίας</string>
+    <string name="navigate">Πλοήγηση</string>
+    <string name="close">ΚΛΕΙΣΙΜΟ</string>
+    <string name="qr_text">Αυτός είναι ο κωδικός QR σας. Δείξτε τον στο προσωπικό του νοσοκομείο για να σας κάνουν check in.</string>
+    <string name="bg_loc_title">Χρειάζεται πρόσβαση στην τοποθεσία στο παρασκήνιο</string>
+    <string name="bg_loc_text">Προκειμένου να λειτουργήσουν οι επείγουσες ειδοποιήσεις, χρειάζεται να εκχωρήσετε το δικαίωμα για πρόσβαση στην τοποθεσία σας στο παρασκήνιο. Θέλετε να το κάνετε τώρα;</string>
+    <string name="notif_first_time">Ευχαριστούμε που ενεργοποιήσατε τις ειδοποιήσεις. Κερδίσατε 10 πόντους.</string>
+    <string name="event_added">Το γεγονός προστέθηκε!</string>
+    <string name="alert_added">Η ειδοποίηση δημιουργήθηκε!</string>
 </resources>

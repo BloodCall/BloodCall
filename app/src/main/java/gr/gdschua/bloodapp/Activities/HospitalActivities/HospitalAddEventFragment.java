@@ -107,7 +107,7 @@ public class HospitalAddEventFragment extends Fragment {
                     daoEvents.insertEvent(event).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), "Event Added!", Snackbar.LENGTH_LONG);
+                            Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.event_added, Snackbar.LENGTH_LONG);
                             requireActivity().onBackPressed();
                             snackbar.show();
                         }
