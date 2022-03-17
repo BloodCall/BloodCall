@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/share_event_background.xml" value="0.2425" />
+        <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/share_event_background2.xml" value="0.2425" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_launcher.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_main_user.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_no_internet.xml" value="0.36666666666666664" />
