@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="140dp"
-        android:fontFamily="@font/adamina"
+        android:fontFamily="@font/barlow_medium"
         android:text="Check out this event being hosted right now by"
         android:textAlignment="center"
         android:textColor="@color/browser_actions_bg_grey"
@@ -31,10 +31,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="100dp"
-            android:fontFamily="@font/adamina"
+            android:fontFamily="@font/barlow_medium"
             android:text="at"
             android:textColor="@android:color/black"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/organizerShareAddress"
@@ -42,9 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="150dp"
-            android:fontFamily="@font/adamina"
+            android:fontFamily="@font/barlow_medium"
             android:textColor="@android:color/black"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/organizerShareName"
@@ -52,10 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
-            android:fontFamily="@font/adamina"
-            android:textAlignment="center"
+            android:fontFamily="@font/barlow_medium"
             android:textColor="@android:color/black"
-            android:textSize="14sp" />
+            android:textSize="18sp" />
     </FrameLayout>
 
     <ImageView
@@ -74,7 +73,7 @@
         android:layout_gravity="bottom|center"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="35dp"
-        android:fontFamily="@font/adamina"
+        android:fontFamily="@font/barlow_medium"
         android:text="BloodCall"
         android:textColor="@color/browser_actions_bg_grey"
         android:textSize="16sp" />
@@ -85,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
-        android:fontFamily="@font/adamina"
+        android:fontFamily="@font/barlow_medium"
         android:text="Your Blood is Needed!"
         android:textAlignment="center"
         android:textColor="@color/browser_actions_bg_grey"
