@@ -10,29 +10,29 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import gr.gdschua.bloodapp.Entities.Event;
 
 public class DAOEvents {
-    Map<String,Object> eventMap = new HashMap<>();
+    Map<String, Object> eventMap = new HashMap<>();
 
 
-    public DAOEvents(){
+    public DAOEvents() {
         populateEventMap();
     }
 
-    public Task<Void> insertEvent(Event newEvent){
+    public static Event mapToEvent(Map singleEvent) {
+        return new Event(singleEvent.get("name").toString(), singleEvent.get("date").toString(), singleEvent.get("owner").toString(), Double.parseDouble(singleEvent.get("lat").toString()), Double.parseDouble(singleEvent.get("lon").toString()));
+    }
+
+    public Task<Void> insertEvent(Event newEvent) {
 
         return FirebaseDatabase.getInstance().getReference("Events")
-                .child(UUID.randomUUID().toString())
+                .child(newEvent.getId())
                 .setValue(newEvent);
     }
 
-
-
-
-    private void populateEventMap(){
+    private void populateEventMap() {
 
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Events");
@@ -42,7 +42,7 @@ public class DAOEvents {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         //Get map of users in datasnapshot
-                        if(dataSnapshot.exists()) {
+                        if (dataSnapshot.exists()) {
                             eventMap.putAll((Map<String, Object>) dataSnapshot.getValue());
                         }
 
@@ -58,22 +58,17 @@ public class DAOEvents {
 
     //Maybe make static
     //Maybe in the future add a parameter to limit how many hospitals it should return or the general location?
-    public ArrayList<Event> getAllEvents(){
+    public ArrayList<Event> getAllEvents() {
 
 
         ArrayList<Event> allEventsList = new ArrayList<>();
         //iterate through each user, ignoring their UID
-        for (Map.Entry<String, Object> entry : eventMap.entrySet()){
+        for (Map.Entry<String, Object> entry : eventMap.entrySet()) {
 
-            //Get user map
-            Map  singleEvent =  (Map)entry.getValue();
-            //Get phone field and append to list
+            Map singleEvent = (Map) entry.getValue();
             allEventsList.add(mapToEvent(singleEvent));
         }
         return allEventsList;
-    }
-    public static Event mapToEvent(Map singleEvent){
-        return new Event(singleEvent.get("name").toString(),singleEvent.get("date").toString(),singleEvent.get("owner").toString(),Double.parseDouble(singleEvent.get("lat").toString()),Double.parseDouble(singleEvent.get("lon").toString()));
     }
 
 

@@ -6,104 +6,129 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/ice_white"
     android:textAlignment="center"
     tools:context="Activities.LauncherActivity">
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="331dp"
-        android:layout_height="222dp"
-        android:src="@drawable/ic_logo"
-        android:tint="@color/changed_red"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.115" />
-
-
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="138dp"
-        android:layout_height="39dp"
-        android:background="@drawable/buttons_curved"
-        android:backgroundTint="@color/changed_red"
-        android:text="@string/login_button"
-        android:textColor="@color/ice_white"
-        app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.179"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8"
-        tools:ignore="TouchTargetSizeCheck" />
-
-    <Button
-        android:id="@+id/signup_button"
-        android:layout_width="138dp"
-        android:layout_height="39dp"
-        android:background="@drawable/buttons_curved"
-        android:backgroundTint="@color/changed_red"
-        android:text="@string/signup_button"
-        android:textColor="@color/ice_white"
-        app:backgroundTint="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.805"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.8"
-        tools:ignore="TouchTargetSizeCheck" />
-
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:foregroundGravity="center"
+        android:gravity="center"
         android:text="@string/SecondTextViewLaunch"
         android:textAlignment="center"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.721" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline3" />
+
+    <LinearLayout
+        android:layout_width="411dp"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:maxHeight="14dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/hospital_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/signup_button"
+            android:layout_width="138dp"
+            android:layout_height="match_parent"
+            android:text="@string/signup_button"
+            android:textAlignment="center" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="138dp"
+            android:layout_height="match_parent"
+            android:text="@string/login_button"
+            android:textAlignment="center" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/hospital_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:padding="15dp"
         android:text="@string/ThirdTextViewLaunch"
         android:textAlignment="center"
-        android:textColor="@color/black"
+
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_logo"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.883" />
+        app:layout_constraintVertical_bias="1.0"
+        app:tint="?android:colorPrimary" />
 
     <TextView
         android:id="@id/FirstTextViewLaunch"
-        android:layout_width="191dp"
-        android:layout_height="63dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="@string/FirstTextViewLaunch"
         android:textAlignment="center"
-        android:textColor="@color/black"
+
         android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.621"
-        android:text="@string/FirstTextViewLaunch" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.8" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

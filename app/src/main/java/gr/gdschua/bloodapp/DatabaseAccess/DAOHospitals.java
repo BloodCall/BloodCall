@@ -16,32 +16,34 @@ import java.util.Map;
 import gr.gdschua.bloodapp.Entities.Hospital;
 
 public class DAOHospitals {
-    Map<String,Object> hospitalsMap = new HashMap<>();
+    Map<String, Object> hospitalsMap = new HashMap<>();
 
     public DAOHospitals() {
         populateHospitalMap();
     }
 
-    public Task<Void> insertUser(Hospital newUser){
+    public static Hospital mapToHospital(Map singleHospital) {
+        return new Hospital(singleHospital.get("name").toString(), singleHospital.get("email").toString(), (double) singleHospital.get("lat"), (double) singleHospital.get("lon"), singleHospital.get("address").toString());
+    }
+
+    public Task<Void> insertUser(Hospital newUser) {
+
+        newUser.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         return FirebaseDatabase.getInstance().getReference("Hospitals")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(newUser.getId())
                 .setValue(newUser);
     }
 
-
-
-    public Task<DataSnapshot> getUser(){
+    public Task<DataSnapshot> getUser() {
         return FirebaseDatabase.getInstance().getReference().child("Hospitals").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).get();
     }
 
-    public Task<DataSnapshot> getUser(String ID){
+    public Task<DataSnapshot> getUser(String ID) {
         return FirebaseDatabase.getInstance().getReference().child("Hospitals").child(ID).get();
     }
 
-
-
-    private void populateHospitalMap(){
+    private void populateHospitalMap() {
 
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Hospitals");
@@ -53,9 +55,8 @@ public class DAOHospitals {
                         //Get map of users in datasnapshot
 
 
-
                         //hospitalsMap = (Map<String, Object>) dataSnapshot.getValue();
-                        if(dataSnapshot.exists()) {
+                        if (dataSnapshot.exists()) {
                             hospitalsMap.putAll((Map<String, Object>) dataSnapshot.getValue());
                         }
 
@@ -71,22 +72,19 @@ public class DAOHospitals {
 
     //Maybe make static
     //Maybe in the future add a parameter to limit how many hospitals it should return or the general location?
-    public ArrayList<Hospital> getAllHospitals(){
+    public ArrayList<Hospital> getAllHospitals() {
 
 
         ArrayList<Hospital> allHospitalsList = new ArrayList<>();
         //iterate through each user, ignoring their UID
-        for (Map.Entry<String, Object> entry : hospitalsMap.entrySet()){
+        for (Map.Entry<String, Object> entry : hospitalsMap.entrySet()) {
 
             //Get user map
-            Map  singleHospital =  (Map)entry.getValue();
+            Map singleHospital = (Map) entry.getValue();
             //Get phone field and append to list
             allHospitalsList.add(mapToHospital(singleHospital));
         }
         return allHospitalsList;
-    }
-    public static Hospital mapToHospital(Map singleHospital){
-        return new Hospital(singleHospital.get("name").toString(),singleHospital.get("email").toString(),(double)singleHospital.get("lat"),(double)singleHospital.get("lon"));
     }
 
 }

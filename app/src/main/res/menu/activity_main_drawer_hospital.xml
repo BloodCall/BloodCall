@@ -7,17 +7,15 @@
         <item
             android:id="@+id/nav_hospital_home"
             android:title="@string/side_bar_home" />
-        <item
-            android:id="@+id/nav_hosp_addEvent"
-            android:title="@string/side_bar_add_event" />
+
         <item
             android:id="@+id/nav_hosp_map"
             android:title="@string/side_bar_map" />
 
         <item
-            android:id="@+id/nav_hosp_alert"
-            android:title="@string/add_new_alert"
-            />
+            android:id="@+id/nav_hosp_qr_scanner"
+            android:title="@string/check_in" />
+
     </group>
     <item
         android:id="@+id/sign_out"

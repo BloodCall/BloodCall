@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
     <fragment
@@ -15,5 +14,10 @@
         android:name="gr.gdschua.bloodapp.Activities.MapsFragment"
         android:label="@string/side_bar_map"
         tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/nav_history"
+        android:name="gr.gdschua.bloodapp.Activities.HistoryFragment"
+        android:label="@string/my_history"
+        tools:layout="@layout/fragment_history" />
 
 </navigation>

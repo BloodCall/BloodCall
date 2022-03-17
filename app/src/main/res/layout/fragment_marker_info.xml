@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rounding_borders_markerinfo"
+    android:theme="@style/LauncherTheme"
     tools:context=".Activities.MarkerInfoFragment">
 
     <TextView
@@ -15,40 +15,37 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="92dp"
         android:layout_marginEnd="35dp"
-        android:text="@string/textViewMarkerCenter"
         android:textAlignment="center"
-        android:textColor="@color/changed_red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewMarkerTitle" />
 
     <Button
-        android:id="@+id/btnMakerInfo"
+        android:id="@+id/shareEventButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:background="@drawable/buttons_curved"
         android:text="@string/btnMakerInfo"
-        android:textColor="@color/white"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewMarkerCenter" />
 
     <Button
-        android:id="@+id/btnMakerSkip"
+        android:id="@+id/closeDialogButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@android:color/white"
         android:stateListAnimator="@null"
         android:text="@string/btnMakerSkip"
-        android:textColor="@color/changed_red"
+        android:textColor="?android:colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMakerInfo"
+        app:layout_constraintTop_toBottomOf="@+id/shareEventButton"
         app:layout_constraintVertical_bias="0.71000004" />
 
     <TextView
@@ -58,9 +55,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginTop="216dp"
         android:layout_marginEnd="35dp"
-        android:text="@string/textViewCongratsMessage"
         android:textAlignment="center"
-        android:textColor="@color/changed_red"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +67,7 @@
         android:id="@+id/imageView2"
         android:layout_width="392dp"
         android:layout_height="164dp"
-        android:background="@drawable/welcome_rectangle"
+        android:src="@drawable/hospital_ic_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
