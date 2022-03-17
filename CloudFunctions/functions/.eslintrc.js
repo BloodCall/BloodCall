@@ -5,11 +5,12 @@ module.exports = {
     node: true,
   },
   extends: [
-    "eslint:recommended",
-    "google",
+    'eslint:recommended',
+    'google',
   ],
   rules: {
-    "quotes": ["error", "double"],
-    "linebreak-style": 0,
+    'quotes': ['error', 'single'],
+    'linebreak-style': 0,
+    'max-len': [2, 250, 4, {'ignoreUrls': true}],
   },
 };
