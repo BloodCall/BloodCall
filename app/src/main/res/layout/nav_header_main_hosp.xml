@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="246dp"
-        android:layout_height="142dp"
+        android:layout_width="227dp"
+        android:layout_height="131dp"
         android:layout_gravity="center_vertical"
         app:srcCompat="@drawable/hospital_ic_menu" />
 </LinearLayout>
