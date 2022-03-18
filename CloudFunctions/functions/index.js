@@ -5,6 +5,20 @@ let hospital;
 let topic;
 let messageCondition;
 admin.initializeApp();
+
+exports.leaderboard = functions.https.onRequest((request, response) => {
+  const users = [];
+  admin.database().ref('/Users/')
+      .once('value')
+      .then((results) => {
+        results.forEach((snapshot) => {
+          users.push(snapshot.val());
+        });
+        users.sort((a, b) => (a.xp < b.xp) ? 1 : -1);
+        response.send(users);
+      });
+});
+
 exports.alertAdded = functions.database.ref('/Alerts/{alert_id}')
     .onCreate((snapshot, context) => {
       const alertData=snapshot.val();

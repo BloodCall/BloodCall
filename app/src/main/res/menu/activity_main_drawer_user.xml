@@ -12,6 +12,10 @@
             android:title="@string/side_bar_map" />
 
         <item
+            android:id="@+id/nav_leaderboard"
+            android:title="@string/leaderboard" />
+
+        <item
             android:id="@+id/nav_history"
             android:title="@string/my_history" />
     </group>

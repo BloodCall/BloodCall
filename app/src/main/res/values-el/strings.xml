@@ -80,4 +80,5 @@
     <string name="icons_disc">Τα εικονίδια παρέχονται απο το logomakr.com και τις προεπιλεγμένες πηγές του Android.</string>
     <string name="enable_location_title">Παρακαλώ ενεργοποιήστε την λειτουργία τοποθεσίας στην συσκευή σας.</string>
     <string name="enable_location_text">Αυτή η εφαρμογή απαιτεί να είναι ενεργοποιημένη η ρύθμιση τοποθεσίας στο τηλέφωνό σας για να εμφανιστεί ο χάρτης και να σας στείλει γεωγραφικά φιλτραρισμένες ειδοποιήσεις. Ενεργοποιήστε τη για να συνεχίσετε</string>
+    <string name="leaderboard" translatable="false">Κατάταξη</string>
 </resources>
