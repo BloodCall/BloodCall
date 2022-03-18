@@ -162,7 +162,6 @@ public class SignupActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             startActivity(goToHome);
-                                            LauncherActivity.actv.finish();
                                             finish();
                                         }
                                     });

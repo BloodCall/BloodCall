@@ -1,8 +1,12 @@
 package gr.gdschua.bloodapp.Activities;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.IntentSender;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,7 +14,9 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -19,6 +25,11 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,6 +46,10 @@ import gr.gdschua.bloodapp.databinding.ActivityMainHospitalBinding;
 import gr.gdschua.bloodapp.databinding.ActivityMainUserBinding;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int REQUEST_CODE_CHECK_SETTINGS = 500;
+    private static final long LOCATION_UPDATE_INTERVAL = 1000;
+    private static final long LOCATION_UPDATE_FASTEST_INTERVAL = 500;
 
     BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
     DAOUsers Udao = new DAOUsers();
@@ -64,11 +79,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         registerReceiver(broadcastReceiver, filter);
+        enableLocationSettings();
     }
 
     @Override
@@ -193,5 +207,51 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-}
+    protected void enableLocationSettings() {
+        LocationRequest locationRequest = LocationRequest.create()
+                .setInterval(LOCATION_UPDATE_INTERVAL)
+                .setFastestInterval(LOCATION_UPDATE_FASTEST_INTERVAL)
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest);
+
+        LocationServices
+                .getSettingsClient(this)
+                .checkLocationSettings(builder.build())
+                .addOnSuccessListener(this, (LocationSettingsResponse response) -> {
+                    // startUpdatingLocation(...);
+                })
+                .addOnFailureListener(this, ex -> {
+                    if (ex instanceof ResolvableApiException) {
+                        // Location settings are NOT satisfied,  but this can be fixed  by showing the user a dialog.
+                        try {
+                            // Show the dialog by calling startResolutionForResult(),  and check the result in onActivityResult().
+                            ResolvableApiException resolvable = (ResolvableApiException) ex;
+                            resolvable.startResolutionForResult(MainActivity.this, REQUEST_CODE_CHECK_SETTINGS);
+                        } catch (IntentSender.SendIntentException sendEx) {
+                            // Ignore the error.
+                        }
+                    }
+                });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if (REQUEST_CODE_CHECK_SETTINGS == requestCode) {
+            if(Activity.RESULT_OK != resultCode){
+                new AlertDialog.Builder(this, R.style.CustomDialogTheme)
+                        .setTitle(R.string.enable_location_title)
+                        .setMessage(R.string.enable_location_text)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                enableLocationSettings();
+                            }
+                        }).show().setCancelable(false);
+            }
+            }
+        }
+    }
 
