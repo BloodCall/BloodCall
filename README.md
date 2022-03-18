@@ -17,7 +17,7 @@ For more information, visit https://www.gnu.org/licenses/gpl-3.0 or see included
     - Cloud Messaging
     - Cloud Functions
 
-## Application Features
+## :cherry_blossom: Application Features :cherry_blossom:
     - [x] Access map with hospitals and blood donation events in real time!
     - [x] Get alerted for emergency blood needed!
     - [x] Easy to use QR code for checking in!
