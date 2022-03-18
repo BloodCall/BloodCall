@@ -60,7 +60,7 @@ exports.alertAdded = functions.database.ref('/Alerts/{alert_id}')
             console.log('The read failed: ' + errorObject.name);
           });
     });
-exports.scheduledFunctionCrontab = functions.pubsub.schedule('0 12 * * *')
+exports.scheduledEventDateCheck = functions.pubsub.schedule('0 12 * * *')
     .timeZone('Greece/Athens')
     .onRun((context) => {
       console.log('Checking for expired events at 12:00 AM Greek time');
