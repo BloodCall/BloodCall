@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_weight="0.5"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/barlow_medium"
         android:maxLines="3"
         android:text="@string/create_hospital_account"
 
@@ -24,10 +24,10 @@
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintHorizontal_bias="0.396"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.396" />
+        app:layout_constraintVertical_bias="0.638" />
 
     <EditText
         android:id="@+id/hospSignupName"
@@ -122,7 +122,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hospSignupPass" />
+        app:layout_constraintTop_toBottomOf="@+id/hospSignupPass"
+        app:layout_constraintVertical_bias="0.366" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
