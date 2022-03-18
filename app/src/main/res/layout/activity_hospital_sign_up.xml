@@ -32,8 +32,8 @@
     <EditText
         android:id="@+id/hospSignupName"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-        android:layout_width="294dp"
-        android:layout_height="48dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/borders_making"
         android:drawableStart="@drawable/custom_fullname_icon"
         android:drawablePadding="8dp"
@@ -41,7 +41,6 @@
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
         android:paddingStart="8dp"
-        android:paddingEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -8,13 +8,13 @@
     android:background="@drawable/share_event_background">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/eventIntroTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="140dp"
         android:fontFamily="@font/barlow_medium"
-        android:text="Check out this event being hosted right now by"
+        android:text="@string/share_check_event_out"
         android:textAlignment="center"
         android:textColor="@color/browser_actions_bg_grey"
         android:textSize="14sp" />
@@ -32,7 +32,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="100dp"
             android:fontFamily="@font/barlow_medium"
-            android:text="at"
+            android:text="@string/share_at"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
@@ -47,7 +47,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/organizerShareName"
+            android:id="@+id/eventShareName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -74,7 +74,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="35dp"
         android:fontFamily="@font/barlow_medium"
-        android:text="BloodCall"
+        android:text="@string/app_name"
         android:textColor="@color/browser_actions_bg_grey"
         android:textSize="16sp" />
 
@@ -85,11 +85,20 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="80dp"
         android:fontFamily="@font/barlow_medium"
-        android:text="Your Blood is Needed!"
+        android:text="@string/notif_title"
         android:textAlignment="center"
         android:textColor="@color/browser_actions_bg_grey"
         android:textSize="30sp"
         android:typeface="normal" />
+
+    <TextView
+        android:id="@+id/organizerTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="180dp"
+        android:fontFamily="@font/barlow_medium"
+        android:gravity="center" />
 
 
 </FrameLayout>

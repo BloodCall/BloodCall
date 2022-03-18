@@ -36,17 +36,17 @@
     <Button
         android:id="@+id/closeDialogButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:backgroundTint="@android:color/white"
         android:stateListAnimator="@null"
         android:text="@string/btnMakerSkip"
         android:textColor="?android:colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shareEventButton"
-        app:layout_constraintVertical_bias="0.71000004" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <TextView
         android:id="@+id/textViewMarkerTitle"
@@ -65,7 +65,7 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="392dp"
+        android:layout_width="0dp"
         android:layout_height="164dp"
         android:src="@drawable/hospital_ic_menu"
         app:layout_constraintEnd_toEndOf="parent"

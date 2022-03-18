@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">BloodCall</string>
+    <string name="app_name" translatable="false">BloodCall</string>
 
     <!-- LauncherActivity Strings !-->
     <string name="FirstTextViewLaunch">DONATE BLOOD,\nSAVE A LIFE</string>
@@ -56,8 +56,6 @@
     <string name="res_btn">Reset</string>
 
     <!--Marker Info Fragment Strings !-->
-    <string name="textViewMarkerCenter">You just gain one "Cookhat" for Salad \ncooking. Share you achievement with \nyour friends.</string>
-    <string name="textViewCongratsMessage">Congrats Julia!!!</string>
     <string name="btnMakerInfo">Share</string>
     <string name="btnMakerSkip">Close</string>
 
@@ -72,14 +70,14 @@
         <item>+</item>
         <item>-</item>
     </string-array>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main" translatable="false">MainActivity</string>
 
 
     <!--to toggle the open close button
         of the navigation drawer-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="add_new_alert">Add New Alert</string>
-    <string name="new_alert_text">What Kind of Blood Type is required?</string>
+    <string name="new_alert_text">What kind of blood does the patient have? (Blood type compatibility is calculated automatically)</string>
     <string name="create_alert_btn">Create Alert</string>
     <string name="hospital_mode">HOSPITAL MODE</string>
 
@@ -112,4 +110,12 @@
     <string name="notif_first_time">Thank you for turning on push notifications! You have been awarded 10 XP!</string>
     <string name="event_added">Event Added!</string>
     <string name="alert_added">Alert Created!</string>
+    <string name="share_check_event_out">Check out this event being hosted right now by:</string>
+    <string name="share_at">at</string>
+    <string name="_2021_2022" translatable="false">2021-2022</string>
+    <string name="names" translatable="false"><a href="https://github.com/thanbimp">Athanasios Bimpas</a> \n <a href="https://github.com/kitsakisGk">Georgios Kitsakis</a> \n <a href="https://github.com/kourounisgiorgos">Georgios Kourounis</a> \n <a href="https://github.com/Bleemoose">Stefanos Togias</a></string>
+    <string name="git_link"><a href="https://github.com/BloodCall">GitHub Project Page</a></string>
+    <string name="licence_text">Distributed under GPL v3. A copy of the licence can be found <a href="https://www.gnu.org/licenses/gpl-3.0.html">here</a>. For library licences see \"Open Source Licences\" option.</string>
+    <string name="about">About</string>
+    <string name="icons_disc">Icons from logomakr.com and Android default resources.</string>
 </resources>

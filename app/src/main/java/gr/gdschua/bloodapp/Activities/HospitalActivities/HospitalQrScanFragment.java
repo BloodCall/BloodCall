@@ -10,10 +10,10 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -24,7 +24,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -61,10 +60,15 @@ public class HospitalQrScanFragment extends Fragment {
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
     private SurfaceView surfaceView;
-    private static final int REQUEST_CAMERA_PERMISSION = 201;
     private ToneGenerator toneGen1;
     private TextView barcodeText;
     private String barcodeData;
+
+    ActivityResultLauncher<String> cameraRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission() , result -> {
+       if(result){
+           initialiseDetectorsAndSources();
+       }
+    });
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,7 +90,12 @@ public class HospitalQrScanFragment extends Fragment {
         toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
         surfaceView = view.findViewById(R.id.cameraSurfaceView);
         barcodeText = view.findViewById(R.id.textScanResult);
-        initialiseDetectorsAndSources();
+
+        if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            initialiseDetectorsAndSources();
+        }else {
+            cameraRequest.launch(Manifest.permission.CAMERA);
+        }
         return view;
     }
 
@@ -103,16 +112,11 @@ public class HospitalQrScanFragment extends Fragment {
                 .build();
 
         surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+            @SuppressLint("MissingPermission")
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 try {
-                    if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                         cameraSource.start(surfaceView.getHolder());
-                    } else {
-                        ActivityCompat.requestPermissions(requireActivity(), new
-                                String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-                    }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

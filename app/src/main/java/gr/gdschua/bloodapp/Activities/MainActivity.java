@@ -86,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
             OssLicensesMenuActivity.setActivityTitle(getString(R.string.settings_toolbar));
             return true;
         }
+        if (item.getItemId() == R.id.action_about) {
+            startActivity(new Intent(this, AboutActivity.class));
+            OssLicensesMenuActivity.setActivityTitle(getString(R.string.about));
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

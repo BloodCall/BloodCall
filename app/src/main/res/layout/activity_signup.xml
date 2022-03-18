@@ -150,6 +150,7 @@
         android:layout_marginEnd="10dp"
         android:gravity="center_horizontal|center_vertical"
         android:orientation="horizontal"
+        android:weightSum="100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -159,7 +160,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.15"
+            android:layout_weight="30"
             android:gravity="center"
             android:text="@string/blood_type_description" />
 
@@ -167,7 +168,7 @@
             android:id="@+id/bloodtype_spinner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="35"
 
             android:entries="@array/blood_types"
             android:minHeight="48dp" />
@@ -176,7 +177,7 @@
             android:id="@+id/bloodtype_spinner_pos_neg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight="37"
             android:entries="@array/pos_neg"
             android:minHeight="48dp" />
     </LinearLayout>

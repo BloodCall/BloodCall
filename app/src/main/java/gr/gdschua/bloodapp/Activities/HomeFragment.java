@@ -55,6 +55,7 @@ public class HomeFragment extends Fragment {
     TextView emailTextView;
     StorageReference mStorageReference;
     User currUser;
+    Boolean showPermsDialog=true;
     de.hdodenhof.circleimageview.CircleImageView profilePicture;
     SwitchMaterial pushN;
 
@@ -70,6 +71,7 @@ public class HomeFragment extends Fragment {
 
     final ActivityResultLauncher<String> bgLocationRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result-> {
         reqResult=result;
+        showPermsDialog=!reqResult;
         pushN.setChecked(reqResult);
         currUser.setNotificationsB(reqResult);
         if(!currUser.notifFirstTime){
@@ -87,6 +89,7 @@ public class HomeFragment extends Fragment {
         else {
             reqResult = result;
             pushN.setChecked(reqResult);
+            showPermsDialog=!reqResult;
             currUser.setNotificationsB(reqResult);
             if(!currUser.notifFirstTime){
                 currUser.setXp(currUser.getXp()+10);
@@ -191,7 +194,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void handleBgLoc(){
-        if(shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION)){
+        if(shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION) && showPermsDialog){
             new AlertDialog.Builder(requireContext(), R.style.CustomDialogTheme)
                     .setTitle(R.string.bg_loc_title)
                     .setMessage(R.string.bg_loc_text)
@@ -206,6 +209,7 @@ public class HomeFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             pushN.setChecked(false);
                             dialog.dismiss();
+                            showPermsDialog=true;
                         }
                     }).show();
         }
@@ -214,5 +218,6 @@ public class HomeFragment extends Fragment {
             currUser.setNotificationsB(true);
             Udao.updateUser(currUser);
         }
+        showPermsDialog=false;
     }
 }
