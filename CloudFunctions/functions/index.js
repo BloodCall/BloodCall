@@ -60,3 +60,37 @@ exports.alertAdded = functions.database.ref('/Alerts/{alert_id}')
             console.log('The read failed: ' + errorObject.name);
           });
     });
+exports.scheduledEventDateCheck = functions.pubsub.schedule('0 12 * * *')
+    .timeZone('Greece/Athens')
+    .onRun((context) => {
+      console.log('Checking for expired events at 12:00 AM Greek time');
+      const ref = admin.database.ref('/Events');
+      ref.orderByChild('date').on('check_date', (snap) => {
+        console.log('Child date:' + snap.val());
+        console.log('Server timestamp:'+ admin.database.ServerValue.TIMESTAMP);
+        const serverTime = admin.database.ServerValue.TIMESTAMP;
+        // checking something cause of github
+        console.log(Date.now());
+        const date = new Date(serverTime);
+        console.log(date);
+        const eventDay = snap.val().trimEnd(6);
+        const eventMonth = snap.val().trim(3);
+        const eventYear = snap.val().trimStart(6);
+        console.log('Trimmed event day is : '+eventDay);
+        console.log('Trimmed event month is : '+eventMonth);
+        console.log('Trimmed event year is : '+eventYear);
+        if (parseInt(date.getFullYear().toString().trimEnd(2)) > eventYear) {
+          ref.removeChild(snap.key);
+        } else if (date.getMonth()+1 > eventMonth && parseInt(date.getFullYear().toString().trimEnd(2)) >= eventYear) {
+          ref.removeChild(snap.key);
+        } else if (date.getDay() > eventDay && date.getMonth()+1 >= eventMonth && parseInt(date.getFullYear().toString().trimEnd(2)) >= eventYear) {
+          ref.removeChild(snap.key);
+        } else {
+          console.log('This good!');
+        }
+      });
+
+
+      return null;
+    });
+
