@@ -10,22 +10,26 @@
     tools:ignore="Overdraw">
 
     <TextView
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/barlow_medium"
         android:gravity="center"
         android:text="@string/new_alert_text"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19" />
+        app:layout_constraintVertical_bias="0.893" />
 
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="300dp"
         android:layout_height="55dp"
         android:layout_marginStart="10dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="10dp"
         android:gravity="center_horizontal|center_vertical"
         android:orientation="horizontal"
@@ -57,11 +61,23 @@
         android:id="@+id/createAlertBtn"
         android:layout_width="wrap_content"
         android:layout_height="55dp"
-        android:layout_marginBottom="204dp"
+        android:layout_marginBottom="232dp"
         android:text="@string/create_alert_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="85dp"
+        android:layout_height="88dp"
+        android:src="@drawable/ic_baseline_notification_important_24"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.945" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

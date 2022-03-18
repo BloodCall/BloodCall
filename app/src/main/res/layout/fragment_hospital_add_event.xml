@@ -14,41 +14,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="156dp"
-        android:background="@drawable/borders_making"
+        android:autofillHints=""
+        android:background="@drawable/hospital_border_making"
         android:drawablePadding="8dp"
         android:ems="10"
         android:hint="@string/name_hint_hospital"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:paddingStart="8dp"
-        android:paddingEnd="8dp"
 
+        android:paddingEnd="8dp"
         app:layout_constraintBottom_toTopOf="@+id/eventAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.838" />
 
     <EditText
         android:id="@+id/eventAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
-        android:background="@drawable/borders_making"
+        android:layout_marginTop="380dp"
+        android:autofillHints=""
+        android:background="@drawable/hospital_border_making"
         android:drawablePadding="8dp"
         android:ems="10"
         android:hint="@string/address_hint_hospital"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:paddingStart="8dp"
-        android:paddingEnd="8dp"
 
+        android:paddingEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/addEventButton"
@@ -59,14 +60,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/eventAddress"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintVertical_bias="0.254" />
 
     <EditText
         android:id="@+id/eventDateBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/borders_making"
+        android:autofillHints=""
+        android:background="@drawable/hospital_border_making"
         android:drawablePadding="8dp"
         android:ems="10"
         android:focusable="false"
@@ -75,12 +77,38 @@
         android:longClickable="false"
         android:minHeight="48dp"
         android:paddingStart="8dp"
-        android:paddingEnd="8dp"
 
+        android:paddingEnd="8dp"
         app:layout_constraintBottom_toTopOf="@+id/eventName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.95"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.909" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
+        android:text="Please include zip code"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/addEventButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eventAddress"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="95dp"
+        android:layout_height="101dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/ic_baseline_calendar_today_24"
+        app:layout_constraintBottom_toTopOf="@+id/eventDateBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
