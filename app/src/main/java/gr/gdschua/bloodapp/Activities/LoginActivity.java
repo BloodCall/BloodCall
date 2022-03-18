@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 
+@SuppressWarnings("ALL")
 public class LoginActivity extends AppCompatActivity {
     EditText passET;
     EditText emailET;

@@ -14,6 +14,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 import gr.gdschua.bloodapp.Entities.User;
 
@@ -26,7 +27,7 @@ public class DAOUsers {
 
     public Task<Void> insertUser(User newUser, Bitmap userImage, Context context) throws IOException {
 
-        newUser.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        newUser.setId(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
         if (userImage != null) {
             File outputFile = File.createTempFile("profPic" + Math.random(), ".png", context.getCacheDir());
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -56,7 +57,7 @@ public class DAOUsers {
 
 
     public Task<DataSnapshot> getUser() {
-        return FirebaseDatabase.getInstance().getReference().child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).get();
+        return FirebaseDatabase.getInstance().getReference().child("Users").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).get();
     }
 
     public Task<DataSnapshot> getUser(String uID) {

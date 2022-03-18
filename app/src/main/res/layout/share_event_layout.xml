@@ -63,7 +63,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="270dp"
         android:src="@drawable/ic_launcher_foreground"
-        tools:src="@drawable/ic_launcher_foreground" />
+        tools:src="@drawable/ic_launcher_foreground"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/textView3"

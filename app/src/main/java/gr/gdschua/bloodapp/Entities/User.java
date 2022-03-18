@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User {
-    public ArrayList<CheckIn> checkIns = new ArrayList<>();
+    public final ArrayList<CheckIn> checkIns = new ArrayList<>();
     public Boolean notifFirstTime;
     private String fullName, email, bloodType, id, notifications;
     private int xp;

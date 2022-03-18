@@ -17,7 +17,7 @@ import gr.gdschua.bloodapp.R;
 public class NoInternetActivity extends AppCompatActivity {
 
 
-    BroadcastReceiver receiver = new BroadcastReceiver() {
+    final BroadcastReceiver receiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {

@@ -10,6 +10,7 @@ import androidx.exifinterface.media.ExifInterface;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 public class BitmapResizer {
 
@@ -18,8 +19,6 @@ public class BitmapResizer {
 
         Matrix matrix = new Matrix();
         switch (orientation) {
-            case ExifInterface.ORIENTATION_NORMAL:
-                return bitmap;
             case ExifInterface.ORIENTATION_FLIP_HORIZONTAL:
                 matrix.setScale(-1, 1);
                 break;
@@ -44,6 +43,7 @@ public class BitmapResizer {
             case ExifInterface.ORIENTATION_ROTATE_270:
                 matrix.setRotate(-90);
                 break;
+            case ExifInterface.ORIENTATION_NORMAL:
             default:
                 return bitmap;
         }
@@ -68,7 +68,7 @@ public class BitmapResizer {
             e.printStackTrace();
         }
         image = rotateBitmap(image, orientation);
-        int width = image.getWidth();
+        int width = Objects.requireNonNull(image).getWidth();
         int height = image.getHeight();
         float bitmapRatio = (float) width / (float) height;
         if (bitmapRatio > 1) {

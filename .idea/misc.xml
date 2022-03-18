@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/rounding_borders_markerinfo.xml" value="0.314" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_launcher.xml" value="0.2552372808892689" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_no_internet.xml" value="0.2552372808892689" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/content_main.xml" value="0.2552372808892689" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_hospital_add_alert.xml" value="0.2552372808892689" />
+      </map>
+    </option>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

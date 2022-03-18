@@ -40,7 +40,7 @@ public class MapsFragment extends Fragment {
 
     private final DAOHospitals daoHospitals = new DAOHospitals();
     private final DAOEvents daoEvents = new DAOEvents();
-    GoogleMap.OnMarkerClickListener MarkerClickListener = marker -> {
+    final GoogleMap.OnMarkerClickListener MarkerClickListener = marker -> {
         MarkerInfoFragment myMarkerInfoFragment = new MarkerInfoFragment();
         if (Objects.equals(marker.getSnippet(), "Hospital")) {
             Hospital hospital = (Hospital) marker.getTag();
@@ -120,7 +120,7 @@ public class MapsFragment extends Fragment {
         if (events.size() > 0) {
             for (int i = 0; i < events.size(); i++) {
                 LatLng eventLatLong = new LatLng(events.get(i).getLat(), events.get(i).getLon());
-                map.addMarker(new MarkerOptions().position(eventLatLong).title(events.get(i).getName()).snippet("Event").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))).setTag(events.get(i));
+                Objects.requireNonNull(map.addMarker(new MarkerOptions().position(eventLatLong).title(events.get(i).getName()).snippet("Event").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)))).setTag(events.get(i));
             }
         }
         if (hospitals.size() > 0) {

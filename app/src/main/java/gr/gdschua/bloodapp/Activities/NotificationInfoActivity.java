@@ -68,7 +68,7 @@ public class NotificationInfoActivity extends AppCompatActivity {
         mapView.getMapAsync(new OnMapReadyCallback() {
 
             @Override
-            public void onMapReady(GoogleMap googleMap) {
+            public void onMapReady(@NonNull GoogleMap googleMap) {
                 LatLng coordinates = new LatLng(lat, lon);
                 googleMap.addMarker(new MarkerOptions().position(coordinates));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15));

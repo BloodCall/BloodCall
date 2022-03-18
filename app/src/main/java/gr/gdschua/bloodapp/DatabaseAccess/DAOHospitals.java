@@ -1,6 +1,8 @@
 package gr.gdschua.bloodapp.DatabaseAccess;
 
 
+import androidx.annotation.NonNull;
+
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -12,23 +14,24 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import gr.gdschua.bloodapp.Entities.Hospital;
 
 public class DAOHospitals {
-    Map<String, Object> hospitalsMap = new HashMap<>();
+    final Map<String, Object> hospitalsMap = new HashMap<>();
 
     public DAOHospitals() {
         populateHospitalMap();
     }
 
     public static Hospital mapToHospital(Map singleHospital) {
-        return new Hospital(singleHospital.get("name").toString(), singleHospital.get("email").toString(), (double) singleHospital.get("lat"), (double) singleHospital.get("lon"), singleHospital.get("address").toString());
+        return new Hospital(Objects.requireNonNull(singleHospital.get("name")).toString(), Objects.requireNonNull(singleHospital.get("email")).toString(), (double) singleHospital.get("lat"), (double) singleHospital.get("lon"), Objects.requireNonNull(singleHospital.get("address")).toString());
     }
 
     public Task<Void> insertUser(Hospital newUser) {
 
-        newUser.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        newUser.setId(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid());
 
         return FirebaseDatabase.getInstance().getReference("Hospitals")
                 .child(newUser.getId())
@@ -36,7 +39,7 @@ public class DAOHospitals {
     }
 
     public Task<DataSnapshot> getUser() {
-        return FirebaseDatabase.getInstance().getReference().child("Hospitals").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).get();
+        return FirebaseDatabase.getInstance().getReference().child("Hospitals").child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).get();
     }
 
     public Task<DataSnapshot> getUser(String ID) {
@@ -51,19 +54,19 @@ public class DAOHospitals {
                 new ValueEventListener() {
 
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         //Get map of users in datasnapshot
 
 
                         //hospitalsMap = (Map<String, Object>) dataSnapshot.getValue();
                         if (dataSnapshot.exists()) {
-                            hospitalsMap.putAll((Map<String, Object>) dataSnapshot.getValue());
+                            hospitalsMap.putAll((Map<String, Object>) Objects.requireNonNull(dataSnapshot.getValue()));
                         }
 
                     }
 
                     @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
                         //handle databaseError
                     }
                 });

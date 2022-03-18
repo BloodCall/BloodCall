@@ -46,7 +46,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.35"
-        tools:ignore="TextContrastCheck" />
+        tools:ignore="RtlSymmetry,TextContrastCheck"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/hospSignupAddr"
@@ -65,7 +66,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.45"
-        tools:ignore="TextContrastCheck" />
+        tools:ignore="RtlSymmetry,TextContrastCheck"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/hospSignupEmail"
@@ -78,14 +80,15 @@
         android:hint="@string/email_signup_box_hint"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        android:paddingLeft="8dp"
+        android:paddingStart="8dp"
         android:paddingEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.55"
-        tools:ignore="TextContrastCheck" />
+        tools:ignore="TextContrastCheck"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/hospSignupPass"
@@ -99,7 +102,7 @@
         android:hint="@string/password_signup_box_hint"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:paddingLeft="8dp"
+        android:paddingStart="8dp"
         android:paddingEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +145,8 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="TODO" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -27,12 +27,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.BitmapResizer;
 
+@SuppressWarnings("ALL")
 public class SignupActivity extends AppCompatActivity {
 
 
@@ -48,8 +50,8 @@ public class SignupActivity extends AppCompatActivity {
     EditText email;
     ProgressBar progressBar;
     EditText password;
-    DAOUsers daoUser = new DAOUsers();
-    ActivityResultLauncher<Intent> launchGalleryActivity = registerForActivityResult(
+    final DAOUsers daoUser = new DAOUsers();
+    final ActivityResultLauncher<Intent> launchGalleryActivity = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -59,7 +61,7 @@ public class SignupActivity extends AppCompatActivity {
                     }
                     Intent data = result.getData();
                     try {
-                        profilePicture = BitmapResizer.processBitmap(data.getData(), 400, SignupActivity.this);
+                        profilePicture = BitmapResizer.processBitmap(Objects.requireNonNull(data).getData(), 400, SignupActivity.this);
                         profilePicButton.setImageBitmap(profilePicture);
                     } catch (Exception e) {
                         e.printStackTrace();

@@ -34,14 +34,15 @@
         android:hint="@string/e_mail_hint"
         android:inputType="textEmailAddress"
         android:minHeight="48dp"
-        android:paddingLeft="8dp"
+        android:paddingStart="8dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.4"
-        tools:ignore="TextContrastCheck" />
+        tools:ignore="RtlSymmetry,TextContrastCheck"
+        android:autofillHints="" />
 
     <EditText
         android:id="@+id/password_input"
@@ -56,14 +57,14 @@
         android:hint="@string/password_box_hint"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:paddingLeft="8dp"
+        android:paddingStart="8dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"
-        tools:ignore="TextContrastCheck" />
+        tools:ignore="RtlSymmetry,TextContrastCheck" />
 
 
     <Button
@@ -85,7 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:focusable="false"
+        android:focusable="true"
         android:minHeight="48dp"
         android:text="@string/reset_password"
         android:textAlignment="viewEnd"
@@ -103,7 +104,8 @@
         android:layout_marginEnd="4dp"
         android:src="@drawable/show_password_image"
         app:layout_constraintEnd_toEndOf="@+id/password_input"
-        app:layout_constraintTop_toTopOf="@+id/password_input" />
+        app:layout_constraintTop_toTopOf="@+id/password_input"
+        android:contentDescription="TODO" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"

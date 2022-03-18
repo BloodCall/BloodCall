@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 
+import java.util.Objects;
+
 import gr.gdschua.bloodapp.Activities.MainActivity;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.Entities.Hospital;
@@ -35,12 +37,9 @@ public class HospitalHomeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    DAOHospitals daoHospitals = new DAOHospitals();
+    final DAOHospitals daoHospitals = new DAOHospitals();
     Hospital currUser;
     private boolean isFABOpen;
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public HospitalHomeFragment() {
         // Required empty public constructor
@@ -68,8 +67,9 @@ public class HospitalHomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // TODO: Rename and change types of parameters
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -77,7 +77,7 @@ public class HospitalHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ((AppCompatActivity) getContext()).getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        ((AppCompatActivity) requireContext()).getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         isFABOpen = false;
         View view = inflater.inflate(R.layout.fragment_hospital_home, container, false);
         TextView email = view.findViewById(R.id.hosp_emailTextView);
@@ -88,7 +88,7 @@ public class HospitalHomeFragment extends Fragment {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
                     currUser = task.getResult().getValue(Hospital.class);
-                    email.setText(currUser.getEmail());
+                    email.setText(Objects.requireNonNull(currUser).getEmail());
                     name.setText(currUser.getName());
                     address.setText(currUser.getAddress());
                 }

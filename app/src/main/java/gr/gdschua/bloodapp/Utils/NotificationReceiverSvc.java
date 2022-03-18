@@ -2,6 +2,7 @@ package gr.gdschua.bloodapp.Utils;
 
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -31,7 +32,7 @@ import gr.gdschua.bloodapp.R;
 
 public class NotificationReceiverSvc extends FirebaseMessagingService {
 
-    Gson gson = new Gson();
+    final Gson gson = new Gson();
 
     @Override
     public void onNewToken(@NonNull String s) {
@@ -64,6 +65,7 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
     }
 
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     public PendingIntent buildIntent(Hospital hospital, Alert alert) {
         Intent intent = new Intent(this, NotificationInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

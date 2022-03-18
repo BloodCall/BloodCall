@@ -149,7 +149,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/nametag_oval"
-                android:drawableStart="@drawable/ic_person"
                 android:elegantTextHeight="false"
                 android:gravity="center|start"
                 android:maxLines="1"
@@ -160,7 +159,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:drawableStartCompat="@drawable/ic_person" />
 
             <TextView
                 android:id="@+id/hosp_emailTextView"
@@ -168,7 +168,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/nametag_oval"
-                android:drawableStart="@drawable/ic_mail_profile"
                 android:drawablePadding="5dp"
                 android:elegantTextHeight="false"
                 android:gravity="center|start"
@@ -182,7 +181,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/hosp_fullNameTextView" />
+                app:layout_constraintTop_toTopOf="@id/hosp_fullNameTextView"
+                app:drawableStartCompat="@drawable/ic_mail_profile" />
 
             <TextView
                 android:id="@+id/bloodTypeTextView"
@@ -190,7 +190,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/nametag_oval"
-                android:drawableStart="@drawable/ic_blood_drop"
                 android:elegantTextHeight="false"
                 android:gravity="center|start"
                 android:maxWidth="200dp"
@@ -203,7 +202,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/hosp_fullNameTextView" />
+                app:layout_constraintTop_toTopOf="@id/hosp_fullNameTextView"
+                app:drawableStartCompat="@drawable/ic_blood_drop" />
 
         </LinearLayout>
 
@@ -223,7 +223,8 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline15"
         app:layout_constraintEnd_toStartOf="@+id/guideline17"
         app:layout_constraintStart_toStartOf="@+id/guideline16"
-        app:layout_constraintTop_toTopOf="@+id/guideline14" />
+        app:layout_constraintTop_toTopOf="@+id/guideline14"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/textView"

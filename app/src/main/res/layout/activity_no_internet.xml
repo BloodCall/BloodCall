@@ -5,17 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:colorPrimary"
-    tools:context=".Activities.NoInternetActivity">
+    tools:context=".Activities.NoInternetActivity"
+    tools:ignore="Overdraw">
 
     <ImageView
         android:id="@+id/noInternetIcon"
         android:layout_width="167dp"
         android:layout_height="166dp"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.454"
+        app:layout_constraintVertical_bias="0.336"
         app:srcCompat="@drawable/ic_baseline_wifi_off_24" />
 
     <TextView

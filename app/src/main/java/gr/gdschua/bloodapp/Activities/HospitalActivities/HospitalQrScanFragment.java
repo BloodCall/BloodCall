@@ -34,6 +34,7 @@ import com.google.firebase.database.DataSnapshot;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
@@ -53,7 +54,7 @@ public class HospitalQrScanFragment extends Fragment {
     private ToneGenerator toneGen1;
     private TextView barcodeText;
     private String barcodeData;
-    ActivityResultLauncher<String> cameraRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
+    final ActivityResultLauncher<String> cameraRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
         if (result) {
             initialiseDetectorsAndSources();
         }
@@ -158,7 +159,7 @@ public class HospitalQrScanFragment extends Fragment {
                                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                                         currUser = task.getResult().getValue(User.class);
                                         if (currUser != null) {
-                                            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
                                             Date date = new Date();
                                             currUser.checkIns.add(new CheckIn(formatter.format(date), currHospital.getName()));
                                             currUser.setXp(currUser.getXp() + 300);

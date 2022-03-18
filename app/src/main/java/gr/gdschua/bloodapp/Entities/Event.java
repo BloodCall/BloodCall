@@ -41,7 +41,6 @@ public class Event {
                     strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
                 }
                 strAdd = strReturnedAddress.toString();
-            } else {
             }
         } catch (Exception e) {
             e.printStackTrace();

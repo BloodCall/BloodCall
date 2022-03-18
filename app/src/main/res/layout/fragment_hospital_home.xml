@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".Activities.HomeFragment">
+    tools:context=".Activities.HomeFragment"
+    tools:ignore="Overdraw">
 
 
     <LinearLayout
@@ -57,7 +58,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.803" />
+        app:layout_constraintVertical_bias="0.803"
+        android:contentDescription="TODO" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -101,7 +103,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.90"
         app:tint="@android:color/white"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        android:contentDescription="TODO"
+        android:focusable="true" />
 
     <LinearLayout
         android:id="@+id/alertFabLayout"
@@ -143,7 +147,9 @@
             app:backgroundTint="?android:colorAccent"
             app:borderWidth="0dp"
             app:elevation="0dp"
-            app:tint="@android:color/white" />
+            app:tint="@android:color/white"
+            android:contentDescription="TODO"
+            android:focusable="true" />
 
     </LinearLayout>
 
@@ -186,7 +192,9 @@
             app:backgroundTint="?android:colorAccent"
             app:borderWidth="0dp"
             app:elevation="0dp"
-            app:tint="@android:color/white" />
+            app:tint="@android:color/white"
+            android:contentDescription="TODO"
+            android:focusable="true" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

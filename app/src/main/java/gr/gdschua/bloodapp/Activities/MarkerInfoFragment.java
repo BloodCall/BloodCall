@@ -30,6 +30,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Objects;
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
@@ -41,7 +42,7 @@ public class MarkerInfoFragment extends DialogFragment {
     private User currUser;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.fragment_marker_info, container, false);
@@ -55,7 +56,7 @@ public class MarkerInfoFragment extends DialogFragment {
         TextView organizerTV = inflatedView.findViewById(R.id.organizerTV);
         TextView eventIntro = inflatedView.findViewById(R.id.eventIntroTV);
         TextView organizerAddress = inflatedView.findViewById(R.id.organizerShareAddress);
-        tv.setText(getArguments().get("name").toString());
+        tv.setText(requireArguments().get("name").toString());
 
         if (getArguments().get("organizer") != null) {
             iv.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_calendar_today_24, null));
@@ -65,7 +66,7 @@ public class MarkerInfoFragment extends DialogFragment {
                 @Override
                 public void onClick(View view) {
                     //convert layout to bitmap to share
-                    eventName.setText(getArguments().get("name").toString());
+                    eventName.setText(requireArguments().get("name").toString());
                     organizerTV.setText(getArguments().get("organizer").toString());
                     organizerAddress.setText(getArguments().get("address").toString());
                     FrameLayout fLayout = inflatedView.findViewById(R.id.frameLayout);
@@ -90,7 +91,7 @@ public class MarkerInfoFragment extends DialogFragment {
                                     share.setType("image/jpeg");
                                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                                     bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                                    String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bm, "Title", null);
+                                    String path = MediaStore.Images.Media.insertImage(requireContext().getContentResolver(), bm, "Title", null);
                                     Uri imageUri = Uri.parse(path);
                                     share.putExtra(Intent.EXTRA_STREAM, imageUri);
                                     startActivity(Intent.createChooser(share, "Select"));
@@ -118,7 +119,7 @@ public class MarkerInfoFragment extends DialogFragment {
                 public void onClick(View view) {
 
                     //convert layout to bitmap to share
-                    eventName.setText(getArguments().get("name").toString());
+                    eventName.setText(requireArguments().get("name").toString());
                     eventIntro.setVisibility(View.INVISIBLE);
                     organizerAddress.setText(getArguments().get("address").toString());
                     FrameLayout fLayout = inflatedView.findViewById(R.id.frameLayout);
@@ -136,7 +137,7 @@ public class MarkerInfoFragment extends DialogFragment {
                         share.setType("image/jpeg");
                         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                         bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                        String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bm, "Title", null);
+                        String path = MediaStore.Images.Media.insertImage(requireContext().getContentResolver(), bm, "Title", null);
                         Uri imageUri = Uri.parse(path);
                         share.putExtra(Intent.EXTRA_STREAM, imageUri);
                         startActivity(Intent.createChooser(share, "Select"));
@@ -166,7 +167,7 @@ public class MarkerInfoFragment extends DialogFragment {
     public void onStart() {
         super.onStart();
 
-        Window window = getDialog().getWindow();
+        Window window = Objects.requireNonNull(getDialog()).getWindow();
         WindowManager.LayoutParams windowParams = window.getAttributes();
         windowParams.dimAmount = 0.30f;
         windowParams.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;

@@ -36,6 +36,7 @@ import com.google.zxing.WriterException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
@@ -44,9 +45,10 @@ import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.LevelHandler;
 import gr.gdschua.bloodapp.Utils.QrEncoder;
 
+@SuppressWarnings("ALL")
 public class HomeFragment extends Fragment {
 
-    DAOUsers Udao = new DAOUsers();
+    final DAOUsers Udao = new DAOUsers();
     DAOHospitals Hdao = new DAOHospitals();
     TextView bloodTypeTV;
     TextView fullNameTextView;
@@ -118,7 +120,7 @@ public class HomeFragment extends Fragment {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
                     currUser = task.getResult().getValue(User.class);
-                    pushN.setChecked(currUser.getNotificationsB());
+                    pushN.setChecked(Objects.requireNonNull(currUser).getNotificationsB());
                     if (currUser.getNotificationsB()) {
                         if (!reqResult) {
                             handleBgLoc();
@@ -140,7 +142,7 @@ public class HomeFragment extends Fragment {
                     lvlTV.setText(getResources().getString(R.string.curr_lvl_text, LevelHandler.getLevel(currUser.getXp())));
                     nextLvlTV.setText(getResources().getString(R.string.new_lvl_xp, (LevelHandler.getLvlXpCap(LevelHandler.getLevel(currUser.getXp())) - currUser.getXp()), LevelHandler.getLevel(currUser.getXp()) + 1));
                     try {
-                        File localFile = File.createTempFile(FirebaseAuth.getInstance().getUid(), "jpg");
+                        File localFile = File.createTempFile(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()), "jpg");
                         mStorageReference.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {

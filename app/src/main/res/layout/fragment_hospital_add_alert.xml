@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:theme="@style/LauncherTheme"
-    tools:context=".Activities.HospitalActivities.HospitalAddAlertFragment">
+    tools:context=".Activities.HospitalActivities.HospitalAddAlertFragment"
+    tools:ignore="Overdraw">
 
     <TextView
         android:layout_width="wrap_content"

@@ -12,6 +12,7 @@ import com.google.zxing.common.BitMatrix;
 
 import gr.gdschua.bloodapp.R;
 
+@SuppressWarnings("SuspiciousNameCombination")
 public class QrEncoder {
     private final int CH_RED;
 

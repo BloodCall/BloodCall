@@ -17,7 +17,7 @@ import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 public class LauncherActivity extends AppCompatActivity {
 
 
-    BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
+    final BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

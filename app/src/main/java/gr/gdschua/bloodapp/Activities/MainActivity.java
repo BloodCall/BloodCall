@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private static final long LOCATION_UPDATE_INTERVAL = 1000;
     private static final long LOCATION_UPDATE_FASTEST_INTERVAL = 500;
 
-    BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
-    DAOUsers Udao = new DAOUsers();
+    final BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
+    final DAOUsers Udao = new DAOUsers();
     User currUser;
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = null;
+        NavController navController;
         if (findViewById(R.id.nav_host_fragment_content_user) == null) {
             navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_hosp);
         } else {

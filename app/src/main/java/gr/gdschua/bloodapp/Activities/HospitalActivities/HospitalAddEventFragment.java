@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOEvents;
 import gr.gdschua.bloodapp.Entities.Event;
@@ -43,10 +44,6 @@ public class HospitalAddEventFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     final Calendar myCalendar = Calendar.getInstance();
     private final DAOEvents daoEvents = new DAOEvents();
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public HospitalAddEventFragment() {
         // Required empty public constructor
@@ -74,8 +71,9 @@ public class HospitalAddEventFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            // TODO: Rename and change types of parameters
+            String mParam1 = getArguments().getString(ARG_PARAM1);
+            String mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -103,7 +101,7 @@ public class HospitalAddEventFragment extends Fragment {
                 }
 
                 try {
-                    Event event = new Event(name.getText().toString(), date.getText().toString(), FirebaseAuth.getInstance().getUid(), latLonList.get(0).getLatitude(), latLonList.get(0).getLongitude());
+                    Event event = new Event(name.getText().toString(), date.getText().toString(), FirebaseAuth.getInstance().getUid(), Objects.requireNonNull(latLonList).get(0).getLatitude(), latLonList.get(0).getLongitude());
                     daoEvents.insertEvent(event).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
