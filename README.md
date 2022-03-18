@@ -18,14 +18,14 @@ For more information, visit https://www.gnu.org/licenses/gpl-3.0 or see included
     - Cloud Functions
 
 ## User Features
-- [x] Access map with hospitals and blood donation events in real time!
-- [x] Get alerted for emergency blood needed!
-- [x] Easy to use QR code for checking in!
-- [x] Share events on your social media!
-- [x] Level up and get recognized in the community!
-
+    - [x] Access map with hospitals and blood donation events in real time!
+    - [x] Get alerted for emergency blood needed!
+    - [x] Easy to use QR code for checking in!
+    - [x] Share events on your social media!
+    - [x] Level up and get recognized in the community!
+    
 ##Hospital Features
-- [x] Ability to create blood donation events!
-- [x] Send alerts to all compatible blood types for emergency situations!
-- [x] In-app QR scanner to check your donators with!
+    - [x] Ability to create blood donation events!
+    - [x] Send alerts to all compatible blood types for emergency situations!
+    - [x] In-app QR scanner to check your donators with!
   
