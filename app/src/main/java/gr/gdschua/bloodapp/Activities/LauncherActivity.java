@@ -1,26 +1,17 @@
 package gr.gdschua.bloodapp.Activities;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.IntentSender;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.firebase.auth.FirebaseAuth;
 
 import gr.gdschua.bloodapp.Activities.HospitalActivities.HospitalSignUpActivity;
 import gr.gdschua.bloodapp.R;
-import gr.gdschua.bloodapp.Utils.LevelHandler;
 import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
 
 public class LauncherActivity extends AppCompatActivity {

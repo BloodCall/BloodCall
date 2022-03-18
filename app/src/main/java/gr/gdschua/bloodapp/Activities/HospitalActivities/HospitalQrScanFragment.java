@@ -1,22 +1,12 @@
 package gr.gdschua.bloodapp.Activities.HospitalActivities;
 
 
-import static com.google.android.gms.vision.Detector.*;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -25,8 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.vision.CameraSource;
@@ -34,12 +30,10 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseException;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
@@ -52,10 +46,6 @@ import gr.gdschua.bloodapp.R;
 public class HospitalQrScanFragment extends Fragment {
 
 
-    public HospitalQrScanFragment() {
-        // Required empty public constructor
-    }
-
     Hospital currHospital;
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
@@ -63,12 +53,15 @@ public class HospitalQrScanFragment extends Fragment {
     private ToneGenerator toneGen1;
     private TextView barcodeText;
     private String barcodeData;
-
-    ActivityResultLauncher<String> cameraRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission() , result -> {
-       if(result){
-           initialiseDetectorsAndSources();
-       }
+    ActivityResultLauncher<String> cameraRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
+        if (result) {
+            initialiseDetectorsAndSources();
+        }
     });
+
+    public HospitalQrScanFragment() {
+        // Required empty public constructor
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,11 +73,11 @@ public class HospitalQrScanFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_hospital_qr_scan, container, false);
-        DAOHospitals daoHospitals=new DAOHospitals();
+        DAOHospitals daoHospitals = new DAOHospitals();
         daoHospitals.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-                currHospital=task.getResult().getValue(Hospital.class);
+                currHospital = task.getResult().getValue(Hospital.class);
             }
         });
         toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
@@ -93,7 +86,7 @@ public class HospitalQrScanFragment extends Fragment {
 
         if (ActivityCompat.checkSelfPermission(requireActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             initialiseDetectorsAndSources();
-        }else {
+        } else {
             cameraRequest.launch(Manifest.permission.CAMERA);
         }
         return view;
@@ -116,7 +109,7 @@ public class HospitalQrScanFragment extends Fragment {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 try {
-                        cameraSource.start(surfaceView.getHolder());
+                    cameraSource.start(surfaceView.getHolder());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -148,40 +141,40 @@ public class HospitalQrScanFragment extends Fragment {
 
                     barcodeText.post(new Runnable() {
                         User currUser;
+
                         @Override
                         public void run() {
-                            currUser=null;
+                            currUser = null;
                             barcodes.valueAt(0);
                             if (barcodes.valueAt(0).displayValue.startsWith("BLCL:")) {
                                 barcodeText.removeCallbacks(null);
-                                barcodeData = barcodes.valueAt(0).displayValue.replace("BLCL:","");
+                                barcodeData = barcodes.valueAt(0).displayValue.replace("BLCL:", "");
                                 barcodeText.setText(barcodeData);
                                 barcodeDetector.release();
                                 FragmentTransaction ft = getParentFragmentManager().beginTransaction();
-                                DAOUsers daoUsers=new DAOUsers();
+                                DAOUsers daoUsers = new DAOUsers();
                                 daoUsers.getUser(barcodeData).addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                        currUser=task.getResult().getValue(User.class);
-                                        if (currUser!=null){
+                                        currUser = task.getResult().getValue(User.class);
+                                        if (currUser != null) {
                                             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                                             Date date = new Date();
-                                            currUser.checkIns.add(new CheckIn(formatter.format(date),currHospital.getName()));
-                                            currUser.setXp(currUser.getXp()+300);
+                                            currUser.checkIns.add(new CheckIn(formatter.format(date), currHospital.getName()));
+                                            currUser.setXp(currUser.getXp() + 300);
                                             daoUsers.updateUser(currUser).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
                                                     toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
-                                                    ScanResultFragment fragment= ScanResultFragment.newInstance("true");
-                                                    ft.replace(R.id.nav_host_fragment_content_hosp,fragment).addToBackStack(null).setReorderingAllowed(true);
+                                                    ScanResultFragment fragment = ScanResultFragment.newInstance("true");
+                                                    ft.replace(R.id.nav_host_fragment_content_hosp, fragment).addToBackStack(null).setReorderingAllowed(true);
                                                     ft.commit();
                                                 }
                                             });
-                                        }
-                                        else{
+                                        } else {
                                             toneGen1.startTone(ToneGenerator.TONE_CDMA_ALERT_NETWORK_LITE, 150);
-                                            ScanResultFragment fragment= ScanResultFragment.newInstance("false1");
-                                            ft.replace(R.id.nav_host_fragment_content_hosp,fragment).addToBackStack(null).setReorderingAllowed(true);
+                                            ScanResultFragment fragment = ScanResultFragment.newInstance("false1");
+                                            ft.replace(R.id.nav_host_fragment_content_hosp, fragment).addToBackStack(null).setReorderingAllowed(true);
                                             ft.commit();
                                         }
                                     }

@@ -15,7 +15,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -48,16 +47,46 @@ import gr.gdschua.bloodapp.Utils.QrEncoder;
 public class HomeFragment extends Fragment {
 
     DAOUsers Udao = new DAOUsers();
-    private Boolean reqResult=false;
     DAOHospitals Hdao = new DAOHospitals();
     TextView bloodTypeTV;
     TextView fullNameTextView;
     TextView emailTextView;
     StorageReference mStorageReference;
     User currUser;
-    Boolean showPermsDialog=true;
+    Boolean showPermsDialog = true;
     de.hdodenhof.circleimageview.CircleImageView profilePicture;
     SwitchMaterial pushN;
+    private Boolean reqResult = false;
+    final ActivityResultLauncher<String> bgLocationRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
+        reqResult = result;
+        showPermsDialog = !reqResult;
+        pushN.setChecked(reqResult);
+        currUser.setNotificationsB(reqResult);
+        if (!currUser.notifFirstTime) {
+            currUser.setXp(currUser.getXp() + 10);
+            currUser.notifFirstTime = true;
+            Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.notif_first_time, Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
+        Udao.updateUser(currUser);
+    });
+    final ActivityResultLauncher<String> locationRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            bgLocationRequest.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
+        } else {
+            reqResult = result;
+            pushN.setChecked(reqResult);
+            showPermsDialog = !reqResult;
+            currUser.setNotificationsB(reqResult);
+            if (!currUser.notifFirstTime) {
+                currUser.setXp(currUser.getXp() + 10);
+                currUser.notifFirstTime = true;
+                Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.notif_first_time, Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
+            Udao.updateUser(currUser);
+        }
+    });
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,51 +98,17 @@ public class HomeFragment extends Fragment {
         super.onStart();
     }
 
-    final ActivityResultLauncher<String> bgLocationRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result-> {
-        reqResult=result;
-        showPermsDialog=!reqResult;
-        pushN.setChecked(reqResult);
-        currUser.setNotificationsB(reqResult);
-        if(!currUser.notifFirstTime){
-            currUser.setXp(currUser.getXp()+10);
-            currUser.notifFirstTime=true;
-            Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.notif_first_time, Snackbar.LENGTH_LONG);
-            snackbar.show();
-        }
-        Udao.updateUser(currUser);
-    });
-    final ActivityResultLauncher<String> locationRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            bgLocationRequest.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
-        }
-        else {
-            reqResult = result;
-            pushN.setChecked(reqResult);
-            showPermsDialog=!reqResult;
-            currUser.setNotificationsB(reqResult);
-            if(!currUser.notifFirstTime){
-                currUser.setXp(currUser.getXp()+10);
-                currUser.notifFirstTime=true;
-                Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.notif_first_time, Snackbar.LENGTH_LONG);
-                snackbar.show();
-            }
-            Udao.updateUser(currUser);
-        }
-    });
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         bloodTypeTV = view.findViewById(R.id.bloodTypeTextView);
-        QrEncoder qrEncoder= new QrEncoder(requireContext());
+        QrEncoder qrEncoder = new QrEncoder(requireContext());
         fullNameTextView = view.findViewById(R.id.hosp_fullNameTextView);
-        ProgressBar progressBar= view.findViewById(R.id.lvlProgressBar);
-        TextView lvlTV= view.findViewById(R.id.lvlTV);
-        TextView nextLvlTV= view.findViewById(R.id.nextLvlTV);
-        ImageView qrIV =  view.findViewById(R.id.qrImageView);
+        ProgressBar progressBar = view.findViewById(R.id.lvlProgressBar);
+        TextView lvlTV = view.findViewById(R.id.lvlTV);
+        TextView nextLvlTV = view.findViewById(R.id.nextLvlTV);
+        ImageView qrIV = view.findViewById(R.id.qrImageView);
         pushN = view.findViewById(R.id.pushNotifSwitch);
         //Kitsaros gia to email.
         emailTextView = view.findViewById(R.id.hosp_emailTextView);
@@ -131,7 +126,7 @@ public class HomeFragment extends Fragment {
                         FirebaseMessaging.getInstance().subscribeToTopic(currUser.getTopic());
                     }
                     try {
-                        qrIV.setImageBitmap(qrEncoder.encodeAsBitmap("BLCL:"+currUser.getId()));
+                        qrIV.setImageBitmap(qrEncoder.encodeAsBitmap("BLCL:" + currUser.getId()));
                     } catch (WriterException e) {
                         e.printStackTrace();
                     }
@@ -140,10 +135,10 @@ public class HomeFragment extends Fragment {
                     //kitsaros gia to mail
                     emailTextView.setText(currUser.getEmail());
                     mStorageReference = FirebaseStorage.getInstance().getReference().child("UserImages/" + FirebaseAuth.getInstance().getUid());
-                    progressBar.setProgress(LevelHandler.getLvlCompletionPercentage(currUser.getXp(),LevelHandler.getLevel(currUser.getXp())),true);
+                    progressBar.setProgress(LevelHandler.getLvlCompletionPercentage(currUser.getXp(), LevelHandler.getLevel(currUser.getXp())), true);
                     ObjectAnimator.ofInt(progressBar, "progress", progressBar.getProgress()).setDuration(1000).start();
-                    lvlTV.setText(getResources().getString(R.string.curr_lvl_text,LevelHandler.getLevel(currUser.getXp())));
-                    nextLvlTV.setText(getResources().getString(R.string.new_lvl_xp,(LevelHandler.getLvlXpCap(LevelHandler.getLevel(currUser.getXp()))-currUser.getXp()),LevelHandler.getLevel(currUser.getXp())+1));
+                    lvlTV.setText(getResources().getString(R.string.curr_lvl_text, LevelHandler.getLevel(currUser.getXp())));
+                    nextLvlTV.setText(getResources().getString(R.string.new_lvl_xp, (LevelHandler.getLvlXpCap(LevelHandler.getLevel(currUser.getXp())) - currUser.getXp()), LevelHandler.getLevel(currUser.getXp()) + 1));
                     try {
                         File localFile = File.createTempFile(FirebaseAuth.getInstance().getUid(), "jpg");
                         mStorageReference.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
@@ -193,8 +188,8 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void handleBgLoc(){
-        if(shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION) && showPermsDialog){
+    private void handleBgLoc() {
+        if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION) && showPermsDialog) {
             new AlertDialog.Builder(requireContext(), R.style.CustomDialogTheme)
                     .setTitle(R.string.bg_loc_title)
                     .setMessage(R.string.bg_loc_text)
@@ -209,15 +204,14 @@ public class HomeFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             pushN.setChecked(false);
                             dialog.dismiss();
-                            showPermsDialog=true;
+                            showPermsDialog = true;
                         }
                     }).show();
-        }
-        else {
-            reqResult=true;
+        } else {
+            reqResult = true;
             currUser.setNotificationsB(true);
             Udao.updateUser(currUser);
         }
-        showPermsDialog=false;
+        showPermsDialog = false;
     }
 }

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -18,11 +17,11 @@ import java.util.List;
 import gr.gdschua.bloodapp.Entities.CheckIn;
 
 public class CheckInAdapter extends ArrayAdapter<CheckIn> {
-    private Context mContext;
-    private List<CheckIn> checkInList;
+    private final Context mContext;
+    private final List<CheckIn> checkInList;
 
-    public CheckInAdapter(@NonNull Context context,ArrayList<CheckIn> list) {
-        super(context, 0 , list);
+    public CheckInAdapter(@NonNull Context context, ArrayList<CheckIn> list) {
+        super(context, 0, list);
         mContext = context;
         checkInList = list;
     }
@@ -31,10 +30,10 @@ public class CheckInAdapter extends ArrayAdapter<CheckIn> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listItem = convertView;
-        if(listItem == null)
-            listItem = LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_2,parent,false);
+        if (listItem == null)
+            listItem = LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_2, parent, false);
 
-        CheckIn currCheckIn= checkInList.get(position);
+        CheckIn currCheckIn = checkInList.get(position);
 
 
         TextView timeStamp = (TextView) listItem.findViewById(android.R.id.text1);

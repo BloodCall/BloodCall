@@ -155,7 +155,7 @@ public class SignupActivity extends AppCompatActivity {
                             User newUser = new User(fullName, userEmail, bloodType);
                             newUser.setNotificationsB(true);
                             try {
-                                daoUser.insertUser(newUser, profilePicture,getApplicationContext()).addOnSuccessListener(suc -> {
+                                daoUser.insertUser(newUser, profilePicture, getApplicationContext()).addOnSuccessListener(suc -> {
                                     Toast.makeText(SignupActivity.this, getResources().getString(R.string.succ_reg), Toast.LENGTH_LONG).show();
                                     Intent goToHome = new Intent(SignupActivity.this, MainActivity.class);
                                     FirebaseMessaging.getInstance().subscribeToTopic(newUser.getTopic()).addOnCompleteListener(new OnCompleteListener<Void>() {

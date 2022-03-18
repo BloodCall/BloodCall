@@ -8,18 +8,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User {
+    public ArrayList<CheckIn> checkIns = new ArrayList<>();
+    public Boolean notifFirstTime;
     private String fullName, email, bloodType, id, notifications;
     private int xp;
-    public ArrayList<CheckIn> checkIns= new ArrayList<>();
-    public Boolean notifFirstTime;
 
     public User(String fullName, String email, String bloodType) {
         this.fullName = fullName;
         this.email = email;
         this.bloodType = bloodType;
-        notifFirstTime=false;
+        notifFirstTime = false;
     }
 
+
+    public User() {
+    }
 
     public Boolean getNotifFirstTime() {
         return notifFirstTime;
@@ -35,10 +38,6 @@ public class User {
 
     public void setXp(int xp) {
         this.xp = xp;
-    }
-
-
-    public User() {
     }
 
     public String getBloodType() {

@@ -1,6 +1,5 @@
 package gr.gdschua.bloodapp.Activities;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
@@ -141,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_hospital_home, R.id.nav_hosp_map,R.id.nav_hosp_qr_scanner)
+                R.id.nav_hospital_home, R.id.nav_hosp_map, R.id.nav_hosp_qr_scanner)
                 .setOpenableLayout(drawer)
                 .build();
 
@@ -176,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_map,R.id.nav_history)
+                R.id.nav_home, R.id.nav_map, R.id.nav_history)
                 .setOpenableLayout(drawer)
                 .build();
 
@@ -238,9 +237,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
         if (REQUEST_CODE_CHECK_SETTINGS == requestCode) {
-            if(Activity.RESULT_OK != resultCode){
+            if (Activity.RESULT_OK != resultCode) {
                 new AlertDialog.Builder(this, R.style.CustomDialogTheme)
                         .setTitle(R.string.enable_location_title)
                         .setMessage(R.string.enable_location_text)
@@ -251,7 +250,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }).show().setCancelable(false);
             }
-            }
         }
     }
+}
 

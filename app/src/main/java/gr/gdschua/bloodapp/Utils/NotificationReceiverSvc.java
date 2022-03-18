@@ -103,19 +103,19 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
     }
 
     //Haversine formula
-    private int calculateDistance(LatLng userLocation , LatLng hospitalLocation){
+    private int calculateDistance(LatLng userLocation, LatLng hospitalLocation) {
 
-            double earthRadius = 6371;
-            double latDistance = Math.toRadians(userLocation.latitude - hospitalLocation.latitude);
-            double lngDistance = Math.toRadians(userLocation.longitude - hospitalLocation.longitude);
+        double earthRadius = 6371;
+        double latDistance = Math.toRadians(userLocation.latitude - hospitalLocation.latitude);
+        double lngDistance = Math.toRadians(userLocation.longitude - hospitalLocation.longitude);
 
-            double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                    + Math.cos(Math.toRadians(userLocation.latitude)) * Math.cos(Math.toRadians(hospitalLocation.latitude))
-                    * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(userLocation.latitude)) * Math.cos(Math.toRadians(hospitalLocation.latitude))
+                * Math.sin(lngDistance / 2) * Math.sin(lngDistance / 2);
 
-            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-            return (int) (Math.round(earthRadius * c));
+        return (int) (Math.round(earthRadius * c));
     }
 
 }

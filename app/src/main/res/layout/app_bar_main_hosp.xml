@@ -17,8 +17,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include
-        layout="@layout/content_hosp" />
+    <include layout="@layout/content_hosp" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

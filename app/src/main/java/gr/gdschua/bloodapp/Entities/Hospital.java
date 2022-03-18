@@ -1,25 +1,18 @@
 package gr.gdschua.bloodapp.Entities;
 
-import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
-
-import java.util.List;
-import java.util.Locale;
-
 public class Hospital {
-    private String name, email, id,address;
+    private String name, email, id, address;
     private double lat, lon;
 
     public Hospital() {
     }
 
-    public Hospital(String name, String email, double lat, double lon,String address) {
+    public Hospital(String name, String email, double lat, double lon, String address) {
         this.name = name;
         this.email = email;
         this.lat = lat;
         this.lon = lon;
-        this.address=address;
+        this.address = address;
     }
 
     public String getName() {

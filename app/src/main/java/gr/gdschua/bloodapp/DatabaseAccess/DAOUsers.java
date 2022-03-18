@@ -28,7 +28,7 @@ public class DAOUsers {
 
         newUser.setId(FirebaseAuth.getInstance().getCurrentUser().getUid());
         if (userImage != null) {
-            File outputFile = File.createTempFile("profPic"+Math.random(), ".png", context.getCacheDir());
+            File outputFile = File.createTempFile("profPic" + Math.random(), ".png", context.getCacheDir());
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             userImage.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
             byte[] bitmapdata = bos.toByteArray();

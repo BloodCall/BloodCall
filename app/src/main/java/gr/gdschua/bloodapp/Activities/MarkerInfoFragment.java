@@ -3,7 +3,6 @@ package gr.gdschua.bloodapp.Activities;
 import static android.view.View.LAYER_TYPE_SOFTWARE;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -60,7 +59,7 @@ public class MarkerInfoFragment extends DialogFragment {
 
         if (getArguments().get("organizer") != null) {
             iv.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_calendar_today_24, null));
-            tv2.setText(String.format(getString(R.string.marker_type_1), getArguments().get("address").toString(), getArguments().get("organizer").toString(),getArguments().get("date"), getArguments().get("email").toString()));
+            tv2.setText(String.format(getString(R.string.marker_type_1), getArguments().get("address").toString(), getArguments().get("organizer").toString(), getArguments().get("date"), getArguments().get("email").toString()));
             Button shareButton = view.findViewById(R.id.shareEventButton);
             shareButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,17 +70,17 @@ public class MarkerInfoFragment extends DialogFragment {
                     organizerAddress.setText(getArguments().get("address").toString());
                     FrameLayout fLayout = inflatedView.findViewById(R.id.frameLayout);
                     Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_blood_drop);
-                    Bitmap bm = Bitmap.createBitmap( 1080,2177, Bitmap.Config.ARGB_8888);
+                    Bitmap bm = Bitmap.createBitmap(1080, 2177, Bitmap.Config.ARGB_8888);
                     Canvas c = new Canvas(bm);
-                    fLayout.measure(Resources.getSystem().getDisplayMetrics().widthPixels,Resources.getSystem().getDisplayMetrics().heightPixels);
-                    fLayout.layout(0, 0, 1080,2177);
+                    fLayout.measure(Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels);
+                    fLayout.layout(0, 0, 1080, 2177);
                     fLayout.setLayerType(LAYER_TYPE_SOFTWARE, null);
                     fLayout.draw(c);
 
                     daoUsers.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 currUser = task.getResult().getValue(User.class);
                                 if (bm != null) {
 
@@ -92,10 +91,10 @@ public class MarkerInfoFragment extends DialogFragment {
                                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                                     bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
                                     String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bm, "Title", null);
-                                    Uri imageUri =  Uri.parse(path);
+                                    Uri imageUri = Uri.parse(path);
                                     share.putExtra(Intent.EXTRA_STREAM, imageUri);
                                     startActivity(Intent.createChooser(share, "Select"));
-                                    if(currUser!=null) {
+                                    if (currUser != null) {
                                         currUser.setXp(currUser.getXp() + 25);
                                         daoUsers.updateUser(currUser);
                                     }
@@ -124,30 +123,30 @@ public class MarkerInfoFragment extends DialogFragment {
                     organizerAddress.setText(getArguments().get("address").toString());
                     FrameLayout fLayout = inflatedView.findViewById(R.id.frameLayout);
                     Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_blood_drop);
-                    Bitmap bm = Bitmap.createBitmap( 1080,2177, Bitmap.Config.ARGB_8888);
+                    Bitmap bm = Bitmap.createBitmap(1080, 2177, Bitmap.Config.ARGB_8888);
                     Canvas c = new Canvas(bm);
-                    fLayout.measure(Resources.getSystem().getDisplayMetrics().widthPixels,Resources.getSystem().getDisplayMetrics().heightPixels);
-                    fLayout.layout(0, 0, 1080,2177);
+                    fLayout.measure(Resources.getSystem().getDisplayMetrics().widthPixels, Resources.getSystem().getDisplayMetrics().heightPixels);
+                    fLayout.layout(0, 0, 1080, 2177);
                     fLayout.setLayerType(LAYER_TYPE_SOFTWARE, null);
                     fLayout.draw(c);
-                                if (bm != null) {
-                                    Toast toast = Toast.makeText(getContext(), "Image was saved", Toast.LENGTH_LONG);
-                                    toast.show();
-                                    Intent share = new Intent(Intent.ACTION_SEND);
-                                    share.setType("image/jpeg");
-                                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                                    bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                                    String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bm, "Title", null);
-                                    Uri imageUri =  Uri.parse(path);
-                                    share.putExtra(Intent.EXTRA_STREAM, imageUri);
-                                    startActivity(Intent.createChooser(share, "Select"));
-                                    dismiss();
+                    if (bm != null) {
+                        Toast toast = Toast.makeText(getContext(), "Image was saved", Toast.LENGTH_LONG);
+                        toast.show();
+                        Intent share = new Intent(Intent.ACTION_SEND);
+                        share.setType("image/jpeg");
+                        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                        bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                        String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bm, "Title", null);
+                        Uri imageUri = Uri.parse(path);
+                        share.putExtra(Intent.EXTRA_STREAM, imageUri);
+                        startActivity(Intent.createChooser(share, "Select"));
+                        dismiss();
 
-                                } else {
-                                    Toast toast = Toast.makeText(getContext(),
-                                            "No image saved.", Toast.LENGTH_LONG);
-                                    toast.show();
-                                }
+                    } else {
+                        Toast toast = Toast.makeText(getContext(),
+                                "No image saved.", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
                 }
             });
         }
