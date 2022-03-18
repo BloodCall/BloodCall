@@ -29,8 +29,10 @@ For more information, visit https://www.gnu.org/licenses/gpl-3.0 or see included
     - [x] Automatic deletion of events and alerts for hospitals quality of life!
   
 ## Screenshots 📷
-|           **Main Page**            |            **Signup Page**            |               **Profile Page**                |           **Map Page**           |
+|           **Main Page**            |            **Signup Page**            |               **Map**                |           **Profile Page**           |
 |:------------------------------------:|:------------------------------------:|:------------------------------------:|:------------------------------------:|
-| ![](https://i.imgur.com/SCI9QFs.jpeg) |![](https://i.imgur.com/ttx2G4K.jpeg)|![](https://i.imgur.com/U8GY0ce.jpeg)| ![](https://i.imgur.com/bH5uSZe.jpeg)|
-|            **Donation History**             |            **About Page**            |
-| ![](https://i.imgur.com/vpv3QRN.jpeg)| ![](https://i.imgur.com/SqWaNgv.jpeg)|
+| ![](https://i.imgur.com/SCI9QFs.jpg) |![](https://i.imgur.com/ttx2G4K.jpg)|![](https://i.imgur.com/bH5uSZe.jpg)| ![](https://i.imgur.com/U8GY0ce.jpg)|
+|            **About Page**             |            **Event Creation**            |            **Alert Creation**             |          **Marker Info**            |
+| ![](https://i.imgur.com/SqWaNgv.jpg)| ![](https://i.imgur.com/mzTCxqR.jpg)| ![](https://i.imgur.com/DIM6iDl.jpg) | ![](https://i.imgur.com/kPJGaPd.jpg)|
+|            **Donation History**             |        **Hospital Profile**            |
+| ![](https://i.imgur.com/JWTlaYs.jpg)| ![](https://i.imgur.com/toppfYC.jpg)|
