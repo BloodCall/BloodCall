@@ -25,7 +25,7 @@ For more information, visit https://www.gnu.org/licenses/gpl-3.0 or see included
 - [x] Level up and get recognized in the community!
 
 ##Hospital Features
--[x] Ability to create blood donation events!
--[x] Send alerts to all compatible blood types for emergency situations!
--[x] In-app QR scanner to check your donators with!
+- [x] Ability to create blood donation events!
+- [x] Send alerts to all compatible blood types for emergency situations!
+- [x] In-app QR scanner to check your donators with!
   
