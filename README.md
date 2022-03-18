@@ -26,4 +26,5 @@ For more information, visit https://www.gnu.org/licenses/gpl-3.0 or see included
     - [x] Hospitals have the ability to create blood donation events!
     - [x] Hospitals can send alerts to all compatible blood types for emergency situations!
     - [x] In-app QR scanner for the hospital to check it's donators with!
+    - [x] Automatic deletion of events and alerts for hospitals quality of life!
   
