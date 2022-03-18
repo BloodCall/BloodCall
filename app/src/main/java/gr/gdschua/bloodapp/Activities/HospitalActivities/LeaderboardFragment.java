@@ -37,6 +37,8 @@ import kotlin.text.Charsets;
 public class LeaderboardFragment extends Fragment {
 
     String result;
+    ArrayList<User> userArrayList;
+    UserAdapter userAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -85,6 +87,8 @@ public class LeaderboardFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
 
+        ListView listView = view.findViewById(R.id.LeaderboardLV);
+
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -103,6 +107,10 @@ public class LeaderboardFragment extends Fragment {
                 try {
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                     result = CharStreams.toString(new InputStreamReader(in, Charsets.UTF_8));
+                    Gson gson = new Gson();
+                    Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
+                    userArrayList= gson.fromJson(result,userListType);
+                    userAdapter = new UserAdapter(requireContext(),userArrayList);
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
@@ -112,20 +120,12 @@ public class LeaderboardFragment extends Fragment {
         });
 
         t.start();
-
         try {
             t.join();
-            Gson gson = new Gson();
-            Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
-            ArrayList<User> userArrayList= gson.fromJson(result,userListType);
-            ListView listView = view.findViewById(R.id.LeaderboardLV);
-            UserAdapter userAdapter = new UserAdapter(requireContext(),userArrayList);
-
             listView.setAdapter(userAdapter);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
         return view;
     }
