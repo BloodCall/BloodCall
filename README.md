@@ -29,8 +29,8 @@ For more information, visit https://www.gnu.org/licenses/gpl-3.0 or see included
     - [x] Automatic deletion of events and alerts for hospitals quality of life!
   
 ## Screenshots 📷
-|           **Main Page**            |            **Signup Page**            |               **Map**                |           **Profile Page**           |
+|           **Main Page**            |            **Signup Page**            |               **Profile Page**                |           **Map Page**           |
 |:------------------------------------:|:------------------------------------:|:------------------------------------:|:------------------------------------:|
-| ![](https://i.imgur.com/SCI9QFs.jpeg) |![](https://imgur.com/ttx2G4K)|![](https://imgur.com/bH5uSZe)| ![](https://imgur.com/U8GY0ce)|
+| ![](https://imgur.com/SCI9QFs) |![](https://imgur.com/ttx2G4K)|![](https://imgur.com/U8GY0ce)| ![](https://imgur.com/bH5uSZe)|
 |            **Donation History**             |            **About Page**            |
 | ![](https://imgur.com/vpv3QRN)| ![](https://imgur.com/SqWaNgv)|
