@@ -31,6 +31,6 @@ For more information, visit https://www.gnu.org/licenses/gpl-3.0 or see included
 ## Screenshots 📷
 |           **Main Page**            |            **Signup Page**            |               **Profile Page**                |           **Map Page**           |
 |:------------------------------------:|:------------------------------------:|:------------------------------------:|:------------------------------------:|
-| ![](https://imgur.com/SCI9QFs) |![](https://imgur.com/ttx2G4K)|![](https://imgur.com/U8GY0ce)| ![](https://imgur.com/bH5uSZe)|
+| ![](https://i.imgur.com/SCI9QFs.jpeg) |![](https://i.imgur.com/ttx2G4K.jpeg)|![](https://i.imgur.com/U8GY0ce.jpeg)| ![](https://i.imgur.com/bH5uSZe.jpeg)|
 |            **Donation History**             |            **About Page**            |
-| ![](https://imgur.com/vpv3QRN)| ![](https://imgur.com/SqWaNgv)|
+| ![](https://i.imgur.com/vpv3QRN.jpeg)| ![](https://i.imgur.com/SqWaNgv.jpeg)|
