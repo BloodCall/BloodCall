@@ -77,7 +77,7 @@
         of the navigation drawer-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="add_new_alert">Add New Alert</string>
-    <string name="new_alert_text">What kind of blood does the patient have? (Blood type compatibility is calculated automatically)</string>
+    <string name="new_alert_text">What kind of blood does the patient have? \n Alert will be sent to all compatible blood types</string>
     <string name="create_alert_btn">Create Alert</string>
     <string name="hospital_mode">HOSPITAL MODE</string>
 
@@ -87,7 +87,7 @@
     <string name="add_event_hospital_frag_btn">Add Event</string>
     <string name="date_hint_hospital" tools:ignore="MissingTranslation">Date</string>
     <string name="address_hint_hospital">Address</string>
-    <string name="name_hint_hospital" tools:ignore="MissingTranslation">Name</string>
+    <string name="name_hint_hospital" tools:ignore="MissingTranslation">Event Name</string>
 
     <string name="notif_channel_name">Emergency Notification</string>
     <string name="notif_title">Your blood is needed!</string>
