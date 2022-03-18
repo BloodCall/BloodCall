@@ -10,42 +10,42 @@
 
 
     <LinearLayout
-        android:layout_width="261dp"
-        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3"
+        android:layout_width="343dp"
+        android:layout_height="129dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.036">
+        app:layout_constraintVertical_bias="0.079">
 
         <TextView
             android:id="@+id/hosp_fullNameTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/hosp_nametags"
-            android:gravity="clip_vertical"
+            android:textAlignment="center"
             android:textSize="14sp" />
 
         <TextView
             android:id="@+id/hosp_emailTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/hosp_nametags"
-            android:gravity="clip_vertical"
+            android:textAlignment="center"
             android:textSize="14sp" />
 
         <TextView
             android:id="@+id/hosp_adrressTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/hosp_nametags"
-            android:gravity="clip_vertical"
+            android:textAlignment="center"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -53,13 +53,13 @@
     <ImageView
         android:layout_width="127dp"
         android:layout_height="115dp"
+        android:contentDescription="TODO"
         android:src="@drawable/hospital_ic_menu"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.803"
-        android:contentDescription="TODO" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_percent="0.25"
+        app:layout_constraintGuide_percent="0.3"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -196,5 +196,22 @@
             android:contentDescription="TODO"
             android:focusable="true" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/barlow_medium"
+        android:text="Hospital Profile"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
