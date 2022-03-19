@@ -46,37 +46,37 @@ public class HospitalSignUpActivity extends AppCompatActivity {
                 EditText password = findViewById(R.id.hospSignupPass);
 
 
-                mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
+                try{
+                    Geocoder geocoder = new Geocoder(HospitalSignUpActivity.this, Locale.getDefault());
 
-                                    Geocoder geocoder = new Geocoder(HospitalSignUpActivity.this, Locale.getDefault());
-                                    try {
+                    List<Address> latLonList = geocoder.getFromLocationName(addr.getText().toString(), 1);
+                    Hospital newUser = new Hospital(name.getText().toString(), email.getText().toString(), latLonList.get(0).getLatitude()
+                            , latLonList.get(0).getLongitude(), addr.getText().toString());
 
-                                        List<Address> latLonList = geocoder.getFromLocationName(addr.getText().toString(), 1);
-                                        Hospital newUser = new Hospital(name.getText().toString(), email.getText().toString(), latLonList.get(0).getLatitude(), latLonList.get(0).getLongitude(), addr.getText().toString());
-
-                                        dao.insertUser(newUser).addOnSuccessListener(suc -> {
-                                            Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.succ_reg), Toast.LENGTH_LONG).show();
-                                        }).addOnFailureListener(fail -> {
-                                            Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.fail_reg) + fail.getMessage(), Toast.LENGTH_LONG).show();
-                                        });
+                    dao.insertUser(newUser).addOnSuccessListener(suc -> {
+                        Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.succ_reg), Toast.LENGTH_LONG).show();
+                    }).addOnFailureListener(fail -> {
+                        Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.fail_reg) + fail.getMessage(), Toast.LENGTH_LONG).show();
+                    });
+                    mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
                                         Intent goToLogin = new Intent(HospitalSignUpActivity.this, MainActivity.class);
                                         startActivity(goToLogin);
                                         finish();
-
-                                    } catch (IOException e) {
-                                        //error handle it here
-                                        e.printStackTrace();
+                                    } else {
+                                        Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.fail_reg), Toast.LENGTH_LONG).show();
+                                        Log.w("error", "signInWithCustomToken:failure", task.getException());
                                     }
-                                } else {
-                                    Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.fail_reg), Toast.LENGTH_LONG).show();
-                                    Log.w("error", "signInWithCustomToken:failure", task.getException());
                                 }
-                            }
-                        });
+                            });
+                }catch(IndexOutOfBoundsException | IOException e){
+                    Toast.makeText(HospitalSignUpActivity.this, "Could not get address", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+
             }
         });
     }
