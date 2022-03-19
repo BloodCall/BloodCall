@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,8 +45,21 @@ public class UserAdapter extends ArrayAdapter<User> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listItem = convertView;
-        if (listItem == null)
+        if (listItem == null){
             listItem = LayoutInflater.from(mContext).inflate(R.layout.leaderboard_user_layout, parent, false);
+            switch(position){
+                case 1:
+                    listItem.setBackgroundColor(Color.parseColor("#E1E1E1"));
+                    break;
+                case 0:
+                    listItem.setBackgroundColor(Color.parseColor("#F1E5AC"));
+                    break;
+                case 2:
+                    listItem.setBackgroundColor(Color.parseColor("#DCA56E"));
+                    break;
+            }
+        }
+
 
         User currUser = userList.get(position);
 
@@ -55,6 +69,7 @@ public class UserAdapter extends ArrayAdapter<User> {
         pos.setTextColor(mContext.getColor(R.color.changed_red));
 
         de.hdodenhof.circleimageview.CircleImageView profilePicture = listItem.findViewById(R.id.profilePic_list);
+
 
         try {
             profilePicture.setImageDrawable(mContext.getDrawable(R.drawable.default_profile));
