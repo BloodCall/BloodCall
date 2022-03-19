@@ -5,8 +5,12 @@ import com.google.common.io.CharStreams;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,9 +40,10 @@ import kotlin.text.Charsets;
  */
 public class LeaderboardFragment extends Fragment {
 
-    String result;
-    ArrayList<User> userArrayList;
-    UserAdapter userAdapter;
+    private Handler mainThreadHandler;
+    private leaderboardThread workerThread = null;
+
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -73,6 +78,12 @@ public class LeaderboardFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+       Handler mHandler=new Handler(Looper.getMainLooper()){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+            }
+        };
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -80,54 +91,70 @@ public class LeaderboardFragment extends Fragment {
         }
     }
 
+
+    class leaderboardThread extends Thread {
+        Handler mHandler= new Handler(Looper.getMainLooper());
+
+        @Override
+        public synchronized void start() {
+            super.start();
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            URL url = null;
+            try {
+                url = new URL("https://us-central1-bloodcall-951a8-default-rtdb.cloudfunctions.net/leaderboard");
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            HttpURLConnection urlConnection = null;
+            try {
+                urlConnection = (HttpURLConnection) url.openConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                String result = CharStreams.toString(new InputStreamReader(in, Charsets.UTF_8));
+                Gson gson = new Gson();
+                Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
+                ArrayList<User> userArrayList= gson.fromJson(result,userListType);
+                UserAdapter userAdapter = new UserAdapter(requireContext(),userArrayList);
+                Message msg = new Message();
+                msg.what=200;
+                msg.obj=userAdapter;
+                mainThreadHandler.sendMessage(msg);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                urlConnection.disconnect();
+            }
+        }
+        }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
-
         ListView listView = view.findViewById(R.id.LeaderboardLV);
+        leaderboardThread thread = new leaderboardThread();
+        thread.start();
 
-        Thread t = new Thread(new Runnable() {
+        mainThreadHandler= new Handler(Looper.getMainLooper()){
             @Override
-            public void run() {
-                URL url = null;
-                try {
-                    url = new URL("https://us-central1-bloodcall-951a8-default-rtdb.cloudfunctions.net/leaderboard");
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-                HttpURLConnection urlConnection = null;
-                try {
-                    urlConnection = (HttpURLConnection) url.openConnection();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                    result = CharStreams.toString(new InputStreamReader(in, Charsets.UTF_8));
-                    Gson gson = new Gson();
-                    Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
-                    userArrayList= gson.fromJson(result,userListType);
-                    userAdapter = new UserAdapter(requireContext(),userArrayList);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    urlConnection.disconnect();
-                }
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+                listView.setAdapter((UserAdapter)(msg.obj));
             }
-        });
-
-        t.start();
-        try {
-            t.join();
-            listView.setAdapter(userAdapter);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        };
 
         return view;
     }
+
+
 
 }
