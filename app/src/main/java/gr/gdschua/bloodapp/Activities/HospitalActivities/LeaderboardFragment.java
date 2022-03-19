@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -140,6 +141,7 @@ public class LeaderboardFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_leaderboard, container, false);
+        ProgressBar progressBar = view.findViewById(R.id.progressBar3);
         ListView listView = view.findViewById(R.id.LeaderboardLV);
         leaderboardThread thread = new leaderboardThread();
         thread.start();
@@ -148,6 +150,7 @@ public class LeaderboardFragment extends Fragment {
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
+                progressBar.setVisibility(View.GONE);
                 listView.setAdapter((UserAdapter)(msg.obj));
             }
         };

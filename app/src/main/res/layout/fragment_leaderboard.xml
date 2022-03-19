@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".Activities.HospitalActivities.LeaderboardFragment">
 
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
     <ListView
         android:id="@+id/LeaderboardLV"
         android:layout_width="match_parent"
