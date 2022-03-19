@@ -26,7 +26,7 @@
     <string name="e_mail_hint">E-mail</string>
     <string name="login_activity_textViewFirst">LOGIN</string>
     <string name="reset_password">Forgot your password?</string>
-    <string name="login_error">Invalid email or password , try again or sign up</string>
+    <string name="login_error">Invalid email or password , try again or sign up!</string>
 
     <!-- Sign Up Fragment texts,may be changed to obtain resources from online? !-->
     <string name="click_to_add_a_profile_picture">Click to add a profile picture</string>
@@ -77,7 +77,7 @@
         of the navigation drawer-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="add_new_alert">Add New Alert</string>
-    <string name="new_alert_text">What kind of blood does the patient have? (Blood type compatibility is calculated automatically)</string>
+    <string name="new_alert_text">What kind of blood does the patient have? \n\n Alert will be sent to all compatible blood types</string>
     <string name="create_alert_btn">Create Alert</string>
     <string name="hospital_mode">HOSPITAL MODE</string>
     <string name="marker_type_1">Address: %1$s \n Organized By: %2$s \n\n Date: %3$s \n\n Email: %4$s</string>
@@ -92,7 +92,7 @@
     <string name="notif_text_template">At location: %1$s, tap to learn more.</string>
     <string name="date_hint_hospital">Date</string>
     <string name="address_hint_hospital">Address</string>
-    <string name="name_hint_hospital">Name</string>
+    <string name="name_hint_hospital">Event Name</string>
     <string name="create_hospital_account">CREATE HOSPITAL ACCOUNT</string>
     <string name="curr_lvl_text">My Level: %1$d</string>
     <string name="new_lvl_xp">%1$d XP remaining for level %2$d</string>

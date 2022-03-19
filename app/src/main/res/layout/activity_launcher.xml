@@ -14,6 +14,7 @@
         android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fontFamily="@font/barlow_medium"
         android:foregroundGravity="center"
         android:gravity="center"
         android:text="@string/SecondTextViewLaunch"
@@ -45,6 +46,7 @@
             android:id="@+id/signup_button"
             android:layout_width="138dp"
             android:layout_height="match_parent"
+            android:fontFamily="@font/barlow_medium"
             android:text="@string/signup_button"
             android:textAlignment="center" />
 
@@ -58,6 +60,7 @@
             android:id="@+id/login_button"
             android:layout_width="138dp"
             android:layout_height="match_parent"
+            android:fontFamily="@font/barlow_medium"
             android:text="@string/login_button"
             android:textAlignment="center" />
 
@@ -72,10 +75,11 @@
         android:id="@+id/hospital_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/barlow_medium"
         android:padding="15dp"
         android:text="@string/ThirdTextViewLaunch"
-        android:textAlignment="center"
 
+        android:textAlignment="center"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -101,7 +105,7 @@
         android:id="@id/FirstTextViewLaunch"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:fontFamily="sans-serif"
+        android:fontFamily="@font/barlow_medium"
         android:gravity="center"
         android:text="@string/FirstTextViewLaunch"
         android:textAlignment="center"

@@ -54,6 +54,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:autofillHints=""
         android:background="@drawable/borders_making"
         android:drawableStart="@drawable/ic_baseline_pin_drop_24"
         android:drawablePadding="8dp"
@@ -66,8 +67,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.45"
-        tools:ignore="RtlSymmetry,TextContrastCheck"
-        android:autofillHints="" />
+        tools:ignore="RtlSymmetry,TextContrastCheck" />
 
     <EditText
         android:id="@+id/hospSignupEmail"
@@ -148,6 +148,22 @@
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="TODO" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Please include zip code"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        android:textColor="@android:color/black"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hospSignupAddr"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
