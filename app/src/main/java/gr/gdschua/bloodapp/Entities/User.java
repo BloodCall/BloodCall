@@ -72,6 +72,7 @@ public class User {
         this.email = email;
     }
 
+    @Exclude
     public String getTopic() {
         return this.bloodType.replace("+", "pos").replace("-", "neg");
     }

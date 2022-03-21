@@ -21,6 +21,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -113,6 +114,18 @@ public class HomeFragment extends Fragment {
         pushN = view.findViewById(R.id.pushNotifSwitch);
         emailTextView = view.findViewById(R.id.hosp_emailTextView);
         profilePicture = view.findViewById(R.id.profilePic);
+
+        view.findViewById(R.id.editProfile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditProfileFragment editProfileFragment = EditProfileFragment.newInstance(currUser.getId());
+                FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+                ft.replace(R.id.nav_host_fragment_content_user, editProfileFragment);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
 
         Udao.getUser().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
