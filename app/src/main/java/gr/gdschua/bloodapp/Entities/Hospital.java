@@ -1,8 +1,15 @@
 package gr.gdschua.bloodapp.Entities;
 
+import com.google.firebase.database.Exclude;
+
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Hospital {
     private String name, email, id, address;
     private double lat, lon;
+    private int serviced;
 
     public Hospital() {
     }
@@ -13,6 +20,7 @@ public class Hospital {
         this.lat = lat;
         this.lon = lon;
         this.address = address;
+        this.serviced=0;
     }
 
     public String getName() {
@@ -61,5 +69,27 @@ public class Hospital {
 
     public void setLon(double lon) {
         this.lon = lon;
+    }
+
+    public int getServiced() {
+        return serviced;
+    }
+
+    public void setServiced(int serviced) {
+        this.serviced = serviced;
+    }
+
+    @Exclude
+    public Map<String, Object> getAsMap() {
+        Map<String, Object> map = new HashMap<>();
+        for (Field field : this.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            try {
+                map.put(field.getName(), field.get(this));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return map;
     }
 }

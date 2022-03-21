@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 
+import org.w3c.dom.Text;
+
 import java.util.Objects;
 
 import gr.gdschua.bloodapp.Activities.MainActivity;
@@ -68,6 +70,7 @@ public class HospitalHomeFragment extends Fragment {
         TextView email = view.findViewById(R.id.hosp_emailTextView);
         TextView name = view.findViewById(R.id.hosp_fullNameTextView);
         TextView address = view.findViewById(R.id.hosp_adrressTextView);
+        TextView serviced = view.findViewById(R.id.hospital_serviced);
         daoHospitals.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -76,6 +79,7 @@ public class HospitalHomeFragment extends Fragment {
                     email.setText(Objects.requireNonNull(currUser).getEmail());
                     name.setText(currUser.getName());
                     address.setText(currUser.getAddress());
+                    serviced.setText(String.format("%d",currUser.getServiced()));
                 }
             }
         });
