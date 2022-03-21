@@ -8,13 +8,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+
 import java.util.Objects;
 
+import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
+import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 
@@ -22,9 +29,9 @@ import gr.gdschua.bloodapp.R;
 public class ScanResultFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
-    private final DAOUsers daoUsers = new DAOUsers();
+    private final DAOHospitals daoHospitals = new DAOHospitals();
     private String mParam1;
-    private User currUser;
+    private Hospital currHospital;
 
     public ScanResultFragment() {
     }
@@ -61,6 +68,19 @@ public class ScanResultFragment extends Fragment {
             ResultIV.setColorFilter(ContextCompat.getColor(requireContext(), R.color.light_green), android.graphics.PorterDuff.Mode.SRC_IN);
             ResultIV.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_check_circle_outline_24, getContext().getTheme()));
             ResultTV.setText(getString(R.string.qr_succ));
+            daoHospitals.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    if(task.isSuccessful()){
+                        currHospital = task.getResult().getValue(Hospital.class);
+                        if(currHospital != null){
+                            currHospital.setServiced(currHospital.getServiced()+1);
+                            daoHospitals.updateUser(currHospital);
+                        }
+
+                    }
+                }
+            });
         } else if (mParam1.equals("false1")) {
             ResultIV.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_remove_circle_outline_24, requireContext().getTheme()));
             ResultIV.setColorFilter(ContextCompat.getColor(getContext(), android.R.color.holo_red_dark), android.graphics.PorterDuff.Mode.SRC_IN);

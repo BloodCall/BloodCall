@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import gr.gdschua.bloodapp.Entities.Hospital;
+import gr.gdschua.bloodapp.Entities.User;
 
 public class DAOHospitals {
     final Map<String, Object> hospitalsMap = new HashMap<>();
@@ -88,6 +89,14 @@ public class DAOHospitals {
             allHospitalsList.add(mapToHospital(singleHospital));
         }
         return allHospitalsList;
+    }
+
+    public Task<Void> updateUser(Hospital hospital) {
+
+
+        return FirebaseDatabase.getInstance().getReference("Hospitals")
+                .child(hospital.getId())
+                .updateChildren(hospital.getAsMap());
     }
 
 }
