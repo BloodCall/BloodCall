@@ -155,7 +155,7 @@ public class SignupActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             User newUser = new User(fullName, userEmail, bloodType);
-                            newUser.setNotificationsB(true);
+                            newUser.setNotifications(true);
                             try {
                                 daoUser.insertUser(newUser, profilePicture, getApplicationContext()).addOnSuccessListener(suc -> {
                                     Toast.makeText(SignupActivity.this, getResources().getString(R.string.succ_reg), Toast.LENGTH_LONG).show();

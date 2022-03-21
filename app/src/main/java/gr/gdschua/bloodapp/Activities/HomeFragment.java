@@ -23,6 +23,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -38,55 +39,35 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 
-import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.LevelHandler;
 import gr.gdschua.bloodapp.Utils.QrEncoder;
 
-@SuppressWarnings("ALL")
 public class HomeFragment extends Fragment {
 
     final DAOUsers Udao = new DAOUsers();
-    DAOHospitals Hdao = new DAOHospitals();
     TextView bloodTypeTV;
     TextView fullNameTextView;
     TextView emailTextView;
-    StorageReference mStorageReference;
+    StorageReference mStorageReference = FirebaseStorage.getInstance().getReference().child("UserImages/" + FirebaseAuth.getInstance().getUid());;
     User currUser;
     Boolean showPermsDialog = true;
     de.hdodenhof.circleimageview.CircleImageView profilePicture;
     SwitchMaterial pushN;
-    private Boolean reqResult = false;
+
+
     final ActivityResultLauncher<String> bgLocationRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
-        reqResult = result;
-        showPermsDialog = !reqResult;
-        pushN.setChecked(reqResult);
-        currUser.setNotificationsB(reqResult);
-        if (!currUser.notifFirstTime) {
-            currUser.setXp(currUser.getXp() + 10);
-            currUser.notifFirstTime = true;
-            Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.notif_first_time, Snackbar.LENGTH_LONG);
-            snackbar.show();
-        }
-        Udao.updateUser(currUser);
+        setNotifications(result,currUser);
     });
+
+
     final ActivityResultLauncher<String> locationRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             bgLocationRequest.launch(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
-        } else {
-            reqResult = result;
-            pushN.setChecked(reqResult);
-            showPermsDialog = !reqResult;
-            currUser.setNotificationsB(reqResult);
-            if (!currUser.notifFirstTime) {
-                currUser.setXp(currUser.getXp() + 10);
-                currUser.notifFirstTime = true;
-                Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.notif_first_time, Snackbar.LENGTH_LONG);
-                snackbar.show();
-            }
-            Udao.updateUser(currUser);
+        }else {
+            setNotifications(result,currUser);
         }
     });
 
@@ -98,11 +79,29 @@ public class HomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Udao.getUser().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                currUser=dataSnapshot.getValue(User.class);
+            }
+        });
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void onResume(){
+        super.onResume();
+        Udao.getUser().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+            @Override
+            public void onSuccess(DataSnapshot dataSnapshot) {
+                currUser=dataSnapshot.getValue(User.class);
+            }
+        });
+    }
+
+    
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         bloodTypeTV = view.findViewById(R.id.bloodTypeTextView);
         QrEncoder qrEncoder = new QrEncoder(requireContext());
@@ -112,80 +111,61 @@ public class HomeFragment extends Fragment {
         TextView nextLvlTV = view.findViewById(R.id.nextLvlTV);
         ImageView qrIV = view.findViewById(R.id.qrImageView);
         pushN = view.findViewById(R.id.pushNotifSwitch);
-        //Kitsaros gia to email.
         emailTextView = view.findViewById(R.id.hosp_emailTextView);
         profilePicture = view.findViewById(R.id.profilePic);
-        Udao.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
+        Udao.getUser().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful()) {
-                    currUser = task.getResult().getValue(User.class);
-                    pushN.setChecked(Objects.requireNonNull(currUser).getNotificationsB());
-                    if (currUser.getNotificationsB()) {
-                        if (!reqResult) {
+            public void onSuccess(DataSnapshot dataSnapshot) {
+
+                //Toggle Switch Listener
+                pushN.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked){
                             handleBgLoc();
                         }
-                        FirebaseMessaging.getInstance().subscribeToTopic(currUser.getTopic());
+                        else {
+                            setNotifications(false,currUser);
+                        }
                     }
-                    try {
-                        qrIV.setImageBitmap(qrEncoder.encodeAsBitmap("BLCL:" + currUser.getId()));
-                    } catch (WriterException e) {
-                        e.printStackTrace();
-                    }
-                    bloodTypeTV.setText(currUser.getBloodType());
-                    fullNameTextView.setText(currUser.getFullName());
-                    //kitsaros gia to mail
-                    emailTextView.setText(currUser.getEmail());
-                    mStorageReference = FirebaseStorage.getInstance().getReference().child("UserImages/" + FirebaseAuth.getInstance().getUid());
-                    progressBar.setProgress(LevelHandler.getLvlCompletionPercentage(currUser.getXp(), LevelHandler.getLevel(currUser.getXp())), true);
-                    ObjectAnimator.ofInt(progressBar, "progress", progressBar.getProgress()).setDuration(1000).start();
-                    lvlTV.setText(getResources().getString(R.string.curr_lvl_text, LevelHandler.getLevel(currUser.getXp())));
-                    nextLvlTV.setText(getResources().getString(R.string.new_lvl_xp, (LevelHandler.getLvlXpCap(LevelHandler.getLevel(currUser.getXp())) - currUser.getXp()), LevelHandler.getLevel(currUser.getXp()) + 1));
-                    try {
-                        File localFile = File.createTempFile(Objects.requireNonNull(FirebaseAuth.getInstance().getUid()), "jpg");
-                        mStorageReference.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                                    profilePicture.setImageBitmap(bitmap);
-                                    localFile.delete();
-                                } else {
-                                    Log.e("ERROR", "IMAGE NOT FOUND!");
-                                }
+                });
+
+
+
+                //Get logged in user information
+                currUser=dataSnapshot.getValue(User.class);
+                try {
+                    qrIV.setImageBitmap(qrEncoder.encodeAsBitmap("BLCL:"+currUser.getId()));
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
+                progressBar.setProgress(LevelHandler.getLvlCompletionPercentage(currUser.getXp(),LevelHandler.getLevel(currUser.getXp())));
+                lvlTV.setText(getResources().getString(R.string.curr_lvl_text, LevelHandler.getLevel(currUser.getXp())));
+                nextLvlTV.setText(getResources().getString(R.string.new_lvl_xp, (LevelHandler.getLvlXpCap(LevelHandler.getLevel(currUser.getXp())) - currUser.getXp()), LevelHandler.getLevel(currUser.getXp()) + 1));
+                bloodTypeTV.setText(currUser.getBloodType());
+                fullNameTextView.setText(currUser.getFullName());
+                pushN.setChecked(currUser.getNotifications());
+                emailTextView.setText(currUser.getEmail());
+                try {
+                    File localFile = File.createTempFile(currUser.getId(), "jpg");
+                    mStorageReference.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                profilePicture.setImageBitmap(bitmap);
+                                localFile.delete();
+                            } else {
+                                Log.e("ERROR", "IMAGE NOT FOUND!");
                             }
-                        });
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-        });
-
-
-        pushN.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    FirebaseMessaging.getInstance().subscribeToTopic(currUser.getTopic()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            handleBgLoc();
                         }
                     });
-                } else {
-                    FirebaseMessaging.getInstance().unsubscribeFromTopic(currUser.getTopic()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            currUser.setNotificationsB(false);
-                            Udao.updateUser(currUser);
-                        }
-                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
-
 
         return view;
     }
@@ -204,16 +184,37 @@ public class HomeFragment extends Fragment {
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            setNotifications(false,currUser);
                             pushN.setChecked(false);
                             dialog.dismiss();
                             showPermsDialog = true;
                         }
                     }).show();
         } else {
-            reqResult = true;
-            currUser.setNotificationsB(true);
-            Udao.updateUser(currUser);
+            setNotifications(true,currUser);
         }
         showPermsDialog = false;
+    }
+
+    private void setNotifications(Boolean state,User currUser){
+        if (state) {
+            FirebaseMessaging.getInstance().subscribeToTopic(currUser.getTopic());
+            currUser.setNotifications(true);
+            pushN.setChecked(true);
+            if (!currUser.notifFirstTime) {
+                currUser.setXp(currUser.getXp() + 10);
+                currUser.notifFirstTime = true;
+                Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.notif_first_time, Snackbar.LENGTH_LONG);
+                snackbar.show();
+                currUser.notifFirstTime=true;
+            }
+            currUser.updateSelf();
+        }
+        else{
+            FirebaseMessaging.getInstance().unsubscribeFromTopic(currUser.getTopic());
+            currUser.setNotifications(false);
+            pushN.setChecked(false);
+            currUser.updateSelf();
+        }
     }
 }

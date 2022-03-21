@@ -7,10 +7,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
+
 public class User {
     public final ArrayList<CheckIn> checkIns = new ArrayList<>();
-    public Boolean notifFirstTime;
-    private String fullName, email, bloodType, id, notifications;
+    public Boolean notifFirstTime, notifications;
+    private String fullName, email, bloodType, id;
     private int xp;
 
     public User(String fullName, String email, String bloodType) {
@@ -22,14 +24,6 @@ public class User {
 
 
     public User() {
-    }
-
-    public Boolean getNotifFirstTime() {
-        return notifFirstTime;
-    }
-
-    public void setNotifFirstTime(Boolean notifFirstTime) {
-        this.notifFirstTime = notifFirstTime;
     }
 
     public int getXp() {
@@ -48,22 +42,18 @@ public class User {
         this.bloodType = bloodType;
     }
 
-    public String getNotifications() {
+    public Boolean getNotifications() {
         return notifications;
     }
 
-    public void setNotifications(String notifications) {
+    public void setNotifications(Boolean notifications) {
         this.notifications = notifications;
     }
 
-    @Exclude
-    public boolean getNotificationsB() {
-        return Boolean.parseBoolean(notifications);
-    }
 
     @Exclude
-    public void setNotificationsB(boolean notifications) {
-        this.notifications = String.valueOf(notifications);
+    public void updateSelf(){
+        new DAOUsers().updateUser(this);
     }
 
     public String getFullName() {
