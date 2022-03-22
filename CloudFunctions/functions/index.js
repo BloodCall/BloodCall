@@ -6,7 +6,7 @@ let topic;
 let messageCondition;
 admin.initializeApp();
 
-exports.leaderboard = functions.https.onRequest((request, response) => {
+exports.leaderboard = functions.region('europe-west1').https.onRequest((request, response) => {
   const users = [];
   admin.database().ref('/Users/')
       .once('value')
@@ -19,7 +19,7 @@ exports.leaderboard = functions.https.onRequest((request, response) => {
       });
 });
 
-exports.alertAdded = functions.database.ref('/Alerts/{alert_id}')
+exports.alertAdded = functions.region('europe-west1').database.ref('/Alerts/{alert_id}')
     .onCreate((snapshot, context) => {
       const alertData=snapshot.val();
       admin.database().ref('/Hospitals/'+alertData.owner)
@@ -77,7 +77,8 @@ exports.alertAdded = functions.database.ref('/Alerts/{alert_id}')
 let date;
 let eventTime;
 let currentTime;
-exports.scheduledEventDateCheck = functions.pubsub.schedule('30 22 * * *')
+// check all Events at 22:30 and deletes expired events
+exports.scheduledEventDateCheck = functions.region('europe-west1').pubsub.schedule('30 22 * * *')
     .timeZone('Europe/Athens')
     .onRun((context) => {
       const currentDate = new Date();
@@ -105,5 +106,18 @@ exports.scheduledEventDateCheck = functions.pubsub.schedule('30 22 * * *')
             });
           });
       return null;
+    });
+// Deletes all alerts at 23:59
+exports.deleteAlerts = functions.region('europe-west1').pubsub.schedule('59 23 * * *')
+    .timeZone('Europe/Athens')
+    .onRun((context) => {
+      const delRef = admin.database().ref('/Alerts/');
+      delRef.remove()
+          .then(function() {
+            console.log('Alerts deleted');
+          })
+          .catch(function(error) {
+            console.log('Alerts not deleted :(');
+          });
     });
 
