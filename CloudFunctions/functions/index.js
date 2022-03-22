@@ -95,10 +95,10 @@ exports.scheduledEventDateCheck = functions.region('europe-west1').pubsub.schedu
                 const delRef = admin.database().ref('/Events/' + snapshot.key);
                 delRef.remove()
                     .then(function() {
-                      console.log('good');
+                      console.log('Deletion Succeeded');
                     })
                     .catch(function(error) {
-                      console.log('bad');
+                      console.log('Deletion failed');
                     });
               } else {
                 console.log(eventTime);
