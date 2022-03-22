@@ -1,4 +1,4 @@
-package gr.gdschua.bloodapp.Activities.HospitalActivities;
+package gr.gdschua.bloodapp.Activities;
 
 import android.os.Bundle;
 import com.google.common.io.CharStreams;
@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +29,6 @@ import java.util.ArrayList;
 
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
-import gr.gdschua.bloodapp.Utils.CheckInAdapter;
 import gr.gdschua.bloodapp.Utils.UserAdapter;
 import kotlin.text.Charsets;
 
@@ -106,7 +104,7 @@ public class LeaderboardFragment extends Fragment {
             super.run();
             URL url = null;
             try {
-                url = new URL("https://us-central1-bloodcall-951a8-default-rtdb.cloudfunctions.net/leaderboard");
+                url = new URL("https://europe-west1-bloodcall-951a8-default-rtdb.cloudfunctions.net/leaderboard");
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
