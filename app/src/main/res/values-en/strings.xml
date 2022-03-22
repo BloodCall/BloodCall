@@ -119,5 +119,15 @@
     <string name="enable_location_title">Please enable the location setting on your device.</string>
     <string name="enable_location_text">This application requires the location setting on your phone to be enabled in order to display the map, and send you geographically filtered notifications. Please turn it on to continue</string>
     <string name="leaderboard" translatable="false">Top Contributors</string>
+    <string name="please_include_zip_code">Please include zip code</string>
+    <string name="edit_profile">EDIT PROFILE</string>
+    <string name="change_password">CHANGE PASSWORD</string>
+    <string name="update">UPDATE</string>
+    <string name="total_donors_checked_in">Total Donors Checked In:</string>
+    <string name="hospital_profile">Hospital Profile</string>
+    <string name="enter_your_new_password">Enter your new password...</string>
+    <string name="repeat_your_new_password">Repeat your new password...</string>
+    <string name="enter_your_current_password">Enter your current password...</string>
+    <string name="apply">Apply</string>
 
 </resources>

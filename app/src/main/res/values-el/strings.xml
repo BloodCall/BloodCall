@@ -81,4 +81,14 @@
     <string name="enable_location_title">Παρακαλώ ενεργοποιήστε την λειτουργία τοποθεσίας στην συσκευή σας.</string>
     <string name="enable_location_text">Αυτή η εφαρμογή απαιτεί να είναι ενεργοποιημένη η ρύθμιση τοποθεσίας στο τηλέφωνό σας για να εμφανιστεί ο χάρτης και να σας στείλει γεωγραφικά φιλτραρισμένες ειδοποιήσεις. Ενεργοποιήστε τη για να συνεχίσετε</string>
     <string name="leaderboard" translatable="false">Κατάταξη</string>
+    <string name="please_include_zip_code">Παρακαλώ περιλάβετε τον Τ.Κ</string>
+    <string name="edit_profile">ΕΠΕΞΕΡΓΑΣΙΑ ΠΡΟΦΙΛ</string>
+    <string name="change_password">ΑΛΛΑΓΗ ΚΩΔΙΚΟΥ</string>
+    <string name="update">ΕΝΗΜΕΡΩΣΗ</string>
+    <string name="total_donors_checked_in">Συνολικός αριθμός αιμοδοτών που έχουν γίνει check in:</string>
+    <string name="hospital_profile">Προφίλ Νοσοκομείου</string>
+    <string name="enter_your_new_password">Εισάγετε τον νέο κωδικό...</string>
+    <string name="repeat_your_new_password">Επαναλάβετε τον νέο κωδικό...</string>
+    <string name="enter_your_current_password">Εισάγετε τον τρέχον κωδικό...</string>
+    <string name="apply">Εφαρμογή</string>
 </resources>

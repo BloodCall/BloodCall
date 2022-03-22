@@ -91,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="56dp"
-        android:text="Please include zip code"
+        android:text="@string/please_include_zip_code"
         android:textAlignment="center"
         android:textSize="10sp"
         android:textStyle="italic"

@@ -123,5 +123,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="leaderboard">Top Contributors</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="edit_profile">EDIT PROFILE</string>
+    <string name="update">UPDATE</string>
+    <string name="please_include_zip_code">Please include zip code</string>
+    <string name="total_donors_checked_in">Total Donors Checked In:</string>
+    <string name="hospital_profile">Hospital Profile</string>
+    <string name="enter_your_new_password">Enter your new password...</string>
+    <string name="repeat_your_new_password">Repeat your new password...</string>
+    <string name="enter_your_current_password">Enter your current password...</string>
+    <string name="change_password">CHANGE PASSWORD</string>
+    <string name="apply">Apply</string>
 </resources>

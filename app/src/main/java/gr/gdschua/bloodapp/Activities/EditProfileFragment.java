@@ -125,7 +125,7 @@ public class EditProfileFragment extends Fragment {
                     }
                 });
 
-        new DAOUsers().getUser(mParam1).addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        new DAOUsers().getUser().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 User currUser = dataSnapshot.getValue(User.class);
@@ -193,6 +193,13 @@ public class EditProfileFragment extends Fragment {
                         getParentFragmentManager().popBackStack();
                     }
                 });
+            }
+        });
+
+        view.findViewById(R.id.changePasswordBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_content_user,ResetPasswordFragment.newInstance(null,null)).commit();
             }
         });
 
