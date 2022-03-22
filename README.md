@@ -63,4 +63,4 @@ An APK file is provided in the "Releases" section.
 - Athanasios Bimpas [Github](https://github.com/thanbimp)
 - Georgios Kitsakis [Github](https://github.com/kitsakisGk)
 - Georgios Kourounis [Github](https://github.com/kourounisgiorgos)
-- Stefanos Togias [Github](https://github.com/Bleemoose/BloodCall)
+- Stefanos Togias [Github](https://github.com/Bleemoose)
