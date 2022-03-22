@@ -58,9 +58,11 @@ If you wish to build this project you should make your own firebase project, and
 ## Distribution 📦
 An APK file is provided in the "Releases" section.
 
+[Version: 1.0](https://github.com/BloodCall/BloodCall/releases/tag/1.0)
+
 ## Authors 📃
 
 - Athanasios Bimpas [Github](https://github.com/thanbimp)
 - Georgios Kitsakis [Github](https://github.com/kitsakisGk)
 - Georgios Kourounis [Github](https://github.com/kourounisgiorgos)
-- Stefanos Togias [Github](https://github.com/Bleemoose/BloodCall)
+- Stefanos Togias [Github](https://github.com/Bleemoose)

@@ -6,7 +6,7 @@ let topic;
 let messageCondition;
 admin.initializeApp();
 
-exports.leaderboard = functions.https.onRequest((request, response) => {
+exports.leaderboard = functions.region('europe-west1').https.onRequest((request, response) => {
   const users = [];
   admin.database().ref('/Users/')
       .once('value')
@@ -19,7 +19,7 @@ exports.leaderboard = functions.https.onRequest((request, response) => {
       });
 });
 
-exports.alertAdded = functions.database.ref('/Alerts/{alert_id}')
+exports.alertAdded = functions.region('europe-west1').database.ref('/Alerts/{alert_id}')
     .onCreate((snapshot, context) => {
       const alertData=snapshot.val();
       admin.database().ref('/Hospitals/'+alertData.owner)
@@ -74,37 +74,50 @@ exports.alertAdded = functions.database.ref('/Alerts/{alert_id}')
             console.log('The read failed: ' + errorObject.name);
           });
     });
-exports.scheduledEventDateCheck = functions.pubsub.schedule('0 12 * * *')
-    .timeZone('Greece/Athens')
+let date;
+let eventTime;
+let currentTime;
+// check all Events at 22:30 and deletes expired events
+exports.scheduledEventDateCheck = functions.region('europe-west1').pubsub.schedule('30 22 * * *')
+    .timeZone('Europe/Athens')
     .onRun((context) => {
-      console.log('Checking for expired events at 12:00 AM Greek time');
-      const ref = admin.database.ref('/Events');
-      ref.orderByChild('date').on('check_date', (snap) => {
-        console.log('Child date:' + snap.val());
-        console.log('Server timestamp:'+ admin.database.ServerValue.TIMESTAMP);
-        const serverTime = admin.database.ServerValue.TIMESTAMP;
-        // checking something cause of github
-        console.log(Date.now());
-        const date = new Date(serverTime);
-        console.log(date);
-        const eventDay = snap.val().trimEnd(6);
-        const eventMonth = snap.val().trim(3);
-        const eventYear = snap.val().trimStart(6);
-        console.log('Trimmed event day is : '+eventDay);
-        console.log('Trimmed event month is : '+eventMonth);
-        console.log('Trimmed event year is : '+eventYear);
-        if (parseInt(date.getFullYear().toString().trimEnd(2)) > eventYear) {
-          ref.removeChild(snap.key);
-        } else if (date.getMonth()+1 > eventMonth && parseInt(date.getFullYear().toString().trimEnd(2)) >= eventYear) {
-          ref.removeChild(snap.key);
-        } else if (date.getDay() > eventDay && date.getMonth()+1 >= eventMonth && parseInt(date.getFullYear().toString().trimEnd(2)) >= eventYear) {
-          ref.removeChild(snap.key);
-        } else {
-          console.log('This good!');
-        }
-      });
-
-
+      const currentDate = new Date();
+      currentTime = currentDate.getTime();
+      console.log('Server timestamp:'+ currentTime);
+      admin.database().ref('/Events')
+          .once('value')
+          .then((results) => {
+            results.forEach((snapshot) => {
+              date = snapshot.val().date;
+              eventTime = (new Date(date+' 20:00:00')).getTime(); // 23:55 PM - GMT
+              if (eventTime<currentTime) {
+                console.log(currentTime);
+                const delRef = admin.database().ref('/Events/' + snapshot.key);
+                delRef.remove()
+                    .then(function() {
+                      console.log('Deletion Succeeded');
+                    })
+                    .catch(function(error) {
+                      console.log('Deletion failed');
+                    });
+              } else {
+                console.log(eventTime);
+              }
+            });
+          });
       return null;
+    });
+// Deletes all alerts at 23:59
+exports.deleteAlerts = functions.region('europe-west1').pubsub.schedule('59 23 * * *')
+    .timeZone('Europe/Athens')
+    .onRun((context) => {
+      const delRef = admin.database().ref('/Alerts/');
+      delRef.remove()
+          .then(function() {
+            console.log('Alerts deleted');
+          })
+          .catch(function(error) {
+            console.log('Alerts not deleted :(');
+          });
     });
 
