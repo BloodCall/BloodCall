@@ -77,7 +77,7 @@ public class LeaderboardFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-       Handler mHandler=new Handler(Looper.getMainLooper()){
+        Handler mHandler=new Handler(Looper.getMainLooper()){
             @Override
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
@@ -104,7 +104,7 @@ public class LeaderboardFragment extends Fragment {
             super.run();
             URL url = null;
             try {
-                url = new URL("leaderboard_url_here");
+                url = new URL("insert a url for a leaderboard function here");
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -131,7 +131,7 @@ public class LeaderboardFragment extends Fragment {
                 urlConnection.disconnect();
             }
         }
-        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -143,6 +143,9 @@ public class LeaderboardFragment extends Fragment {
         ListView listView = view.findViewById(R.id.LeaderboardLV);
         leaderboardThread thread = new leaderboardThread();
         thread.start();
+
+        ViewGroup header = (ViewGroup)inflater.inflate(R.layout.listheader, listView, false);
+        listView.addHeaderView(header, null, false);
 
         mainThreadHandler= new Handler(Looper.getMainLooper()){
             @Override
