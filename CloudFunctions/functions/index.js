@@ -12,7 +12,11 @@ exports.leaderboard = functions.region('europe-west1').https.onRequest((request,
       .once('value')
       .then((results) => {
         results.forEach((snapshot) => {
-          users.push(snapshot.val());
+          const ldbResult = {};
+          ldbResult.fullName = snapshot.val().fullName;
+          ldbResult.id = snapshot.val().id;
+          ldbResult.xp = snapshot.val().xp;
+          users.push(ldbResult);
         });
         users.sort((a, b) => (a.xp < b.xp) ? 1 : -1);
         response.send(users);
