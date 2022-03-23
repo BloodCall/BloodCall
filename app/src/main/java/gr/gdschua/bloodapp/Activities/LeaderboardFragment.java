@@ -104,7 +104,7 @@ public class LeaderboardFragment extends Fragment {
             super.run();
             URL url = null;
             try {
-                url = new URL("https://europe-west1-bloodcall-951a8-default-rtdb.cloudfunctions.net/leaderboard");
+                url = new URL("leaderboard_url_here");
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
