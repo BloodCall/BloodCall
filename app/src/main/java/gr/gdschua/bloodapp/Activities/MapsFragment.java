@@ -50,6 +50,8 @@ public class MapsFragment extends Fragment {
             bundle.putString("name", hospital.getName());
             bundle.putString("address", hospital.getAddress());
             bundle.putString("email", hospital.getEmail());
+            bundle.putDouble("lat",hospital.getLat());
+            bundle.putDouble("lon", hospital.getLon());
             myMarkerInfoFragment.setArguments(bundle);
             myMarkerInfoFragment.show(requireActivity().getSupportFragmentManager(), "My Fragment");
 
@@ -61,6 +63,8 @@ public class MapsFragment extends Fragment {
             bundle.putString("name", event.getName());
             bundle.putString("date", event.getDate());
             bundle.putString("address", event.getAddress(getActivity()));
+            bundle.putDouble("lat",event.getLat());
+            bundle.putDouble("lon", event.getLon());
             daoHospitals.getUser(event.getOwner()).addOnCompleteListener(task -> {
                 Hospital ownerHosp = task.getResult().getValue(Hospital.class);
                 assert ownerHosp != null;

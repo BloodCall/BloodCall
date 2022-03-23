@@ -133,4 +133,5 @@
     <string name="enter_your_current_password">Enter your current password...</string>
     <string name="change_password">CHANGE PASSWORD</string>
     <string name="apply">Apply</string>
+    <string name="list_warning">According to Red Cross, you should donate blood once every 56 days. For more information, consult a physician. Please do not attempt any actions that may harm you in order to obtain a higher ranking.</string>
 </resources>

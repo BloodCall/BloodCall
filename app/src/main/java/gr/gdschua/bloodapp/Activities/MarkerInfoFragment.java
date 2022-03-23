@@ -7,6 +7,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -50,6 +52,9 @@ public class MarkerInfoFragment extends DialogFragment {
         TextView tv2 = view.findViewById(R.id.textViewMarkerCenter);
         ImageView iv = view.findViewById(R.id.imageView2);
 
+        Button navigateBtn = view.findViewById(R.id.navigateBtn);
+
+
         View inflatedView = getLayoutInflater().inflate(R.layout.share_event_layout, null);
 
         TextView eventName = inflatedView.findViewById(R.id.eventShareName);
@@ -59,6 +64,17 @@ public class MarkerInfoFragment extends DialogFragment {
         tv.setText(requireArguments().get("name").toString());
 
         if (getArguments().get("organizer") != null) {
+            navigateBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri gmmIntentUri = Uri.parse("google.navigation:q=" + requireArguments().get("lat") + "," + requireArguments().get("lon"));
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    if (mapIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+                        startActivity(mapIntent);
+                    }
+                }
+            });
             iv.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_calendar_today_24, null));
             tv2.setText(String.format(getString(R.string.marker_type_1), getArguments().get("address").toString(), getArguments().get("organizer").toString(), getArguments().get("date"), getArguments().get("email").toString()));
             Button shareButton = view.findViewById(R.id.shareEventButton);
@@ -112,6 +128,17 @@ public class MarkerInfoFragment extends DialogFragment {
                 }
             });
         } else {
+            navigateBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri gmmIntentUri = Uri.parse("google.navigation:q=" + requireArguments().get("lat") + "," + requireArguments().get("lon"));
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    if (mapIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+                        startActivity(mapIntent);
+                    }
+                }
+            });
             tv2.setText(String.format(getString(R.string.marker_type_2), getArguments().get("address").toString(), getArguments().get("email").toString()));
             Button shareButton = view.findViewById(R.id.shareEventButton);
             shareButton.setOnClickListener(new View.OnClickListener() {
@@ -160,13 +187,18 @@ public class MarkerInfoFragment extends DialogFragment {
                 dismiss();
             }
         });
+
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
+
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
         Window window = Objects.requireNonNull(getDialog()).getWindow();
         WindowManager.LayoutParams windowParams = window.getAttributes();
         windowParams.dimAmount = 0.30f;
