@@ -79,9 +79,10 @@
         <Button
             android:id="@+id/navigateBtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.3"
 
+            android:autoText="false"
             android:gravity="center"
             android:maxLines="1"
             android:text="@string/navigate"
@@ -99,8 +100,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
 
+            android:autoText="false"
             android:gravity="center"
-            android:text="@string/btnMakerInfo" />
+            android:maxLines="1"
+            android:text="@string/btnMakerInfo"
+            android:textSize="12sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
