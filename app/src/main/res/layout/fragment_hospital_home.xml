@@ -28,6 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/barlow_medium"
+        android:foregroundGravity="center"
+        android:gravity="center"
         android:text="@string/total_donors_checked_in"
         android:textColor="#5A4B4B"
         android:textSize="20sp"

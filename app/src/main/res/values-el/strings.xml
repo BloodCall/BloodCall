@@ -73,7 +73,7 @@
     <string name="event_added">Το γεγονός προστέθηκε!</string>
     <string name="alert_added">Η ειδοποίηση δημιουργήθηκε!</string>
     <string name="share_check_event_out">Δείτε αυτη την εκδήλωση που διοργανώνεται απο:</string>
-    <string name="share_at">στο</string>
+    <string name="share_at">στην διεύθυνση</string>
     <string name="git_link"><a href="https://github.com/BloodCall">Σελίδα project στο GitHub</a></string>
     <string name="licence_text">Διανέμεται υπο την άδεια GPL v3. Ένα αντίγραφο της άδειας μπορεί να βρεθεί <a href="https://www.gnu.org/licenses/gpl-3.0.html">εδώ</a>. Για άδειες βιβλιοθηκών δείτε την επιλογή \"Άδειες λογισμικού ανοιχτού κώδικα\"</string>
     <string name="about">Σχετικά με</string>
