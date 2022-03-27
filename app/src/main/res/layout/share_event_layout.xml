@@ -42,6 +42,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="150dp"
             android:fontFamily="@font/barlow_medium"
+            android:foregroundGravity="center"
+            android:gravity="center"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
 
@@ -52,6 +54,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
             android:fontFamily="@font/barlow_medium"
+            android:foregroundGravity="center"
+            android:gravity="center"
             android:textColor="@android:color/black"
             android:textSize="18sp" />
     </FrameLayout>
