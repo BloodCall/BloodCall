@@ -1,6 +1,7 @@
 package gr.gdschua.bloodapp.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -54,6 +55,7 @@ public class EditProfileFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private final Context thisContext = getActivity();
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -168,7 +170,7 @@ public class EditProfileFragment extends Fragment {
                         if(profilePictureBitmap != null) {
                             File outputFile = null;
                             try {
-                                outputFile = File.createTempFile("profPic" + Math.random(), ".png", requireContext().getCacheDir());
+                                outputFile = File.createTempFile("profPic" + Math.random(), ".png", thisContext.getCacheDir());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }

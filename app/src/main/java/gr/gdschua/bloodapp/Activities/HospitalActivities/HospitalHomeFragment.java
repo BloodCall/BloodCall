@@ -1,6 +1,7 @@
 package gr.gdschua.bloodapp.Activities.HospitalActivities;
 
 import android.animation.Animator;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ import gr.gdschua.bloodapp.R;
 
 public class HospitalHomeFragment extends Fragment {
 
+    private Context thisContext;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -53,6 +55,7 @@ public class HospitalHomeFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        thisContext = getActivity();
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             String mParam1 = getArguments().getString(ARG_PARAM1);
@@ -64,7 +67,7 @@ public class HospitalHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ((AppCompatActivity) requireContext()).getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        ((AppCompatActivity) thisContext).getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         isFABOpen = false;
         View view = inflater.inflate(R.layout.fragment_hospital_home, container, false);
         TextView email = view.findViewById(R.id.hosp_emailTextView);

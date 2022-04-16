@@ -3,6 +3,7 @@ package gr.gdschua.bloodapp.Activities.HospitalActivities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -48,6 +49,7 @@ public class HospitalQrScanFragment extends Fragment {
 
 
     Hospital currHospital;
+    private  Context thisContext;
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
     private SurfaceView surfaceView;
@@ -66,6 +68,7 @@ public class HospitalQrScanFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        thisContext = getActivity();
         super.onCreate(savedInstanceState);
     }
 
@@ -97,11 +100,11 @@ public class HospitalQrScanFragment extends Fragment {
 
         //Toast.makeText(getApplicationContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
 
-        barcodeDetector = new BarcodeDetector.Builder(requireContext())
+        barcodeDetector = new BarcodeDetector.Builder(thisContext)
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
                 .build();
 
-        cameraSource = new CameraSource.Builder(requireContext(), barcodeDetector)
+        cameraSource = new CameraSource.Builder(thisContext, barcodeDetector)
                 .setAutoFocusEnabled(true) //you should add this feature
                 .build();
 

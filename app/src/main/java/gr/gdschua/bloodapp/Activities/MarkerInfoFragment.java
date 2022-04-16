@@ -2,6 +2,7 @@ package gr.gdschua.bloodapp.Activities;
 
 import static android.view.View.LAYER_TYPE_SOFTWARE;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.DialogFragment;
 
@@ -40,8 +42,16 @@ import gr.gdschua.bloodapp.R;
 
 public class MarkerInfoFragment extends DialogFragment {
 
+    private Context thisContext;
     private final DAOUsers daoUsers = new DAOUsers();
     private User currUser;
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        thisContext = getActivity();
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -107,7 +117,7 @@ public class MarkerInfoFragment extends DialogFragment {
                                     share.setType("image/jpeg");
                                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                                     bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                                    String path = MediaStore.Images.Media.insertImage(requireContext().getContentResolver(), bm, "Title", null);
+                                    String path = MediaStore.Images.Media.insertImage(thisContext.getContentResolver(), bm, "Title", null);
                                     Uri imageUri = Uri.parse(path);
                                     share.putExtra(Intent.EXTRA_STREAM, imageUri);
                                     startActivity(Intent.createChooser(share, "Select"));
@@ -164,7 +174,7 @@ public class MarkerInfoFragment extends DialogFragment {
                         share.setType("image/jpeg");
                         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                         bm.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-                        String path = MediaStore.Images.Media.insertImage(requireContext().getContentResolver(), bm, "Title", null);
+                        String path = MediaStore.Images.Media.insertImage(thisContext.getContentResolver(), bm, "Title", null);
                         Uri imageUri = Uri.parse(path);
                         share.putExtra(Intent.EXTRA_STREAM, imageUri);
                         startActivity(Intent.createChooser(share, "Select"));

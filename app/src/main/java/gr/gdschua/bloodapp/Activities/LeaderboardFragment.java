@@ -1,5 +1,6 @@
 package gr.gdschua.bloodapp.Activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import com.google.common.io.CharStreams;
 import com.google.common.reflect.TypeToken;
@@ -39,6 +40,7 @@ import kotlin.text.Charsets;
  */
 public class LeaderboardFragment extends Fragment {
 
+    private Context thisContext;
     private Handler mainThreadHandler;
     private leaderboardThread workerThread = null;
 
@@ -77,6 +79,7 @@ public class LeaderboardFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        thisContext = getActivity();
         Handler mHandler=new Handler(Looper.getMainLooper()){
             @Override
             public void handleMessage(@NonNull Message msg) {
@@ -120,7 +123,7 @@ public class LeaderboardFragment extends Fragment {
                 Gson gson = new Gson();
                 Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
                 ArrayList<User> userArrayList= gson.fromJson(result,userListType);
-                UserAdapter userAdapter = new UserAdapter(requireContext(),userArrayList);
+                UserAdapter userAdapter = new UserAdapter(thisContext,userArrayList);
                 Message msg = new Message();
                 msg.what=200;
                 msg.obj=userAdapter;

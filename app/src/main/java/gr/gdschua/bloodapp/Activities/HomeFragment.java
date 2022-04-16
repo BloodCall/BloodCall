@@ -2,6 +2,7 @@ package gr.gdschua.bloodapp.Activities;
 
 import android.Manifest;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -49,6 +50,7 @@ import gr.gdschua.bloodapp.Utils.QrEncoder;
 public class HomeFragment extends Fragment {
 
     final DAOUsers Udao = new DAOUsers();
+    private Context thisContext;
     TextView bloodTypeTV;
     TextView fullNameTextView;
     TextView emailTextView;
@@ -75,6 +77,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        thisContext = getActivity();
     }
 
     @Override
@@ -105,7 +108,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         bloodTypeTV = view.findViewById(R.id.bloodTypeTextView);
-        QrEncoder qrEncoder = new QrEncoder(requireContext());
+        QrEncoder qrEncoder = new QrEncoder(thisContext);
         fullNameTextView = view.findViewById(R.id.hosp_fullNameTextView);
         ProgressBar progressBar = view.findViewById(R.id.lvlProgressBar);
         TextView lvlTV = view.findViewById(R.id.lvlTV);
@@ -185,7 +188,7 @@ public class HomeFragment extends Fragment {
 
     private void handleBgLoc() {
         if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION) && showPermsDialog) {
-            new AlertDialog.Builder(requireContext(), R.style.CustomDialogTheme)
+            new AlertDialog.Builder(thisContext, R.style.CustomDialogTheme)
                     .setTitle(R.string.bg_loc_title)
                     .setMessage(R.string.bg_loc_text)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {

@@ -1,5 +1,6 @@
 package gr.gdschua.bloodapp.Activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import gr.gdschua.bloodapp.Utils.CheckInAdapter;
  * create an instance of this fragment.
  */
 public class HistoryFragment extends Fragment {
+    
+    private Context thisContext;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,6 +56,7 @@ public class HistoryFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        thisContext = getActivity();
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             // TODO: Rename and change types of parameters
@@ -72,7 +76,7 @@ public class HistoryFragment extends Fragment {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
                 currUser = dataSnapshot.getValue(User.class);
-                CheckInAdapter adapter = new CheckInAdapter(requireContext(), currUser.checkIns);
+                CheckInAdapter adapter = new CheckInAdapter(thisContext, currUser.checkIns);
                 listView.setAdapter(adapter);
             }
         });

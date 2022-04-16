@@ -2,6 +2,7 @@ package gr.gdschua.bloodapp.Activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import gr.gdschua.bloodapp.R;
 
 public class MapsFragment extends Fragment {
 
+    private Context thisContext;
     private final DAOHospitals daoHospitals = new DAOHospitals();
     private final DAOEvents daoEvents = new DAOEvents();
     final GoogleMap.OnMarkerClickListener MarkerClickListener = marker -> {
@@ -84,7 +86,7 @@ public class MapsFragment extends Fragment {
         if (result) {
             handleLocation();
         } else {
-            Toast.makeText(requireContext(), "We were not able to retrieve your location because you denied the permission.", Toast.LENGTH_LONG).show();
+            Toast.makeText(thisContext, "We were not able to retrieve your location because you denied the permission.", Toast.LENGTH_LONG).show();
         }
     });
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
@@ -92,7 +94,7 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(@NonNull GoogleMap googleMap) {
             map = googleMap;
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(thisContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 locationRequest.launch(Manifest.permission.ACCESS_FINE_LOCATION);
             } else {
                 handleLocation();
@@ -107,7 +109,7 @@ public class MapsFragment extends Fragment {
     @SuppressLint("MissingPermission")
     private void handleLocation() {
         map.setMyLocationEnabled(true);
-        FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
+        FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(thisContext);
         mFusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
             Location location = task.getResult();
             LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
@@ -141,6 +143,12 @@ public class MapsFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_maps, container, false);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        thisContext = getActivity();
     }
 
     @Override
