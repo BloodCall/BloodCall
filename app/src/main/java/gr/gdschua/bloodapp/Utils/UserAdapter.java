@@ -66,13 +66,13 @@ public class UserAdapter extends ArrayAdapter<User> {
 
         TextView pos= listItem.findViewById(R.id.position_list);
         pos.setText(position+1+".");
-        pos.setTextColor(mContext.getColor(R.color.changed_red));
+        pos.setTextColor(ContextCompat.getColor(mContext,R.color.changed_red));
 
         de.hdodenhof.circleimageview.CircleImageView profilePicture = listItem.findViewById(R.id.profilePic_list);
 
 
         try {
-            profilePicture.setImageDrawable(mContext.getDrawable(R.drawable.default_profile));
+            profilePicture.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.default_profile));
             File localFile = File.createTempFile("uimg_"+currUser.getId(), "jpg");
             FirebaseStorage.getInstance().getReference().child("UserImages/" + currUser.getId()).getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
                 @Override

@@ -29,7 +29,7 @@ import gr.gdschua.bloodapp.R;
 
 public class ScanResultFragment extends Fragment {
 
-    private final Context thisContext = getActivity();
+    private Context thisContext;
     private static final String ARG_PARAM1 = "param1";
     private final DAOHospitals daoHospitals = new DAOHospitals();
     private String mParam1;
@@ -48,6 +48,7 @@ public class ScanResultFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        thisContext = getActivity();
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -68,7 +69,7 @@ public class ScanResultFragment extends Fragment {
 
         if (mParam1.equals("true")) {
             ResultIV.setColorFilter(ContextCompat.getColor(thisContext, R.color.light_green), android.graphics.PorterDuff.Mode.SRC_IN);
-            ResultIV.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_check_circle_outline_24, getContext().getTheme()));
+            ResultIV.setImageDrawable(ContextCompat.getDrawable(thisContext,R.drawable.ic_baseline_check_circle_outline_24));
             ResultTV.setText(getString(R.string.qr_succ));
             daoHospitals.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
@@ -84,12 +85,12 @@ public class ScanResultFragment extends Fragment {
                 }
             });
         } else if (mParam1.equals("false1")) {
-            ResultIV.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_remove_circle_outline_24, thisContext.getTheme()));
-            ResultIV.setColorFilter(ContextCompat.getColor(getContext(), android.R.color.holo_red_dark), android.graphics.PorterDuff.Mode.SRC_IN);
+            ResultIV.setImageDrawable(ContextCompat.getDrawable(thisContext,R.drawable.ic_baseline_remove_circle_outline_24));
+            ResultIV.setColorFilter(ContextCompat.getColor(thisContext, android.R.color.holo_red_dark), android.graphics.PorterDuff.Mode.SRC_IN);
             ResultTV.setText(getString(R.string.qr_fail_2));
         } else if (mParam1.equals("false2")) {
-            ResultIV.setImageDrawable(getResources().getDrawable(R.drawable.ic_baseline_remove_circle_outline_24, thisContext.getTheme()));
-            ResultIV.setColorFilter(ContextCompat.getColor(getContext(), android.R.color.holo_red_dark), android.graphics.PorterDuff.Mode.SRC_IN);
+            ResultIV.setImageDrawable(ContextCompat.getDrawable(thisContext,R.drawable.ic_baseline_remove_circle_outline_24));
+            ResultIV.setColorFilter(ContextCompat.getColor(thisContext, android.R.color.holo_red_dark), android.graphics.PorterDuff.Mode.SRC_IN);
             ResultTV.setText(getString(R.string.qr_fail_1));
         }
 
