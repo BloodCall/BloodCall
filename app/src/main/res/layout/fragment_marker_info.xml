@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="35dp"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="212dp"
         android:layout_marginEnd="35dp"
         android:textAlignment="center"
         android:textSize="18sp"
@@ -53,12 +53,13 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
+        android:layout_width="410dp"
+        android:layout_height="178dp"
+        android:layout_marginTop="48dp"
         android:contentDescription="TODO"
-        android:src="@drawable/hospital_ic_menu"
+        android:src="@drawable/hospital_marker"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -106,5 +107,14 @@
             android:text="@string/btnMakerInfo"
             android:textSize="12sp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/emptyTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
