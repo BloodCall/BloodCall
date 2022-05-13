@@ -1,9 +1,11 @@
 package gr.gdschua.bloodapp.Utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,25 +43,15 @@ public class UserAdapter extends ArrayAdapter<User> {
         userList = list;
     }
 
+    @SuppressLint("SetTextI18n")
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listItem = convertView;
+
         if (listItem == null){
             listItem = LayoutInflater.from(mContext).inflate(R.layout.leaderboard_user_layout, parent, false);
-            switch(position){
-                case 1:
-                    listItem.setBackgroundColor(Color.parseColor("#E1E1E1"));
-                    break;
-                case 0:
-                    listItem.setBackgroundColor(Color.parseColor("#F1E5AC"));
-                    break;
-                case 2:
-                    listItem.setBackgroundColor(Color.parseColor("#DCA56E"));
-                    break;
-            }
         }
-
 
         User currUser = userList.get(position);
 
@@ -67,6 +59,16 @@ public class UserAdapter extends ArrayAdapter<User> {
         TextView pos= listItem.findViewById(R.id.position_list);
         pos.setText(position+1+".");
         pos.setTextColor(ContextCompat.getColor(mContext,R.color.changed_red));
+
+        if(position != 0 && position != 1 && position != 2 ){
+            listItem.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        }else if (position == 0) {
+            listItem.setBackgroundColor(Color.parseColor("#F1E5AC"));
+        }else if (position == 1) {
+            listItem.setBackgroundColor(Color.parseColor("#E1E1E1"));
+        }else {
+            listItem.setBackgroundColor(Color.parseColor("#DCA56E"));
+        }
 
         de.hdodenhof.circleimageview.CircleImageView profilePicture = listItem.findViewById(R.id.profilePic_list);
 
