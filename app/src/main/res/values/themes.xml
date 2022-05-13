@@ -6,8 +6,9 @@
         <item name="android:statusBarColor">@color/changed_red</item>
         <item name="colorAccent">@color/changed_red</item>
         <item name="snackbarStyle">@style/MySnackBarStyle</item>
-
+        <item name="actionBarTheme">@style/ActionBarTheme</item>
     </style>
+
 
     <style name="CustomDialogTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
         <item name="android:windowBackground">@android:color/white</item>

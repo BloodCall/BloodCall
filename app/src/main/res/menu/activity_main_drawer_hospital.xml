@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view">
+    tools:showIn="bottom_navigation">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_hospital_home"
-            android:title="@string/side_bar_home" />
 
         <item
             android:id="@+id/nav_hosp_map"
-            android:title="@string/side_bar_map" />
+            android:title="@string/side_bar_map"
+            android:icon="@drawable/ic_baseline_map_24"
+            />
+
+        <item
+            android:id="@+id/nav_hospital_home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="@string/side_bar_home" />
 
         <item
             android:id="@+id/nav_hosp_qr_scanner"
+            android:icon="@drawable/ic_baseline_qr_code_scanner_24"
             android:title="@string/check_in" />
 
     </group>
-    <item
-        android:id="@+id/sign_out"
-        android:title="@string/side_bar_signout" />
 </menu>

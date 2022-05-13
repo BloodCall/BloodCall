@@ -118,17 +118,6 @@ public class HomeFragment extends Fragment {
         emailTextView = view.findViewById(R.id.hosp_emailTextView);
         profilePicture = view.findViewById(R.id.profilePic);
 
-        view.findViewById(R.id.editProfile).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditProfileFragment editProfileFragment = EditProfileFragment.newInstance(currUser.getId());
-                FragmentTransaction ft = getParentFragmentManager().beginTransaction();
-                ft.replace(R.id.nav_host_fragment_content_user, editProfileFragment);
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.addToBackStack(null);
-                ft.commit();
-            }
-        });
 
         Udao.getUser().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override

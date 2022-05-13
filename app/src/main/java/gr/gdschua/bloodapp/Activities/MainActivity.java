@@ -19,8 +19,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -32,10 +34,13 @@ import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.util.Objects;
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
@@ -134,76 +139,28 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainHospitalBinding binding = ActivityMainHospitalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.appBarMainHosp.toolbar);
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_hosp);
+        NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        NavigationUI.setupWithNavController(bottomNav, navController);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_hospital_home, R.id.nav_hosp_map, R.id.nav_hosp_qr_scanner)
-                .setOpenableLayout(drawer)
-                .build();
 
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_hosp);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                if (id == R.id.sign_out) {
-                    FirebaseAuth.getInstance().signOut();
-                    Intent intent = new Intent(MainActivity.this, LauncherActivity.class);
-                    startActivity(intent);
-                    finish();
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.signed_out), Toast.LENGTH_SHORT).show();
-                }
-                NavigationUI.onNavDestinationSelected(menuItem, navController);
-                drawer.closeDrawer(GravityCompat.START);
-                return true;
-            }
-        });
     }
 
     protected void InflateUser() {
         ActivityMainUserBinding binding = ActivityMainUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.appBarMainUser.toolbar);
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_map, R.id.nav_leaderboard ,R.id.nav_history)
-                .setOpenableLayout(drawer)
-                .build();
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_user);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                if (id == R.id.sign_out) {
-                    FirebaseMessaging.getInstance().unsubscribeFromTopic(currUser.getTopic()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            FirebaseAuth.getInstance().signOut();
-                            Intent intent = new Intent(MainActivity.this, LauncherActivity.class);
-                            startActivity(intent);
-                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.signed_out), Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    });
-                }
-                NavigationUI.onNavDestinationSelected(menuItem, navController);
-                drawer.closeDrawer(GravityCompat.START);
-                return true;
-            }
-        });
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_user);
+        NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation2);
+        NavigationUI.setupWithNavController(bottomNav, navController);
 
     }
 
