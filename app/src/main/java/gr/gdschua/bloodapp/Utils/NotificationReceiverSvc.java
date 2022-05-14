@@ -8,6 +8,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -17,6 +18,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -44,6 +46,7 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
     @Override
     public void
     onMessageReceived(RemoteMessage remoteMessage) {
+        Integer dist = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("notifs_distance", "20"));
         Log.d("notif", "msg recieved");
         Alert targetAlert = gson.fromJson(remoteMessage.getData().get("alert"), Alert.class);
         Hospital targetHospital = gson.fromJson(remoteMessage.getData().get("hospital"), Hospital.class);
@@ -57,7 +60,7 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
                 LatLng userLatLng = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
                 Log.d("notif", "location available " + userLatLng.latitude + " , " + userLatLng.longitude);
                 LatLng hospitalLatLng = new LatLng(targetHospital.getLat(), targetHospital.getLon());
-                if (calculateDistance(userLatLng, hospitalLatLng) <= 20) {
+                if (calculateDistance(userLatLng, hospitalLatLng) <= dist) {
                     showNotification(targetHospital, targetAlert);
                 }
             });

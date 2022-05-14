@@ -58,7 +58,6 @@ public class HomeFragment extends Fragment {
     User currUser;
     Boolean showPermsDialog = true;
     de.hdodenhof.circleimageview.CircleImageView profilePicture;
-    SwitchMaterial pushN;
 
 
     final ActivityResultLauncher<String> bgLocationRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
@@ -114,7 +113,6 @@ public class HomeFragment extends Fragment {
         TextView lvlTV = view.findViewById(R.id.lvlTV);
         TextView nextLvlTV = view.findViewById(R.id.nextLvlTV);
         ImageView qrIV = view.findViewById(R.id.qrImageView);
-        pushN = view.findViewById(R.id.pushNotifSwitch);
         emailTextView = view.findViewById(R.id.hosp_emailTextView);
         profilePicture = view.findViewById(R.id.profilePic);
 
@@ -122,24 +120,11 @@ public class HomeFragment extends Fragment {
         Udao.getUser().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-
-                //Toggle Switch Listener
-                pushN.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked){
-                            handleBgLoc();
-                        }
-                        else {
-                            setNotifications(false,currUser);
-                        }
-                    }
-                });
-
-
-
                 //Get logged in user information
                 currUser=dataSnapshot.getValue(User.class);
+                if (currUser.getNotifications()){
+                    handleBgLoc();
+                }
                 try {
                     qrIV.setImageBitmap(qrEncoder.encodeAsBitmap("BLCL:"+currUser.getId()));
                 } catch (WriterException e) {
@@ -150,7 +135,6 @@ public class HomeFragment extends Fragment {
                 nextLvlTV.setText(getResources().getString(R.string.new_lvl_xp, (LevelHandler.getLvlXpCap(LevelHandler.getLevel(currUser.getXp())) - currUser.getXp()), LevelHandler.getLevel(currUser.getXp()) + 1));
                 bloodTypeTV.setText(currUser.getBloodType());
                 fullNameTextView.setText(currUser.getFullName());
-                pushN.setChecked(currUser.getNotifications());
                 emailTextView.setText(currUser.getEmail());
                 try {
                     File localFile = File.createTempFile(currUser.getId(), "jpg");
@@ -190,7 +174,6 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             setNotifications(false,currUser);
-                            pushN.setChecked(false);
                             dialog.dismiss();
                             showPermsDialog = true;
                         }
@@ -205,7 +188,6 @@ public class HomeFragment extends Fragment {
         if (state) {
             FirebaseMessaging.getInstance().subscribeToTopic(currUser.getTopic());
             currUser.setNotifications(true);
-            pushN.setChecked(true);
             if (!currUser.notifFirstTime) {
                 currUser.setXp(currUser.getXp() + 10);
                 currUser.notifFirstTime = true;
@@ -218,7 +200,6 @@ public class HomeFragment extends Fragment {
         else{
             FirebaseMessaging.getInstance().unsubscribeFromTopic(currUser.getTopic());
             currUser.setNotifications(false);
-            pushN.setChecked(false);
             currUser.updateSelf();
         }
     }

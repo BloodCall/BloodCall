@@ -70,6 +70,7 @@ public class LauncherActivity extends AppCompatActivity {
         unregisterNetwork();
     }
 
+
     protected void unregisterNetwork() {
         try {
             unregisterReceiver(broadcastReceiver);

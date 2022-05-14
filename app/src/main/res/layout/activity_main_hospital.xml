@@ -48,7 +48,7 @@
                 app:srcCompat="@drawable/ic_stylized_text" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/settings_btn_hosp"
                 android:layout_width="37dp"
                 android:layout_height="0dp"
                 android:background="@color/changed_red"

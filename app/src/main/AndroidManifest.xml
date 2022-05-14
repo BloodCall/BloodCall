@@ -15,6 +15,18 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Activities.UserSettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_user_settings"
+            android:parentActivityName=".Activities.MainActivity"
+            android:theme="@style/AuxTheme" />
+        <activity
+            android:name=".Activities.HospitalActivities.HospitalSettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_hospital_settings"
+            android:parentActivityName=".Activities.MainActivity"
+            android:theme="@style/AuxTheme" />
+        <activity
             android:name=".Activities.AboutActivity"
             android:exported="false"
             android:theme="@style/AuxTheme" />

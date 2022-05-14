@@ -92,4 +92,6 @@
     <string name="enter_your_current_password">Εισάγετε τον τρέχον κωδικό...</string>
     <string name="apply">Εφαρμογή</string>
     <string name="list_warning">Σύμφωνα με τον Ερυθρό Σταυρό, θα πρέπει να δίνετε αίμα μία φορά κάθε 56 ημέρες. Για περισσότερες πληροφορίες, συμβουλευτείτε έναν γιατρό. Παρακαλούμε μην επιχειρήσετε ενέργειες που μπορεί να σας βλάψουν για να αποκτήσετε υψηλότερη κατάταξη.</string>
+    <string name="title_activity_hospital_settings">Ρυθμίσεις</string>
+    <string name="title_activity_user_settings">Ρυθμίσεις</string>
 </resources>
