@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,14 +38,36 @@ public class MapDialogFragment extends DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.map_dialog,container,false);
+
         TextView dismissTV = view.findViewById(R.id.textView15);
+        CheckBox regularCb = view.findViewById(R.id.bloodCheckBox);
+        CheckBox platCb = view.findViewById(R.id.plateletsCheckBox);
+        CheckBox plasmaCb = view.findViewById(R.id.plasmaCheckBox);
+
         dismissTV.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("CommitPrefEdits")
             @Override
             public void onClick(View view) {
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-                //here
-                preferences.edit().putString("balls","balls").apply();
+
+                if(regularCb.isChecked()){
+                    preferences.edit().putString("regular","0").apply();
+                }else{
+                    preferences.edit().putString("regular","null").apply();
+                }
+                if(platCb.isChecked()){
+                    preferences.edit().putString("platelets","1").apply();
+
+                }else{
+                    preferences.edit().putString("platelets","null").apply();
+                }
+                if(plasmaCb.isChecked()){
+                    preferences.edit().putString("plasma","2").apply();
+
+                }else{
+                    preferences.edit().putString("plasma","null").apply();
+                }
+
                 dismiss();
             }
         });
