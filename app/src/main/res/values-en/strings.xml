@@ -77,7 +77,7 @@
         of the navigation drawer-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="add_new_alert">Add New Alert</string>
-    <string name="new_alert_text">What kind of blood does the patient have? \n\n Alert will be sent to all compatible blood types</string>
+    <string name="new_alert_text">What type of blood does the patient have? \n\n Alert will be sent to all compatible blood types</string>
     <string name="create_alert_btn">Create Alert</string>
     <string name="hospital_mode">HOSPITAL MODE</string>
     <string name="marker_type_1">Address: %1$s \n Organized By: %2$s \n\n Date: %3$s \n\n Email: %4$s</string>
@@ -101,10 +101,10 @@
     <string name="qr_fail_1">Invalid QR code!</string>
     <string name="qr_fail_2">Could not check in user!</string>
     <string name="check_in">Check in</string>
-    <string name="my_history">Blood Donation History</string>
+    <string name="my_history">Blood History</string>
     <string name="navigate">Navigate</string>
     <string name="close">CLOSE</string>
-    <string name="qr_text">This is your QR code. Show this to hospital staff in order to be checked in</string>
+    <string name="qr_text">This is your QR code. \n\nShow this to hospital staff in order to be checked in.</string>
     <string name="bg_loc_title">Background Location Access is needed.</string>
     <string name="bg_loc_text">In order for the emergency notifications to work, you need to provide background notification permission. Do that now?</string>
     <string name="notif_first_time">Thank you for turning on push notifications! You have been awarded 10 XP!</string>
@@ -118,7 +118,7 @@
     <string name="icons_disc">Icons from logomakr.com and Android default resources.</string>
     <string name="enable_location_title">Please enable the location setting on your device.</string>
     <string name="enable_location_text">This application requires the location setting on your phone to be enabled in order to display the map, and send you geographically filtered notifications. Please turn it on to continue</string>
-    <string name="leaderboard" translatable="false">Top Contributors</string>
+    <string name="leaderboard" translatable="false">Contributors</string>
     <string name="please_include_zip_code">Please include zip code</string>
     <string name="edit_profile">EDIT PROFILE</string>
     <string name="change_password">CHANGE PASSWORD</string>

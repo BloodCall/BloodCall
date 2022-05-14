@@ -104,7 +104,7 @@
     <string name="my_history">Blood Donation History</string>
     <string name="navigate">Navigate</string>
     <string name="close">CLOSE</string>
-    <string name="qr_text">This is your QR code. Show this to hospital staff in order to be checked in</string>
+    <string name="qr_text">This is your QR code. \n\nShow this to hospital staff in order to be checked in.</string>
     <string name="bg_loc_title">Background Location Access is needed.</string>
     <string name="bg_loc_text">In order for the emergency notifications to work, you need to provide background notification permission. Do that now?</string>
     <string name="notif_first_time">Thank you for turning on push notifications! You have been awarded 10 XP!</string>
@@ -121,7 +121,7 @@
     <string name="enable_location_title">Please enable the location setting on your device.</string>
     <string name="enable_location_text">This application requires the location setting on your phone to be enabled in order to display the map, and send you geographically filtered notifications. Please turn it on to continue</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="leaderboard">Top Contributors</string>
+    <string name="leaderboard">Contributors</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="edit_profile">EDIT PROFILE</string>
     <string name="update">UPDATE</string>

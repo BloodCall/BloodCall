@@ -219,6 +219,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/qr_text"
+        android:textAlignment="center"
         android:theme="@style/LauncherTheme"
         app:layout_constraintBottom_toTopOf="@+id/qrImageView"
         app:layout_constraintEnd_toEndOf="parent"

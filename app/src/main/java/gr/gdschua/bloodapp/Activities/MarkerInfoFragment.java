@@ -2,6 +2,7 @@ package gr.gdschua.bloodapp.Activities;
 
 import static android.view.View.LAYER_TYPE_SOFTWARE;
 
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -215,5 +216,6 @@ public class MarkerInfoFragment extends DialogFragment {
         windowParams.flags |= WindowManager.LayoutParams.FLAG_DIM_BEHIND;
         window.setAttributes(windowParams);
     }
+
 
 }
