@@ -2,29 +2,46 @@ package gr.gdschua.bloodapp.Activities.HospitalActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
 
 import gr.gdschua.bloodapp.Activities.AboutActivity;
 import gr.gdschua.bloodapp.Activities.LauncherActivity;
-import gr.gdschua.bloodapp.Activities.MainActivity;
+import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
+import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
 
 public class HospitalSettingsActivity extends AppCompatActivity {
 
+    static DAOHospitals daoHosp = new DAOHospitals();
+    static Hospital currHosp;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        daoHosp.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                currHosp = task.getResult().getValue(Hospital.class);
+            }
+        });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity_hospital);
         if (savedInstanceState == null) {
@@ -44,6 +61,18 @@ public class HospitalSettingsActivity extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.hospital_prefrences, rootKey);
+
+            MultiSelectListPreference multiSelectListPreference = findPreference("donation_type");
+            Objects.requireNonNull(multiSelectListPreference).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    Object [] prefs = ((HashSet<String>) newValue).toArray();
+                    currHosp.setAccepts(Arrays.asList(prefs));
+                    currHosp.updateSelf();
+                    return true;
+                }
+            });
+
             Preference oss_btn = findPreference(getString(R.string.settings_toolbar));
             Objects.requireNonNull(oss_btn).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override

@@ -4,12 +4,21 @@ import com.google.firebase.database.Exclude;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
+
 public class Hospital {
+    private List<Object> accepts;
     private String name, email, id, address;
     private double lat, lon;
     private int serviced;
+
+    @Exclude
+    public void updateSelf(){
+        new DAOHospitals().updateUser(this);
+    }
 
     public Hospital() {
     }
@@ -33,6 +42,14 @@ public class Hospital {
 
     public String getId() {
         return id;
+    }
+
+    public List<Object> getAccepts() {
+        return accepts;
+    }
+
+    public void setAccepts(List<Object> accepts) {
+        this.accepts = accepts;
     }
 
     public void setId(String id) {

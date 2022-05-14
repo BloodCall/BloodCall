@@ -6,9 +6,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +24,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationRequest;
@@ -36,11 +37,16 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import gr.gdschua.bloodapp.Activities.HospitalActivities.HospitalSettingsActivity;
+import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
+import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
@@ -55,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     final BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
     final DAOUsers Udao = new DAOUsers();
+    Hospital currHosp;
     User currUser;
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -142,6 +149,21 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         NavigationUI.setupWithNavController(bottomNav, navController);
+
+        DAOHospitals daoHosp = new DAOHospitals();
+
+        daoHosp.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                currHosp = task.getResult().getValue(Hospital.class);
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                Set<String> don_types = preferences.getStringSet("donation_type", new HashSet<>(Arrays.asList("0", "1", "2")));
+                currHosp.setAccepts(new ArrayList<>(don_types));
+                currHosp.updateSelf();
+            }
+        });
+
+
 
         findViewById(R.id.settings_btn_hosp).setOnClickListener(new View.OnClickListener() {
             @Override

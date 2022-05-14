@@ -1,5 +1,19 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:icon="@drawable/ic_blood_drop">
+
+    <PreferenceCategory android:title="Hospital Settings">
+
+        <MultiSelectListPreference
+            android:defaultValue="@array/donation_types"
+            android:entryValues="@array/donation_types"
+            android:entries="@array/donation_types_strings"
+            android:key="donation_type"
+            android:summary="Select what kind of donations you are currently accepting"
+            android:title="Donation Type"
+            app:icon="@drawable/ic_blood_drop" />
+
+    </PreferenceCategory>
 
 
     <PreferenceCategory android:title="Information">
