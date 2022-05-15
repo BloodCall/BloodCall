@@ -66,7 +66,7 @@ public class HospitalSettingsActivity extends AppCompatActivity {
             Objects.requireNonNull(multiSelectListPreference).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    Object [] prefs = ((HashSet<String>) newValue).toArray();
+                    String [] prefs = ((HashSet<String>) newValue).toArray(new String[3]);
                     currHosp.setAccepts(Arrays.asList(prefs));
                     currHosp.updateSelf();
                     return true;

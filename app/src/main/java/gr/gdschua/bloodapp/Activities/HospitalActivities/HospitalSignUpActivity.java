@@ -57,7 +57,7 @@ public class HospitalSignUpActivity extends AppCompatActivity {
                                     Geocoder geocoder = new Geocoder(HospitalSignUpActivity.this, Locale.getDefault());
                                     try {
                                         List<Address> latLonList = geocoder.getFromLocationName(addr.getText().toString(), 1);
-                                        Hospital newUser = new Hospital(name.getText().toString(), email.getText().toString(), latLonList.get(0).getLatitude(), latLonList.get(0).getLongitude(),addr.getText().toString());
+                                        Hospital newUser = new Hospital(name.getText().toString(), email.getText().toString(), latLonList.get(0).getLatitude(), latLonList.get(0).getLongitude(),addr.getText().toString() , null);
 
                                         dao.insertUser(newUser).addOnSuccessListener(suc -> {
                                             Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.succ_reg), Toast.LENGTH_LONG).show();

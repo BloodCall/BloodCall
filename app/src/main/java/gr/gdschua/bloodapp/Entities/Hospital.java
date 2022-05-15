@@ -10,7 +10,7 @@ import java.util.Map;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 
 public class Hospital {
-    private List<Object> accepts;
+    private List<String> accepts;
     private String name, email, id, address;
     private double lat, lon;
     private int serviced;
@@ -23,13 +23,14 @@ public class Hospital {
     public Hospital() {
     }
 
-    public Hospital(String name, String email, double lat, double lon, String address) {
+    public Hospital(String name, String email, double lat, double lon, String address,List<String> accepts) {
         this.name = name;
         this.email = email;
         this.lat = lat;
         this.lon = lon;
         this.address = address;
         this.serviced=0;
+        this.accepts = accepts;
     }
 
     public String getName() {
@@ -44,11 +45,11 @@ public class Hospital {
         return id;
     }
 
-    public List<Object> getAccepts() {
+    public List<String> getAccepts() {
         return accepts;
     }
 
-    public void setAccepts(List<Object> accepts) {
+    public void setAccepts(List<String> accepts) {
         this.accepts = accepts;
     }
 

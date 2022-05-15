@@ -13,6 +13,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -27,7 +28,9 @@ public class DAOHospitals {
     }
 
     public static Hospital mapToHospital(Map singleHospital) {
-        return new Hospital(Objects.requireNonNull(singleHospital.get("name")).toString(), Objects.requireNonNull(singleHospital.get("email")).toString(), (double) singleHospital.get("lat"), (double) singleHospital.get("lon"), Objects.requireNonNull(singleHospital.get("address")).toString());
+        return new Hospital(Objects.requireNonNull(singleHospital.get("name")).toString(), Objects.requireNonNull(singleHospital.get("email")).toString(),
+                (double) singleHospital.get("lat"), (double) singleHospital.get("lon"), Objects.requireNonNull(singleHospital.get("address")).toString() ,
+                (List<String>) singleHospital.get("accepts"));
     }
 
     public Task<Void> insertUser(Hospital newUser) {

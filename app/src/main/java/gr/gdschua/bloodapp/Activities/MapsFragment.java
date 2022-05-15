@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOEvents;
@@ -115,7 +117,7 @@ public class MapsFragment extends Fragment implements MyDialogCloseListener {
             MyDialogCloseListener closeListener = new MyDialogCloseListener() {
                 @Override
                 public void handleDialogClose(DialogInterface dialog) {
-                    SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
                     placeMarkers();
                 }
             };
@@ -140,6 +142,11 @@ public class MapsFragment extends Fragment implements MyDialogCloseListener {
     private void placeMarkers() {
         ArrayList<Event> events = daoEvents.getAllEvents();
         ArrayList<Hospital> hospitals = daoHospitals.getAllHospitals();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        String regularBlood = preferences.getString("regular","null");
+        String platelets = preferences.getString("platelets","null");
+        String plasma = preferences.getString("plasma","null");
 
         if (events.size() > 0) {
             for (int i = 0; i < events.size(); i++) {
@@ -150,7 +157,19 @@ public class MapsFragment extends Fragment implements MyDialogCloseListener {
         if (hospitals.size() > 0) {
             for (int i = 0; i < hospitals.size(); i++) {
                 LatLng hospitalLatLong = new LatLng(hospitals.get(i).getLat(), hospitals.get(i).getLon());
-                Objects.requireNonNull(map.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()).snippet("Hospital"))).setTag(hospitals.get(i));
+                List<String> accepts = hospitals.get(i).getAccepts();
+
+                if( accepts != null){
+
+                    for(int j=0; j< accepts.size();j++){
+
+                        if(accepts.get(j).equals(regularBlood) || accepts.get(j).equals(platelets) || accepts.get(j).equals(plasma) ){
+                            Objects.requireNonNull(map.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()).snippet("Hospital")))
+                                    .setTag(hospitals.get(i));
+                        }
+
+                    }
+                }
             }
         }
     }
