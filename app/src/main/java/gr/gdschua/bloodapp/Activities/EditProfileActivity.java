@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -47,6 +48,12 @@ public class EditProfileActivity extends AppCompatActivity {
     Bitmap profilePictureBitmap;
 
     @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
@@ -58,6 +65,11 @@ public class EditProfileActivity extends AppCompatActivity {
         Spinner posNegSpinner = findViewById(R.id.bloodtype_spinner_pos_neg);
         Button updateBtn = findViewById(R.id.updateBtn);
         Button changePwBtn = findViewById(R.id.changePasswordBtn);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         final ActivityResultLauncher<Intent> launchGalleryActivity = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),

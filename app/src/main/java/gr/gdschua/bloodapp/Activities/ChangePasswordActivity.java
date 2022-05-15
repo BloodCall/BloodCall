@@ -1,6 +1,7 @@
 package gr.gdschua.bloodapp.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +29,13 @@ import gr.gdschua.bloodapp.R;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +45,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
         EditText repeatNewPW = findViewById(R.id.newPW_2);
         Button applyBTN = findViewById(R.id.button);
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         new DAOUsers().getUser().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
@@ -44,7 +57,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (!newPW.getText().toString().equals(repeatNewPW.getText().toString())){
-                            new AlertDialog.Builder(getApplicationContext())
+                            new AlertDialog.Builder(ChangePasswordActivity.this)
                                     .setMessage("Please check that you have inputted the same password in both fields.")
                                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                         public void onClick(DialogInterface dialog, int which) {
@@ -73,7 +86,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                                                     }
                                                 });
                                             } else {
-                                                new AlertDialog.Builder(getApplicationContext())
+                                                new AlertDialog.Builder(ChangePasswordActivity.this)
                                                         .setMessage("You have entered your current password wrong. Please try again.")
                                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                                             public void onClick(DialogInterface dialog, int which) {
