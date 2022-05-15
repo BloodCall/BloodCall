@@ -1,5 +1,7 @@
 # BloodCall
 
+🏆- Top 50 - GDSC Solution Challenge 2022
+
 <img src="https://firebase.google.com/downloads/brand-guidelines/PNG/logo-built_white.png" width="100"/> <img src="https://1000logos.net/wp-content/uploads/2020/05/Google-Maps-Logo.png" width="100"/>  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/2346px-Android_logo_2019_%28stacked%29.svg.png" width="100">
 
 Android app developed for GDSC solution challenge 2022 , that aims to make blood donation an easier task for everyone involved.
