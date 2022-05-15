@@ -141,6 +141,17 @@ public class UserSettingsActivity extends AppCompatActivity {
                 }
             });
 
+            Preference editProfile = findPreference("edit_profile");
+
+            Objects.requireNonNull(editProfile).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getContext(),EditProfileActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });
+
             ListPreference push_n_dist = findPreference("notifs_distance");
 
             SwitchPreference push_n_switch = findPreference("push_notif_switch");

@@ -187,6 +187,7 @@
                 app:autoSizeStepGranularity="3sp"
                 app:autoSizeTextType="uniform"
                 app:drawableStartCompat="@drawable/ic_blood_drop"
+                app:drawableTint="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

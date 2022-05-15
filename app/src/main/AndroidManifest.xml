@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="gr.gdschua.bloodapp">
+    package="gr.gdschua.bloodapp" >
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -13,7 +13,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".Activities.ChangePasswordActivity"
+            android:theme="@style/AuxTheme"
+            android:label="Change Password"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.EditProfileActivity"
+            android:theme="@style/AuxTheme"
+            android:label="Edit Profile"
+            android:exported="false" />
         <activity
             android:name=".Activities.UserSettingsActivity"
             android:exported="false"
@@ -48,7 +58,7 @@
 
         <service
             android:name=".Utils.NotificationReceiverSvc"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -86,7 +96,7 @@
             android:name=".Activities.LauncherActivity"
             android:exported="true"
             android:launchMode="singleInstance"
-            android:theme="@style/LauncherTheme">
+            android:theme="@style/LauncherTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

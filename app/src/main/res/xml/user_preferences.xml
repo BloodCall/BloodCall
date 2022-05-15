@@ -40,10 +40,19 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Account">
+
+        <Preference
+            android:id="@+id/user_settings_edit_profile"
+            android:key="edit_profile"
+            android:title="Edit Profile"
+            android:summary="Change your profile information, as well as your password"
+            app:icon="@drawable/ic_baseline_edit_24" />
+
         <Preference
             android:id="@+id/user_settings_sign_out"
             android:key="@string/side_bar_signout"
             android:title="@string/side_bar_signout"
             app:icon="@drawable/ic_signout_24" />
+
     </PreferenceCategory>
 </PreferenceScreen>
