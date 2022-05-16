@@ -16,9 +16,9 @@
             android:title="@string/side_bar_map" />
 
         <item
-            android:id="@+id/nav_leaderboard"
-            android:icon="@drawable/ic_baseline_leaderboard_24"
-            android:title="@string/leaderboard" />
+            android:id="@+id/nav_community"
+            android:icon="@drawable/ic_baseline_people_alt_24"
+            android:title="Community" />
 
         <item
             android:id="@+id/nav_history"
