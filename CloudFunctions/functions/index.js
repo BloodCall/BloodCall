@@ -23,6 +23,19 @@ exports.leaderboard = functions.region('europe-west1').https.onRequest((request,
       });
 });
 
+exports.getPosts = functions.region('europe-west1').https.onRequest((request, response) => {
+  const posts = [];
+  admin.database().ref('/Posts/')
+      .once('value')
+      .then((results) => {
+        results.forEach((snapshot) => {
+          posts.push(snapshot.val());
+        });
+        posts.sort((a, b) => (new Date(a.dateStamp) < new Date(b.dateStamp) ?1 : -1));
+        response.send(posts);
+      });
+});
+
 exports.eventAdded = functions.region('europe-west1').database.ref('/Events/{event_id}')
     .onCreate((snapshot, context) => {
       const eventData=snapshot.val();
