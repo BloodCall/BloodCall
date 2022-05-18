@@ -4,21 +4,23 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
 public class Event {
     private final String id;
-    private String Name;
-    private String Date;
-    private String Owner;
+    private String name;
+    private String date;
+    private String owner;
     private double lat, lon;
 
     public Event(String name, String date, String owner, double lat, double lon) {
-        Name = name;
-        Date = date;
-        Owner = owner;
+        this.name = name;
+        this.date = date;
+        this.owner = owner;
         this.lat = lat;
         this.lon = lon;
         id = UUID.randomUUID().toString();
@@ -29,6 +31,7 @@ public class Event {
         return id;
     }
 
+    @Exclude
     public String getAddress(Context context) {
         String strAdd = "";
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
@@ -49,27 +52,27 @@ public class Event {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public String getDate() {
-        return Date;
+        return date;
     }
 
     public void setDate(String date) {
-        Date = date;
+        this.date = date;
     }
 
     public String getOwner() {
-        return Owner;
+        return owner;
     }
 
     public void setOwner(String owner) {
-        Owner = owner;
+        this.owner = owner;
     }
 
     public double getLat() {

@@ -8,7 +8,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -27,14 +26,19 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
 
+import java.util.Random;
+
+import gr.gdschua.bloodapp.Activities.MainActivity;
 import gr.gdschua.bloodapp.Activities.NotificationInfoActivity;
 import gr.gdschua.bloodapp.Entities.Alert;
+import gr.gdschua.bloodapp.Entities.Event;
 import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
 
 public class NotificationReceiverSvc extends FirebaseMessagingService {
 
     final Gson gson = new Gson();
+    Random rand = new Random();
 
     @Override
     public void onNewToken(@NonNull String s) {
@@ -46,10 +50,13 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
     @Override
     public void
     onMessageReceived(RemoteMessage remoteMessage) {
-        Integer dist = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("notifs_distance", "20"));
+        int emerg_dist = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("notifs_distance", "20"));
+        int event_dist = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(this).getString("notifs_event_distance", "20"));
+        boolean event_notif_enabled = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("push_notif_switch_events",true);
         Log.d("notif", "msg recieved");
         Alert targetAlert = gson.fromJson(remoteMessage.getData().get("alert"), Alert.class);
         Hospital targetHospital = gson.fromJson(remoteMessage.getData().get("hospital"), Hospital.class);
+        Event targetEvent = gson.fromJson(remoteMessage.getData().get("event"), Event.class);
 
         FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
         //not sure if this if actually works
@@ -59,9 +66,17 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
                 Location userLocation = task.getResult();
                 LatLng userLatLng = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
                 Log.d("notif", "location available " + userLatLng.latitude + " , " + userLatLng.longitude);
-                LatLng hospitalLatLng = new LatLng(targetHospital.getLat(), targetHospital.getLon());
-                if (calculateDistance(userLatLng, hospitalLatLng) <= dist) {
-                    showNotification(targetHospital, targetAlert);
+                if (targetHospital!= null) {
+                    LatLng hospitalLatLng = new LatLng(targetHospital.getLat(), targetHospital.getLon());
+                    if (calculateDistance(userLatLng, hospitalLatLng) <= emerg_dist) {
+                        showNotificationEmergency(targetHospital, targetAlert);
+                    }
+                }
+                else if (targetEvent != null && event_notif_enabled){
+                    LatLng eventLatLng = new LatLng(targetEvent.getLat(), targetEvent.getLon());
+                    if (calculateDistance(userLatLng, eventLatLng) <= event_dist) {
+                        showNotificationEvent(targetEvent);
+                    }
                 }
             });
         }
@@ -69,7 +84,7 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
 
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    public PendingIntent buildIntent(Hospital hospital, Alert alert) {
+    public PendingIntent buildIntentEmergency(Hospital hospital, Alert alert) {
         Intent intent = new Intent(this, NotificationInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Bundle b = new Bundle();
@@ -89,14 +104,14 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
     }
 
 
-    public void showNotification(Hospital hospital, Alert alert) {
+    public void showNotificationEmergency(Hospital hospital, Alert alert) {
         NotificationCompat.Builder builder = new NotificationCompat
                 .Builder(getApplicationContext(), "emerg_notif_chan")
                 .setAutoCancel(true)
                 .setContentText(String.format(getString(R.string.notif_text_template), hospital.getName())) //just to cover all android versions/oem skins
                 .setSmallIcon(R.drawable.ic_blood_drop)
                 .setContentTitle(getResources().getString(R.string.notif_title))
-                .setContentIntent(buildIntent(hospital, alert))
+                .setContentIntent(buildIntentEmergency(hospital, alert))
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(String.format(getString(R.string.notif_text_template), hospital.getName())));
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -105,6 +120,38 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(notificationChannel);
         }
         notificationManager.notify(alert.getId(), builder.build());
+    }
+
+    @SuppressLint("UnspecifiedImmutableFlag")
+    public PendingIntent buildIntentEvent(Event event) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            pendingIntent = PendingIntent.getActivity(this,rand.nextInt() , intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_MUTABLE);
+        } else {
+            pendingIntent = PendingIntent.getActivity(this, rand.nextInt(), intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        }
+        return pendingIntent;
+    }
+
+
+    public void showNotificationEvent(Event event) {
+        NotificationCompat.Builder builder = new NotificationCompat
+                .Builder(getApplicationContext(), "event_notif_chan")
+                .setAutoCancel(true)
+                .setContentText("Event "+event.getName()+" has been created near you! Click here to open the app.") //just to cover all android versions/oem skins
+                .setSmallIcon(R.drawable.ic_blood_drop)
+                .setContentTitle("Check out this new event near you!")
+                .setContentIntent(buildIntentEvent(event))
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Event "+event.getName()+" has been created near you! Click here to open the app."));
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel = new NotificationChannel("event_notif_chan", "Events", NotificationManager.IMPORTANCE_DEFAULT);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+        notificationManager.notify(rand.nextInt(), builder.build());
     }
 
     //Haversine formula

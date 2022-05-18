@@ -129,6 +129,19 @@ public class UserSettingsActivity extends AppCompatActivity {
             }
         }
 
+        public void setEventNotifications(Boolean state, User currUser){
+            if (state) {
+                FirebaseMessaging.getInstance().subscribeToTopic("events");
+                currUser.setEventNotifs(true);
+                currUser.updateSelf();
+            }
+            else{
+                FirebaseMessaging.getInstance().unsubscribeFromTopic("events");
+                currUser.setEventNotifs(false);
+                currUser.updateSelf();
+            }
+        }
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.user_preferences, rootKey);
@@ -159,6 +172,30 @@ public class UserSettingsActivity extends AppCompatActivity {
             if(push_n_switch.isChecked()){
                 push_n_dist.setVisible(true);
             }
+
+            ListPreference push_n_e_dist = findPreference("notifs_event_distance");
+            SwitchPreference push_n_e_switch = findPreference("push_notif_switch_events");
+
+            if(push_n_e_switch.isChecked()){
+                push_n_e_dist.setVisible(true);
+            }
+
+            push_n_e_switch.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.M)
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    if (push_n_e_switch.isChecked()){
+                        push_n_e_dist.setVisible(true);
+                        setEventNotifications(true,currUser);
+                    }
+                    else{
+                        push_n_e_dist.setVisible(false);
+                        setEventNotifications(false,currUser);
+                    }
+                    return true;
+                }
+            });
+
             push_n_switch.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.M)
                 @Override
@@ -190,6 +227,8 @@ public class UserSettingsActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     FirebaseAuth.getInstance().signOut();
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic(currUser.getTopic());
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic("events");
                     Intent intent = new Intent(getContext(), LauncherActivity.class);
                     startActivity(intent);
                     getActivity().finishAffinity();
