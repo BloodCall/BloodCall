@@ -15,7 +15,23 @@
             android:entryValues="@array/distances"
             android:key="notifs_distance"
             android:summary="Select the distance of the hospitals you want to receive alerts from"
-            android:title="Notification Distance"
+            android:title="Emergency Notification Distance"
+            app:icon="@drawable/ic_baseline_my_location_24"
+            app:isPreferenceVisible="false" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="push_notif_switch_events"
+            android:title="Recieve event notifications"
+            app:icon="@drawable/ic_baseline_calendar_today_24" />
+
+        <ListPreference
+            android:defaultValue="20"
+            android:entries="@array/distances_strings"
+            android:entryValues="@array/distances"
+            android:key="notifs_event_distance"
+            android:summary="Select the distance of the events you want to receive alerts from"
+            android:title="Event Notification Distance"
             app:icon="@drawable/ic_baseline_my_location_24"
             app:isPreferenceVisible="false" />
 

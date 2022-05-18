@@ -23,6 +23,28 @@ exports.leaderboard = functions.region('europe-west1').https.onRequest((request,
       });
 });
 
+exports.eventAdded = functions.region('europe-west1').database.ref('/Events/{event_id}')
+    .onCreate((snapshot, context) => {
+      const eventData=snapshot.val();
+      const messageCondition='\'events\' in topics';
+      console.log(messageCondition + ' message condition');
+      const message = {
+        data: {
+          event: JSON.stringify(eventData),
+        },
+        condition: messageCondition,
+      };
+      console.log(message);
+      admin.messaging().send(message)
+          .then((response)=>{
+            console.log('Successfully sent message:', response);
+          }).catch((error) => {
+            console.log('Error sending message:', error);
+          });
+    }, (errorObject) => {
+      console.log('The read failed: ' + errorObject.name);
+    });
+
 exports.alertAdded = functions.region('europe-west1').database.ref('/Alerts/{alert_id}')
     .onCreate((snapshot, context) => {
       const alertData=snapshot.val();
