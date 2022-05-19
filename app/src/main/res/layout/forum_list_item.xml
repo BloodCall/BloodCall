@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/barlow_medium"
-            android:text="dfqw3qwfqw"
+            android:layout_marginStart="15dp"
             android:textColor="@color/ic_launcher_background"
             android:textSize="16sp"/>
 
@@ -25,7 +25,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/barlow_medium"
-            android:text="Professional"
             android:textColor="@color/browser_actions_text_color"
             android:textSize="12sp" />
     </LinearLayout>
@@ -35,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="I love loli hentai"
+        android:layout_marginStart="5dp"
         android:textColor="@color/ic_launcher_background"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -57,9 +56,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginStart="5dp"
             android:fontFamily="@font/barlow_medium"
-            android:text="10"
             android:textColor="@color/browser_actions_text_color"
-            android:textSize="14sp" />/>
+            android:textSize="14sp" />
     </LinearLayout>
 
 
