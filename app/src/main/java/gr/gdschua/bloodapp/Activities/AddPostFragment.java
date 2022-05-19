@@ -10,8 +10,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -83,14 +86,26 @@ public class AddPostFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_post, container, false);
         Button addPostBtn = view.findViewById(R.id.createPostButton);
+
+
+        Spinner dropdown = view.findViewById(R.id.flairSpinner);
+        String[] items = new String[]{"Question", "Experience"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), R.layout.my_selected_item, items);
+        adapter.setDropDownViewResource(R.layout.my_dropdown_item);
+        dropdown.setAdapter(adapter);
+
         addPostBtn.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
+
                 EditText postTitle = view.findViewById(R.id.postTitleEditText);
                 String postTitleStr = postTitle.getText().toString();
                 EditText postBody = view.findViewById(R.id.postBodyEditText);
                 String postBodyStr = postBody.getText().toString();
+                TextView textView = (TextView)dropdown.getSelectedView();
+                String flair = textView.getText().toString();
+
                 daoUsers.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -101,7 +116,8 @@ public class AddPostFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                                     currHospital = task.getResult().getValue(Hospital.class);
-                                    Post currPost = new Post(currHospital.getName(),"unavailable",postTitleStr,postBodyStr,"idk what here","Professional");
+
+                                    Post currPost = new Post(currHospital.getName(),"unavailable",postTitleStr,postBodyStr,flair,"Professional");
                                     daoPosts.insertPost(currPost).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
@@ -114,7 +130,7 @@ public class AddPostFragment extends Fragment {
                             });
                         }
                         else {
-                            Post currPost = new Post(currUser.getFullName(),String.valueOf(LevelHandler.getLevel(currUser.getXp())),postTitleStr,postBodyStr,"idk what here","User");
+                            Post currPost = new Post(currUser.getFullName(),String.valueOf(LevelHandler.getLevel(currUser.getXp())),postTitleStr,postBodyStr,flair,"User");
                             daoPosts.insertPost(currPost).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

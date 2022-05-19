@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start|top"
         android:fontFamily="@font/barlow_medium"
-        android:text="Create a post"
-        android:textColor="#8C8888"
+        android:text="Create a Post"
+        android:textColor="@color/ic_launcher_background"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,11 +25,12 @@
     <EditText
         android:id="@+id/postTitleEditText"
         android:layout_width="321dp"
-        android:layout_height="39dp"
+        android:layout_height="48dp"
+        android:paddingLeft="5dp"
         android:background="@drawable/borders_making"
         android:ems="10"
+        android:fontFamily="@font/barlow_medium"
         android:hint="Enter a title"
-        android:inputType="none|textEmailSubject"
         android:maxLines="1"
         android:textColor="@color/changed_red"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,16 +42,18 @@
 
     <EditText
         android:id="@+id/postBodyEditText"
-        android:layout_width="325dp"
+        android:layout_width="344dp"
         android:layout_height="357dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/borders_making"
         android:ems="10"
+        android:paddingLeft="5dp"
+        android:fontFamily="@font/barlow_medium"
+        android:gravity="top|left"
         android:hint="Enter your post's text"
         android:inputType="textLongMessage|textMultiLine"
-        android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.163"
+        app:layout_constraintHorizontal_bias="0.238"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postTitleEditText" />
 
@@ -58,12 +61,51 @@
         android:id="@+id/createPostButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/barlow_medium"
         android:text="Create Post"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.947"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/postBodyEditText"
-        app:layout_constraintVertical_bias="0.494" />
+        app:layout_constraintVertical_bias="0.643" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="27dp"
+        android:layout_height="23dp"
+        android:src="@drawable/ic_add_post"
+        app:layout_constraintBottom_toTopOf="@+id/postTitleEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.035"
+        app:layout_constraintStart_toEndOf="@+id/AddPostHeader"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.691" />
+
+    <Spinner
+        android:id="@+id/flairSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/createPostButton"
+        app:layout_constraintHorizontal_bias="0.18"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/barlow_medium"
+        android:text="Post Flair"
+        android:textColor="@color/ic_launcher_background"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/flairSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postBodyEditText"
+        app:layout_constraintVertical_bias="0.946" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
