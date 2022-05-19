@@ -9,7 +9,7 @@ public class DAOPosts {
 
     public Task<Void> insertPost(Post newPost) {
 
-        return FirebaseDatabase.getInstance().getReference("Alerts")
+        return FirebaseDatabase.getInstance().getReference("Posts")
                 .child(String.valueOf(newPost.getId()))
                 .setValue(newPost);
     }

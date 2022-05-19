@@ -1,5 +1,11 @@
 package gr.gdschua.bloodapp.Entities;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 public class Post {
@@ -10,16 +16,36 @@ public class Post {
     private String body;
     private String flair;
     private String authorType;
-    private final String id;
+    private String id;
+    private String dateStamp;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public Post(String authorName, String authorLevel, String title, String body, String flair, String authorType) {
         this.authorName = authorName;
         this.authorLevel = authorLevel;
         this.title = title;
         this.body = body;
-        this.flair = flair;
-        this.authorType = authorType;
+        this.flair = flair; //question o experience
+        this.authorType = authorType; // user o hospital
         this.id = UUID.randomUUID().toString();
+        this.dateStamp = java.time.LocalDate.now().toString();
+    }
+
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDateStamp() {
+        return dateStamp;
+    }
+
+    public void setDateStamp(String dateStamp) {
+        this.dateStamp = dateStamp;
+    }
+
+    public Post(){
+
     }
 
     public String getId() {
