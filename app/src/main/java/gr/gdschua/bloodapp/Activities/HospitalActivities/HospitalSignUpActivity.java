@@ -18,7 +18,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,50 +37,44 @@ public class HospitalSignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hospital_sign_up);
         double lat, lon;
 
-        findViewById(R.id.hospSignupBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText addr = findViewById(R.id.hospSignupAddr);
-                EditText name = findViewById(R.id.hospSignupName);
-                EditText email = findViewById(R.id.hospSignupEmail);
-                EditText password = findViewById(R.id.hospSignupPass);
+        findViewById(R.id.hospSignupBtn).setOnClickListener(v -> {
+            EditText addr = findViewById(R.id.hospSignupAddr);
+            EditText name = findViewById(R.id.hospSignupName);
+            EditText email = findViewById(R.id.hospSignupEmail);
+            EditText password = findViewById(R.id.hospSignupPass);
 
 
-                mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                boolean successful=true;
-                                if (task.isSuccessful()) {
+            mAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                    .addOnCompleteListener(task -> {
+                        boolean successful = true;
+                        if (task.isSuccessful()) {
 
-                                    Geocoder geocoder = new Geocoder(HospitalSignUpActivity.this, Locale.getDefault());
-                                    try {
-                                        List<Address> latLonList = geocoder.getFromLocationName(addr.getText().toString(), 1);
-                                        Hospital newUser = new Hospital(name.getText().toString(), email.getText().toString(), latLonList.get(0).getLatitude(), latLonList.get(0).getLongitude(),addr.getText().toString() , null);
+                            Geocoder geocoder = new Geocoder(HospitalSignUpActivity.this, Locale.getDefault());
+                            try {
+                                List<Address> latLonList = geocoder.getFromLocationName(addr.getText().toString(), 1);
+                                Hospital newUser = new Hospital(name.getText().toString(), email.getText().toString(), latLonList.get(0).getLatitude(), latLonList.get(0).getLongitude(), addr.getText().toString(), null);
 
-                                        dao.insertUser(newUser).addOnSuccessListener(suc -> {
-                                            Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.succ_reg), Toast.LENGTH_LONG).show();
-                                        }).addOnFailureListener(fail -> {
-                                            Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.fail_reg) + fail.getMessage(), Toast.LENGTH_LONG).show();
-                                        });
+                                dao.insertUser(newUser).addOnSuccessListener(suc -> {
+                                    Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.succ_reg), Toast.LENGTH_LONG).show();
+                                }).addOnFailureListener(fail -> {
+                                    Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.fail_reg) + fail.getMessage(), Toast.LENGTH_LONG).show();
+                                });
 
-                                        Intent goToLogin = new Intent(HospitalSignUpActivity.this, MainActivity.class);
-                                        startActivity(goToLogin);
-                                        finish();
-                                    } catch (Exception e) {
-                                        FirebaseUser currentUser = mAuth.getCurrentUser();
-                                        currentUser.delete();
-                                        Toast.makeText(HospitalSignUpActivity.this, "Invalid address", Toast.LENGTH_LONG).show();
-                                        e.printStackTrace();
-                                    }
-                                } else {
-                                    Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.fail_reg), Toast.LENGTH_LONG).show();
-                                    Log.w("error", "signInWithCustomToken:failure", task.getException());
-                                }
+                                Intent goToLogin = new Intent(HospitalSignUpActivity.this, MainActivity.class);
+                                startActivity(goToLogin);
+                                finish();
+                            } catch (Exception e) {
+                                FirebaseUser currentUser = mAuth.getCurrentUser();
+                                currentUser.delete();
+                                Toast.makeText(HospitalSignUpActivity.this, getString(R.string.hosp_s_u_addr_err), Toast.LENGTH_LONG).show();
+                                e.printStackTrace();
                             }
-                        });
+                        } else {
+                            Toast.makeText(HospitalSignUpActivity.this, getResources().getString(R.string.fail_reg), Toast.LENGTH_LONG).show();
+                            Log.w("error", "signInWithCustomToken:failure", task.getException());
+                        }
+                    });
 
-            }
         });
     }
 

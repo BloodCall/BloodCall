@@ -78,12 +78,7 @@ public class HospitalQrScanFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_hospital_qr_scan, container, false);
         DAOHospitals daoHospitals = new DAOHospitals();
-        daoHospitals.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                currHospital = task.getResult().getValue(Hospital.class);
-            }
-        });
+        daoHospitals.getUser().addOnCompleteListener(task -> currHospital = task.getResult().getValue(Hospital.class));
         toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
         surfaceView = view.findViewById(R.id.cameraSurfaceView);
         barcodeText = view.findViewById(R.id.textScanResult);
@@ -157,30 +152,24 @@ public class HospitalQrScanFragment extends Fragment {
                                 barcodeDetector.release();
                                 FragmentTransaction ft = getParentFragmentManager().beginTransaction();
                                 DAOUsers daoUsers = new DAOUsers();
-                                daoUsers.getUser(barcodeData).addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                        currUser = task.getResult().getValue(User.class);
-                                        if (currUser != null) {
-                                            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
-                                            Date date = new Date();
-                                            currUser.checkIns.add(new CheckIn(formatter.format(date), currHospital.getName()));
-                                            currUser.setXp(currUser.getXp() + 300);
-                                            daoUsers.updateUser(currUser).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
-                                                    ScanResultFragment fragment = ScanResultFragment.newInstance("true");
-                                                    ft.replace(R.id.nav_host_fragment_content_hosp, fragment).addToBackStack(null).setReorderingAllowed(true);
-                                                    ft.commit();
-                                                }
-                                            });
-                                        } else {
-                                            toneGen1.startTone(ToneGenerator.TONE_CDMA_ALERT_NETWORK_LITE, 150);
-                                            ScanResultFragment fragment = ScanResultFragment.newInstance("false1");
+                                daoUsers.getUser(barcodeData).addOnCompleteListener(task -> {
+                                    currUser = task.getResult().getValue(User.class);
+                                    if (currUser != null) {
+                                        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+                                        Date date = new Date();
+                                        currUser.checkIns.add(new CheckIn(formatter.format(date), currHospital.getName()));
+                                        currUser.setXp(currUser.getXp() + 300);
+                                        daoUsers.updateUser(currUser).addOnSuccessListener(unused -> {
+                                            toneGen1.startTone(ToneGenerator.TONE_CDMA_PIP, 150);
+                                            ScanResultFragment fragment = ScanResultFragment.newInstance("true");
                                             ft.replace(R.id.nav_host_fragment_content_hosp, fragment).addToBackStack(null).setReorderingAllowed(true);
                                             ft.commit();
-                                        }
+                                        });
+                                    } else {
+                                        toneGen1.startTone(ToneGenerator.TONE_CDMA_ALERT_NETWORK_LITE, 150);
+                                        ScanResultFragment fragment = ScanResultFragment.newInstance("false1");
+                                        ft.replace(R.id.nav_host_fragment_content_hosp, fragment).addToBackStack(null).setReorderingAllowed(true);
+                                        ft.commit();
                                     }
                                 });
                             } else {

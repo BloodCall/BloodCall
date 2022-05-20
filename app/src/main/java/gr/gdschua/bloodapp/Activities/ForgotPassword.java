@@ -29,34 +29,28 @@ public class ForgotPassword extends AppCompatActivity {
         emailET = findViewById(R.id.forgotPassEmail);
 
 
-        findViewById(R.id.resetPassButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = emailET.getText().toString().trim();
+        findViewById(R.id.resetPassButton).setOnClickListener(v -> {
+            String email = emailET.getText().toString().trim();
 
-                if (email.isEmpty()) {
-                    emailET.setError(getResources().getString(R.string.email_req_error));
-                    emailET.requestFocus();
-                    return;
-                }
-
-                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    emailET.setError(getResources().getString(R.string.email_inv_error));
-                    emailET.requestFocus();
-                    return;
-                }
-
-                FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.res_email_succ), Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.res_email_err), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+            if (email.isEmpty()) {
+                emailET.setError(getResources().getString(R.string.email_req_error));
+                emailET.requestFocus();
+                return;
             }
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                emailET.setError(getResources().getString(R.string.email_inv_error));
+                emailET.requestFocus();
+                return;
+            }
+
+            FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.res_email_succ), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.res_email_err), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 }

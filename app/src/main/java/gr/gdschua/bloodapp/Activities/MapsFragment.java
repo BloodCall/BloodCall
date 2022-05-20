@@ -11,11 +11,9 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -96,7 +94,7 @@ public class MapsFragment extends Fragment implements MyDialogCloseListener {
         if (result) {
             handleLocation();
         } else {
-            Toast.makeText(thisContext, "We were not able to retrieve your location because you denied the permission.", Toast.LENGTH_LONG).show();
+            Toast.makeText(thisContext, getString(R.string.maps_loc_err), Toast.LENGTH_LONG).show();
         }
     });
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
@@ -114,13 +112,7 @@ public class MapsFragment extends Fragment implements MyDialogCloseListener {
 
             MapDialogFragment mapDialogFragment = new MapDialogFragment();
             mapDialogFragment.show(requireActivity().getSupportFragmentManager(), "My Fragment");
-            MyDialogCloseListener closeListener = new MyDialogCloseListener() {
-                @Override
-                public void handleDialogClose(DialogInterface dialog) {
-
-                    placeMarkers();
-                }
-            };
+            MyDialogCloseListener closeListener = dialog -> placeMarkers();
 
             mapDialogFragment.DismissListener(closeListener);
         }
@@ -203,15 +195,13 @@ public class MapsFragment extends Fragment implements MyDialogCloseListener {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 1:
-                if (resultCode == Activity.RESULT_OK) {
-                    // here the part where I get my selected date from the saved variable in the intent and the displaying it.
-                    Bundle bundle = data.getExtras();
-                    String resultDate = bundle.getString("selectedDate", "error");
-                    Toast.makeText(getContext(),"COCK " + resultDate , Toast.LENGTH_LONG).show();
-                }
-                break;
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                // here the part where I get my selected date from the saved variable in the intent and the displaying it.
+                Bundle bundle = data.getExtras();
+                String resultDate = bundle.getString("selectedDate", "error");
+                Toast.makeText(getContext(), "COCK " + resultDate, Toast.LENGTH_LONG).show();
+            }
         }
 
     }

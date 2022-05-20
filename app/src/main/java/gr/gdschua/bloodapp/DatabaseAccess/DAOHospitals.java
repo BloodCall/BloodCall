@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Objects;
 
 import gr.gdschua.bloodapp.Entities.Hospital;
-import gr.gdschua.bloodapp.Entities.User;
 
 public class DAOHospitals {
     final Map<String, Object> hospitalsMap = new HashMap<>();

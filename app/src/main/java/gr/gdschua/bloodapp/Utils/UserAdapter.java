@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,16 +17,13 @@ import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
-import gr.gdschua.bloodapp.Entities.CheckIn;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 
@@ -76,14 +72,11 @@ public class UserAdapter extends ArrayAdapter<User> {
         try {
             profilePicture.setImageDrawable(ContextCompat.getDrawable(mContext,R.drawable.default_profile));
             File localFile = File.createTempFile("uimg_"+currUser.getId(), "jpg");
-            FirebaseStorage.getInstance().getReference().child("UserImages/" + currUser.getId()).getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        profilePicture.setImageBitmap(bitmap);
-                        localFile.delete();
-                    }
+            FirebaseStorage.getInstance().getReference().child("UserImages/" + currUser.getId()).getFile(localFile).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    profilePicture.setImageBitmap(bitmap);
+                    localFile.delete();
                 }
             });
         } catch (IOException e) {
@@ -98,7 +91,7 @@ public class UserAdapter extends ArrayAdapter<User> {
 
         TextView lvl = (TextView) listItem.findViewById(R.id.userLevel_list);
         lvl.setTextColor(Color.BLACK);
-        lvl.setText("Level "+String.valueOf(LevelHandler.getLevel(currUser.getXp())));
+        lvl.setText("Level "+ LevelHandler.getLevel(currUser.getXp()));
 
         TextView xp = (TextView) listItem.findViewById(R.id.userXp_list);
         xp.setText(currUser.getXp()+" XP");

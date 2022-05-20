@@ -1,7 +1,6 @@
 package gr.gdschua.bloodapp.Activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +13,6 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,12 +29,11 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import gr.gdschua.bloodapp.Entities.Post;
-import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.PostAdapter;
-import gr.gdschua.bloodapp.Utils.UserAdapter;
 import kotlin.text.Charsets;
 
 /**
@@ -99,14 +96,11 @@ public class ForumFragment extends Fragment {
         };
 
         FloatingActionButton floatingActionButton = view.findViewById(R.id.fabButton);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AddPostFragment addPostFragment = AddPostFragment.newInstance();
-                FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(R.anim.slide_in_up, 0, 0, R.anim.slide_out_down);
-                fragmentTransaction.replace(getParentFragment().getId(),addPostFragment).addToBackStack(null).commit();
-            }
+        floatingActionButton.setOnClickListener(view1 -> {
+            AddPostFragment addPostFragment = AddPostFragment.newInstance();
+            FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(R.anim.slide_in_up, 0, 0, R.anim.slide_out_down);
+            fragmentTransaction.replace(getParentFragment().getId(),addPostFragment).addToBackStack(null).commit();
         });
         return view;
     }
@@ -130,12 +124,12 @@ public class ForumFragment extends Fragment {
             }
             HttpURLConnection urlConnection = null;
             try {
-                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection = (HttpURLConnection) Objects.requireNonNull(url).openConnection();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                InputStream in = new BufferedInputStream(Objects.requireNonNull(urlConnection).getInputStream());
                 String result = CharStreams.toString(new InputStreamReader(in, Charsets.UTF_8));
                 Gson gson = new Gson();
                 Type postListType = new TypeToken<ArrayList<Post>>(){}.getType();

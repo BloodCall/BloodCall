@@ -20,8 +20,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 
-import org.w3c.dom.Text;
-
 import java.util.Objects;
 
 import gr.gdschua.bloodapp.Activities.MainActivity;
@@ -74,16 +72,13 @@ public class HospitalHomeFragment extends Fragment {
         TextView name = view.findViewById(R.id.hosp_fullNameTextView);
         TextView address = view.findViewById(R.id.hosp_adrressTextView);
         TextView serviced = view.findViewById(R.id.hospital_serviced);
-        daoHospitals.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful()) {
-                    currUser = task.getResult().getValue(Hospital.class);
-                    email.setText(Objects.requireNonNull(currUser).getEmail());
-                    name.setText(currUser.getName());
-                    address.setText(currUser.getAddress());
-                    serviced.setText(String.format("%d",currUser.getServiced()));
-                }
+        daoHospitals.getUser().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                currUser = task.getResult().getValue(Hospital.class);
+                email.setText(Objects.requireNonNull(currUser).getEmail());
+                name.setText(currUser.getName());
+                address.setText(currUser.getAddress());
+                serviced.setText(String.format("%d",currUser.getServiced()));
             }
         });
 
@@ -95,35 +90,26 @@ public class HospitalHomeFragment extends Fragment {
         FloatingActionButton fab1 = (FloatingActionButton) view.findViewById(R.id.fab1);
         FloatingActionButton fab2 = (FloatingActionButton) view.findViewById(R.id.fab2);
 
-        fab1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HospitalAddAlertFragment hospitalAddAlertFragment = HospitalAddAlertFragment.newInstance(null, null);
-                FragmentTransaction ft = ((MainActivity) requireActivity()).getSupportFragmentManager().beginTransaction();
-                ft.setCustomAnimations(R.anim.slide_in_up, 0, 0, R.anim.slide_out_down);
-                ft.replace(R.id.nav_host_fragment_content_hosp, hospitalAddAlertFragment).addToBackStack(null).commit();
-            }
+        fab1.setOnClickListener(v -> {
+            HospitalAddAlertFragment hospitalAddAlertFragment = HospitalAddAlertFragment.newInstance(null, null);
+            FragmentTransaction ft = ((MainActivity) requireActivity()).getSupportFragmentManager().beginTransaction();
+            ft.setCustomAnimations(R.anim.slide_in_up, 0, 0, R.anim.slide_out_down);
+            ft.replace(R.id.nav_host_fragment_content_hosp, hospitalAddAlertFragment).addToBackStack(null).commit();
         });
 
-        fab2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HospitalAddEventFragment hospitalAddEventFragment = HospitalAddEventFragment.newInstance(null, null);
-                FragmentTransaction ft = ((MainActivity) requireActivity()).getSupportFragmentManager().beginTransaction();
-                ft.setCustomAnimations(R.anim.slide_in_up, 0, 0, R.anim.slide_out_down);
-                ft.replace(R.id.nav_host_fragment_content_hosp, hospitalAddEventFragment).addToBackStack(null).commit();
-            }
+        fab2.setOnClickListener(v -> {
+            HospitalAddEventFragment hospitalAddEventFragment = HospitalAddEventFragment.newInstance(null, null);
+            FragmentTransaction ft = ((MainActivity) requireActivity()).getSupportFragmentManager().beginTransaction();
+            ft.setCustomAnimations(R.anim.slide_in_up, 0, 0, R.anim.slide_out_down);
+            ft.replace(R.id.nav_host_fragment_content_hosp, hospitalAddEventFragment).addToBackStack(null).commit();
         });
 
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!isFABOpen) {
-                    showFABMenu(fabLayout1, fabLayout2);
-                } else {
-                    closeFABMenu(fabLayout1, fabLayout2);
-                }
+        fab.setOnClickListener(view1 -> {
+            if (!isFABOpen) {
+                showFABMenu(fabLayout1, fabLayout2);
+            } else {
+                closeFABMenu(fabLayout1, fabLayout2);
             }
         });
         return view;

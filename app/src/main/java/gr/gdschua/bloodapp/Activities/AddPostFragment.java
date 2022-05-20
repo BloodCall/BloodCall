@@ -112,7 +112,6 @@ public class AddPostFragment extends Fragment {
                         currUser = task.getResult().getValue(User.class);
                         if (currUser == null){
                             daoHospitals.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                @RequiresApi(api = Build.VERSION_CODES.O)
                                 @Override
                                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                                     currHospital = task.getResult().getValue(Hospital.class);
@@ -121,7 +120,7 @@ public class AddPostFragment extends Fragment {
                                     daoPosts.insertPost(currPost).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), "Your Post Has Been Added", Snackbar.LENGTH_LONG);
+                                            Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.post_added), Snackbar.LENGTH_LONG);
                                             requireActivity().onBackPressed();
                                             snackbar.show();
                                         }
@@ -134,7 +133,7 @@ public class AddPostFragment extends Fragment {
                             daoPosts.insertPost(currPost).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), "Your Post Has Been Added", Snackbar.LENGTH_LONG);
+                                    Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), getString(R.string.post_added), Snackbar.LENGTH_LONG);
                                     requireActivity().onBackPressed();
                                     snackbar.show();
                                 }

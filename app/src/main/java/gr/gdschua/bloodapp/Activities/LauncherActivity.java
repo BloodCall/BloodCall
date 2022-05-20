@@ -25,28 +25,19 @@ public class LauncherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_launcher);
 
 
-        findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LauncherActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
+        findViewById(R.id.login_button).setOnClickListener(v -> {
+            Intent intent = new Intent(LauncherActivity.this, LoginActivity.class);
+            startActivity(intent);
         });
 
-        findViewById(R.id.signup_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LauncherActivity.this, SignupActivity.class);
-                startActivity(intent);
-            }
+        findViewById(R.id.signup_button).setOnClickListener(v -> {
+            Intent intent = new Intent(LauncherActivity.this, SignupActivity.class);
+            startActivity(intent);
         });
 
-        findViewById(R.id.hospital_text).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LauncherActivity.this, HospitalSignUpActivity.class);
-                startActivity(intent);
-            }
+        findViewById(R.id.hospital_text).setOnClickListener(v -> {
+            Intent intent = new Intent(LauncherActivity.this, HospitalSignUpActivity.class);
+            startActivity(intent);
         });
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");

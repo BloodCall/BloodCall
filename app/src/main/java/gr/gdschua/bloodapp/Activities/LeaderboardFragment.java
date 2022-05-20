@@ -27,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
@@ -42,7 +43,7 @@ public class LeaderboardFragment extends Fragment {
 
     private Context thisContext;
     private Handler mainThreadHandler;
-    private leaderboardThread workerThread = null;
+    private final leaderboardThread workerThread = null;
 
 
 
@@ -110,12 +111,12 @@ public class LeaderboardFragment extends Fragment {
             }
             HttpURLConnection urlConnection = null;
             try {
-                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection = (HttpURLConnection) Objects.requireNonNull(url).openConnection();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                InputStream in = new BufferedInputStream(Objects.requireNonNull(urlConnection).getInputStream());
                 String result = CharStreams.toString(new InputStreamReader(in, Charsets.UTF_8));
                 Gson gson = new Gson();
                 Type userListType = new TypeToken<ArrayList<User>>(){}.getType();

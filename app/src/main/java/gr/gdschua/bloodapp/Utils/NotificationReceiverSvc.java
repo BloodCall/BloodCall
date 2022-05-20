@@ -123,7 +123,7 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    public PendingIntent buildIntentEvent(Event event) {
+    public PendingIntent buildIntentEvent() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent;
@@ -140,15 +140,15 @@ public class NotificationReceiverSvc extends FirebaseMessagingService {
         NotificationCompat.Builder builder = new NotificationCompat
                 .Builder(getApplicationContext(), "event_notif_chan")
                 .setAutoCancel(true)
-                .setContentText("Event "+event.getName()+" has been created near you! Click here to open the app.") //just to cover all android versions/oem skins
+                .setContentText(String.format(getString(R.string.event_notif_body), event.getName())) //just to cover all android versions/oem skins
                 .setSmallIcon(R.drawable.ic_blood_drop)
-                .setContentTitle("Check out this new event near you!")
-                .setContentIntent(buildIntentEvent(event))
+                .setContentTitle(getString(R.string.notif_event))
+                .setContentIntent(buildIntentEvent())
                 .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText("Event "+event.getName()+" has been created near you! Click here to open the app."));
+                        .bigText(String.format(getString(R.string.event_notif_body), event.getName())));
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel notificationChannel = new NotificationChannel("event_notif_chan", "Events", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationChannel notificationChannel = new NotificationChannel("event_notif_chan", getString(R.string.event_chan_name), NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(notificationChannel);
         }
         notificationManager.notify(rand.nextInt(), builder.build());

@@ -1,21 +1,21 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="Hospital Settings">
+    <PreferenceCategory android:title="@string/hosp_settings_cat_title">
 
         <MultiSelectListPreference
             android:defaultValue="@array/donation_types"
             android:entryValues="@array/donation_types"
             android:entries="@array/donation_types_strings"
             android:key="donation_type"
-            android:summary="Select what kind of donations you are currently accepting"
-            android:title="Donation Type"
+            android:summary="@string/hosp_sett_donation_summary"
+            android:title="@string/hosp_settings_donation_type"
             app:icon="@drawable/ic_blood_drop" />
 
     </PreferenceCategory>
 
 
-    <PreferenceCategory android:title="Information">
+    <PreferenceCategory android:title="@string/settings_information_cat">
 
         <Preference
             android:id="@+id/hosp_settings_about"
@@ -33,7 +33,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Account">
+    <PreferenceCategory android:title="@string/settings_account_cat">
         <Preference
             android:id="@+id/hosp_settings_sign_out"
             android:key="@string/side_bar_signout"

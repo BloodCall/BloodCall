@@ -72,19 +72,13 @@ public class HospitalAddAlertFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_hospital_add_alert, container, false);
         Spinner bloodTypeSpn = view.findViewById(R.id.bloodtype_spinner);
         Spinner posNegSpn = view.findViewById(R.id.bloodtype_spinner_pos_neg);
-        view.findViewById(R.id.createAlertBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Alert alert = new Alert(FirebaseAuth.getInstance().getUid(), bloodTypeSpn.getSelectedItem().toString() + posNegSpn.getSelectedItem().toString(), new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()));
-                daoAlerts.insertAlert(alert).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.alert_added, Snackbar.LENGTH_LONG);
-                        requireActivity().onBackPressed();
-                        snackbar.show();
-                    }
-                });
-            }
+        view.findViewById(R.id.createAlertBtn).setOnClickListener(v -> {
+            Alert alert = new Alert(FirebaseAuth.getInstance().getUid(), bloodTypeSpn.getSelectedItem().toString() + posNegSpn.getSelectedItem().toString(), new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date()));
+            daoAlerts.insertAlert(alert).addOnCompleteListener(task -> {
+                Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.alert_added, Snackbar.LENGTH_LONG);
+                requireActivity().onBackPressed();
+                snackbar.show();
+            });
         });
         return view;
     }

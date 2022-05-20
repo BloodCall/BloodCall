@@ -22,10 +22,7 @@
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_main_user.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_no_internet.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/content_hosp.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/forum_create_layout.xml" value="0.33" />
-        <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/forum_list_item.xml" value="0.33" />
-        <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_add_post.xml" value="0.33" />
-        <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_forum.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/forum_list_item.xml" value="0.17831813576494426" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_home.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_hospital_add_alert.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_hospital_add_event.xml" value="0.36666666666666664" />
@@ -33,8 +30,6 @@
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_leaderboard.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_marker_info.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/leaderboard_user_layout.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/my_dropdown_item.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/my_selected_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/nav_header_main_hosp.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/share_event_img.xml" value="0.358695652173913" />
         <entry key="..\:/Users/GIORGOS/AndroidStudioProjects/BloodCall/app/src/main/res/layout/share_event_layout.xml" value="0.36666666666666664" />
@@ -82,18 +77,52 @@
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/hospital_border_making.xml" value="0.3905" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/drawable/rounding_borders_markerinfo.xml" value="0.3905" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_about.xml" value="0.4514749893116717" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_change_password.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_edit_profile.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_forgot_password.xml" value="0.542572463768116" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_hospital_sign_up.xml" value="0.2552372808892689" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_launcher.xml" value="0.542572463768116" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_login.xml" value="0.14457831325301204" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_main_hospital.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_no_internet.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_notification_info.xml" value="0.542572463768116" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/activity_signup.xml" value="0.2604166666666667" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/app_bar_main_hosp.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/app_bar_main_user.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/content_hosp.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/content_main.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/forum_create_layout.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/forum_list_item.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_add_post.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_community.xml" value="0.3109375" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_edit_profile.xml" value="0.4514749893116717" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_forum.xml" value="0.3109375" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_history.xml" value="0.3109375" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_home.xml" value="0.5" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_hospital_add_alert.xml" value="0.3109375" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_hospital_add_event.xml" value="0.2552372808892689" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_hospital_home.xml" value="0.2552372808892689" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_hospital_qr_scan.xml" value="0.542572463768116" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_leaderboard.xml" value="0.2791791363830697" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_maps.xml" value="0.5" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_marker_info.xml" value="0.33" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_reset_password.xml" value="0.4514749893116717" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/fragment_scan_result.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/leaderboard_user_layout.xml" value="0.542572463768116" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/listheader.xml" value="0.2501068832834545" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/map_dialog.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/my_dropdown_item.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/my_selected_item.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/nav_header_main.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/nav_header_main_hosp.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/settings_activity_hospital.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/settings_activity_user.xml" value="0.542572463768116" />
         <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/layout/share_event_layout.xml" value="0.2552372808892689" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/menu/activity_main_drawer_hospital.xml" value="0.3109375" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/menu/activity_main_drawer_user.xml" value="0.55" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/menu/main.xml" value="0.55" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/xml/hospital_prefrences.xml" value="0.542572463768116" />
+        <entry key="..\:/Users/thanb/AndroidStudioProjects/BloodCall/app/src/main/res/xml/user_preferences.xml" value="0.542572463768116" />
       </map>
     </option>
   </component>

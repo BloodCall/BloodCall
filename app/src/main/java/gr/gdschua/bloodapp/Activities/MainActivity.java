@@ -75,16 +75,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Udao.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful()) {
-                    currUser = task.getResult().getValue(User.class);
-                    if (task.getResult().getValue() == null) {
-                        InflateHospital();
-                    } else {
-                        InflateUser();
-                    }
+        Udao.getUser().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                currUser = task.getResult().getValue(User.class);
+                if (task.getResult().getValue() == null) {
+                    InflateHospital();
+                } else {
+                    InflateUser();
                 }
             }
         });
@@ -94,28 +91,6 @@ public class MainActivity extends AppCompatActivity {
         enableLocationSettings();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        if (item.getItemId() == R.id.action_licences) {
-            startActivity(new Intent(this, OssLicensesMenuActivity.class));
-            OssLicensesMenuActivity.setActivityTitle(getString(R.string.settings_toolbar));
-            return true;
-        }
-        if (item.getItemId() == R.id.action_about) {
-            startActivity(new Intent(this, AboutActivity.class));
-            OssLicensesMenuActivity.setActivityTitle(getString(R.string.about));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 
     @Override
@@ -152,25 +127,19 @@ public class MainActivity extends AppCompatActivity {
 
         DAOHospitals daoHosp = new DAOHospitals();
 
-        daoHosp.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                currHosp = task.getResult().getValue(Hospital.class);
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                Set<String> don_types = preferences.getStringSet("donation_type", new HashSet<>(Arrays.asList("0", "1", "2")));
-                currHosp.setAccepts(new ArrayList<>(don_types));
-                currHosp.updateSelf();
-            }
+        daoHosp.getUser().addOnCompleteListener(task -> {
+            currHosp = task.getResult().getValue(Hospital.class);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            Set<String> don_types = preferences.getStringSet("donation_type", new HashSet<>(Arrays.asList("0", "1", "2")));
+            currHosp.setAccepts(new ArrayList<>(don_types));
+            currHosp.updateSelf();
         });
 
 
 
-        findViewById(R.id.settings_btn_hosp).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent moveToSettings = new Intent(getApplicationContext(), HospitalSettingsActivity.class);
-                startActivity(moveToSettings);
-            }
+        findViewById(R.id.settings_btn_hosp).setOnClickListener(v -> {
+            Intent moveToSettings = new Intent(getApplicationContext(), HospitalSettingsActivity.class);
+            startActivity(moveToSettings);
         });
 
         // Passing each menu ID as a set of Ids because each
@@ -190,12 +159,9 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation2);
         NavigationUI.setupWithNavController(bottomNav, navController);
 
-        findViewById(R.id.settings_btn_user).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent moveToSettings = new Intent(getApplicationContext(), UserSettingsActivity.class);
-                startActivity(moveToSettings);
-            }
+        findViewById(R.id.settings_btn_user).setOnClickListener(v -> {
+            Intent moveToSettings = new Intent(getApplicationContext(), UserSettingsActivity.class);
+            startActivity(moveToSettings);
         });
 
     }
@@ -237,12 +203,7 @@ public class MainActivity extends AppCompatActivity {
                 new AlertDialog.Builder(this, R.style.CustomDialogTheme)
                         .setTitle(R.string.enable_location_title)
                         .setMessage(R.string.enable_location_text)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                enableLocationSettings();
-                            }
-                        }).show().setCancelable(false);
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> enableLocationSettings()).show().setCancelable(false);
             }
         }
     }

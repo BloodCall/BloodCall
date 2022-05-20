@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -26,14 +25,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Objects;
 
 import gr.gdschua.bloodapp.Activities.AboutActivity;
 import gr.gdschua.bloodapp.Activities.LauncherActivity;
-import gr.gdschua.bloodapp.Activities.MainActivity;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
@@ -48,21 +45,18 @@ public class UserSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DAOUsers daoUsers = new DAOUsers();
-        daoUsers.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                currUser = task.getResult().getValue(User.class);
-                setContentView(R.layout.settings_activity_user);
-                if (savedInstanceState == null) {
-                    getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.settings, new SettingsFragment())
-                            .commit();
-                }
-                ActionBar actionBar = getSupportActionBar();
-                if (actionBar != null) {
-                    actionBar.setDisplayHomeAsUpEnabled(true);
-                }
+        daoUsers.getUser().addOnCompleteListener(task -> {
+            currUser = task.getResult().getValue(User.class);
+            setContentView(R.layout.settings_activity_user);
+            if (savedInstanceState == null) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.settings, new SettingsFragment())
+                        .commit();
+            }
+            ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setDisplayHomeAsUpEnabled(true);
             }
         });
     }
@@ -70,9 +64,7 @@ public class UserSettingsActivity extends AppCompatActivity {
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
 
-        final ActivityResultLauncher<String> bgLocationRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
-            setNotifications(result, currUser);
-        });
+        final ActivityResultLauncher<String> bgLocationRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> setNotifications(result, currUser));
 
 
         final ActivityResultLauncher<String> locationRequest = registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
@@ -86,22 +78,14 @@ public class UserSettingsActivity extends AppCompatActivity {
         @RequiresApi(api = Build.VERSION_CODES.M)
         public void handleBgLoc() {
             if (shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_BACKGROUND_LOCATION) && showPermsDialog) {
-                new AlertDialog.Builder(getActivity(), R.style.CustomDialogTheme)
+                new AlertDialog.Builder(Objects.requireNonNull(getActivity()), R.style.CustomDialogTheme)
                         .setTitle(R.string.bg_loc_title)
                         .setMessage(R.string.bg_loc_text)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                locationRequest.launch(Manifest.permission.ACCESS_FINE_LOCATION);
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                setNotifications(false,currUser);
-                                dialog.dismiss();
-                                showPermsDialog = true;
-                            }
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> locationRequest.launch(Manifest.permission.ACCESS_FINE_LOCATION))
+                        .setNegativeButton(android.R.string.no, (dialog, which) -> {
+                            setNotifications(false,currUser);
+                            dialog.dismiss();
+                            showPermsDialog = true;
                         }).show();
             } else {
                 setNotifications(true,currUser);
@@ -120,121 +104,99 @@ public class UserSettingsActivity extends AppCompatActivity {
                     snackbar.show();
                     currUser.notifFirstTime=true;
                 }
-                currUser.updateSelf();
             }
             else{
                 FirebaseMessaging.getInstance().unsubscribeFromTopic(currUser.getTopic());
                 currUser.setNotifications(false);
-                currUser.updateSelf();
             }
+            currUser.updateSelf();
         }
 
         public void setEventNotifications(Boolean state, User currUser){
             if (state) {
                 FirebaseMessaging.getInstance().subscribeToTopic("events");
                 currUser.setEventNotifs(true);
-                currUser.updateSelf();
             }
             else{
                 FirebaseMessaging.getInstance().unsubscribeFromTopic("events");
                 currUser.setEventNotifs(false);
-                currUser.updateSelf();
             }
+            currUser.updateSelf();
         }
 
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.user_preferences, rootKey);
             Preference oss_btn = findPreference(getString(R.string.settings_toolbar));
-            Objects.requireNonNull(oss_btn).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    startActivity(new Intent(getContext(), OssLicensesMenuActivity.class));
-                    return true;
-                }
+            Objects.requireNonNull(oss_btn).setOnPreferenceClickListener(preference -> {
+                startActivity(new Intent(getContext(), OssLicensesMenuActivity.class));
+                return true;
             });
 
             Preference editProfile = findPreference("edit_profile");
 
-            Objects.requireNonNull(editProfile).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    Intent intent = new Intent(getContext(),EditProfileActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
+            Objects.requireNonNull(editProfile).setOnPreferenceClickListener(preference -> {
+                Intent intent = new Intent(getContext(),EditProfileActivity.class);
+                startActivity(intent);
+                return true;
             });
 
             ListPreference push_n_dist = findPreference("notifs_distance");
 
             SwitchPreference push_n_switch = findPreference("push_notif_switch");
-            push_n_switch.setChecked(currUser.getNotifications());
+            Objects.requireNonNull(push_n_switch).setChecked(currUser.getNotifications());
             if(push_n_switch.isChecked()){
-                push_n_dist.setVisible(true);
+                Objects.requireNonNull(push_n_dist).setVisible(true);
             }
 
             ListPreference push_n_e_dist = findPreference("notifs_event_distance");
             SwitchPreference push_n_e_switch = findPreference("push_notif_switch_events");
 
-            if(push_n_e_switch.isChecked()){
-                push_n_e_dist.setVisible(true);
+            if(Objects.requireNonNull(push_n_e_switch).isChecked()){
+                Objects.requireNonNull(push_n_e_dist).setVisible(true);
             }
 
-            push_n_e_switch.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.M)
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    if (push_n_e_switch.isChecked()){
-                        push_n_e_dist.setVisible(true);
-                        setEventNotifications(true,currUser);
-                    }
-                    else{
-                        push_n_e_dist.setVisible(false);
-                        setEventNotifications(false,currUser);
-                    }
-                    return true;
+            push_n_e_switch.setOnPreferenceClickListener(preference -> {
+                if (push_n_e_switch.isChecked()){
+                    push_n_e_dist.setVisible(true);
+                    setEventNotifications(true,currUser);
                 }
+                else{
+                    push_n_e_dist.setVisible(false);
+                    setEventNotifications(false,currUser);
+                }
+                return true;
             });
 
-            push_n_switch.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.M)
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    if (push_n_switch.isChecked()){
-                        push_n_dist.setVisible(true);
-                        handleBgLoc();
-                    }
-                    else{
-                        setNotifications(false,currUser);
-                        push_n_dist.setVisible(false);
-                    }
-                    return true;
+            push_n_switch.setOnPreferenceClickListener(preference -> {
+                if (push_n_switch.isChecked()){
+                    push_n_dist.setVisible(true);
+                    handleBgLoc();
                 }
+                else{
+                    setNotifications(false,currUser);
+                    push_n_dist.setVisible(false);
+                }
+                return true;
             });
 
             Preference about_btn = findPreference(getString(R.string.about));
-            Objects.requireNonNull(about_btn).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    startActivity(new Intent(getContext(), AboutActivity.class));
-                    return true;
-                }
+            Objects.requireNonNull(about_btn).setOnPreferenceClickListener(preference -> {
+                startActivity(new Intent(getContext(), AboutActivity.class));
+                return true;
             });
 
 
             Preference signout_btn = findPreference(getString(R.string.side_bar_signout));
-            Objects.requireNonNull(signout_btn).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    FirebaseAuth.getInstance().signOut();
-                    FirebaseMessaging.getInstance().unsubscribeFromTopic(currUser.getTopic());
-                    FirebaseMessaging.getInstance().unsubscribeFromTopic("events");
-                    Intent intent = new Intent(getContext(), LauncherActivity.class);
-                    startActivity(intent);
-                    getActivity().finishAffinity();
-                    Toast.makeText(getContext(), getResources().getString(R.string.signed_out), Toast.LENGTH_SHORT).show();
-                    return true;
-                }
+            Objects.requireNonNull(signout_btn).setOnPreferenceClickListener(preference -> {
+                FirebaseAuth.getInstance().signOut();
+                FirebaseMessaging.getInstance().unsubscribeFromTopic(currUser.getTopic());
+                FirebaseMessaging.getInstance().unsubscribeFromTopic("events");
+                Intent intent = new Intent(getContext(), LauncherActivity.class);
+                startActivity(intent);
+                getActivity().finishAffinity();
+                Toast.makeText(getContext(), getResources().getString(R.string.signed_out), Toast.LENGTH_SHORT).show();
+                return true;
             });
         }
 

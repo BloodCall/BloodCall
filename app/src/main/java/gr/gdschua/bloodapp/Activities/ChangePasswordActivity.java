@@ -50,58 +50,35 @@ public class ChangePasswordActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        new DAOUsers().getUser().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-            @Override
-            public void onSuccess(DataSnapshot dataSnapshot) {
-                applyBTN.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!newPW.getText().toString().equals(repeatNewPW.getText().toString())){
-                            new AlertDialog.Builder(ChangePasswordActivity.this)
-                                    .setMessage("Please check that you have inputted the same password in both fields.")
-                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                        }
-                                    })
-                                    .show();
-                        }else {
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            AuthCredential credential = EmailAuthProvider.getCredential(dataSnapshot.getValue(User.class).getEmail(), currPW.getText().toString());
+        new DAOUsers().getUser().addOnSuccessListener(dataSnapshot -> applyBTN.setOnClickListener(v -> {
+            if (!newPW.getText().toString().equals(repeatNewPW.getText().toString())) {
+                new AlertDialog.Builder(ChangePasswordActivity.this)
+                        .setMessage(getString(R.string.pwd_not_matching))
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> dialog.dismiss())
+                        .show();
+            } else {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                AuthCredential credential = EmailAuthProvider.getCredential(dataSnapshot.getValue(User.class).getEmail(), currPW.getText().toString());
 
-                            Objects.requireNonNull(user).reauthenticate(credential)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                user.updatePassword(newPW.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()) {
-                                                            Toast.makeText(getApplicationContext(),"Your password has been updated.",Toast.LENGTH_LONG).show();
-                                                            finish();
-                                                        } else {
-                                                            Toast.makeText(getApplicationContext(),"There was an error updating your password.",Toast.LENGTH_LONG).show();
-                                                        }
-                                                    }
-                                                });
-                                            } else {
-                                                new AlertDialog.Builder(ChangePasswordActivity.this)
-                                                        .setMessage("You have entered your current password wrong. Please try again.")
-                                                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                                            public void onClick(DialogInterface dialog, int which) {
-                                                                dialog.dismiss();
-                                                            }
-                                                        })
-                                                        .show();
-                                            }
-                                        }
-                                    });
-                        }
-                    }
-
-                });
+                Objects.requireNonNull(user).reauthenticate(credential)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                user.updatePassword(newPW.getText().toString()).addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        Toast.makeText(getApplicationContext(), getString(R.string.pwd_updated), Toast.LENGTH_LONG).show();
+                                        finish();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), getString(R.string.pwd_upd_error), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            } else {
+                                new AlertDialog.Builder(ChangePasswordActivity.this)
+                                        .setMessage(getString(R.string.pwd_wrong_curr))
+                                        .setPositiveButton(android.R.string.yes, (dialog, which) -> dialog.dismiss())
+                                        .show();
+                            }
+                        });
             }
-        });
+        }));
     }
 }

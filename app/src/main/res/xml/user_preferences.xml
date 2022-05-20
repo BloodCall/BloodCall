@@ -1,7 +1,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory android:title="Notifications">
+    <PreferenceCategory android:title="@string/user_settings_not_cat">
 
         <SwitchPreference
             android:defaultValue="false"
@@ -14,15 +14,15 @@
             android:entries="@array/distances_strings"
             android:entryValues="@array/distances"
             android:key="notifs_distance"
-            android:summary="Select the distance of the hospitals you want to receive alerts from"
-            android:title="Emergency Notification Distance"
+            android:summary="@string/emerg_notif_summary"
+            android:title="@string/emerg_notif_dist"
             app:icon="@drawable/ic_baseline_my_location_24"
             app:isPreferenceVisible="false" />
 
         <SwitchPreference
             android:defaultValue="false"
             android:key="push_notif_switch_events"
-            android:title="Recieve event notifications"
+            android:title="@string/event_notifs_switch"
             app:icon="@drawable/ic_baseline_calendar_today_24" />
 
         <ListPreference
@@ -30,14 +30,14 @@
             android:entries="@array/distances_strings"
             android:entryValues="@array/distances"
             android:key="notifs_event_distance"
-            android:summary="Select the distance of the events you want to receive alerts from"
-            android:title="Event Notification Distance"
+            android:summary="@string/event_notif_summary"
+            android:title="@string/event_notif_dist"
             app:icon="@drawable/ic_baseline_my_location_24"
             app:isPreferenceVisible="false" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Information">
+    <PreferenceCategory android:title="@string/settings_information_cat">
 
         <Preference
             android:id="@+id/user_settings_about"
@@ -55,13 +55,13 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Account">
+    <PreferenceCategory android:title="@string/settings_account_cat">
 
         <Preference
             android:id="@+id/user_settings_edit_profile"
             android:key="edit_profile"
-            android:title="Edit Profile"
-            android:summary="Change your profile information, as well as your password"
+            android:title="@string/edit_profile_settings"
+            android:summary="@string/edit_profile_summary"
             app:icon="@drawable/ic_baseline_edit_24" />
 
         <Preference

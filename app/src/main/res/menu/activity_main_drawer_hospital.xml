@@ -19,7 +19,7 @@
         <item
             android:id="@+id/nav_community"
             android:icon="@drawable/ic_baseline_people_alt_24"
-            android:title="Community" />
+            android:title="@string/menu_community" />
 
         <item
             android:id="@+id/nav_hosp_qr_scanner"

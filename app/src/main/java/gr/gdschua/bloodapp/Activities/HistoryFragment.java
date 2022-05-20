@@ -72,13 +72,10 @@ public class HistoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         DAOUsers daoUsers = new DAOUsers();
         ListView listView = view.findViewById(R.id.list_history);
-        daoUsers.getUser().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-            @Override
-            public void onSuccess(DataSnapshot dataSnapshot) {
-                currUser = dataSnapshot.getValue(User.class);
-                CheckInAdapter adapter = new CheckInAdapter(thisContext, currUser.checkIns);
-                listView.setAdapter(adapter);
-            }
+        daoUsers.getUser().addOnSuccessListener(dataSnapshot -> {
+            currUser = dataSnapshot.getValue(User.class);
+            CheckInAdapter adapter = new CheckInAdapter(thisContext, currUser.checkIns);
+            listView.setAdapter(adapter);
         });
 
 

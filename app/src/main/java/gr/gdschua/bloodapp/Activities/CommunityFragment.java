@@ -28,7 +28,6 @@ public class CommunityFragment extends Fragment {
     private static final int NUM_PAGES = 2;
     public static ViewPager2 viewPager;
     private FragmentStateAdapter pagerAdapter;
-    private String[] titles = new String[]{"Forum", "Leaderboard"};
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -76,6 +75,7 @@ public class CommunityFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_community, container, false);
+        String[] titles = new String[]{getString(R.string.forum_tab), getString(R.string.leaderboard_tab)};
         viewPager = view.findViewById(R.id.mypager);
         pagerAdapter = new MyPagerAdapter(getChildFragmentManager(), getLifecycle());
         viewPager.setAdapter(pagerAdapter);
@@ -85,7 +85,7 @@ public class CommunityFragment extends Fragment {
     }
 
 
-    private class MyPagerAdapter extends FragmentStateAdapter {
+    private static class MyPagerAdapter extends FragmentStateAdapter {
 
 
         public MyPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {

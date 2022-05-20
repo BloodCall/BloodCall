@@ -36,12 +36,7 @@ public class HospitalSettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        daoHosp.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                currHosp = task.getResult().getValue(Hospital.class);
-            }
-        });
+        daoHosp.getUser().addOnCompleteListener(task -> currHosp = task.getResult().getValue(Hospital.class));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity_hospital);
         if (savedInstanceState == null) {
@@ -63,45 +58,33 @@ public class HospitalSettingsActivity extends AppCompatActivity {
             setPreferencesFromResource(R.xml.hospital_prefrences, rootKey);
 
             MultiSelectListPreference multiSelectListPreference = findPreference("donation_type");
-            Objects.requireNonNull(multiSelectListPreference).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-                @Override
-                public boolean onPreferenceChange(Preference preference, Object newValue) {
-                    String [] prefs = ((HashSet<String>) newValue).toArray(new String[3]);
-                    currHosp.setAccepts(Arrays.asList(prefs));
-                    currHosp.updateSelf();
-                    return true;
-                }
+            Objects.requireNonNull(multiSelectListPreference).setOnPreferenceChangeListener((preference, newValue) -> {
+                String [] prefs = ((HashSet<String>) newValue).toArray(new String[3]);
+                currHosp.setAccepts(Arrays.asList(prefs));
+                currHosp.updateSelf();
+                return true;
             });
 
             Preference oss_btn = findPreference(getString(R.string.settings_toolbar));
-            Objects.requireNonNull(oss_btn).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    startActivity(new Intent(getContext(), OssLicensesMenuActivity.class));
-                    return true;
-                }
+            Objects.requireNonNull(oss_btn).setOnPreferenceClickListener(preference -> {
+                startActivity(new Intent(getContext(), OssLicensesMenuActivity.class));
+                return true;
             });
 
             Preference about_btn = findPreference(getString(R.string.about));
-            Objects.requireNonNull(about_btn).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    startActivity(new Intent(getContext(), AboutActivity.class));
-                    return true;
-                }
+            Objects.requireNonNull(about_btn).setOnPreferenceClickListener(preference -> {
+                startActivity(new Intent(getContext(), AboutActivity.class));
+                return true;
             });
 
             Preference signout_btn = findPreference(getString(R.string.side_bar_signout));
-            Objects.requireNonNull(signout_btn).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                @Override
-                public boolean onPreferenceClick(Preference preference) {
-                    FirebaseAuth.getInstance().signOut();
-                    Intent intent = new Intent(getContext(), LauncherActivity.class);
-                    startActivity(intent);
-                    getActivity().finishAffinity();
-                    Toast.makeText(getContext(), getResources().getString(R.string.signed_out), Toast.LENGTH_SHORT).show();
-                    return true;
-                }
+            Objects.requireNonNull(signout_btn).setOnPreferenceClickListener(preference -> {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getContext(), LauncherActivity.class);
+                startActivity(intent);
+                getActivity().finishAffinity();
+                Toast.makeText(getContext(), getResources().getString(R.string.signed_out), Toast.LENGTH_SHORT).show();
+                return true;
             });
         }
     }
