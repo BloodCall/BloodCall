@@ -3,6 +3,7 @@ package gr.gdschua.bloodapp.Utils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,8 +29,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.CommentViewHolder holder, int position) {
         holder.auth.setText(comments.get(position).getAuthor());
-        holder.prop.setText(comments.get(position).getAuthorProperty());
-        holder.lvl.setText(comments.get(position).getUserLvl());
+        if(comments.get(position).getAuthorProperty().equals("User")){
+            holder.prop.setImageDrawable(holder.itemView.getResources().getDrawable(R.drawable.ic_person_black));
+        }else{
+            holder.prop.setImageDrawable(holder.itemView.getResources().getDrawable(R.drawable.hospital_ic_menu));
+        }
+        if(comments.get(position).getUserLvl() != null){
+            holder.lvl.setText("Level " + comments.get(position).getUserLvl());
+        }
         holder.body.setText(comments.get(position).getBody());
     }
 
@@ -43,7 +50,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     class CommentViewHolder extends RecyclerView.ViewHolder{
         TextView auth;
-        TextView prop;
+        ImageView prop;
         TextView lvl;
         TextView body;
 
@@ -52,7 +59,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
             auth = itemView.findViewById(R.id.comment_author);
 
-            prop = itemView.findViewById(R.id.comment_auth_prop);
+            prop = itemView.findViewById(R.id.imageViewProp);
 
             lvl = itemView.findViewById(R.id.comment_auth_lvl);
 

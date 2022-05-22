@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <TextView
@@ -11,6 +11,7 @@
         android:layout_height="26dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/barlow_medium"
         android:text="TextView"
         android:textColor="@android:color/black"
         android:textSize="20sp"
@@ -20,26 +21,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/full_post_prop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        android:textColor="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/full_post_author"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/full_post_lvl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
-        android:text="TextView"
+        android:fontFamily="@font/barlow_medium"
         android:textColor="@android:color/black"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,13 +41,29 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:fontFamily="@font/barlow_medium"
         android:text="TextView"
         android:textColor="@color/changed_red"
-        android:textSize="30sp"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/full_post_lvl" />
+
+    <TextView
+        android:id="@+id/full_post_title2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/barlow_medium"
+        android:text="Comments:"
+        android:textColor="@color/changed_red"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view2" />
 
     <TextView
         android:id="@+id/full_post_body"
@@ -67,9 +72,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
+        android:fontFamily="@font/barlow_medium"
         android:text="TextView"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,14 +86,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/hosp_nametags"
+        android:fontFamily="@font/barlow_medium"
         android:paddingStart="3dp"
         android:paddingEnd="3dp"
         android:text="TextView"
+        android:textAlignment="center"
         android:textColor="@android:color/white"
-        app:layout_constraintStart_toEndOf="@+id/full_post_lvl"
-        app:layout_constraintTop_toBottomOf="@+id/full_post_prop" />
+        app:layout_constraintBottom_toTopOf="@+id/full_post_title"
+        app:layout_constraintStart_toEndOf="@+id/full_post_lvl" />
 
     <View
         android:id="@+id/view2"
@@ -98,4 +106,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/full_post_body" />
+
+    <ImageView
+        android:id="@+id/propertyImageView"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.027"
+        app:layout_constraintStart_toEndOf="@+id/full_post_author"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
