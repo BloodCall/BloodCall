@@ -100,7 +100,7 @@
         android:fontFamily="@font/barlow_medium"
         android:text="Post Flair"
         android:textColor="@color/ic_launcher_background"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/flairSpinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.046"

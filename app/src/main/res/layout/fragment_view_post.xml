@@ -9,9 +9,10 @@
 
     <EditText
         android:id="@+id/comment_body_ET"
-        android:layout_width="348dp"
-        android:layout_height="34dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="232dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/borders_making"
         android:ems="10"
         android:hint="Write a comment..."
@@ -19,18 +20,18 @@
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/add_comment_btn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/add_comment_btn"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/ic_baseline_add_circle_24"
-        app:tint="@color/changed_red"
+        android:backgroundTint="@color/changed_red"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/comment_body_ET" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

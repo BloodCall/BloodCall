@@ -3,6 +3,7 @@ package gr.gdschua.bloodapp.Utils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,14 +44,20 @@ public class ViewPostAdapter extends RecyclerView.Adapter<ViewPostAdapter.PostVi
             TextView author = itemView.findViewById(R.id.full_post_author);
             author.setText(post.get(0).getAuthorName());
 
-            TextView prop = itemView.findViewById(R.id.full_post_prop);
-            prop.setText(post.get(0).getAuthorType());
+            ImageView prop = itemView.findViewById(R.id.propertyImageView);
+            if(post.get(0).getAuthorType().equals("User")){
+                prop.setImageDrawable(itemView.getResources().getDrawable(R.drawable.ic_person_black));
+            }else{
+                prop.setImageDrawable(itemView.getResources().getDrawable(R.drawable.hospital_ic_menu));
+            }
 
             TextView flair = itemView.findViewById(R.id.full_post_flair);
             flair.setText(post.get(0).getFlair());
 
             TextView lvl = itemView.findViewById(R.id.full_post_lvl);
-            lvl.setText(post.get(0).getAuthorLevel());
+            if(!lvl.equals("unknown")){
+                lvl.setText("Level " + post.get(0).getAuthorLevel());
+            }
 
             TextView title = itemView.findViewById(R.id.full_post_title);
             title.setText(post.get(0).getTitle());
