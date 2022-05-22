@@ -22,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -43,6 +44,7 @@ import gr.gdschua.bloodapp.Entities.Event;
 import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.MyDialogCloseListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MapsFragment extends Fragment implements MyDialogCloseListener {
 
@@ -115,6 +117,12 @@ public class MapsFragment extends Fragment implements MyDialogCloseListener {
             MyDialogCloseListener closeListener = dialog -> placeMarkers();
 
             mapDialogFragment.DismissListener(closeListener);
+
+            FloatingActionButton floatingActionButton = getView().findViewById(R.id.emergenciesButton);
+
+            floatingActionButton.setOnClickListener(view1 -> {
+                Toast.makeText(getContext(),"CURRENT_EMERGENCIES",Toast.LENGTH_SHORT).show();
+            });
         }
     };
 
