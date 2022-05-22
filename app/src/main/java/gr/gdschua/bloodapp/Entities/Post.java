@@ -4,7 +4,18 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.google.firebase.database.Exclude;
+
+import org.checkerframework.checker.units.qual.A;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
+
+import gr.gdschua.bloodapp.DatabaseAccess.DAOPosts;
+import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 
 public class Post {
 
@@ -16,6 +27,15 @@ public class Post {
     private String authorType;
     private String id;
     private String dateStamp;
+    private ArrayList<Comment> comments;
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Post(String authorName, String authorLevel, String title, String body, String flair, String authorType) {
@@ -27,6 +47,7 @@ public class Post {
         this.authorType = authorType; // user o hospital
         this.id = UUID.randomUUID().toString();
         this.dateStamp = java.time.LocalDate.now().toString();
+        this.comments = new ArrayList<>();
     }
 
 
@@ -96,5 +117,24 @@ public class Post {
 
     public void setAuthorType(String authorType) {
         this.authorType = authorType;
+    }
+
+    @Exclude
+    public void updateSelf(){
+        new DAOPosts().updatePost(this);
+    }
+
+    @Exclude
+    public Map<String, Object> getAsMap() {
+        Map<String, Object> map = new HashMap<>();
+        for (Field field : this.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            try {
+                map.put(field.getName(), field.get(this));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return map;
     }
 }

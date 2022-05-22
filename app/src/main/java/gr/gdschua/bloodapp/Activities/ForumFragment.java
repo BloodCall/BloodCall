@@ -13,7 +13,9 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.io.CharStreams;
@@ -102,8 +104,22 @@ public class ForumFragment extends Fragment {
             fragmentTransaction.setCustomAnimations(R.anim.slide_in_up, 0, 0, R.anim.slide_out_down);
             fragmentTransaction.replace(getParentFragment().getId(),addPostFragment).addToBackStack(null).commit();
         });
+
+        ListView listView = view.findViewById(R.id.forumListView);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Post clicked = (Post) adapterView.getItemAtPosition(i);
+                ViewPostFragment viewPostFragment = ViewPostFragment.newInstance(clicked.getId());
+                FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_up, 0, 0, R.anim.slide_out_down);
+                fragmentTransaction.replace(getParentFragment().getId(),viewPostFragment).addToBackStack(null).commit();
+            }
+        });
         return view;
     }
+
 
     class forumThread extends Thread {
         Handler mHandler= new Handler(Looper.getMainLooper());

@@ -27,6 +27,8 @@ public class PostAdapter extends ArrayAdapter<Post> {
         postList = list;
     }
 
+
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
