@@ -129,6 +129,9 @@ public class ViewPostFragment extends Fragment {
                                 temp.add(new Comment(comment_body, currUser.getFullName(), String.valueOf(LevelHandler.getLevel(currUser.getXp())), "User"));
                                 currPost.setComments(temp);
                                 currPost.updateSelf();
+                                comment_body_et.getText().clear();
+                                commentAdapter.notifyDataSetChanged();
+                                recyclerView.scrollToPosition(temp.size());
                             }
                         }
                         else{
