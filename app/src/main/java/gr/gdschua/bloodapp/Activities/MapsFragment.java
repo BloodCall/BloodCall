@@ -121,7 +121,12 @@ public class MapsFragment extends Fragment implements MyDialogCloseListener {
             FloatingActionButton floatingActionButton = getView().findViewById(R.id.emergenciesButton);
 
             floatingActionButton.setOnClickListener(view1 -> {
+                CurrentEmergenciesFragment currentEmergenciesFragment =  CurrentEmergenciesFragment.newInstance();
+                FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(getParentFragment().getId(),currentEmergenciesFragment).addToBackStack(null).commit();
+
                 Toast.makeText(getContext(),"CURRENT_EMERGENCIES",Toast.LENGTH_SHORT).show();
+
             });
         }
     };
