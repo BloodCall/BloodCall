@@ -34,6 +34,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
@@ -177,10 +178,24 @@ public class MarkerInfoFragment extends DialogFragment {
 
         Button closeButton = view.findViewById(R.id.closeDialogButton);
         closeButton.setOnClickListener(view1 -> dismiss());
+        ImageView regularIV = view.findViewById(R.id.regularIV);
+        ImageView plateletsIV = view.findViewById(R.id.plateletsIV);
+        ImageView plasmaIV = view.findViewById(R.id.plasmaIV);
 
         if (getDialog() != null && getDialog().getWindow() != null) {
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        }
+
+        ArrayList<String> accepts = (ArrayList<String>) getArguments().get("accepts");
+        for(int i=0;i<accepts.size();i++){
+            if(accepts.get(i).equals("0")){
+                regularIV.setVisibility(View.VISIBLE);
+            }else if(accepts.get(i).equals("1")){
+                plateletsIV.setVisibility(View.VISIBLE);
+            }else if(accepts.get(i).equals("2")){
+                plasmaIV.setVisibility(View.VISIBLE);
+            }
         }
 
         return view;

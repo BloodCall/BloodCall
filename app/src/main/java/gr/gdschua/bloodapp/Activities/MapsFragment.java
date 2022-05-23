@@ -59,11 +59,14 @@ public class MapsFragment extends Fragment implements MyDialogCloseListener {
 
             Bundle bundle = new Bundle();
             assert hospital != null;
+            ArrayList<String> accepts = new ArrayList<>(hospital.getAccepts());
+
             bundle.putString("name", hospital.getName());
             bundle.putString("address", hospital.getAddress());
             bundle.putString("email", hospital.getEmail());
             bundle.putDouble("lat", hospital.getLat());
             bundle.putDouble("lon", hospital.getLon());
+            bundle.putStringArrayList("accepts",accepts);
             myMarkerInfoFragment.setArguments(bundle);
             myMarkerInfoFragment.show(requireActivity().getSupportFragmentManager(), "My Fragment");
 
