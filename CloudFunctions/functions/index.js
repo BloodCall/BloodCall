@@ -160,3 +160,15 @@ exports.deleteAlerts = functions.region('europe-west1').pubsub.schedule('59 23 *
           });
     });
 
+exports.getAlerts = functions.region('europe-west1').https.onRequest((request, response) => {
+  const alerts = [];
+  admin.database().ref('/Alerts/')
+      .once('value')
+      .then((results) => {
+        results.forEach((snapshot) => {
+          alerts.push(snapshot.val());
+        });
+        alerts.sort((a, b) => (new Date(a.dateCreated) < new Date(b.dateCreated) ?1 : -1));
+        response.send(alerts);
+      });
+});
