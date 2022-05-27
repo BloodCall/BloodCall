@@ -74,7 +74,7 @@ public class MarkerInfoFragment extends DialogFragment {
         TextView organizerAddress = inflatedView.findViewById(R.id.organizerShareAddress);
         tv.setText(requireArguments().get("name").toString());
 
-        if (Objects.requireNonNull(Objects.requireNonNull(getArguments())).get("organizer") != null) {
+        if (Objects.requireNonNull(requireArguments()).get("organizer") != null) {
             navigateBtn.setOnClickListener(v -> {
                 Uri gmmIntentUri = Uri.parse("google.navigation:q=" + requireArguments().get("lat") + "," + requireArguments().get("lon"));
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
@@ -187,16 +187,20 @@ public class MarkerInfoFragment extends DialogFragment {
             getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         }
 
-        ArrayList<String> accepts = (ArrayList<String>) getArguments().get("accepts");
-        for(int i=0;i<accepts.size();i++){
-            if(accepts.get(i).equals("0")){
-                regularIV.setVisibility(View.VISIBLE);
-            }else if(accepts.get(i).equals("1")){
-                plateletsIV.setVisibility(View.VISIBLE);
-            }else if(accepts.get(i).equals("2")){
-                plasmaIV.setVisibility(View.VISIBLE);
+        assert getArguments() != null;
+        if (getArguments().get("accepts") != null) {
+            ArrayList<String> accepts = (ArrayList<String>) getArguments().get("accepts");
+            for(int i=0;i<accepts.size();i++){
+                if(accepts.get(i).equals("0")){
+                    regularIV.setVisibility(View.VISIBLE);
+                }else if(accepts.get(i).equals("1")){
+                    plateletsIV.setVisibility(View.VISIBLE);
+                }else if(accepts.get(i).equals("2")){
+                    plasmaIV.setVisibility(View.VISIBLE);
+                }
             }
         }
+
 
         return view;
     }
