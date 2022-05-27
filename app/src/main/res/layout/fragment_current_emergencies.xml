@@ -8,26 +8,60 @@
     android:theme="@style/LauncherTheme"
     tools:context=".Activities.MarkerInfoFragment">
 
-    <Button
-        android:id="@+id/closeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:backgroundTint="@android:color/white"
-        android:stateListAnimator="@null"
-        android:text="@string/btnMakerSkip"
-        android:textColor="?android:colorPrimary"
+    <ListView
+        android:id="@+id/current_emergencies_lv"
+        android:layout_width="match_parent"
+        android:layout_height="540dp"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17"
+        app:layout_constraintVertical_bias="1.0">
+
+    </ListView>
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/barlow_medium"
+        android:gravity="center"
+        android:text="Emergencies"
+        android:textColor="@color/changed_red"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView17"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ListView
-        android:id="@+id/current_emergencies_lv"
-        android:layout_width="409dp"
-        android:layout_height="669dp"
-        app:layout_constraintBottom_toTopOf="@+id/closeButton"
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/barlow_medium"
+        android:text="Respond and save a life!"
+        android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/barlow_medium"
+        android:text="Current Emergencies:"
+        android:textColor="@color/browser_actions_text_color"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.058"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

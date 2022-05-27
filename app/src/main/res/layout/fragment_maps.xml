@@ -31,9 +31,10 @@
         android:elevation="0dp"
         android:focusable="true"
         android:minHeight="48dp"
-        android:src="@drawable/ic_add_post"
+        android:src="@drawable/ic_alarm"
         app:backgroundTint="?android:colorAccent"
         app:borderWidth="0dp"
+
         app:elevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
