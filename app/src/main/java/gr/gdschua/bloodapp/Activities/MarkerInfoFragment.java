@@ -83,7 +83,7 @@ public class MarkerInfoFragment extends DialogFragment {
                     startActivity(mapIntent);
                 }
             });
-            iv.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_baseline_calendar_today_24, null));
+            iv.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_event, null));
             tv2.setText(String.format(getString(R.string.marker_type_1), getArguments().get("address").toString(), getArguments().get("organizer").toString(), getArguments().get("date"), getArguments().get("email").toString()));
             Button shareButton = view.findViewById(R.id.shareEventButton);
             shareButton.setOnClickListener(view13 -> {
