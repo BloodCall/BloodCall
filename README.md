@@ -50,9 +50,9 @@ For more information, visit https://www.gnu.org/licenses/gpl-3.0 or see included
 |         **Edit Profile Page**      |         **Top Contributors**       |           **Donation History**     |           **About Page**           |
 |![](https://i.imgur.com/d0ICDVX.png)|![](https://i.imgur.com/kvLYkCx.jpg)|![](https://i.imgur.com/Q46BDv6.jpg)|![](https://i.imgur.com/SqWaNgv.jpg)|
 |   **Current Emergencies Page**  |      **Event Creation**            |            **Alert Creation**      |          **Marker Info**           |
-|![](https://i.imgur.com/6XWJ7jU.jpg)|![](https://i.imgur.com/DIM6iDl.jpg)|![](https://i.imgur.com/SqWaNgv.jpg)|![](https://i.imgur.com/oXFAW5V.jpg)|
+|![](https://i.imgur.com/6XWJ7jU.jpg)|![](https://i.imgur.com/IBodAEp.jpg)|![](https://i.imgur.com/pTJPRU6.jpg)|![](https://i.imgur.com/oXFAW5V.jpg)|
 |       **Hospital Profile**         |
-|![](https://i.imgur.com/toppfYC.jpg)|
+|![](https://i.imgur.com/ZIoSmhl.jpg)|
 
 ## Build Information 🧰 
 If you wish to build this project you should make your own firebase project, and use your own firebase json. The project should be on the blaze plan, and have a realtime database, cloud functions, storage and authentication enabled.Other than that it should be built just by opening the project in android studio.
