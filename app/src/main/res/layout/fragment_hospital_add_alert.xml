@@ -26,8 +26,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout4"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
+        android:layout_width="186dp"
+        android:layout_height="50dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="10dp"
@@ -71,9 +71,9 @@
 
     <ImageView
         android:id="@+id/imageView6"
-        android:layout_width="85dp"
-        android:layout_height="88dp"
-        android:src="@drawable/ic_baseline_notification_important_24"
+        android:layout_width="110dp"
+        android:layout_height="104dp"
+        android:src="@drawable/ic_alert"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

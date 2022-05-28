@@ -85,7 +85,7 @@
         android:layout_width="127dp"
         android:layout_height="115dp"
         android:contentDescription="TODO"
-        android:src="@drawable/hospital_ic_menu"
+        android:src="@drawable/hospital_marker"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
