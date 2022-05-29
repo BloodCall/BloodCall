@@ -51,7 +51,7 @@ public class ForumFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private Handler mainThreadHandler;
     private Context thisContext;
-
+    ArrayList<Post> postArrayList = new ArrayList<>();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -94,6 +94,10 @@ public class ForumFragment extends Fragment {
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
                 postListView.setAdapter((PostAdapter)(msg.obj));
+                view.findViewById(R.id.progressBar2).setVisibility(View.GONE);
+                if(postArrayList.isEmpty()){
+                    view.findViewById(R.id.no_post_text).setVisibility(View.VISIBLE);
+                }
             }
         };
 
@@ -149,7 +153,7 @@ public class ForumFragment extends Fragment {
                 String result = CharStreams.toString(new InputStreamReader(in, Charsets.UTF_8));
                 Gson gson = new Gson();
                 Type postListType = new TypeToken<ArrayList<Post>>(){}.getType();
-                ArrayList<Post> postArrayList= gson.fromJson(result,postListType);
+                postArrayList= gson.fromJson(result,postListType);
                 PostAdapter userAdapter = new PostAdapter(thisContext,postArrayList);
                 Message msg = new Message();
                 msg.what=200;
