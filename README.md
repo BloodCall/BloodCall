@@ -47,7 +47,7 @@ For more information, visit https://www.gnu.org/licenses/gpl-3.0 or see included
     🩸 In-app QR scanner for the hospital to check it's donators with!
     🩸 Automatic deletion of events and alerts for hospitals quality of life!
   
-## Screenshots OUTDATED📷
+## Screenshots📷
 |       **Main Page**                |              **Signup Page**       |        **Map**                     |            **Profile Page**        |
 |:----------------------------------:|:----------------------------------:|:----------------------------------:|:----------------------------------:|
 |![](https://i.imgur.com/SCI9QFs.jpg)|![](https://i.imgur.com/ttx2G4K.jpg)|![](https://i.imgur.com/CULJ4ye.jpg)|![](https://i.imgur.com/DIN6NI0.jpg)|
