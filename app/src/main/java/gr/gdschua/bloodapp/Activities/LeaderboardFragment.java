@@ -1,5 +1,6 @@
 package gr.gdschua.bloodapp.Activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import com.google.common.io.CharStreams;
 import com.google.common.reflect.TypeToken;
@@ -26,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
@@ -39,8 +41,9 @@ import kotlin.text.Charsets;
  */
 public class LeaderboardFragment extends Fragment {
 
+    private Context thisContext;
     private Handler mainThreadHandler;
-    private leaderboardThread workerThread = null;
+    private final leaderboardThread workerThread = null;
 
 
 
@@ -61,22 +64,20 @@ public class LeaderboardFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment LeaderboardFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LeaderboardFragment newInstance(String param1, String param2) {
+    public static LeaderboardFragment newInstance() {
         LeaderboardFragment fragment = new LeaderboardFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        thisContext = getActivity();
         Handler mHandler=new Handler(Looper.getMainLooper()){
             @Override
             public void handleMessage(@NonNull Message msg) {
@@ -104,23 +105,23 @@ public class LeaderboardFragment extends Fragment {
             super.run();
             URL url = null;
             try {
-                url = new URL("insert a url for a leaderboard function here");
+                url = new URL("https://europe-west1-bloodcall-951a8-default-rtdb.cloudfunctions.net/getUsersforLeaderboard");
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
             HttpURLConnection urlConnection = null;
             try {
-                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection = (HttpURLConnection) Objects.requireNonNull(url).openConnection();
             } catch (IOException e) {
                 e.printStackTrace();
             }
             try {
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                InputStream in = new BufferedInputStream(Objects.requireNonNull(urlConnection).getInputStream());
                 String result = CharStreams.toString(new InputStreamReader(in, Charsets.UTF_8));
                 Gson gson = new Gson();
                 Type userListType = new TypeToken<ArrayList<User>>(){}.getType();
                 ArrayList<User> userArrayList= gson.fromJson(result,userListType);
-                UserAdapter userAdapter = new UserAdapter(requireContext(),userArrayList);
+                UserAdapter userAdapter = new UserAdapter(thisContext,userArrayList);
                 Message msg = new Message();
                 msg.what=200;
                 msg.obj=userAdapter;

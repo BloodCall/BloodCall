@@ -5,6 +5,8 @@ import static android.graphics.Color.WHITE;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import androidx.core.content.ContextCompat;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -17,7 +19,7 @@ public class QrEncoder {
     private final int CH_RED;
 
     public QrEncoder(Context context) {
-        CH_RED = context.getColor(R.color.changed_red);
+            CH_RED = ContextCompat.getColor(context,R.color.changed_red);
     }
 
 

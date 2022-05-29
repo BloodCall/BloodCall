@@ -88,6 +88,7 @@ public class LoginActivity extends AppCompatActivity {
         if (!email.isEmpty() && !password.isEmpty() && !loginClicked) {
             loginClicked = true;
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {

@@ -1,5 +1,6 @@
 package gr.gdschua.bloodapp.Activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -36,6 +37,8 @@ import gr.gdschua.bloodapp.R;
  */
 public class ResetPasswordFragment extends Fragment {
 
+    
+    private final Context thisContext = getActivity();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -83,59 +86,36 @@ public class ResetPasswordFragment extends Fragment {
         EditText repeatNewPW = view.findViewById(R.id.newPW_2);
         Button applyBTN = view.findViewById(R.id.button);
 
-        new DAOUsers().getUser().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-            @Override
-            public void onSuccess(DataSnapshot dataSnapshot) {
-                applyBTN.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!newPW.getText().toString().equals(repeatNewPW.getText().toString())){
-                            new AlertDialog.Builder(requireContext())
-                                    .setMessage("Please check that you have inputted the same password in both fields.")
-                                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                        }
-                                    })
-                                    .show();
-                        }else {
-                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            AuthCredential credential = EmailAuthProvider.getCredential(dataSnapshot.getValue(User.class).getEmail(), currPW.getText().toString());
+        new DAOUsers().getUser().addOnSuccessListener(dataSnapshot -> applyBTN.setOnClickListener(v -> {
+            if (!newPW.getText().toString().equals(repeatNewPW.getText().toString())) {
+                new AlertDialog.Builder(thisContext)
+                        .setMessage(R.string.pwd_not_matching)
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> dialog.dismiss())
+                        .show();
+            } else {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                AuthCredential credential = EmailAuthProvider.getCredential(dataSnapshot.getValue(User.class).getEmail(), currPW.getText().toString());
 
-                            Objects.requireNonNull(user).reauthenticate(credential)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                user.updatePassword(newPW.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful()) {
-                                                            Toast.makeText(requireContext(),"Your password has been updated.",Toast.LENGTH_LONG).show();
-                                                            getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_content_user,new HomeFragment()).commit();
-                                                        } else {
-                                                            Toast.makeText(requireContext(),"There was an error updating your password.",Toast.LENGTH_LONG).show();
-                                                        }
-                                                    }
-                                                });
-                                            } else {
-                                                new AlertDialog.Builder(requireContext())
-                                                        .setMessage("You have entered your current password wrong. Please try again.")
-                                                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                                            public void onClick(DialogInterface dialog, int which) {
-                                                                dialog.dismiss();
-                                                            }
-                                                        })
-                                                        .show();
-                                            }
-                                        }
-                                    });
-                        }
-                    }
-
-                });
+                Objects.requireNonNull(user).reauthenticate(credential)
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                user.updatePassword(newPW.getText().toString()).addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        Toast.makeText(thisContext, getString(R.string.pwd_updated), Toast.LENGTH_LONG).show();
+                                        getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_content_user, new HomeFragment()).commit();
+                                    } else {
+                                        Toast.makeText(thisContext,  getString(R.string.pwd_upd_error), Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                            } else {
+                                new AlertDialog.Builder(thisContext)
+                                        .setMessage(R.string.pwd_wrong_curr)
+                                        .setPositiveButton(android.R.string.yes, (dialog, which) -> dialog.dismiss())
+                                        .show();
+                            }
+                        });
             }
-        });
+        }));
         return view;
     }
 }

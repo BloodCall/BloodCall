@@ -142,12 +142,12 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/hospital_ic_menu"
+        android:contentDescription="TODO"
+        android:src="@drawable/hospital_marker"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="TODO" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView13"

@@ -14,8 +14,9 @@
   },
   "main": "index.js",
   "dependencies": {
+    "firebase": "^9.8.1",
     "firebase-admin": "^10.0.2",
-    "firebase-functions": "^3.18.1"
+    "firebase-functions": "^3.21.2"
   },
   "devDependencies": {
     "eslint": "^7.6.0",

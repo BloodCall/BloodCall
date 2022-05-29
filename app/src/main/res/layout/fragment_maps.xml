@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <androidx.fragment.app.FragmentContainerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/map"
     android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -7,3 +15,32 @@
     android:layout_height="match_parent"
     tools:context=".Activities.MapsFragment"
     tools:layout="@layout/fragment_maps" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/emergenciesButton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:layout_weight="6"
+        android:clickable="true"
+        android:elevation="0dp"
+        android:focusable="true"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_alarm"
+        app:backgroundTint="?android:colorAccent"
+        app:borderWidth="0dp"
+
+        app:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@android:color/white" />
+
+
+
+
+</RelativeLayout>

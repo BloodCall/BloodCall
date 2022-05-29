@@ -46,7 +46,7 @@
     <!-- Main Activity Strings !-->
     <string name="side_bar_home">Home</string>
     <string name="side_bar_map">Hospital Map</string>
-    <string name="settings_toolbar">Open Source Licences</string>
+    <string name="settings_toolbar">Open source licences</string>
     <string name="side_bar_signout">Sign Out</string>
     <string name="signed_out">Signed Out</string>
     <string name="side_bar_add_event">Add Event</string>
@@ -77,7 +77,7 @@
         of the navigation drawer-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="add_new_alert">Add New Alert</string>
-    <string name="new_alert_text">What kind of blood does the patient have? \n\n Alert will be sent to all compatible blood types</string>
+    <string name="new_alert_text">What type of blood does the patient have? \n\n Alert will be sent to all compatible blood types</string>
     <string name="create_alert_btn">Create Alert</string>
     <string name="hospital_mode">HOSPITAL MODE</string>
     <string name="marker_type_1">Address: %1$s \n Organized By: %2$s \n\n Date: %3$s \n\n Email: %4$s</string>
@@ -101,10 +101,10 @@
     <string name="qr_fail_1">Invalid QR code!</string>
     <string name="qr_fail_2">Could not check in user!</string>
     <string name="check_in">Check in</string>
-    <string name="my_history">Blood Donation History</string>
+    <string name="my_history">Blood History</string>
     <string name="navigate">Navigate</string>
     <string name="close">CLOSE</string>
-    <string name="qr_text">This is your QR code. Show this to hospital staff in order to be checked in</string>
+    <string name="qr_text">This is your QR code. \n\nShow this to hospital staff in order to be checked in.</string>
     <string name="bg_loc_title">Background Location Access is needed.</string>
     <string name="bg_loc_text">In order for the emergency notifications to work, you need to provide background notification permission. Do that now?</string>
     <string name="notif_first_time">Thank you for turning on push notifications! You have been awarded 10 XP!</string>
@@ -118,7 +118,7 @@
     <string name="icons_disc">Icons from logomakr.com and Android default resources.</string>
     <string name="enable_location_title">Please enable the location setting on your device.</string>
     <string name="enable_location_text">This application requires the location setting on your phone to be enabled in order to display the map, and send you geographically filtered notifications. Please turn it on to continue</string>
-    <string name="leaderboard" translatable="false">Top Contributors</string>
+    <string name="leaderboard" translatable="false">Contributors</string>
     <string name="please_include_zip_code">Please include zip code</string>
     <string name="edit_profile">EDIT PROFILE</string>
     <string name="change_password">CHANGE PASSWORD</string>
@@ -130,5 +130,44 @@
     <string name="enter_your_current_password">Enter your current password...</string>
     <string name="apply">Apply</string>
     <string name="list_warning">According to Red Cross, you should donate blood once every 56 days. For more information, consult a physician. Please do not attempt any actions that may harm you in order to obtain a higher ranking.</string>
+    <string name="title_activity_hospital_settings">Settings</string>
+    <string name="title_activity_user_settings">Settings</string>
+    <string name="post_added">Your post has been added</string>
+    <string name="pwd_not_matching">Please check that you have inputted the same password in both fields.</string>
+    <string name="pwd_updated">Your password has been updated.</string>
+    <string name="pwd_upd_error">There was an error updating your password.</string>
+    <string name="pwd_wrong_curr">You have entered your current password wrong. Please try again.</string>
+    <string name="forum_tab">Forum</string>
+    <string name="leaderboard_tab">Leaderboard</string>
+    <string name="add_event_addr_error">Address not found!</string>
+    <string name="hosp_s_u_addr_err">Invalid address</string>
+    <string name="maps_loc_err">We were not able to retrieve your location because you denied the permission.</string>
+    <string name="info_img_saved">Image was saved</string>
+    <string name="info_no_img_saved">No image saved.</string>
+    <string name="notif_event">Check out this new event near you!</string>
+    <string name="event_notif_body">Event %s has been created near you! Click here to open the app.</string>
+    <string name="event_chan_name">Events</string>
+    <string name="add_post">Add Post</string>
+    <string name="post_hint_body">Type your text here..</string>
+    <string name="post_header">ADD POST</string>
+    <string name="post_title_hint">Title</string>
+    <string name="post_flair">flair</string>
+    <string name="map_dialog_title">What are you looking to donate?</string>
+    <string name="map_dialog_blood">Regular blood</string>
+    <string name="map_dialog_plasma">Plasma</string>
+    <string name="map_dialog_platelets">Platelets</string>
+    <string name="menu_community">Community</string>
+    <string name="hosp_sett_donation_summary">Select what kind of donations you are currently accepting</string>
+    <string name="hosp_settings_donation_type">Donation type</string>
+    <string name="hosp_settings_cat_title">Hospital settings</string>
+    <string name="settings_information_cat">Information</string>
+    <string name="user_settings_not_cat">Notifications</string>
+    <string name="emerg_notif_summary">Select the distance of the hospitals you want to receive alerts from</string>
+    <string name="emerg_notif_dist">Emergency notification distance</string>
+    <string name="event_notifs_switch">Receive event notifications</string>
+    <string name="event_notif_dist">Event notification distance</string>
+    <string name="event_notif_summary">Select the distance of the events you want to receive alerts from</string>
+    <string name="settings_account_cat">Account</string>
+    <string name="edit_profile_summary">Change your profile information, as well as your password</string>
 
 </resources>

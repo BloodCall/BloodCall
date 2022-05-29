@@ -23,7 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -86,55 +85,42 @@ public class HospitalAddEventFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_hospital_add_event, container, false);
         EditText editText = view.findViewById(R.id.eventDateBox);
 
-        view.findViewById(R.id.addEventButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<Address> latLonList = null;
-                TextView name = view.findViewById(R.id.eventName);
-                TextView addr = view.findViewById(R.id.eventAddress);
-                TextView date = view.findViewById(R.id.eventDateBox);
+        view.findViewById(R.id.addEventButton).setOnClickListener(v -> {
+            List<Address> latLonList = null;
+            TextView name = view.findViewById(R.id.eventName);
+            TextView addr = view.findViewById(R.id.eventAddress);
+            TextView date = view.findViewById(R.id.eventDateBox);
 
-                Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
-                try {
-                    latLonList = geocoder.getFromLocationName(addr.getText().toString(), 1);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    Event event = new Event(name.getText().toString(), date.getText().toString(), FirebaseAuth.getInstance().getUid(), Objects.requireNonNull(latLonList).get(0).getLatitude(), latLonList.get(0).getLongitude());
-                    daoEvents.insertEvent(event).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.event_added, Snackbar.LENGTH_LONG);
-                            requireActivity().onBackPressed();
-                            snackbar.show();
-                        }
-                    });
-                } catch (IndexOutOfBoundsException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity(), "Address not found!", Toast.LENGTH_SHORT).show();
-                }
+            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+            try {
+                latLonList = geocoder.getFromLocationName(addr.getText().toString(), 1);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
+            try {
+                Event event = new Event(name.getText().toString(), date.getText().toString(), FirebaseAuth.getInstance().getUid(), Objects.requireNonNull(latLonList).get(0).getLatitude(), latLonList.get(0).getLongitude());
+                daoEvents.insertEvent(event).addOnCompleteListener(task -> {
+                    Snackbar snackbar = Snackbar.make(requireActivity().findViewById(android.R.id.content), R.string.event_added, Snackbar.LENGTH_LONG);
+                    requireActivity().onBackPressed();
+                    snackbar.show();
+                });
+            } catch (IndexOutOfBoundsException e) {
+                e.printStackTrace();
+                Toast.makeText(getActivity(), getString(R.string.add_event_addr_error), Toast.LENGTH_SHORT).show();
+            }
         });
 
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, month);
-                myCalendar.set(Calendar.DAY_OF_MONTH, day);
-                updateLabel(editText);
-            }
+        DatePickerDialog.OnDateSetListener date = (view12, year, month, day) -> {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, month);
+            myCalendar.set(Calendar.DAY_OF_MONTH, day);
+            updateLabel(editText);
         };
-        editText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerDialog dpDialog = new DatePickerDialog(getActivity(), date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
-                dpDialog.getDatePicker().setMinDate(System.currentTimeMillis());
-                dpDialog.show();
-            }
+        editText.setOnClickListener(view1 -> {
+            DatePickerDialog dpDialog = new DatePickerDialog(getActivity(), date, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+            dpDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+            dpDialog.show();
         });
 
         return view;

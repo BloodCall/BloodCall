@@ -11,7 +11,7 @@ import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
 
 public class User {
     public final ArrayList<CheckIn> checkIns = new ArrayList<>();
-    public Boolean notifFirstTime, notifications;
+    public Boolean notifFirstTime, notifications, eventNotifs;
     private String fullName, email, bloodType, id;
     private int xp;
 
@@ -22,9 +22,10 @@ public class User {
         notifFirstTime = false;
     }
 
-
     public User() {
     }
+
+
 
     public int getXp() {
         return xp;
@@ -54,6 +55,14 @@ public class User {
     @Exclude
     public void updateSelf(){
         new DAOUsers().updateUser(this);
+    }
+
+    public Boolean getEventNotifs() {
+        return eventNotifs;
+    }
+
+    public void setEventNotifs(Boolean eventNotifs) {
+        this.eventNotifs = eventNotifs;
     }
 
     public String getFullName() {

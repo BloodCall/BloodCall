@@ -47,16 +47,16 @@ For more information, visit https://www.gnu.org/licenses/gpl-3.0 or see included
     🩸 In-app QR scanner for the hospital to check it's donators with!
     🩸 Automatic deletion of events and alerts for hospitals quality of life!
   
-## Screenshots 📷
+## Screenshots OUTDATED📷
 |       **Main Page**                |              **Signup Page**       |        **Map**                     |            **Profile Page**        |
 |:----------------------------------:|:----------------------------------:|:----------------------------------:|:----------------------------------:|
-|![](https://i.imgur.com/SCI9QFs.jpg)|![](https://i.imgur.com/ttx2G4K.jpg)|![](https://i.imgur.com/bH5uSZe.jpg)|![](https://i.imgur.com/U8GY0ce.jpg)|
+|![](https://i.imgur.com/SCI9QFs.jpg)|![](https://i.imgur.com/ttx2G4K.jpg)|![](https://i.imgur.com/CULJ4ye.jpg)|![](https://i.imgur.com/DIN6NI0.jpg)|
 |         **Edit Profile Page**      |         **Top Contributors**       |           **Donation History**     |           **About Page**           |
-|![](https://i.imgur.com/d0ICDVX.png)|![](https://i.imgur.com/IqenlEU.png)|![](https://i.imgur.com/FCCzyyC.png)|![](https://i.imgur.com/SqWaNgv.jpg)|
-|   **Open Source Licenses Screen**  |      **Event Creation**            |            **Alert Creation**      |          **Marker Info**           |
-|![](https://i.imgur.com/6h1FgTl.png)|![](https://i.imgur.com/DIM6iDl.jpg)|![](https://i.imgur.com/SqWaNgv.jpg)|![](https://i.imgur.com/kPJGaPd.jpg)|
+|![](https://i.imgur.com/d0ICDVX.png)|![](https://i.imgur.com/kvLYkCx.jpg)|![](https://i.imgur.com/Q46BDv6.jpg)|![](https://i.imgur.com/SqWaNgv.jpg)|
+|   **Current Emergencies Page**  |      **Event Creation**            |            **Alert Creation**      |          **Marker Info**           |
+|![](https://i.imgur.com/6XWJ7jU.jpg)|![](https://i.imgur.com/IBodAEp.jpg)|![](https://i.imgur.com/pTJPRU6.jpg)|![](https://i.imgur.com/oXFAW5V.jpg)|
 |       **Hospital Profile**         |
-|![](https://i.imgur.com/toppfYC.jpg)|
+|![](https://i.imgur.com/ZIoSmhl.jpg)|
 
 ## Build Information 🧰 
 If you wish to build this project you should make your own firebase project, and use your own firebase json. The project should be on the blaze plan, and have a realtime database, cloud functions, storage and authentication enabled.Other than that it should be built just by opening the project in android studio.

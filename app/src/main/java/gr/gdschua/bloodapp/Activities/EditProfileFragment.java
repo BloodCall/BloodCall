@@ -1,6 +1,7 @@
 package gr.gdschua.bloodapp.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,7 +32,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -54,6 +54,7 @@ public class EditProfileFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private final Context thisContext = getActivity();
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -109,115 +110,92 @@ public class EditProfileFragment extends Fragment {
 
         final ActivityResultLauncher<Intent> launchGalleryActivity = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() != Activity.RESULT_OK) {
-                            return;
-                        }
-                        Intent data = result.getData();
-                        try {
-                            profilePictureBitmap = BitmapResizer.processBitmap(Objects.requireNonNull(data).getData(), 400, requireActivity());
-                            profilePic.setImageBitmap(profilePictureBitmap);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                result -> {
+                    if (result.getResultCode() != Activity.RESULT_OK) {
+                        return;
+                    }
+                    Intent data = result.getData();
+                    try {
+                        profilePictureBitmap = BitmapResizer.processBitmap(Objects.requireNonNull(data).getData(), 400, requireActivity());
+                        profilePic.setImageBitmap(profilePictureBitmap);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 });
 
-        new DAOUsers().getUser().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
-            @Override
-            public void onSuccess(DataSnapshot dataSnapshot) {
-                User currUser = dataSnapshot.getValue(User.class);
-                String[] nameSpl = currUser.getFullName().split("\\s+");
-                fName.setText(nameSpl[0]);
-                lName.setText(nameSpl[1]);
-                email.setText(currUser.getEmail());
-                String[] bldSpl = currUser.getBloodType().split("((?=[+-])|(?<=[+-]))");
-                bloodTypeSpinner.setSelection(((ArrayAdapter<String>)bloodTypeSpinner.getAdapter()).getPosition(bldSpl[0]));
-                posNegSpinner.setSelection(((ArrayAdapter<String>)posNegSpinner.getAdapter()).getPosition(bldSpl[1]));
+        new DAOUsers().getUser().addOnSuccessListener(dataSnapshot -> {
+            User currUser = dataSnapshot.getValue(User.class);
+            String[] nameSpl = currUser.getFullName().split("\\s+");
+            fName.setText(nameSpl[0]);
+            lName.setText(nameSpl[1]);
+            email.setText(currUser.getEmail());
+            String[] bldSpl = currUser.getBloodType().split("((?=[+-])|(?<=[+-]))");
+            bloodTypeSpinner.setSelection(((ArrayAdapter<String>)bloodTypeSpinner.getAdapter()).getPosition(bldSpl[0]));
+            posNegSpinner.setSelection(((ArrayAdapter<String>)posNegSpinner.getAdapter()).getPosition(bldSpl[1]));
 
 
-                profilePic.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_PICK).setType("image/*").putExtra("outputX", 240).putExtra("outputY", 240).putExtra("aspectX", 1).putExtra("aspectY", 1).putExtra("scale", true);
-                        launchGalleryActivity.launch(intent);
-                    }
+            profilePic.setOnClickListener(v -> {
+                Intent intent = new Intent(Intent.ACTION_PICK).setType("image/*").putExtra("outputX", 240).putExtra("outputY", 240).putExtra("aspectX", 1).putExtra("aspectY", 1).putExtra("scale", true);
+                launchGalleryActivity.launch(intent);
+            });
+
+            updateBtn.setOnClickListener(v -> {
+
+                Thread t = new Thread(() -> {
+                    FirebaseMessaging.getInstance().subscribeToTopic(currUser.getTopic());
+                    currUser.updateSelf();
                 });
-
-                updateBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        Thread t = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                FirebaseMessaging.getInstance().subscribeToTopic(currUser.getTopic());
-                                currUser.updateSelf();
-                            }
-                        });
-                        if(!email.getText().toString().equals(currUser.getEmail())){
-                            FirebaseAuth.getInstance().getCurrentUser().updateEmail(email.getText().toString());
-                        }
-                        FirebaseMessaging.getInstance().unsubscribeFromTopic(currUser.getTopic());
-                        currUser.setEmail(email.getText().toString());
-                        currUser.setFullName(fName.getText()+" "+lName.getText());
-                        currUser.setBloodType(bloodTypeSpinner.getSelectedItem().toString().trim() + posNegSpinner.getSelectedItem().toString().trim());
-                        t.start();
-                        if(profilePictureBitmap != null) {
-                            File outputFile = null;
-                            try {
-                                outputFile = File.createTempFile("profPic" + Math.random(), ".png", requireContext().getCacheDir());
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                            profilePictureBitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
-                            byte[] bitmapdata = bos.toByteArray();
-                            FileOutputStream fos = null;
-                            try {
-                                fos = new FileOutputStream(outputFile);
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                fos.write(bitmapdata);
-                                fos.flush();
-                                fos.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                            FirebaseStorage.getInstance().getReference("UserImages").child(currUser.getId()).putFile(Uri.fromFile(outputFile));
-                        }
-                        getParentFragmentManager().popBackStack();
+                if (!email.getText().toString().equals(currUser.getEmail())) {
+                    FirebaseAuth.getInstance().getCurrentUser().updateEmail(email.getText().toString());
+                }
+                FirebaseMessaging.getInstance().unsubscribeFromTopic(currUser.getTopic());
+                currUser.setEmail(email.getText().toString());
+                currUser.setFullName(fName.getText() + " " + lName.getText());
+                currUser.setBloodType(bloodTypeSpinner.getSelectedItem().toString().trim() + posNegSpinner.getSelectedItem().toString().trim());
+                t.start();
+                if (profilePictureBitmap != null) {
+                    File outputFile = null;
+                    try {
+                        outputFile = File.createTempFile("profPic" + Math.random(), ".png", thisContext.getCacheDir());
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                });
-            }
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    profilePictureBitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+                    byte[] bitmapdata = bos.toByteArray();
+                    FileOutputStream fos = null;
+                    try {
+                        fos = new FileOutputStream(outputFile);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        fos.write(bitmapdata);
+                        fos.flush();
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    FirebaseStorage.getInstance().getReference("UserImages").child(currUser.getId()).putFile(Uri.fromFile(outputFile));
+                }
+                getParentFragmentManager().popBackStack();
+            });
         });
 
-        view.findViewById(R.id.changePasswordBtn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_content_user,ResetPasswordFragment.newInstance(null,null)).commit();
-            }
-        });
+        view.findViewById(R.id.changePasswordBtn).setOnClickListener(v -> getParentFragmentManager().beginTransaction().replace(R.id.nav_host_fragment_content_user,ResetPasswordFragment.newInstance(null,null)).commit());
 
 
         try {
             File localFile = File.createTempFile(mParam1, "jpg");
-             FirebaseStorage.getInstance().getReference().child("UserImages/" + mParam1).getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        profilePic.setImageBitmap(bitmap);
-                        localFile.delete();
-                    } else {
-                        Log.e("ERROR", "IMAGE NOT FOUND!");
-                    }
-                }
-            });
+             FirebaseStorage.getInstance().getReference().child("UserImages/" + mParam1).getFile(localFile).addOnCompleteListener(task -> {
+                 if (task.isSuccessful()) {
+                     Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                     profilePic.setImageBitmap(bitmap);
+                     localFile.delete();
+                 } else {
+                     Log.e("ERROR", "IMAGE NOT FOUND!");
+                 }
+             });
         } catch (IOException e) {
             e.printStackTrace();
         }

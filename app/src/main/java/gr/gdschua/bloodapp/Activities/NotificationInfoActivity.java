@@ -43,43 +43,26 @@ public class NotificationInfoActivity extends AppCompatActivity {
         Double lat = launchIntent.getDouble("lat");
         Double lon = launchIntent.getDouble("lon");
 
-        closeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        closeBtn.setOnClickListener(v -> finish());
 
         final MapView mapView = (MapView) findViewById(R.id.mapView);
 
-        navBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri gmmIntentUri = Uri.parse("google.navigation:q=" + lat + "," + lon);
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                mapIntent.setPackage("com.google.android.apps.maps");
-                if (mapIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(mapIntent);
-                }
+        navBtn.setOnClickListener(v -> {
+            Uri gmmIntentUri = Uri.parse("google.navigation:q=" + lat + "," + lon);
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            if (mapIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(mapIntent);
             }
         });
 
         mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-
-            @Override
-            public void onMapReady(@NonNull GoogleMap googleMap) {
-                LatLng coordinates = new LatLng(lat, lon);
-                googleMap.addMarker(new MarkerOptions().position(coordinates));
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15));
-                googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-                    @Override
-                    public boolean onMarkerClick(@NonNull Marker marker) {
-                        return true;
-                    }
-                });
-                mapView.onResume();
-            }
+        mapView.getMapAsync(googleMap -> {
+            LatLng coordinates = new LatLng(lat, lon);
+            googleMap.addMarker(new MarkerOptions().position(coordinates));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15));
+            googleMap.setOnMarkerClickListener(marker -> true);
+            mapView.onResume();
         });
     }
 }

@@ -2,9 +2,15 @@ package gr.gdschua.bloodapp.Activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -28,6 +35,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import gr.gdschua.bloodapp.DatabaseAccess.DAOEvents;
@@ -35,9 +43,13 @@ import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.Entities.Event;
 import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.R;
+import gr.gdschua.bloodapp.Utils.MyDialogCloseListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MapsFragment extends Fragment {
+public class MapsFragment extends Fragment implements MyDialogCloseListener {
 
+    private Context thisContext;
+    private static final String TAG = "MapsFragment";
     private final DAOHospitals daoHospitals = new DAOHospitals();
     private final DAOEvents daoEvents = new DAOEvents();
     final GoogleMap.OnMarkerClickListener MarkerClickListener = marker -> {
@@ -47,11 +59,14 @@ public class MapsFragment extends Fragment {
 
             Bundle bundle = new Bundle();
             assert hospital != null;
+            ArrayList<String> accepts = new ArrayList<>(hospital.getAccepts());
+
             bundle.putString("name", hospital.getName());
             bundle.putString("address", hospital.getAddress());
             bundle.putString("email", hospital.getEmail());
-            bundle.putDouble("lat",hospital.getLat());
+            bundle.putDouble("lat", hospital.getLat());
             bundle.putDouble("lon", hospital.getLon());
+            bundle.putStringArrayList("accepts",accepts);
             myMarkerInfoFragment.setArguments(bundle);
             myMarkerInfoFragment.show(requireActivity().getSupportFragmentManager(), "My Fragment");
 
@@ -63,7 +78,7 @@ public class MapsFragment extends Fragment {
             bundle.putString("name", event.getName());
             bundle.putString("date", event.getDate());
             bundle.putString("address", event.getAddress(getActivity()));
-            bundle.putDouble("lat",event.getLat());
+            bundle.putDouble("lat", event.getLat());
             bundle.putDouble("lon", event.getLon());
             daoHospitals.getUser(event.getOwner()).addOnCompleteListener(task -> {
                 Hospital ownerHosp = task.getResult().getValue(Hospital.class);
@@ -84,7 +99,7 @@ public class MapsFragment extends Fragment {
         if (result) {
             handleLocation();
         } else {
-            Toast.makeText(requireContext(), "We were not able to retrieve your location because you denied the permission.", Toast.LENGTH_LONG).show();
+            Toast.makeText(thisContext, getString(R.string.maps_loc_err), Toast.LENGTH_LONG).show();
         }
     });
     private final OnMapReadyCallback callback = new OnMapReadyCallback() {
@@ -92,22 +107,36 @@ public class MapsFragment extends Fragment {
         @Override
         public void onMapReady(@NonNull GoogleMap googleMap) {
             map = googleMap;
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(thisContext, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 locationRequest.launch(Manifest.permission.ACCESS_FINE_LOCATION);
             } else {
                 handleLocation();
             }
 
             googleMap.setOnMarkerClickListener(MarkerClickListener);
-            placeMarkers();
 
+            MapDialogFragment mapDialogFragment = new MapDialogFragment();
+            mapDialogFragment.show(requireActivity().getSupportFragmentManager(), "My Fragment");
+            MyDialogCloseListener closeListener = dialog -> placeMarkers();
+
+            mapDialogFragment.DismissListener(closeListener);
+
+            FloatingActionButton floatingActionButton = getView().findViewById(R.id.emergenciesButton);
+
+            floatingActionButton.setOnClickListener(view1 -> {
+                CurrentEmergenciesFragment currentEmergenciesFragment =  CurrentEmergenciesFragment.newInstance();
+                FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(getParentFragment().getId(),currentEmergenciesFragment).addToBackStack(null).commit();
+
+
+            });
         }
     };
 
     @SuppressLint("MissingPermission")
     private void handleLocation() {
         map.setMyLocationEnabled(true);
-        FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext());
+        FusedLocationProviderClient mFusedLocationClient = LocationServices.getFusedLocationProviderClient(thisContext);
         mFusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
             Location location = task.getResult();
             LatLng myLoc = new LatLng(location.getLatitude(), location.getLongitude());
@@ -120,6 +149,11 @@ public class MapsFragment extends Fragment {
     private void placeMarkers() {
         ArrayList<Event> events = daoEvents.getAllEvents();
         ArrayList<Hospital> hospitals = daoHospitals.getAllHospitals();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        String regularBlood = preferences.getString("regular","null");
+        String platelets = preferences.getString("platelets","null");
+        String plasma = preferences.getString("plasma","null");
 
         if (events.size() > 0) {
             for (int i = 0; i < events.size(); i++) {
@@ -130,7 +164,19 @@ public class MapsFragment extends Fragment {
         if (hospitals.size() > 0) {
             for (int i = 0; i < hospitals.size(); i++) {
                 LatLng hospitalLatLong = new LatLng(hospitals.get(i).getLat(), hospitals.get(i).getLon());
-                Objects.requireNonNull(map.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()).snippet("Hospital"))).setTag(hospitals.get(i));
+                List<String> accepts = hospitals.get(i).getAccepts();
+
+                if( accepts != null){
+
+                    for(int j=0; j< accepts.size();j++){
+
+                        if(accepts.get(j).equals(regularBlood) || accepts.get(j).equals(platelets) || accepts.get(j).equals(plasma) ){
+                            Objects.requireNonNull(map.addMarker(new MarkerOptions().position(hospitalLatLong).title(hospitals.get(i).getName()).snippet("Hospital")))
+                                    .setTag(hospitals.get(i));
+                        }
+
+                    }
+                }
             }
         }
     }
@@ -140,7 +186,15 @@ public class MapsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_maps, container, false);
+
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        thisContext = getActivity();
     }
 
     @Override
@@ -154,4 +208,21 @@ public class MapsFragment extends Fragment {
     }
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                // here the part where I get my selected date from the saved variable in the intent and the displaying it.
+                Bundle bundle = data.getExtras();
+                String resultDate = bundle.getString("selectedDate", "error");
+                Toast.makeText(getContext(), "COCK " + resultDate, Toast.LENGTH_LONG).show();
+            }
+        }
+
+    }
+
+    @Override
+    public void handleDialogClose(DialogInterface dialog) {
+
+    }
 }

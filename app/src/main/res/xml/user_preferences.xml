@@ -1,0 +1,74 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="@string/user_settings_not_cat">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="push_notif_switch"
+            android:title="@string/textViewWithSwitch"
+            app:icon="@drawable/ic_baseline_notification_important_24" />
+
+        <ListPreference
+            android:defaultValue="20"
+            android:entries="@array/distances_strings"
+            android:entryValues="@array/distances"
+            android:key="notifs_distance"
+            android:summary="@string/emerg_notif_summary"
+            android:title="@string/emerg_notif_dist"
+            app:icon="@drawable/ic_baseline_my_location_24"
+            app:isPreferenceVisible="false" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="push_notif_switch_events"
+            android:title="@string/event_notifs_switch"
+            app:icon="@drawable/ic_baseline_calendar_today_24" />
+
+        <ListPreference
+            android:defaultValue="20"
+            android:entries="@array/distances_strings"
+            android:entryValues="@array/distances"
+            android:key="notifs_event_distance"
+            android:summary="@string/event_notif_summary"
+            android:title="@string/event_notif_dist"
+            app:icon="@drawable/ic_baseline_my_location_24"
+            app:isPreferenceVisible="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_information_cat">
+
+        <Preference
+            android:id="@+id/user_settings_about"
+            android:key="@string/about"
+            android:summary="Licence information, Credits"
+            android:title="@string/about"
+            app:icon="@drawable/ic_baseline_info_24" />
+
+        <Preference
+            android:id="@+id/user_settings_oss"
+            android:key="@string/settings_toolbar"
+            android:summary="Information about the libraries we used"
+            android:title="@string/settings_toolbar"
+            app:icon="@drawable/ic_baseline_code_24" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_account_cat">
+
+        <Preference
+            android:id="@+id/user_settings_edit_profile"
+            android:key="edit_profile"
+            android:title="@string/edit_profile_settings"
+            android:summary="@string/edit_profile_summary"
+            app:icon="@drawable/ic_baseline_edit_24" />
+
+        <Preference
+            android:id="@+id/user_settings_sign_out"
+            android:key="@string/side_bar_signout"
+            android:title="@string/side_bar_signout"
+            app:icon="@drawable/ic_signout_24" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

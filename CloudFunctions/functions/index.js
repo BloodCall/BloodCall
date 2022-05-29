@@ -23,6 +23,41 @@ exports.leaderboard = functions.region('europe-west1').https.onRequest((request,
       });
 });
 
+exports.getPosts = functions.region('europe-west1').https.onRequest((request, response) => {
+  const posts = [];
+  admin.database().ref('/Posts/')
+      .once('value')
+      .then((results) => {
+        results.forEach((snapshot) => {
+          posts.push(snapshot.val());
+        });
+        posts.sort((a, b) => (new Date(a.dateStamp) < new Date(b.dateStamp) ?1 : -1));
+        response.send(posts);
+      });
+});
+
+exports.eventAdded = functions.region('europe-west1').database.ref('/Events/{event_id}')
+    .onCreate((snapshot, context) => {
+      const eventData=snapshot.val();
+      const messageCondition='\'events\' in topics';
+      console.log(messageCondition + ' message condition');
+      const message = {
+        data: {
+          event: JSON.stringify(eventData),
+        },
+        condition: messageCondition,
+      };
+      console.log(message);
+      admin.messaging().send(message)
+          .then((response)=>{
+            console.log('Successfully sent message:', response);
+          }).catch((error) => {
+            console.log('Error sending message:', error);
+          });
+    }, (errorObject) => {
+      console.log('The read failed: ' + errorObject.name);
+    });
+
 exports.alertAdded = functions.region('europe-west1').database.ref('/Alerts/{alert_id}')
     .onCreate((snapshot, context) => {
       const alertData=snapshot.val();
@@ -125,3 +160,15 @@ exports.deleteAlerts = functions.region('europe-west1').pubsub.schedule('59 23 *
           });
     });
 
+exports.getAlerts = functions.region('europe-west1').https.onRequest((request, response) => {
+  const alerts = [];
+  admin.database().ref('/Alerts/')
+      .once('value')
+      .then((results) => {
+        results.forEach((snapshot) => {
+          alerts.push(snapshot.val());
+        });
+        alerts.sort((a, b) => (new Date(a.dateCreated) < new Date(b.dateCreated) ?1 : -1));
+        response.send(alerts);
+      });
+});

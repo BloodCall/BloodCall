@@ -21,10 +21,11 @@ android {
 
     defaultConfig {
         applicationId "gr.gdschua.bloodapp"
-        minSdk 24
+        minSdk 19
         targetSdk 31
-        versionCode 3
-        versionName "1.0"
+        versionCode 4
+        versionName "2.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.release
@@ -49,12 +50,14 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation "com.google.android.material:material:1.5.0"
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation 'androidx.navigation:navigation-fragment:2.4.1'
     implementation 'com.google.android.gms:play-services-tasks:18.0.1'
     implementation 'com.google.firebase:firebase-auth:firebase-auth'
     implementation 'com.google.firebase:firebase-database:firebase-database'
     implementation 'com.google.firebase:firebase-messaging:firebase-messaging'
     implementation 'com.google.firebase:firebase-storage:firebase-storage'
+    implementation 'androidx.preference:preference:1.1.1'
     releaseImplementation 'com.google.firebase:firebase-analytics:20.1.0'
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'androidx.navigation:navigation-ui:2.4.1'

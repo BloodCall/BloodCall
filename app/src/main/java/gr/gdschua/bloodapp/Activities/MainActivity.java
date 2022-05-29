@@ -6,23 +6,25 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationRequest;
@@ -32,12 +34,19 @@ import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.navigation.NavigationView;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import gr.gdschua.bloodapp.Activities.HospitalActivities.HospitalSettingsActivity;
+import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.DatabaseAccess.DAOUsers;
+import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.Entities.User;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.NetworkChangeReceiver;
@@ -52,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     final BroadcastReceiver broadcastReceiver = new NetworkChangeReceiver();
     final DAOUsers Udao = new DAOUsers();
+    Hospital currHosp;
     User currUser;
     private AppBarConfiguration mAppBarConfiguration;
 
@@ -65,16 +75,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Udao.getUser().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (task.isSuccessful()) {
-                    currUser = task.getResult().getValue(User.class);
-                    if (task.getResult().getValue() == null) {
-                        InflateHospital();
-                    } else {
-                        InflateUser();
-                    }
+        Udao.getUser().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                currUser = task.getResult().getValue(User.class);
+                if (task.getResult().getValue() == null) {
+                    InflateHospital();
+                } else {
+                    InflateUser();
                 }
             }
         });
@@ -84,28 +91,6 @@ public class MainActivity extends AppCompatActivity {
         enableLocationSettings();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        if (item.getItemId() == R.id.action_licences) {
-            startActivity(new Intent(this, OssLicensesMenuActivity.class));
-            OssLicensesMenuActivity.setActivityTitle(getString(R.string.settings_toolbar));
-            return true;
-        }
-        if (item.getItemId() == R.id.action_about) {
-            startActivity(new Intent(this, AboutActivity.class));
-            OssLicensesMenuActivity.setActivityTitle(getString(R.string.about));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 
     @Override
@@ -134,74 +119,49 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainHospitalBinding binding = ActivityMainHospitalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.appBarMainHosp.toolbar);
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_hosp);
+        NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        NavigationUI.setupWithNavController(bottomNav, navController);
+
+        DAOHospitals daoHosp = new DAOHospitals();
+
+        daoHosp.getUser().addOnCompleteListener(task -> {
+            currHosp = task.getResult().getValue(Hospital.class);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            Set<String> don_types = preferences.getStringSet("donation_type", new HashSet<>(Arrays.asList("0", "1", "2")));
+            currHosp.setAccepts(new ArrayList<>(don_types));
+            currHosp.updateSelf();
+        });
+
+
+
+        findViewById(R.id.settings_btn_hosp).setOnClickListener(v -> {
+            Intent moveToSettings = new Intent(getApplicationContext(), HospitalSettingsActivity.class);
+            startActivity(moveToSettings);
+        });
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_hospital_home, R.id.nav_hosp_map, R.id.nav_hosp_qr_scanner)
-                .setOpenableLayout(drawer)
-                .build();
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_hosp);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                if (id == R.id.sign_out) {
-                    FirebaseAuth.getInstance().signOut();
-                    Intent intent = new Intent(MainActivity.this, LauncherActivity.class);
-                    startActivity(intent);
-                    finish();
-                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.signed_out), Toast.LENGTH_SHORT).show();
-                }
-                NavigationUI.onNavDestinationSelected(menuItem, navController);
-                drawer.closeDrawer(GravityCompat.START);
-                return true;
-            }
-        });
+
     }
 
     protected void InflateUser() {
         ActivityMainUserBinding binding = ActivityMainUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.appBarMainUser.toolbar);
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_map, R.id.nav_leaderboard ,R.id.nav_history)
-                .setOpenableLayout(drawer)
-                .build();
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        NavHostFragment navHostFragment = (NavHostFragment) supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_user);
+        NavController navController = Objects.requireNonNull(navHostFragment).getNavController();
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation2);
+        NavigationUI.setupWithNavController(bottomNav, navController);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_user);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int id = menuItem.getItemId();
-                if (id == R.id.sign_out) {
-                    FirebaseMessaging.getInstance().unsubscribeFromTopic(currUser.getTopic()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            FirebaseAuth.getInstance().signOut();
-                            Intent intent = new Intent(MainActivity.this, LauncherActivity.class);
-                            startActivity(intent);
-                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.signed_out), Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    });
-                }
-                NavigationUI.onNavDestinationSelected(menuItem, navController);
-                drawer.closeDrawer(GravityCompat.START);
-                return true;
-            }
+        findViewById(R.id.settings_btn_user).setOnClickListener(v -> {
+            Intent moveToSettings = new Intent(getApplicationContext(), UserSettingsActivity.class);
+            startActivity(moveToSettings);
         });
 
     }
@@ -243,12 +203,7 @@ public class MainActivity extends AppCompatActivity {
                 new AlertDialog.Builder(this, R.style.CustomDialogTheme)
                         .setTitle(R.string.enable_location_title)
                         .setMessage(R.string.enable_location_text)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                enableLocationSettings();
-                            }
-                        }).show().setCancelable(false);
+                        .setPositiveButton(android.R.string.yes, (dialog, which) -> enableLocationSettings()).show().setCancelable(false);
             }
         }
     }

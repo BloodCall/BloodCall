@@ -20,9 +20,9 @@
         android:label="@string/my_history"
         tools:layout="@layout/fragment_history" />
     <fragment
-        android:id="@+id/nav_leaderboard"
-        android:name="gr.gdschua.bloodapp.Activities.LeaderboardFragment"
-        android:label="@string/leaderboard"
-        tools:layout="@layout/fragment_leaderboard" />
+        android:id="@+id/nav_community"
+        android:name="gr.gdschua.bloodapp.Activities.CommunityFragment"
+        android:label="@string/menu_community"
+        tools:layout="@layout/fragment_community" />
 
 </navigation>
