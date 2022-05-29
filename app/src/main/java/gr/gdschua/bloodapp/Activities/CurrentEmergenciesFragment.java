@@ -1,6 +1,8 @@
 package gr.gdschua.bloodapp.Activities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,10 +14,15 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.common.io.CharStreams;
 import com.google.common.reflect.TypeToken;
+import com.google.firebase.database.DataSnapshot;
 import com.google.gson.Gson;
 
 import java.io.BufferedInputStream;
@@ -29,7 +36,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import gr.gdschua.bloodapp.DatabaseAccess.DAOHospitals;
 import gr.gdschua.bloodapp.Entities.Alert;
+import gr.gdschua.bloodapp.Entities.Hospital;
 import gr.gdschua.bloodapp.Entities.Post;
 import gr.gdschua.bloodapp.R;
 import gr.gdschua.bloodapp.Utils.EmergenciesAdapter;
@@ -44,6 +53,7 @@ import kotlin.text.Charsets;
 public class CurrentEmergenciesFragment extends Fragment {
     private Handler mainThreadHandler;
     private Context thisContext;
+    private DAOHospitals daoHospitals = new DAOHospitals();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -94,6 +104,28 @@ public class CurrentEmergenciesFragment extends Fragment {
             public void handleMessage(@NonNull Message msg) {
                 super.handleMessage(msg);
                 emergenciesLV.setAdapter((EmergenciesAdapter)(msg.obj));
+                emergenciesLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Alert alertItem = (Alert) adapterView.getItemAtPosition(i);
+                        daoHospitals.getUser(alertItem.getOwner()).addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    Hospital currHospital = task.getResult().getValue(Hospital.class);
+                                    assert currHospital != null;
+
+                                    Uri gmmIntentUri = Uri.parse("google.navigation:q=" + currHospital.getLat() + "," + currHospital.getLon());
+                                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                                    mapIntent.setPackage("com.google.android.apps.maps");
+                                    if (mapIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+                                        startActivity(mapIntent);
+                                    }
+                                }
+                            }
+                        });
+                    }
+                });
             }
         };
 

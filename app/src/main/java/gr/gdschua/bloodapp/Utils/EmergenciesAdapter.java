@@ -1,6 +1,8 @@
 package gr.gdschua.bloodapp.Utils;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,12 +41,14 @@ public class EmergenciesAdapter extends ArrayAdapter<Alert> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View listItem = convertView;
+
         if (listItem == null)
             listItem = LayoutInflater.from(mContext).inflate(R.layout.emergency_item, parent, false);
 
         TextView hospitalNameTV = listItem.findViewById(R.id.hospitalNameTV);
         TextView hospitalAddressTV = listItem.findViewById(R.id.hospitalAddressTV);
         TextView alertBloodTypeTV = listItem.findViewById(R.id.alertBloodTypeTV);
+
 
         daoHospitals.getUser(alertList.get(position).owner).addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
@@ -58,6 +62,7 @@ public class EmergenciesAdapter extends ArrayAdapter<Alert> {
                 }
             }
         });
+
         return listItem;
     }
 
