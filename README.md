@@ -65,6 +65,7 @@ If you wish to build this project you should make your own firebase project, and
 An APK file is provided in the "Releases" section.
 
 [Version: 1.0](https://github.com/BloodCall/BloodCall/releases/tag/1.0)
+[Version: 2.0](https://github.com/BloodCall/BloodCall/releases/tag/2.0)
 
 ## Authors 📃
 
