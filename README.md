@@ -6,7 +6,7 @@
 
 ![](https://i.imgur.com/CWRiVel.png)
 
-[Our video presentation](https://www.youtube.com/watch?v=m2UCJ-RQdec)
+[Our video presentation](https://www.youtube.com/watch?v=LK_cRpyMtHs)
 
 Android app developed for GDSC solution challenge 2022 , that aims to make blood donation an easier task for everyone involved.
 
