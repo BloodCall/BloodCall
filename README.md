@@ -8,6 +8,7 @@
 
 [Our video presentation](https://www.youtube.com/watch?v=LK_cRpyMtHs)
 
+
 Android app developed for GDSC solution challenge 2022 , that aims to make blood donation an easier task for everyone involved.
 
 
@@ -74,7 +75,7 @@ An APK file is provided in the "Releases" section.
 [Version: 2.0](https://github.com/BloodCall/BloodCall/releases/tag/2.0)
 
 ## Authors 📃
-
+Contact Us : bloodcallteam@gmail.com
 - Athanasios Bimpas [Github](https://github.com/thanbimp)
 - Georgios Kitsakis [Github](https://github.com/kitsakisGk)
 - Georgios Kourounis [Github](https://github.com/kourounisgiorgos)
